@@ -1,4 +1,4 @@
-console.log("JED.js è stato caricato correttamente");
+console.log("Snakeleev.js è stato caricato correttamente");
 
 // Define the elements
 const elements = [
