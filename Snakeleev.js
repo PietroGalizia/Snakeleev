@@ -68,6 +68,10 @@ const diets = {
     "f-block elements": ["La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm"],
 };
 
+const erasedElements = [
+    "Md"
+];
+
 // Initialize game state
 const SPEED = 90;
 const SIZE = 20;
@@ -131,11 +135,8 @@ document.addEventListener('keydown', (event) => {
 
 function changeFoodElement() {
     console.log("Changing food element...");
-    
-    const randomIndex = Math.floor(Math.random() * elements.length);
-    foodElement = elements[randomIndex];
-    foodElementName = elementNames[randomIndex];
-    foodElementNumber = elementNumbers[randomIndex];
+
+    generateFood();
 
     console.log("New food element:", foodElement, foodElementName, foodElementNumber);
 
@@ -207,8 +208,14 @@ function generateFood() {
 
     console.log(`Initial food position: (${food.x}, ${food.y})`);
     
-    const elementIndex = Math.floor(Math.random() * elements.length);
-    foodElement = elements[elementIndex];
+    let elementIndex;
+    // Continua a generare un elemento finché non ne trovi uno che non è in erasedElements
+    do {
+        elementIndex = Math.floor(Math.random() * elements.length);
+        foodElement = elements[elementIndex];
+    } while (erasedElements.includes(foodElement));
+
+    // Assegna nome e numero dell’elemento selezionato
     foodElementName = elementNames[elementIndex];
     foodElementNumber = elementNumbers[elementIndex];
 
