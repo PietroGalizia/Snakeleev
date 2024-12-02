@@ -237,13 +237,22 @@ function updateScore(newScore) {
 
 function updateGame(ctx) {
     // Aggiorna la posizione del serpente
-    const head = { x: snake[0].x + direction.x * SIZE, y: snake[0].y + direction.y * SIZE };
+    let head = {
+        x: snake[0].x + direction.x * SIZE,
+        y: snake[0].y + direction.y * SIZE
+    };
     
-    // Controlla se il serpente esce dai bordi del canvas
-    if (head.x < 0 || head.x >= CANVAS_WIDTH || head.y < 0 || head.y >= CANVAS_HEIGHT) {
-        alert("Stay Hungry! Stay Periodic!");
-        exitGame();
-        return;
+    // Implementazione del wrap-around
+    if (head.x < 0) {
+        head.x = CANVAS_WIDTH - SIZE; // Passa dal bordo sinistro a quello destro
+    } else if (head.x >= CANVAS_WIDTH) {
+        head.x = 0; // Passa dal bordo destro a quello sinistro
+    }
+
+    if (head.y < 0) {
+        head.y = CANVAS_HEIGHT - SIZE; // Passa dal bordo superiore a quello inferiore
+    } else if (head.y >= CANVAS_HEIGHT) {
+        head.y = 0; // Passa dal bordo inferiore a quello superiore
     }
  
     // Controlla se il serpente si scontra con se stesso
