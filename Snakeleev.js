@@ -87,7 +87,7 @@ let foodElementName = "";
 let foodElementNumber = "";
 // Posizione iniziale del serpente
 let snake = [{ x: 100, y: 100 }];
-let lastRedSegment = null;
+let lastRedSegment = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mainMenu').style.display = 'block';
@@ -283,7 +283,6 @@ function updateGame(ctx) {
         if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
             score += 10;
             flashEffect("rgb(65, 127, 69)");
-            expandFoodEffect();
         } else {
             score -= 5;
             flashEffect("rgb(229, 26, 75)");
@@ -298,11 +297,14 @@ function updateGame(ctx) {
         snake.pop();
     }
 
+    // Aggiorna le posizioni relative dei segmenti rossi
+    lastRedSegments = lastRedSegments.map(pos => pos + 1).filter(pos => pos < snake.length);
+
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
     function flashEffect(color) {
         const originalColor = ctx.fillStyle;
-        let flashes = 3; // Numero di lampeggi
+        let flashes = 1; // Numero di lampeggi
         let isFlashing = false;
         
         const interval = setInterval(() => {
@@ -318,27 +320,10 @@ function updateGame(ctx) {
         }, 100); // Cambia colore ogni 100ms
     }
 
-    function expandFoodEffect() {
-        let size = SIZE;
-        let steps = 10; // Numero di passi nell'espansione
-        const expandInterval = setInterval(() => {
-            ctx.clearRect(food.x - size / 4, food.y - size / 4, size, size); // Cancella il precedente
-            size += 4; // Incrementa gradualmente la dimensione
-            ctx.fillStyle = "rgb(120, 179, 224)";
-            ctx.fillRect(food.x - size / 4, food.y - size / 4, size, size);
-
-            steps--;
-            if (steps <= 0) {
-                clearInterval(expandInterval);
-                drawFood(); // Ritorna il cibo alla dimensione originale
-            }
-        }, 50); // Passo ogni 50ms
-    }
-
     // Draw the snake
     snake.forEach((part, index) => {
-        if (lastRedSegment && lastRedSegment.x === part.x && lastRedSegment.y === part.y) {
-            ctx.fillStyle = "rgb(229, 26, 75)"; // Rosso per il segmento precedente
+        if (lastRedSegments.includes(index)) {
+            ctx.fillStyle = "rgb(229, 26, 75)"; // Rosso per errore
         } else if (index === 0) {
             ctx.fillStyle = "rgb(65, 127, 69)"; // Verde per la testa
         } else {
@@ -358,6 +343,9 @@ function updateGame(ctx) {
     // Disegna sfondo cibo
     ctx.fillStyle = "rgb(120, 179, 224)";
     ctx.fillRect(food.x, food.y, SIZE, SIZE);
+    ctx.fillStyle = "rgb(120, 179, 224)";
+    ctx.fillRect(food.x, food.y, SIZE, SIZE);
+    ctx.shadowBlur = 0;
 
     // Reset shadowBlur per evitare che influenzi altri elementi
     ctx.shadowBlur = 0;
@@ -369,17 +357,20 @@ function updateGame(ctx) {
     ctx.textBaseline = "middle";
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
 
-    // Disegna il numero atomico sotto il simbolo
-    ctx.font = "bold 12px Arial"; // Numero atomico più piccolo
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(foodElementNumber, food.x + SIZE / 2, food.y + SIZE / 1.2); // Regola posizione verticale
-
     // Draw game area border
     ctx.strokeStyle = "#83B7DE";
     ctx.lineWidth = 4;
     ctx.strokeRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
             
+}
+
+// Funzione per l'effetto di flash
+function flashEffect(color) {
+    const originalColor = document.getElementById('gameCanvas').style.backgroundColor;
+    document.getElementById('gameCanvas').style.backgroundColor = color;
+    setTimeout(() => {
+        document.getElementById('gameCanvas').style.backgroundColor = originalColor;
+    }, 100);
 }
 
 // Function to exit the game
