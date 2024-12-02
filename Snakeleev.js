@@ -292,9 +292,21 @@ function updateGame(ctx) {
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
     // Draw the snake
-    ctx.fillStyle = "#96AE21";
-    snake.forEach(part => ctx.fillRect(part.x, part.y, SIZE, SIZE));
+       snake.forEach((part, index) => {
+        const gradientFactor = index / snake.length;
+        const red = 65 + gradientFactor * (150 - 65);
+        const green = 127 + gradientFactor * (174 - 127);
+        const blue = 69 + gradientFactor * (33 - 69);
+        ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
+        ctx.fillRect(part.x, part.y, SIZE, SIZE);
+    });
 
+    // Disegna sfondo circolare
+    ctx.fillStyle = "rgb(247, 157, 39)";
+    ctx.beginPath();
+    ctx.arc(food.x + SIZE / 2, food.y + SIZE / 2, SIZE / 2, 0, Math.PI * 2);
+    ctx.fill();
+    
     // Draw the food element symbol
     ctx.fillStyle = "red";
     ctx.font = "20px Arial";
