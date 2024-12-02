@@ -300,17 +300,26 @@ function updateGame(ctx) {
         const blue = 69 + gradientFactor * (33 - 69);
         ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
         ctx.fillRect(part.x, part.y, SIZE, SIZE);
+
+        ctx.strokeStyle = "rgb(0, 47, 95)";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(part.x, part.y, SIZE, SIZE);
     });
 
-    // Disegna sfondo circolare
-    ctx.fillStyle = "rgb(247, 157, 39)";
-    ctx.beginPath();
-    ctx.arc(food.x + SIZE / 2, food.y + SIZE / 2, SIZE / 2, 0, Math.PI * 2);
-    ctx.fill();
+    // Effetto glow intorno al cibo
+    ctx.shadowColor = "rgb(247, 157, 39)"; // Colore del bagliore
+    ctx.shadowBlur = 10;
+
+    // Disegna sfondo cibo
+    ctx.fillStyle = "rgb(120, 179, 224)";
+    ctx.fillRect(food.x, food.y, SIZE, SIZE);
+
+    // Reset shadowBlur per evitare che influenzi altri elementi
+    ctx.shadowBlur = 0;
     
     // Draw the food element symbol
-    ctx.fillStyle = "red";
-    ctx.font = "20px Arial";
+    ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
+    ctx.font = "18px Arial"; // Font più piccolo per una migliore leggibilità
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
