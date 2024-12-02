@@ -302,24 +302,37 @@ function updateGame(ctx) {
 
     function flashEffect(color) {
         const originalColor = ctx.fillStyle;
-        ctx.fillStyle = color;
-        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        setTimeout(() => {
-            ctx.fillStyle = originalColor;
-        }, 100); // Torna al colore originale dopo 100ms
+        let flashes = 3; // Numero di lampeggi
+        let isFlashing = false;
+        
+        const interval = setInterval(() => {
+            isFlashing = !isFlashing;
+            ctx.fillStyle = isFlashing ? color : originalColor;
+            ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+            flashes--;
+            if (flashes <= 0) {
+                clearInterval(interval);
+                ctx.fillStyle = originalColor; // Ripristina colore originale
+            }
+        }, 100); // Cambia colore ogni 100ms
     }
 
     function expandFoodEffect() {
         let size = SIZE;
+        let steps = 10; // Numero di passi nell'espansione
         const expandInterval = setInterval(() => {
-            size += 2; // Espande gradualmente
+            ctx.clearRect(food.x - size / 4, food.y - size / 4, size, size); // Cancella il precedente
+            size += 4; // Incrementa gradualmente la dimensione
             ctx.fillStyle = "rgb(120, 179, 224)";
             ctx.fillRect(food.x - size / 4, food.y - size / 4, size, size);
-        }, 30);
 
-        setTimeout(() => {
-            clearInterval(expandInterval);
-        }, 300); // Ferma l'espansione dopo 300ms
+            steps--;
+            if (steps <= 0) {
+                clearInterval(expandInterval);
+                drawFood(); // Ritorna il cibo alla dimensione originale
+            }
+        }, 50); // Passo ogni 50ms
     }
 
     // Draw the snake
@@ -350,15 +363,17 @@ function updateGame(ctx) {
     ctx.shadowBlur = 0;
     
     // Draw the food element symbol
-    ctx.fillStyle = "rgb(247, 157, 39)"; // Colore del simbolo
+    ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
     ctx.font = "bold 14px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
 
     // Disegna il numero atomico sotto il simbolo
-    ctx.font = "12px Arial"; // Numero atomico più piccolo
-    ctx.fillText(foodElementNumber, food.x + SIZE / 2, food.y + (2 * SIZE) / 3);
+    ctx.font = "bold 12px Arial"; // Numero atomico più piccolo
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(foodElementNumber, food.x + SIZE / 2, food.y + SIZE / 1.2); // Regola posizione verticale
 
     // Draw game area border
     ctx.strokeStyle = "#83B7DE";
