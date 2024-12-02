@@ -199,11 +199,12 @@ function startNewGame() {
 }
 
 function generateFood() {
-    const maxX = Math.floor(620 / SIZE);
-    const maxY = Math.floor(520 / SIZE);
+    const margin = SIZE;
+    const maxX = Math.floor((CANVAS_WIDTH - margin * 2) / SIZE);
+    const maxY = Math.floor((CANVAS_HEIGHT - margin * 2) / SIZE);
     food = {
-        x: Math.floor(Math.random() * maxX) * SIZE,
-        y: Math.floor(Math.random() * maxY) * SIZE
+        x: Math.floor(Math.random() * maxX) * SIZE + margin,
+        y: Math.floor(Math.random() * maxY) * SIZE + margin
     };
 
     console.log(`Initial food position: (${food.x}, ${food.y})`);
