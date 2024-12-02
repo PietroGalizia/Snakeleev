@@ -281,8 +281,11 @@ function updateGame(ctx) {
     if (head.x === food.x && head.y === food.y) {
         if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
             score += 10;
+            flashEffect("rgb(65, 127, 69)");
+            expandFoodEffect();
         } else {
             score -= 5;
+            flashEffect("rgb(229, 26, 75)");
         }
         updateScore(score);
         generateFood();
@@ -291,6 +294,28 @@ function updateGame(ctx) {
     }
 
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    function flashEffect(color) {
+        const originalColor = ctx.fillStyle;
+        ctx.fillStyle = color;
+        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        setTimeout(() => {
+            ctx.fillStyle = originalColor;
+        }, 100); // Torna al colore originale dopo 100ms
+    }
+
+    function expandFoodEffect() {
+        let size = SIZE;
+        const expandInterval = setInterval(() => {
+            size += 2; // Espande gradualmente
+            ctx.fillStyle = "rgb(120, 179, 224)";
+            ctx.fillRect(food.x - size / 4, food.y - size / 4, size, size);
+        }, 30);
+
+        setTimeout(() => {
+            clearInterval(expandInterval);
+        }, 300); // Ferma l'espansione dopo 300ms
+    }
 
     // Draw the snake
        snake.forEach((part, index) => {
@@ -318,11 +343,15 @@ function updateGame(ctx) {
     ctx.shadowBlur = 0;
     
     // Draw the food element symbol
-    ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
-    ctx.font = "18px Arial"; // Font più piccolo per una migliore leggibilità
+    ctx.fillStyle = "rgb(247, 157, 39)"; // Colore del simbolo
+    ctx.font = "bold 14px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
+
+    // Disegna il numero atomico sotto il simbolo
+    ctx.font = "12px Arial"; // Numero atomico più piccolo
+    ctx.fillText(foodElementNumber, food.x + SIZE / 2, food.y + (2 * SIZE) / 3);
 
     // Draw game area border
     ctx.strokeStyle = "#83B7DE";
