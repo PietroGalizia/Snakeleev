@@ -73,7 +73,7 @@ const erasedElements = [
 ];
 
 // Initialize game state
-const SPEED = 90;
+const SPEED = 150;
 const SIZE = 20;
 const CANVAS_WIDTH = 620;
 const CANVAS_HEIGHT = 520;
@@ -202,10 +202,17 @@ function generateFood() {
     const margin = SIZE;
     const maxX = Math.floor((CANVAS_WIDTH - margin * 2) / SIZE);
     const maxY = Math.floor((CANVAS_HEIGHT - margin * 2) / SIZE);
-    food = {
-        x: Math.floor(Math.random() * maxX) * SIZE + margin,
-        y: Math.floor(Math.random() * maxY) * SIZE + margin
-    };
+
+    // Continua a generare una posizione valida finché non trovi una che non è sopra il serpente
+    while (!foodPositionValid) {
+        food = {
+            x: Math.floor(Math.random() * maxX) * SIZE + margin,
+            y: Math.floor(Math.random() * maxY) * SIZE + margin
+        };
+
+        // Verifica che il cibo non sia sopra il serpente
+        foodPositionValid = !snake.some(part => part.x === food.x && part.y === food.y);
+    }
 
     console.log(`Initial food position: (${food.x}, ${food.y})`);
     
