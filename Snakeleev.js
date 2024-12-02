@@ -203,6 +203,8 @@ function generateFood() {
     const maxX = Math.floor((CANVAS_WIDTH - margin * 2) / SIZE);
     const maxY = Math.floor((CANVAS_HEIGHT - margin * 2) / SIZE);
 
+    let foodPositionValid = false;
+
     // Continua a generare una posizione valida finché non trovi una che non è sopra il serpente
     while (!foodPositionValid) {
         food = {
