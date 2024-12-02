@@ -240,6 +240,7 @@ function startGameLoop(ctx) {
 }
 
 function updateScore(newScore) {
+    document.getElementById('scoreBoard').style.color = "rgb(173, 176, 184)";
     document.getElementById('scoreBoard').innerText = 
         `${selectedDiet}\nScore: ${newScore} | ${foodElementName} [${foodElement}], Z = ${foodElementNumber}`;
 }
