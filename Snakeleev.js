@@ -214,7 +214,7 @@ function generateFood() {
         foodPositionValid = !snake.some(part => part.x === food.x && part.y === food.y);
     }
 
-    console.log(`Initial food position: (${food.x}, ${food.y})`);
+    console.log(`Valid food position: (${food.x}, ${food.y})`);
     
     let elementIndex;
     // Continua a generare un elemento finché non ne trovi uno che non è in erasedElements
