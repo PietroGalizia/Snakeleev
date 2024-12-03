@@ -90,6 +90,7 @@ let foodElementName = "";
 let foodElementNumber = "";
 // Posizione iniziale del serpente
 let snake = [{ x: 100, y: 100 }];
+let snakeColors = ["green"];
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mainMenu').style.display = 'block';
@@ -284,11 +285,16 @@ function updateGame(ctx) {
     if (head.x === food.x && head.y === food.y) {
         if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
             score += 10;
-            flashEffect("rgb(65, 127, 69)");
-            expandFoodEffect();
+            snakeColors.unshift("green");
+            expandFoodEffect(food.x, food.y); // Espansione prima di sparire
         } else {
             score -= 5;
-            flashEffect("rgb(229, 26, 75)");
+            snakeColors.unshift("red");
+            flashEffect("rgba(229, 26, 75, 0.5)", food.x, food.y); // Lampeggio per errore
+        }
+         // Rimuove i colori extra se il serpente è più corto della lista colori
+        if (snakeColors.length > snake.length) {
+            snakeColors.pop();
         }
         updateScore(score);
         generateFood();
@@ -298,37 +304,45 @@ function updateGame(ctx) {
 
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    function flashEffect(color) {
-        const originalColor = ctx.fillStyle;
-        ctx.fillStyle = color;
-        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        setTimeout(() => {
-            ctx.fillStyle = originalColor;
-        }, 100); // Torna al colore originale dopo 100ms
+    function flashEffect(color, x, y) {
+        let flashCount = 0;
+        const interval = setInterval(() => {
+            ctx.fillStyle = color;
+            ctx.fillRect(x - SIZE / 2, y - SIZE / 2, SIZE * 2, SIZE * 2);
+            flashCount++;
+            if (flashCount > 4) {
+                clearInterval(interval);
+                ctx.clearRect(x - SIZE / 2, y - SIZE / 2, SIZE * 2, SIZE * 2);
+            }
+        }, 100);
     }
 
-    function expandFoodEffect() {
+    function expandFoodEffect(x, y) {
         let size = SIZE;
         const expandInterval = setInterval(() => {
-            size += 2; // Espande gradualmente
+            size += 2;
+            ctx.clearRect(x - size / 2, y - size / 2, size, size);
             ctx.fillStyle = "rgb(120, 179, 224)";
-            ctx.fillRect(food.x - size / 4, food.y - size / 4, size, size);
+            ctx.fillRect(x - size / 2, y - size / 2, size, size);
         }, 30);
-
         setTimeout(() => {
             clearInterval(expandInterval);
-        }, 300); // Ferma l'espansione dopo 300ms
+            ctx.clearRect(x - size / 2, y - size / 2, size, size); // Rimuove il cibo
+        }, 300);
     }
 
     // Draw the snake
        snake.forEach((part, index) => {
-        const gradientFactor = index / snake.length;
-        const red = 65 + gradientFactor * (150 - 65);
-        const green = 127 + gradientFactor * (174 - 127);
-        const blue = 69 + gradientFactor * (33 - 69);
-        ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
+        if (index === 0) { // La testa del serpente
+            if (snakeColors[0] === "red") {
+                ctx.fillStyle = "rgb(229, 26, 75)"; // Testa rossa per errore
+            } else {
+                ctx.fillStyle = "rgb(65, 127, 69)"; // Testa verde per successo
+            }
+        } else {
+            ctx.fillStyle = snakeColors[index] || `rgb(150, 174, 33)`; // Segmenti successivi
+        }
         ctx.fillRect(part.x, part.y, SIZE, SIZE);
-
         ctx.strokeStyle = "rgb(0, 47, 95)";
         ctx.lineWidth = 2;
         ctx.strokeRect(part.x, part.y, SIZE, SIZE);
