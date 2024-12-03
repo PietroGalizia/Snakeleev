@@ -91,6 +91,7 @@ let foodElementNumber = "";
 // Posizione iniziale del serpente
 let snake = [{ x: 100, y: 100 }];
 let snakeColors = ["green"];
+let scoreText = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mainMenu').style.display = 'block';
@@ -292,6 +293,14 @@ function updateGame(ctx) {
     if (head.x === food.x && head.y === food.y) {
         if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
             score += 10;
+
+            scoreText = {
+                value: "+10",
+                x: food.x + SIZE / 2,
+                y: food.y,
+                opacity: 1.0 // Trasparenza iniziale
+            };
+            
             snakeColors.unshift("green");
             expandFoodEffect(food.x, food.y); // Espansione prima di sparire
         } else {
@@ -310,6 +319,23 @@ function updateGame(ctx) {
     }
 
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    // Gestione animazione della scritta del punteggio
+    if (scoreText) {
+        ctx.fillStyle = `rgba(0, 0, 0, ${scoreText.opacity})`; // Imposta trasparenza
+        ctx.font = "16px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(scoreText.value, scoreText.x, scoreText.y);
+
+        // Aggiorna la posizione e la trasparenza
+        scoreText.y -= 1; // Si sposta verso l'alto
+        scoreText.opacity -= 0.02; // Si dissolve
+
+        // Rimuovi la scritta quando diventa completamente trasparente
+        if (scoreText.opacity <= 0) {
+            scoreText = null;
+        }
+    }
 
     function flashEffect(color, x, y) {
         let flashCount = 0;
