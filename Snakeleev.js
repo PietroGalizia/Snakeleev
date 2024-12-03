@@ -87,7 +87,6 @@ let foodElementName = "";
 let foodElementNumber = "";
 // Posizione iniziale del serpente
 let snake = [{ x: 100, y: 100 }];
-let lastRedSegment = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mainMenu').style.display = 'block';
@@ -288,10 +287,6 @@ function updateGame(ctx) {
             score -= 5;
             flashEffect("rgb(229, 26, 75)");
         }
-
-        // Segna la testa corrente come il segmento rosso
-        lastRedSegment = { ...head }; 
-        
         updateScore(score);
         generateFood();
     } else {
@@ -323,19 +318,17 @@ function updateGame(ctx) {
     }
 
     // Draw the snake
-    snake.forEach((part, index) => {
-        if (lastRedSegment && lastRedSegment.x === part.x && lastRedSegment.y === part.y) {
-            ctx.fillStyle = "rgb(229, 26, 75)"; // Rosso per il segmento precedente
-        } else if (index === 0) {
-            ctx.fillStyle = "rgb(65, 127, 69)"; // Verde per la testa
-        } else {
-            const gradientFactor = index / snake.length;
-            const red = 65 + gradientFactor * (150 - 65);
-            const green = 127 + gradientFactor * (174 - 127);
-            const blue = 69 + gradientFactor * (33 - 69);
-            ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
-        }
+       snake.forEach((part, index) => {
+        const gradientFactor = index / snake.length;
+        const red = 65 + gradientFactor * (150 - 65);
+        const green = 127 + gradientFactor * (174 - 127);
+        const blue = 69 + gradientFactor * (33 - 69);
+        ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
         ctx.fillRect(part.x, part.y, SIZE, SIZE);
+
+        ctx.strokeStyle = "rgb(0, 47, 95)";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(part.x, part.y, SIZE, SIZE);
     });
 
     // Effetto glow intorno al cibo
