@@ -12,7 +12,10 @@
             text-align: center;
         }
         #mainMenu, #dietSelection, #gameCanvas {
-            display: block; /* Rendi visibili gli elementi per il test */
+            display: none; /* Nascondi gli elementi non usati inizialmente */
+        }
+        #mainMenu {
+            display: block; /* Mostra il menu principale */
         }
         #gameCanvas {
             background-color: #002F5F;
@@ -33,18 +36,35 @@
             color: white;
             cursor: pointer;
         }
+        .speed-button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #83B7DE; /* Sfondo azzurro per default */
+            color: black; /* Testo nero per default */
+            border: none;
+            cursor: pointer;
+        }
+        .speed-button.selected {
+            background-color: #40916c; /* Verde scuro per selezionato */
+            color: lightgray; /* Testo grigio chiaro */
+        }
     </style>
 </head>
 <body>
     <h1>Snakeleev</h1>
     <div id="mainMenu">
-        <button class="button" onclick="showDietSelection()">New Game</button>
-        <button class="button" onclick="exitGame()">Exit</button>
-    </div>
-    <div id="dietSelection">
+        <h2>Select Speed</h2>
+        <div id="speedSelection">
+            <button class="speed-button" onclick="selectSpeed(250, this)">Speed 1</button>
+            <button class="speed-button" onclick="selectSpeed(200, this)">Speed 2</button>
+            <button class="speed-button selected" onclick="selectSpeed(150, this)">Speed 3</button>
+            <button class="speed-button" onclick="selectSpeed(100, this)">Speed 4</button>
+            <button class="speed-button" onclick="selectSpeed(50, this)">Speed 5</button>
+        </div>
         <h2>Select Diet</h2>
         <select id="dietDropdown"></select>
         <button class="button" onclick="startNewGame()">Play</button>
+        <button class="button" onclick="exitGame()">Exit</button>
     </div>
     <div id="scoreBoard">Score: 0</div>
     <canvas id="gameCanvas"></canvas>
