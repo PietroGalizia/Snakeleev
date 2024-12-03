@@ -83,7 +83,7 @@ let gameInterval = null;
 let direction = { x: 1, y: 0 };
 let score = 0;
 let food = {};
-let selectedDiet = "";
+let selectedDiet = "elements of a smartphon";
 let foodElement = "";
 let foodElementName = "";
 let foodElementNumber = "";
@@ -151,6 +151,31 @@ function showStartScreen() {
 
     document.body.appendChild(startScreen);
 }
+
+// Funzione per selezionare la velocità
+function selectSpeed(speed, button) {
+    SPEED = speed;
+
+    // Rimuovi selezione da tutti i pulsanti
+    document.querySelectorAll('.speed-button').forEach(btn => {
+        btn.classList.remove('selected');
+        btn.style.backgroundColor = "#83B7DE"; // Sfondo azzurro
+        btn.style.color = "black"; // Testo nero
+    });
+
+    // Aggiungi selezione al pulsante corrente
+    button.classList.add('selected');
+    button.style.backgroundColor = "#40916c"; // Sfondo verde scuro
+    button.style.color = "lightgray"; // Testo grigio chiaro
+}
+
+// Mostra il menu iniziale ogni volta che si clicca "New Game"
+function showMainMenu() {
+    document.getElementById('mainMenu').style.display = 'block';
+    document.getElementById('gameCanvas').style.display = 'none';
+    document.getElementById('dietSelection').style.display = 'none';
+}
+
 
 function startGame() {
     initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
@@ -250,7 +275,9 @@ function showDietSelection() {
 }
 
 function startNewGame() {
-    selectedDiet = document.getElementById("dietDropdown").value;
+    selectedDiet = document.getElementById("dietDropdown").value; // Ottieni la dieta selezionata
+
+    // Mostra le istruzioni
     alert(`1) Eat the ${selectedDiet},\n\n2) Skip the elements that don’t belong to this diet by pressing the spacebar.\n\n3) Stay Hungry! Stay Periodic!`);
 
     const canvas = document.getElementById('gameCanvas');
@@ -258,16 +285,20 @@ function startNewGame() {
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
-    document.getElementById('dietSelection').style.display = 'none';
+    // Nascondi il menu principale
+    document.getElementById('mainMenu').style.display = 'none';
+
+    // Mostra il canvas di gioco
     canvas.style.display = 'block';
 
+    // Reset del serpente e dei parametri di gioco
     snake = [{ x: 100, y: 100 }];
     snakeColors = ["green"]; // Resetta i colori del serpente, partendo con la testa verde
     direction = { x: 1, y: 0 };
     score = 0;
     updateScore(score);
 
-    
+    // Genera il primo elemento di cibo e avvia il ciclo di gioco
     generateFood();
     startGameLoop(ctx);
 }
