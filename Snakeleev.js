@@ -15,7 +15,7 @@ const elementNumbers = [
 
 // List of diet options and elements associated with each diet
 const DietsList = [
-    "elements of life", "critical raw elements", "elements of a smartphone",
+    "elements of a smartphone", "elements of life", "critical raw elements",
     "elements of DNA", "radioactive elements (U-Th decay series)",
     "elements considered safety (grades A-E) in the first wall of fusion power plan",
     "elements dedicated to scientists", "elements with names of latin derivation",
@@ -34,9 +34,9 @@ const DietsList = [
 ];
 
 const diets = {
+    "elements of a smartphone": ["Cu", "Al", "Ba", "Ni", "Ca", "Sn", "Fe", "Zn", "Ti", "Pb", "Ag", "Sr", "Au", "Mn", "Zr", "B", "Mg", "U", "Na", "W", "Cr", "Te", "Ge", "Ta", "Pd", "Nb", "Bi", "Ir", "Pt", "Li", "Y", "V", "Hf", "Be", "As", "In", "K", "Ga", "Co", "Sb", "Mo", "Sc", "Cd", "Re"],
     "elements of life": ["O", "C", "H", "N", "P", "Ca", "S", "K", "Na", "Cl", "Mg", "Fe", "Zn", "Cr", "Co", "Cu", "Mn", "Mo", "Ni", "V", "Si", "B", "Se", "F", "I", "Br"],
     "critical raw elements": ["Sb", "Ba", "Al", "Be", "Bi", "B", "Co", "F", "Ga", "Ge", "Hf", "In", "Li", "Mg","Nb","P", "Sc","Si","Sr","Ta","Ti","W","V"],
-    "elements of a smartphone": ["Cu", "Al", "Ba", "Ni", "Ca", "Sn", "Fe", "Zn", "Ti", "Pb", "Ag", "Sr", "Au", "Mn", "Zr", "B", "Mg", "U", "Na", "W", "Cr", "Te", "Ge", "Ta", "Pd", "Nb", "Bi", "Ir", "Pt", "Li", "Y", "V", "Hf", "Be", "As", "In", "K", "Ga", "Co", "Sb", "Mo", "Sc", "Cd", "Re"],
     "elements of DNA": ["C", "H", "O", "N", "P"],
     "radioactive elements (U-Th decay series)": ["U", "Th", "Pa", "Ra", "Rn", "Po", "Pb", "Bi", "Pu", "Ac", "Tl", "Am", "Np"],
     "elements considered safety (grades A-E) in the first wall of fusion power plan": ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Mg", "Al", "Si", "P", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr", "Fe", "Co", "Ni", "Cu", "Ge", "Se", "Kr", "Sr", "Y", "Ru", "Sn", "Te", "I", "Xe", "Cs", "Ba", "Ce", "Nd", "Sm", "Dy", "Yb", "Lu", "Tl"],
@@ -69,7 +69,7 @@ const diets = {
 };
 
 const erasedElements = [
-    "Md"
+    "Sc", "V", "Ga", "Ge", "Br", "Kr", "Rb", "Y", "Nb", "Mo", "Tc", "Ru", "Rh", "In", "Te", "Xe", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "Re", "Os", "Ir", "Tl", "Po", "At", "Fr", "Ac", "Th", "Pa", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md"
 ];
 
 // Initialize game state
@@ -343,15 +343,15 @@ function updateGame(ctx) {
     ctx.shadowBlur = 0;
     
     // Draw the food element symbol
-    ctx.fillStyle = "rgb(247, 157, 39)"; // Colore del simbolo
+    ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
     ctx.font = "bold 14px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
 
     // Disegna il numero atomico sotto il simbolo
-    ctx.font = "12px Arial"; // Numero atomico più piccolo
-    ctx.fillText(foodElementNumber, food.x + SIZE / 2, food.y + (2 * SIZE) / 3);
+    //ctx.font = "12px Arial"; // Numero atomico più piccolo
+    //ctx.fillText(foodElementNumber, food.x + SIZE / 2, food.y + (2 * SIZE) / 3);
 
     // Draw game area border
     ctx.strokeStyle = "#83B7DE";
