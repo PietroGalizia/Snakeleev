@@ -83,7 +83,7 @@ let gameInterval = null;
 let direction = { x: 1, y: 0 };
 let score = 0;
 let food = {};
-let selectedDiet = "elements of a smartphon";
+let selectedDiet = "elements of a smartphone";
 let foodElement = "";
 let foodElementName = "";
 let foodElementNumber = "";
@@ -94,96 +94,82 @@ let scoreText = null;
 let SPEED = 150;
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('mainMenu').style.display = 'block';
-    updateScore(score);
-});
+    let playerName = '';
+    let selectedDiet = 'elements of a smartphone';
+    const diets = [
+        'f-block elements',
+        'elements of a smartphone',
+        'elements of life',
+        'critical raw elements',
+        'elements of DNA',
+        'd-block elements'
+    ];
 
-function showStartScreen() {
-    const startScreen = document.createElement('div');
-    startScreen.id = 'startScreen';
-    startScreen.style.position = 'absolute';
-    startScreen.style.top = '0';
-    startScreen.style.left = '0';
-    startScreen.style.width = '100%';
-    startScreen.style.height = '100%';
-    startScreen.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-    startScreen.style.color = 'white';
-    startScreen.style.display = 'flex';
-    startScreen.style.flexDirection = 'column';
-    startScreen.style.alignItems = 'center';
-    startScreen.style.justifyContent = 'center';
-    startScreen.style.fontFamily = 'Arial, sans-serif';
+    let currentDietIndex = diets.indexOf(selectedDiet);
 
-    const title = document.createElement('h1');
-    title.innerText = 'Serpendeleev';
-    title.style.marginBottom = '20px';
+    const showScreen = (screenId) => {
+        document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('visible'));
+        document.getElementById(screenId).classList.add('visible');
+    };
 
-    const instructions = document.createElement('p');
-    instructions.innerText = 'Choose your speed level:';
-    instructions.style.marginBottom = '20px';
+    // Start Screen setup
+    const nameInput = document.getElementById('playerName');
+    document.getElementById('nameOkButton').addEventListener('click', () => {
+        playerName = nameInput.value || 'Player';
+        nameInput.disabled = true;
+        document.getElementById('nameChangeButton').style.display = 'inline-block';
+    });
 
-    const levelContainer = document.createElement('div');
-    levelContainer.style.display = 'flex';
-    levelContainer.style.gap = '10px';
+    document.getElementById('nameChangeButton').addEventListener('click', () => {
+        nameInput.disabled = false;
+        nameInput.focus();
+    });
 
-    const levels = [250, 200, 150, 100, 50];
-    levels.forEach((speed, index) => {
-        const levelButton = document.createElement('button');
-        levelButton.innerText = `Level ${index + 1}`;
-        levelButton.style.padding = '10px 20px';
-        levelButton.style.fontSize = '16px';
-        levelButton.style.cursor = 'pointer';
-        levelButton.style.backgroundColor = 'rgb(120, 179, 224)';
-        levelButton.style.border = 'none';
-        levelButton.style.color = 'black';
-        levelButton.style.borderRadius = '5px';
-        levelButton.addEventListener('click', () => {
-            SPEED = speed;
-            document.body.removeChild(startScreen); // Rimuove la schermata iniziale
-            startGame(); // Avvia il gioco
+    const updateDiets = () => {
+        const dietElements = diets.slice(currentDietIndex - 1, currentDietIndex + 2);
+        const dietContainer = document.getElementById('diets');
+        dietContainer.innerHTML = dietElements.map((diet, index) => {
+            const isSelected = index === 1; // Quello al centro
+            return `<div class="diet-item ${isSelected ? 'selected' : ''}">${diet}</div>`;
+        }).join('');
+    };
+
+    document.getElementById('dietUp').addEventListener('click', () => {
+        currentDietIndex = (currentDietIndex - 1 + diets.length) % diets.length;
+        updateDiets();
+    });
+
+    document.getElementById('dietDown').addEventListener('click', () => {
+        currentDietIndex = (currentDietIndex + 1) % diets.length;
+        updateDiets();
+    });
+
+    // Default setup
+    updateDiets();
+
+    // Speed selection
+    let SPEED = 150;
+    document.querySelectorAll('#speedButtons button').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('#speedButtons button').forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+            SPEED = parseInt(button.dataset.speed);
         });
-        levelContainer.appendChild(levelButton);
     });
 
-    startScreen.appendChild(title);
-    startScreen.appendChild(instructions);
-    startScreen.appendChild(levelContainer);
-
-    document.body.appendChild(startScreen);
-}
-
-// Funzione per selezionare la velocità
-function selectSpeed(speed, button) {
-    SPEED = speed;
-
-    // Rimuovi selezione da tutti i pulsanti
-    document.querySelectorAll('.speed-button').forEach(btn => {
-        btn.classList.remove('selected');
-        btn.style.backgroundColor = "#83B7DE"; // Sfondo azzurro
-        btn.style.color = "black"; // Testo nero
+    // Start Game
+    document.getElementById('playButton').addEventListener('click', () => {
+        selectedDiet = diets[currentDietIndex];
+        showScreen('gameScreen');
+        startNewGame(playerName, selectedDiet, SPEED); // Chiamata alla funzione di avvio
     });
-
-    // Aggiungi selezione al pulsante corrente
-    button.classList.add('selected');
-    button.style.backgroundColor = "#40916c"; // Sfondo verde scuro
-    button.style.color = "lightgray"; // Testo grigio chiaro
-}
-
-// Mostra il menu iniziale ogni volta che si clicca "New Game"
-function showMainMenu() {
-    document.getElementById('mainMenu').style.display = 'block';
-    document.getElementById('gameCanvas').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'none';
-}
+});
 
 
 function startGame() {
     initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
     gameLoop();
 }
-
-// Chiamata iniziale per mostrare la schermata iniziale
-showStartScreen();
 
 document.addEventListener('keydown', (event) => {
     console.log(event.key);
@@ -227,6 +213,8 @@ document.addEventListener('keydown', (event) => {
         // Se la nuova posizione della testa non collide con il corpo, aggiorna la direzione
         if (!snake.some(part => part.x === nextHead.x && part.y === nextHead.y)) {
             direction = newDirection;
+        } else {
+            console.log("Collision detected, ignoring direction change.");
         }
     }
 });
@@ -234,7 +222,9 @@ document.addEventListener('keydown', (event) => {
 function changeFoodElement() {
     console.log("Changing food element...");
 
-    generateFood();
+    do {
+        generateFood();
+    } while (erasedElements.includes(foodElement));
 
     console.log("New food element:", foodElement, foodElementName, foodElementNumber);
 
@@ -247,8 +237,8 @@ function drawFood() {
     const ctx = canvas.getContext('2d');
 
     console.log(`Clearing old food at (${food.x}, ${food.y})`);
-    ctx.clearRect(food.x, food.y, SIZE, SIZE);
-
+    ctx.clearRect(food.x - 1, food.y - 1, SIZE + 2, SIZE + 2);
+    
     ctx.fillStyle = "red"; // Colore per il simbolo dell'elemento
     ctx.font = "20px Arial"; // Imposta la dimensione del font
     ctx.textAlign = "center";
@@ -259,25 +249,7 @@ function drawFood() {
     console.log(`Drawing new food: ${foodElement} at (${food.x}, ${food.y})`);
 }
 
-function showDietSelection() {
-    const dietDropdown = document.getElementById("dietDropdown");
-    dietDropdown.innerHTML = "";
-
-    DietsList.forEach(diet => {
-        let option = document.createElement("option");
-        option.value = diet;
-        option.textContent = diet;
-        dietDropdown.appendChild(option);
-    });
-
-    document.getElementById('mainMenu').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'block';
-}
-
-function startNewGame() {
-    selectedDiet = document.getElementById("dietDropdown").value; // Ottieni la dieta selezionata
-
-    // Mostra le istruzioni
+function startNewGame(playerName, selectedDiet, SPEED) {
     alert(`1) Eat the ${selectedDiet},\n\n2) Skip the elements that don’t belong to this diet by pressing the spacebar.\n\n3) Stay Hungry! Stay Periodic!`);
 
     const canvas = document.getElementById('gameCanvas');
@@ -285,11 +257,9 @@ function startNewGame() {
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
-    // Nascondi il menu principale
-    document.getElementById('mainMenu').style.display = 'none';
-
-    // Mostra il canvas di gioco
-    canvas.style.display = 'block';
+    // Mostra il canvas di gioco e nascondi altre schermate
+    document.getElementById('startScreen').classList.remove('visible');
+    document.getElementById('gameScreen').classList.add('visible');
 
     // Reset del serpente e dei parametri di gioco
     snake = [{ x: 100, y: 100 }];
@@ -297,6 +267,8 @@ function startNewGame() {
     direction = { x: 1, y: 0 };
     score = 0;
     updateScore(score);
+    // Imposta la velocità scelta
+    gameSpeed = SPEED;
 
     // Genera il primo elemento di cibo e avvia il ciclo di gioco
     generateFood();
@@ -323,12 +295,12 @@ function generateFood() {
 
     console.log(`Valid food position: (${food.x}, ${food.y})`);
     
+    let foodElement;
     let elementIndex;
-    // Continua a generare un elemento finché non ne trovi uno che non è in erasedElements
     do {
         elementIndex = Math.floor(Math.random() * elements.length);
         foodElement = elements[elementIndex];
-    } while (erasedElements.includes(foodElement));
+    } while (!diets[selectedDiet].includes(foodElement));
 
     // Assegna nome e numero dell’elemento selezionato
     foodElementName = elementNames[elementIndex];
