@@ -300,7 +300,7 @@ function generateFood() {
     do {
         elementIndex = Math.floor(Math.random() * elements.length);
         foodElement = elements[elementIndex];
-    } while (!diets[selectedDiet].includes(foodElement));
+    } while (!diets[selectedDiet]?.includes(foodElement));
 
     // Assegna nome e numero dell’elemento selezionato
     foodElementName = elementNames[elementIndex];
@@ -310,16 +310,20 @@ function generateFood() {
     updateScore(score);
 }
 
-function startGameLoop(ctx) {
+function startGameLoop(ctx, SPEED) {
+    if (gameInterval) clearInterval(gameInterval); // Evita loop sovrapposti
     gameInterval = setInterval(() => {
         updateGame(ctx);
-    }, SPEED);
+    }, speed);
 }
 
 function updateScore(newScore) {
-    document.getElementById('scoreBoard').style.color = "rgb(173, 176, 184)";
-    document.getElementById('scoreBoard').innerText = 
-        `${selectedDiet}\nScore: ${newScore} | ${foodElementName} [${foodElement}], Z = ${foodElementNumber}`;
+    const scoreBoard = document.getElementById('scoreBoard');
+    if (scoreBoard) {
+        scoreBoard.style.color = "rgb(173, 176, 184)";
+        scoreBoard.innerText = 
+            `${selectedDiet}\nScore: ${newScore} | ${foodElementName} [${foodElement}], Z = ${foodElementNumber}`;
+    }
 }
 
 function updateGame(ctx) {
@@ -477,11 +481,14 @@ function updateGame(ctx) {
 
 // Function to exit the game
 function exitGame() {
-    document.getElementById('mainMenu').style.display = 'block';
-    document.getElementById('dietSelection').style.display = 'none';
-    document.getElementById('gameCanvas').style.display = 'none';
+    showScreen('startScreen'); // Usa il sistema di schermate già definito
 
+    // Resetta il loop di gioco se attivo
     if (gameInterval) {
         clearInterval(gameInterval);
+        gameInterval = null;
     }
+
+    // Resetta altre variabili di gioco se necessario
+    resetGameVariables(); // Funzione da implementare se hai variabili globali
 }
