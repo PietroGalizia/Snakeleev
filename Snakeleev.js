@@ -95,13 +95,11 @@ let SPEED = 150;
 
 // Funzione per cambiare schermata
 function showScreen(screenId) {
-    // Nascondi tutte le schermate
     const screens = document.querySelectorAll('.screen');
     screens.forEach(screen => {
         screen.classList.remove('active');
     });
 
-    // Mostra la schermata richiesta
     const activeScreen = document.getElementById(screenId);
     if (activeScreen) {
         activeScreen.classList.add('active');
@@ -148,14 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
         'f-block elements'     
     ];
 
-    //let currentDietIndex = diets.indexOf(selectedDiet);
-
-    //const showScreen = (screenId) => {
-        //document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('visible'));
-        //document.getElementById(screenId).classList.add('visible');
-    //};
-
-    // Start Screen setup
     const nameInput = document.getElementById('playerName');
     document.getElementById('nameOkButton').addEventListener('click', () => {
         playerName = nameInput.value || 'Player';
@@ -164,15 +154,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('nameChangeButton').addEventListener('click', () => {
-        showScreen('gameScreen'); // Mostra la schermata di gioco
+        showScreen('gameScreen');
         startNewGame(playerName, selectedDiet, SPEED);
-        //nameInput.disabled = false;
-        //nameInput.focus();
     });
 
-    // Game Over Screen setup
     document.getElementById('newGameButton').addEventListener('click', () => {
-        showScreen('startScreen'); // Torna alla schermata iniziale
+        showScreen('startScreen');
+    });
+
+    updateDiets();
+
+    let SPEED = 150;
+    document.querySelectorAll('#speedButtons button').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('#speedButtons button').forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+            SPEED = parseInt(button.dataset.speed);
+        });
+    });
+
+    document.getElementById('playButton').addEventListener('click', () => {
+        selectedDiet = diets[currentDietIndex];
+        showScreen('gameScreen');
+        startNewGame(playerName, selectedDiet, SPEED);
     });
 });
 
