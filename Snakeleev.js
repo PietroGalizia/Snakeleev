@@ -76,6 +76,7 @@ const erasedElements = [
 ];
 
 // Initialize game state
+const SPEED = 150;
 const SIZE = 20;
 const CANVAS_WIDTH = 620;
 const CANVAS_HEIGHT = 520;
@@ -83,7 +84,7 @@ let gameInterval = null;
 let direction = { x: 1, y: 0 };
 let score = 0;
 let food = {};
-let selectedDiet = "elements of a smartphone";
+let selectedDiet = "";
 let foodElement = "";
 let foodElementName = "";
 let foodElementNumber = "";
@@ -91,137 +92,11 @@ let foodElementNumber = "";
 let snake = [{ x: 100, y: 100 }];
 let snakeColors = ["green"];
 let scoreText = null;
-let SPEED = 150;
-
-// Funzione per cambiare schermata
-function showScreen(screenId) {
-    const screens = document.querySelectorAll('.screen');
-    screens.forEach(screen => screen.classList.remove('active'));
-    const activeScreen = document.getElementById(screenId);
-    if (activeScreen) {
-        activeScreen.classList.add('active');
-    }
-}
 
 document.addEventListener('DOMContentLoaded', () => {
-    showScreen('startScreen');
-    let playerName = '';
-    let selectedDiet = 'elements of a smartphone';
-    const diets = [
-        'elements of a smartphone',
-        'elements of life',
-        'critical raw elements',
-        'elements of DNA',
-        'd-block elements',
-        'radioactive elements (U-Th decay series)',
-        'elements considered safety (grades A-E) in the first wall of fusion power plan',
-        'elements dedicated to scientists',
-        'elements with names of latin derivation',
-        'elements with names of greek derivation',
-        'elements with names derived from cities, countries, or elsewhere',
-        'elements with names not derived from latin or greek, nor from cities or countries',
-        'elements in solid state at standard temperature and pressure',
-        'elements in liquid state at standard temperature and pressure',
-        'elements in gas state at standard temperature and pressure',
-        'metals',
-        'nonmetals',
-        'elements of group I (Hydrogen & alkali metals)',
-        'elements of group II (Alkaline earth metals)',
-        'elements of group XV (Pnictogens)',
-        'elements of group XVI (Chalcogens)',
-        'elements of group XVII (Halogens)',
-        'elements of group XVIII (Noblegases)',
-        'lanthanide',
-        'actinides',
-        'transition metals',
-        'post-transition metals',
-        'metalloids',
-        'reactive nonmetals',
-        's-block elements',
-        'p-block elements',
-        'd-block elements',
-        'f-block elements'     
-    ];
-
-    const nameInput = document.getElementById('playerName');
-    document.getElementById('nameOkButton').addEventListener('click', () => {
-        playerName = nameInput.value || 'Player';
-        nameInput.disabled = true;
-        document.getElementById('nameChangeButton').style.display = 'inline-block';
-    });
-
-    document.getElementById('nameChangeButton').addEventListener('click', () => {
-        showScreen('gameScreen');
-        startNewGame(playerName, selectedDiet, SPEED);
-    });
-
-    document.getElementById('newGameButton').addEventListener('click', () => {
-        showScreen('startScreen');
-    });
-
-    updateDiets();
-
-    let SPEED = 150;
-    document.querySelectorAll('#speedButtons button').forEach(button => {
-        button.addEventListener('click', () => {
-            document.querySelectorAll('#speedButtons button').forEach(btn => btn.classList.remove('selected'));
-            button.classList.add('selected');
-            SPEED = parseInt(button.dataset.speed);
-        });
-    });
-
-    document.getElementById('playButton').addEventListener('click', () => {
-        selectedDiet = diets[currentDietIndex];
-        showScreen('gameScreen');
-        startNewGame(playerName, selectedDiet, SPEED);
-    });
+    document.getElementById('mainMenu').style.display = 'block';
+    updateScore(score);
 });
-
-    const updateDiets = () => {
-        const dietElements = diets.slice(currentDietIndex - 1, currentDietIndex + 2);
-        const dietContainer = document.getElementById('diets');
-        dietContainer.innerHTML = dietElements.map((diet, index) => {
-            const isSelected = index === 1; // Quello al centro
-            return `<div class="diet-item ${isSelected ? 'selected' : ''}">${diet}</div>`;
-        }).join('');
-    };
-
-    document.getElementById('dietUp').addEventListener('click', () => {
-        currentDietIndex = (currentDietIndex - 1 + diets.length) % diets.length;
-        updateDiets();
-    });
-
-    document.getElementById('dietDown').addEventListener('click', () => {
-        currentDietIndex = (currentDietIndex + 1) % diets.length;
-        updateDiets();
-    });
-
-    // Default setup
-    updateDiets();
-
-    // Speed selection
-    let SPEED = 150;
-    document.querySelectorAll('#speedButtons button').forEach(button => {
-        button.addEventListener('click', () => {
-            document.querySelectorAll('#speedButtons button').forEach(btn => btn.classList.remove('selected'));
-            button.classList.add('selected');
-            SPEED = parseInt(button.dataset.speed);
-        });
-    });
-
-    // Start Game
-    document.getElementById('playButton').addEventListener('click', () => {
-        selectedDiet = diets[currentDietIndex];
-        showScreen('gameScreen');
-        startNewGame(playerName, selectedDiet, SPEED); // Chiamata alla funzione di avvio
-    });
-});
-
-
-function startGame() {
-    initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
-    gameLoop();
-}
 
 document.addEventListener('keydown', (event) => {
     console.log(event.key);
@@ -265,8 +140,6 @@ document.addEventListener('keydown', (event) => {
         // Se la nuova posizione della testa non collide con il corpo, aggiorna la direzione
         if (!snake.some(part => part.x === nextHead.x && part.y === nextHead.y)) {
             direction = newDirection;
-        } else {
-            console.log("Collision detected, ignoring direction change.");
         }
     }
 });
@@ -274,9 +147,7 @@ document.addEventListener('keydown', (event) => {
 function changeFoodElement() {
     console.log("Changing food element...");
 
-    do {
-        generateFood();
-    } while (erasedElements.includes(foodElement));
+    generateFood();
 
     console.log("New food element:", foodElement, foodElementName, foodElementNumber);
 
@@ -289,8 +160,8 @@ function drawFood() {
     const ctx = canvas.getContext('2d');
 
     console.log(`Clearing old food at (${food.x}, ${food.y})`);
-    ctx.clearRect(food.x - 1, food.y - 1, SIZE + 2, SIZE + 2);
-    
+    ctx.clearRect(food.x, food.y, SIZE, SIZE);
+
     ctx.fillStyle = "red"; // Colore per il simbolo dell'elemento
     ctx.font = "20px Arial"; // Imposta la dimensione del font
     ctx.textAlign = "center";
@@ -301,25 +172,42 @@ function drawFood() {
     console.log(`Drawing new food: ${foodElement} at (${food.x}, ${food.y})`);
 }
 
-function startNewGame(playerName, selectedDiet, SPEED) {
-    console.log(`Starting new game with player: ${playerName}, selected diet: ${selectedDiet}, speed: ${SPEED}`);
+function showDietSelection() {
+    const dietDropdown = document.getElementById("dietDropdown");
+    dietDropdown.innerHTML = "";
+
+    DietsList.forEach(diet => {
+        let option = document.createElement("option");
+        option.value = diet;
+        option.textContent = diet;
+        dietDropdown.appendChild(option);
+    });
+
+    document.getElementById('mainMenu').style.display = 'none';
+    document.getElementById('dietSelection').style.display = 'block';
+}
+
+function startNewGame() {
+    selectedDiet = document.getElementById("dietDropdown").value;
     alert(`1) Eat the ${selectedDiet},\n\n2) Skip the elements that don’t belong to this diet by pressing the spacebar.\n\n3) Stay Hungry! Stay Periodic!`);
-    
+
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
-    // Visualizza la schermata di gioco
-    showScreen('gameScreen');
+    document.getElementById('dietSelection').style.display = 'none';
+    canvas.style.display = 'block';
+
     snake = [{ x: 100, y: 100 }];
-    snakeColors = ["green"];
+    snakeColors = ["green"]; // Resetta i colori del serpente, partendo con la testa verde
     direction = { x: 1, y: 0 };
     score = 0;
     updateScore(score);
+
     
     generateFood();
-    startGameLoop(ctx, SPEED); // Passa la velocità al ciclo di gioco
+    startGameLoop(ctx);
 }
 
 function generateFood() {
@@ -328,41 +216,45 @@ function generateFood() {
     const maxY = Math.floor((CANVAS_HEIGHT - margin * 2) / SIZE);
 
     let foodPositionValid = false;
+
+    // Continua a generare una posizione valida finché non trovi una che non è sopra il serpente
     while (!foodPositionValid) {
         food = {
             x: Math.floor(Math.random() * maxX) * SIZE + margin,
             y: Math.floor(Math.random() * maxY) * SIZE + margin
         };
 
+        // Verifica che il cibo non sia sopra il serpente
         foodPositionValid = !snake.some(part => part.x === food.x && part.y === food.y);
     }
 
     console.log(`Valid food position: (${food.x}, ${food.y})`);
-
-    let foodElement;
+    
     let elementIndex;
+    // Continua a generare un elemento finché non ne trovi uno che non è in erasedElements
     do {
         elementIndex = Math.floor(Math.random() * elements.length);
         foodElement = elements[elementIndex];
-    } while (!diets[selectedDiet]?.includes(foodElement));
+    } while (erasedElements.includes(foodElement));
 
+    // Assegna nome e numero dell’elemento selezionato
     foodElementName = elementNames[elementIndex];
     foodElementNumber = elementNumbers[elementIndex];
 
-    drawFood(); // Chiama la funzione di disegno del cibo
+    drawFood();
     updateScore(score);
 }
 
-function startGameLoop(ctx, SPEED) {
-    if (gameInterval) clearInterval(gameInterval); // Evita loop sovrapposti
+function startGameLoop(ctx) {
     gameInterval = setInterval(() => {
         updateGame(ctx);
     }, SPEED);
 }
 
 function updateScore(newScore) {
-    const scoreDisplay = document.getElementById('scoreDisplay');
-    scoreDisplay.innerText = `Score: ${newScore}`;
+    document.getElementById('scoreBoard').style.color = "rgb(173, 176, 184)";
+    document.getElementById('scoreBoard').innerText = 
+        `${selectedDiet}\nScore: ${newScore} | ${foodElementName} [${foodElement}], Z = ${foodElementNumber}`;
 }
 
 function updateGame(ctx) {
@@ -430,7 +322,7 @@ function updateGame(ctx) {
 
     // Gestione animazione della scritta del punteggio
     if (scoreText) {
-        ctx.fillStyle = `rgba(120, 179, 224, ${scoreText.opacity})`; // Imposta trasparenza
+        ctx.fillStyle = `rgba(0, 0, 0, ${scoreText.opacity})`; // Imposta trasparenza
         ctx.font = "16px Arial";
         ctx.textAlign = "center";
         ctx.fillText(scoreText.value, scoreText.x, scoreText.y);
@@ -520,15 +412,11 @@ function updateGame(ctx) {
 
 // Function to exit the game
 function exitGame() {
-    // Resetta il loop di gioco se attivo
+    document.getElementById('mainMenu').style.display = 'block';
+    document.getElementById('dietSelection').style.display = 'none';
+    document.getElementById('gameCanvas').style.display = 'none';
+
     if (gameInterval) {
         clearInterval(gameInterval);
-        gameInterval = null;
     }
-
-    // Mostra la schermata di Game Over
-    showScreen('gameOverScreen');
-
-    // Resetta altre variabili di gioco se necessario
-    resetGameVariables(); // Funzione da implementare se hai variabili globali
 }
