@@ -76,7 +76,6 @@ const erasedElements = [
 ];
 
 // Initialize game state
-const SPEED = 150;
 const SIZE = 20;
 const CANVAS_WIDTH = 620;
 const CANVAS_HEIGHT = 520;
@@ -91,11 +90,75 @@ let foodElementNumber = "";
 // Posizione iniziale del serpente
 let snake = [{ x: 100, y: 100 }];
 let snakeColors = ["green"];
+let scoreText = null;
+let SPEED = 150;
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mainMenu').style.display = 'block';
     updateScore(score);
 });
+
+function showStartScreen() {
+    const startScreen = document.createElement('div');
+    startScreen.id = 'startScreen';
+    startScreen.style.position = 'absolute';
+    startScreen.style.top = '0';
+    startScreen.style.left = '0';
+    startScreen.style.width = '100%';
+    startScreen.style.height = '100%';
+    startScreen.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    startScreen.style.color = 'white';
+    startScreen.style.display = 'flex';
+    startScreen.style.flexDirection = 'column';
+    startScreen.style.alignItems = 'center';
+    startScreen.style.justifyContent = 'center';
+    startScreen.style.fontFamily = 'Arial, sans-serif';
+
+    const title = document.createElement('h1');
+    title.innerText = 'Serpendeleev';
+    title.style.marginBottom = '20px';
+
+    const instructions = document.createElement('p');
+    instructions.innerText = 'Choose your speed level:';
+    instructions.style.marginBottom = '20px';
+
+    const levelContainer = document.createElement('div');
+    levelContainer.style.display = 'flex';
+    levelContainer.style.gap = '10px';
+
+    const levels = [250, 200, 150, 100, 50];
+    levels.forEach((speed, index) => {
+        const levelButton = document.createElement('button');
+        levelButton.innerText = `Level ${index + 1}`;
+        levelButton.style.padding = '10px 20px';
+        levelButton.style.fontSize = '16px';
+        levelButton.style.cursor = 'pointer';
+        levelButton.style.backgroundColor = 'rgb(120, 179, 224)';
+        levelButton.style.border = 'none';
+        levelButton.style.color = 'black';
+        levelButton.style.borderRadius = '5px';
+        levelButton.addEventListener('click', () => {
+            SPEED = speed;
+            document.body.removeChild(startScreen); // Rimuove la schermata iniziale
+            startGame(); // Avvia il gioco
+        });
+        levelContainer.appendChild(levelButton);
+    });
+
+    startScreen.appendChild(title);
+    startScreen.appendChild(instructions);
+    startScreen.appendChild(levelContainer);
+
+    document.body.appendChild(startScreen);
+}
+
+function startGame() {
+    initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
+    gameLoop();
+}
+
+// Chiamata iniziale per mostrare la schermata iniziale
+showStartScreen();
 
 document.addEventListener('keydown', (event) => {
     console.log(event.key);
@@ -292,6 +355,14 @@ function updateGame(ctx) {
     if (head.x === food.x && head.y === food.y) {
         if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
             score += 10;
+
+            scoreText = {
+                value: "+10",
+                x: food.x + SIZE / 2,
+                y: food.y,
+                opacity: 1.0 // Trasparenza iniziale
+            };
+            
             snakeColors.unshift("green");
             expandFoodEffect(food.x, food.y); // Espansione prima di sparire
         } else {
@@ -310,6 +381,23 @@ function updateGame(ctx) {
     }
 
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    // Gestione animazione della scritta del punteggio
+    if (scoreText) {
+        ctx.fillStyle = `rgba(120, 179, 224, ${scoreText.opacity})`; // Imposta trasparenza
+        ctx.font = "16px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(scoreText.value, scoreText.x, scoreText.y);
+
+        // Aggiorna la posizione e la trasparenza
+        scoreText.y -= 1; // Si sposta verso l'alto
+        scoreText.opacity -= 0.02; // Si dissolve
+
+        // Rimuovi la scritta quando diventa completamente trasparente
+        if (scoreText.opacity <= 0) {
+            scoreText = null;
+        }
+    }
 
     function flashEffect(color, x, y) {
         let flashCount = 0;
