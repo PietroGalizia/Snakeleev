@@ -94,15 +94,43 @@ let scoreText = null;
 let SPEED = 150;
 
 document.addEventListener('DOMContentLoaded', () => {
+    showScreen('startScreen');
     let playerName = '';
     let selectedDiet = 'elements of a smartphone';
     const diets = [
-        'f-block elements',
         'elements of a smartphone',
         'elements of life',
         'critical raw elements',
         'elements of DNA',
-        'd-block elements'
+        'd-block elements',
+        'radioactive elements (U-Th decay series)',
+        'elements considered safety (grades A-E) in the first wall of fusion power plan',
+        'elements dedicated to scientists',
+        'elements with names of latin derivation',
+        'elements with names of greek derivation',
+        'elements with names derived from cities, countries, or elsewhere',
+        'elements with names not derived from latin or greek, nor from cities or countries',
+        'elements in solid state at standard temperature and pressure',
+        'elements in liquid state at standard temperature and pressure',
+        'elements in gas state at standard temperature and pressure',
+        'metals',
+        'nonmetals',
+        'elements of group I (Hydrogen & alkali metals)',
+        'elements of group II (Alkaline earth metals)',
+        'elements of group XV (Pnictogens)',
+        'elements of group XVI (Chalcogens)',
+        'elements of group XVII (Halogens)',
+        'elements of group XVIII (Noblegases)',
+        'lanthanide',
+        'actinides',
+        'transition metals',
+        'post-transition metals',
+        'metalloids',
+        'reactive nonmetals',
+        's-block elements',
+        'p-block elements',
+        'd-block elements',
+        'f-block elements'     
     ];
 
     let currentDietIndex = diets.indexOf(selectedDiet);
@@ -481,13 +509,14 @@ function updateGame(ctx) {
 
 // Function to exit the game
 function exitGame() {
-    showScreen('startScreen'); // Usa il sistema di schermate già definito
-
     // Resetta il loop di gioco se attivo
     if (gameInterval) {
         clearInterval(gameInterval);
         gameInterval = null;
     }
+
+    // Mostra la schermata di Game Over
+    showScreen('gameOverScreen');
 
     // Resetta altre variabili di gioco se necessario
     resetGameVariables(); // Funzione da implementare se hai variabili globali
