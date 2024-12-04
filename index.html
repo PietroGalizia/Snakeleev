@@ -25,7 +25,7 @@
             align-items: center;
             justify-content: center;
         }
-        .visible {
+        .screen.active {
             display: flex; /* Rendi visibile la schermata attiva */
         }
         #gameCanvas {
@@ -88,7 +88,7 @@
 </head>
 <body>
     <!-- Start Screen -->
-    <div id="startScreen" class="screen visible">
+    <div id="startScreen" class="screen">
         <h1>Snakeleev</h1>
         <input type="text" id="playerName" placeholder="Enter your name" style="padding: 5px; font-size: 16px;">
         <button id="nameOkButton" class="button">OK</button>
