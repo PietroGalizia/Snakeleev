@@ -96,10 +96,7 @@ let SPEED = 150;
 // Funzione per cambiare schermata
 function showScreen(screenId) {
     const screens = document.querySelectorAll('.screen');
-    screens.forEach(screen => {
-        screen.classList.remove('active');
-    });
-
+    screens.forEach(screen => screen.classList.remove('active'));
     const activeScreen = document.getElementById(screenId);
     if (activeScreen) {
         activeScreen.classList.add('active');
@@ -305,29 +302,24 @@ function drawFood() {
 }
 
 function startNewGame(playerName, selectedDiet, SPEED) {
+    console.log(`Starting new game with player: ${playerName}, selected diet: ${selectedDiet}, speed: ${SPEED}`);
     alert(`1) Eat the ${selectedDiet},\n\n2) Skip the elements that don’t belong to this diet by pressing the spacebar.\n\n3) Stay Hungry! Stay Periodic!`);
-
+    
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
-    // Mostra il canvas di gioco e nascondi altre schermate
-    document.getElementById('startScreen').classList.remove('visible');
-    document.getElementById('gameScreen').classList.add('visible');
-
-    // Reset del serpente e dei parametri di gioco
+    // Visualizza la schermata di gioco
+    showScreen('gameScreen');
     snake = [{ x: 100, y: 100 }];
-    snakeColors = ["green"]; // Resetta i colori del serpente, partendo con la testa verde
+    snakeColors = ["green"];
     direction = { x: 1, y: 0 };
     score = 0;
     updateScore(score);
-    // Imposta la velocità scelta
-    gameSpeed = SPEED;
-
-    // Genera il primo elemento di cibo e avvia il ciclo di gioco
+    
     generateFood();
-    startGameLoop(ctx);
+    startGameLoop(ctx, SPEED); // Passa la velocità al ciclo di gioco
 }
 
 function generateFood() {
@@ -336,20 +328,17 @@ function generateFood() {
     const maxY = Math.floor((CANVAS_HEIGHT - margin * 2) / SIZE);
 
     let foodPositionValid = false;
-
-    // Continua a generare una posizione valida finché non trovi una che non è sopra il serpente
     while (!foodPositionValid) {
         food = {
             x: Math.floor(Math.random() * maxX) * SIZE + margin,
             y: Math.floor(Math.random() * maxY) * SIZE + margin
         };
 
-        // Verifica che il cibo non sia sopra il serpente
         foodPositionValid = !snake.some(part => part.x === food.x && part.y === food.y);
     }
 
     console.log(`Valid food position: (${food.x}, ${food.y})`);
-    
+
     let foodElement;
     let elementIndex;
     do {
@@ -357,11 +346,10 @@ function generateFood() {
         foodElement = elements[elementIndex];
     } while (!diets[selectedDiet]?.includes(foodElement));
 
-    // Assegna nome e numero dell’elemento selezionato
     foodElementName = elementNames[elementIndex];
     foodElementNumber = elementNumbers[elementIndex];
 
-    drawFood();
+    drawFood(); // Chiama la funzione di disegno del cibo
     updateScore(score);
 }
 
