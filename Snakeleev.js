@@ -361,12 +361,8 @@ function startGameLoop(ctx, SPEED) {
 }
 
 function updateScore(newScore) {
-    const scoreBoard = document.getElementById('scoreBoard');
-    if (scoreBoard) {
-        scoreBoard.style.color = "rgb(173, 176, 184)";
-        scoreBoard.innerText = 
-            `${selectedDiet}\nScore: ${newScore} | ${foodElementName} [${foodElement}], Z = ${foodElementNumber}`;
-    }
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    scoreDisplay.innerText = `Score: ${newScore}`;
 }
 
 function updateGame(ctx) {
