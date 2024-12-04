@@ -93,6 +93,21 @@ let snakeColors = ["green"];
 let scoreText = null;
 let SPEED = 150;
 
+// Funzione per cambiare schermata
+function showScreen(screenId) {
+    // Nascondi tutte le schermate
+    const screens = document.querySelectorAll('.screen');
+    screens.forEach(screen => {
+        screen.classList.remove('active');
+    });
+
+    // Mostra la schermata richiesta
+    const activeScreen = document.getElementById(screenId);
+    if (activeScreen) {
+        activeScreen.classList.add('active');
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     showScreen('startScreen');
     let playerName = '';
@@ -133,12 +148,12 @@ document.addEventListener('DOMContentLoaded', () => {
         'f-block elements'     
     ];
 
-    let currentDietIndex = diets.indexOf(selectedDiet);
+    //let currentDietIndex = diets.indexOf(selectedDiet);
 
-    const showScreen = (screenId) => {
-        document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('visible'));
-        document.getElementById(screenId).classList.add('visible');
-    };
+    //const showScreen = (screenId) => {
+        //document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('visible'));
+        //document.getElementById(screenId).classList.add('visible');
+    //};
 
     // Start Screen setup
     const nameInput = document.getElementById('playerName');
@@ -149,9 +164,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('nameChangeButton').addEventListener('click', () => {
-        nameInput.disabled = false;
-        nameInput.focus();
+        showScreen('gameScreen'); // Mostra la schermata di gioco
+        startNewGame(playerName, selectedDiet, SPEED);
+        //nameInput.disabled = false;
+        //nameInput.focus();
     });
+
+    // Game Over Screen setup
+    document.getElementById('newGameButton').addEventListener('click', () => {
+        showScreen('startScreen'); // Torna alla schermata iniziale
+    });
+});
 
     const updateDiets = () => {
         const dietElements = diets.slice(currentDietIndex - 1, currentDietIndex + 2);
