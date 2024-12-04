@@ -10,23 +10,26 @@
             background-color: #002F5F;
             color: white;
             text-align: center;
+            margin: 0;
+            overflow: hidden;
         }
-        #mainMenu, #dietSelection, #gameCanvas {
-            display: none; /* Nascondi gli elementi non usati inizialmente */
+        .screen {
+            display: none; /* Nascondi le sezioni inizialmente */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        #mainMenu {
-            display: block; /* Mostra il menu principale */
+        .visible {
+            display: flex; /* Rendi visibile la schermata attiva */
         }
         #gameCanvas {
-            background-color: #002F5F;
-            width: 620px;
-            height: 520px;
-            margin: auto;
-        }
-        #scoreBoard {
-            font-size: 24px;
-            color: #96AE21;
-            padding: 10px;
+            border: 5px solid #78B3E0;
         }
         .button {
             margin: 10px;
@@ -35,39 +38,105 @@
             border: none;
             color: white;
             cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
         }
-        .speed-button {
+        .diet-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .diet-scroll {
+            width: 300px;
+            overflow: hidden;
+            text-align: center;
+        }
+        .diet-item {
+            font-size: 20px;
+            color: white;
+            background-color: transparent;
+        }
+        .diet-item.selected {
+            background-color: #96AE21;
+            color: black;
+        }
+        #speedButtons button {
             margin: 5px;
-            padding: 10px 20px;
-            background-color: #83B7DE; /* Sfondo azzurro per default */
-            color: black; /* Testo nero per default */
-            border: none;
-            cursor: pointer;
         }
-        .speed-button.selected {
-            background-color: #40916c; /* Verde scuro per selezionato */
-            color: lightgray; /* Testo grigio chiaro */
+        #gameOverList {
+            text-align: left;
+            padding: 10px;
+        }
+        #bibliography {
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        #elementDisplay {
+            margin-top: 20px;
+            border: 2px solid #78B3E0;
+            background-color: white;
+            color: black;
+            font-size: 18px;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
-    <h1>Snakeleev</h1>
-    <div id="mainMenu">
-        <h2>Select Speed</h2>
-        <div id="speedSelection">
-            <button class="speed-button" onclick="selectSpeed(250, this)">Speed 1</button>
-            <button class="speed-button" onclick="selectSpeed(200, this)">Speed 2</button>
-            <button class="speed-button selected" onclick="selectSpeed(150, this)">Speed 3</button>
-            <button class="speed-button" onclick="selectSpeed(100, this)">Speed 4</button>
-            <button class="speed-button" onclick="selectSpeed(50, this)">Speed 5</button>
+    <!-- Start Screen -->
+    <div id="startScreen" class="screen visible">
+        <h1>Snakeleev</h1>
+        <input type="text" id="playerName" placeholder="Enter your name" style="padding: 5px; font-size: 16px;">
+        <button id="nameOkButton" class="button">OK</button>
+        <button id="nameChangeButton" class="button" style="display: none;">Change</button>
+        <div id="dietSelection" class="diet-container">
+            <h3>Select Diet</h3>
+            <div class="diet-scroll">
+                <div id="dietUp" class="button">⬆</div>
+                <div id="diets"></div>
+                <div id="dietDown" class="button">⬇</div>
+            </div>
         </div>
-        <h2>Select Diet</h2>
-        <select id="dietDropdown"></select>
-        <button class="button" onclick="startNewGame()">Play</button>
-        <button class="button" onclick="exitGame()">Exit</button>
+        <div id="speedButtons">
+            <h3>Select Speed</h3>
+            <button data-speed="250" class="button">Speed 1</button>
+            <button data-speed="200" class="button">Speed 2</button>
+            <button data-speed="150" class="button selected">Speed 3</button>
+            <button data-speed="100" class="button">Speed 4</button>
+            <button data-speed="50" class="button">Speed 5</button>
+        </div>
+        <button id="playButton" class="button">Play</button>
+        <div id="bibliography">Galizia, P. Snakeleev — Videogame for Exploring the Periodic Table of Elements with Real-World Contexts <strong>J. Chem. Educ. 2025</strong>, Vol., n.</div>
     </div>
-    <div id="scoreBoard">Score: 0</div>
-    <canvas id="gameCanvas"></canvas>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen">
+        <canvas id="gameCanvas" width="600" height="400"></canvas>
+        <div id="scoreDisplay">Score: 0</div>
+        <div id="elementDisplay">
+            <div id="atomicNumber"></div>
+            <div id="elementSymbol"></div>
+            <div id="elementName"></div>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverScreen" class="screen">
+        <h1>Snakeleev</h1>
+        <div id="gameOverList">
+            <!-- Lista punteggi -->
+        </div>
+        <div>
+            <h3>Stay Hungry! Stay Periodic!</h3>
+            <p id="dietMessage"></p>
+        </div>
+        <button id="newGameButton" class="button">New Game</button>
+        <div id="bibliography">Galizia, P. Snakeleev — Videogame for Exploring the Periodic Table of Elements with Real-World Contexts <strong>J. Chem. Educ. 2025</strong>, Vol., n.</div>
+    </div>
 
     <script src="Snakeleev.js"></script>
 </body>
