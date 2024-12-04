@@ -357,7 +357,7 @@ function startGameLoop(ctx, SPEED) {
     if (gameInterval) clearInterval(gameInterval); // Evita loop sovrapposti
     gameInterval = setInterval(() => {
         updateGame(ctx);
-    }, speed);
+    }, SPEED);
 }
 
 function updateScore(newScore) {
