@@ -143,7 +143,7 @@ function showStartScreen() {
         levelButton.addEventListener('click', () => {
             SPEED = speed;
             document.body.removeChild(startScreen); // Rimuove la schermata iniziale
-            startGame(); // Avvia il gioco
+            showDietSelectionScreen(); // Mostra la schermata di selezione dieta
         });
         levelContainer.appendChild(levelButton);
     });
@@ -208,6 +208,15 @@ function showDietSelectionScreen() {
 
 function startGame() {
     initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
+    
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = CANVAS_WIDTH;
+    canvas.height = CANVAS_HEIGHT;
+
+    document.getElementById('dietSelection')?.style.display = 'none';
+    canvas.style.display = 'block';
+    
     gameLoop();
 }
 
