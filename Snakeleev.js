@@ -327,7 +327,7 @@ function createInfoRect(element, x, y) {
 }
 
 function createInfoRectNo(element, x, y) {
-    infoRects.push({
+    infoRectsNo.push({
         x: x, // Posizione iniziale
         y: y,
         atomicNumber: element.atomicNumber,
@@ -488,9 +488,9 @@ function updateGame(ctx) {
         ctx.textAlign = "left";
         ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
         ctx.font = "24px Arial";
-        ctx.fillText(rect.symbol, rect.x + 15, rect.y + 30); // Simbolo
+        ctx.fillText(rect.symbol, rect.x + 15, rect.y + 50); // Simbolo
         ctx.font = "16px Arial";
-        ctx.fillText(rect.name, rect.x + 5, rect.y + 60); // Nome dell'elemento
+        ctx.fillText(rect.name, rect.x + 5, rect.y + 100); // Nome dell'elemento
 
         // Aggiorna la posizione e l'opacità
         rect.y -= 1; // Si sposta verso l'alto
@@ -529,7 +529,7 @@ function updateGame(ctx) {
 
         // Rimuovi il rettangolo se esce dall'area di gioco o è completamente trasparente
         if (rect.y + 100 < 0 || rect.opacity <= 0) {
-            infoRects.splice(i, 1); // Rimuovi dall'array
+            infoRectsNo.splice(i, 1); // Rimuovi dall'array
         }
     }
     
