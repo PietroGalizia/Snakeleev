@@ -447,7 +447,7 @@ function updateGame(ctx) {
 
     // Gestione animazione della scritta del punteggio positivo
     if (scoreTextNo) {
-        ctx.fillStyle = `rgba(120, 179, 224, ${scoreTextNo.opacity})`; // Imposta trasparenza
+        ctx.fillStyle = `rgba(229, 26, 75, ${scoreTextNo.opacity})`; // Imposta trasparenza
         ctx.font = "16px Arial";
         ctx.textAlign = "center";
         ctx.fillText(scoreTextNo.value, scoreTextNo.x, scoreTextNo.y);
@@ -507,10 +507,10 @@ function updateGame(ctx) {
         ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
         ctx.font = "24px Arial";
         ctx.textAlign = "centre";
-        ctx.fillText(rect.symbol, rect.x, rect.y + 30); // Simbolo
+        ctx.fillText(rect.symbol, rect.x + 30, rect.y + 30); // Simbolo
         ctx.font = "16px Arial";
         ctx.textAlign = "centre";
-        ctx.fillText(rect.name, rect.x, rect.y + 60); // Nome dell'elemento
+        ctx.fillText(rect.name, rect.x + 5, rect.y + 60); // Nome dell'elemento
 
         // Aggiorna la posizione e l'opacità
         rect.y -= 1; // Si sposta verso l'alto
@@ -540,17 +540,17 @@ function updateGame(ctx) {
         ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
         ctx.font = "24px Arial";
         ctx.textAlign = "centre";
-        ctx.fillText(rect.symbol, rect.x, rect.y + 30); // Simbolo
+        ctx.fillText(rect.symbol, rect.x + 30, rect.y + 30); // Simbolo
         ctx.font = "16px Arial";
         ctx.textAlign = "centre";
-        ctx.fillText(rect.name, rect.x, rect.y + 60); // Nome dell'elemento
+        ctx.fillText(rect.name, rect.x + 5, rect.y + 60); // Nome dell'elemento
 
         // Aggiorna la posizione e l'opacità
         rect.y += 1; // Si sposta verso il basso
         //rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
 
         // Rimuovi il rettangolo se esce dall'area di gioco o è completamente trasparente
-        if (rect.y + 100 > canvas.height || rect.opacity <= 0) {
+        if (rect.y + 100 > 1000 || rect.opacity <= 0) {
             infoRectsNo.splice(i, 1); // Rimuovi dall'array
         }
     }
