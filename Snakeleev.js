@@ -459,12 +459,14 @@ for (let i = infoRects.length - 1; i >= 0; i--) {
     // Disegna il testo
     ctx.fillStyle = `rgba(0, 0, 255, ${rect.opacity})`; // Testo blu con opacità
     ctx.font = "14px Arial";
-    ctx.textAlign = "center";
-    ctx.fillText(rect.atomicNumber, rect.x + 50, rect.y + 20); // Numero atomico
+    ctx.textAlign = "left";
+    ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
     ctx.font = "24px Arial";
-    ctx.fillText(rect.symbol, rect.x + 50, rect.y + 75); // Simbolo
+    ctx.textAlign = "centre";
+    ctx.fillText(rect.symbol, rect.x + 50, rect.y + 50); // Simbolo
     ctx.font = "16px Arial";
-    ctx.fillText(rect.name, rect.x + 50, rect.y + 130); // Nome dell'elemento
+    ctx.textAlign = "centre";
+    ctx.fillText(rect.name, rect.x + 50, rect.y + 90); // Nome dell'elemento
 
     // Aggiorna la posizione e l'opacità
     rect.y -= 1; // Si sposta verso l'alto
