@@ -155,6 +155,57 @@ function showStartScreen() {
     document.body.appendChild(startScreen);
 }
 
+// Mostra la schermata per selezionare la dieta
+function showDietSelectionScreen() {
+    const dietScreen = document.createElement('div');
+    dietScreen.id = 'dietScreen';
+    dietScreen.style.position = 'absolute';
+    dietScreen.style.top = '0';
+    dietScreen.style.left = '0';
+    dietScreen.style.width = '100%';
+    dietScreen.style.height = '100%';
+    dietScreen.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    dietScreen.style.color = 'white';
+    dietScreen.style.display = 'flex';
+    dietScreen.style.flexDirection = 'column';
+    dietScreen.style.alignItems = 'center';
+    dietScreen.style.justifyContent = 'center';
+    dietScreen.style.fontFamily = 'Arial, sans-serif';
+
+    const title = document.createElement('h1');
+    title.innerText = 'Choose Your Diet';
+    title.style.marginBottom = '20px';
+
+    const dietContainer = document.createElement('div');
+    dietContainer.style.display = 'flex';
+    dietContainer.style.flexWrap = 'wrap';
+    dietContainer.style.gap = '10px';
+    dietContainer.style.justifyContent = 'center';
+
+    DietsList.forEach(diet => {
+        const dietButton = document.createElement('button');
+        dietButton.innerText = diet;
+        dietButton.style.padding = '10px 20px';
+        dietButton.style.fontSize = '14px';
+        dietButton.style.cursor = 'pointer';
+        dietButton.style.backgroundColor = 'rgb(120, 179, 224)';
+        dietButton.style.border = 'none';
+        dietButton.style.color = 'black';
+        dietButton.style.borderRadius = '5px';
+        dietButton.addEventListener('click', () => {
+            selectedDiet = diet;
+            document.body.removeChild(dietScreen); // Rimuove la schermata dieta
+            startGame(); // Avvia il gioco
+        });
+        dietContainer.appendChild(dietButton);
+    });
+
+    dietScreen.appendChild(title);
+    dietScreen.appendChild(dietContainer);
+
+    document.body.appendChild(dietScreen);
+}
+
 function startGame() {
     initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
     gameLoop();
