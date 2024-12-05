@@ -514,7 +514,7 @@ function updateGame(ctx) {
 
         // Aggiorna la posizione e l'opacità
         rect.y -= 1; // Si sposta verso l'alto
-        rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
+        //rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
 
         // Rimuovi il rettangolo se esce dall'area di gioco o è completamente trasparente
         if (rect.y + 100 < 0 || rect.opacity <= 0) {
@@ -547,10 +547,10 @@ function updateGame(ctx) {
 
         // Aggiorna la posizione e l'opacità
         rect.y += 1; // Si sposta verso il basso
-        rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
+        //rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
 
         // Rimuovi il rettangolo se esce dall'area di gioco o è completamente trasparente
-        if (rect.y + 100 < 0 || rect.opacity <= 0) {
+        if (rect.y + 100 > canvas.height || rect.opacity <= 0) {
             infoRectsNo.splice(i, 1); // Rimuovi dall'array
         }
     }
