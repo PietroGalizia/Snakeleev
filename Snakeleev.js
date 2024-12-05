@@ -91,6 +91,7 @@ let foodElementNumber = "";
 let snake = [{ x: 100, y: 100 }];
 let snakeColors = ["green"];
 let scoreText = null;
+let scoreTextNo = null;
 let SPEED = 150;
 let infoRects = [];
 let infoRectsNo = [];
@@ -383,7 +384,7 @@ function updateGame(ctx) {
             scoreText = {
                 value: "+10",
                 x: food.x + SIZE/2 ,
-                y: food.y - 10,
+                y: food.y - 50,
                 opacity: 1.0 // Trasparenza iniziale
             };
 
@@ -399,8 +400,8 @@ function updateGame(ctx) {
         } else {
             score -= 5;
 
-             scoreText = {
-                value: "+10",
+             scoreTextNo = {
+                value: "-5",
                 x: food.x + SIZE/2 ,
                 y: food.y - 10,
                 opacity: 1.0 // Trasparenza iniziale
@@ -427,7 +428,7 @@ function updateGame(ctx) {
 
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    // Gestione animazione della scritta del punteggio
+    // Gestione animazione della scritta del punteggio positivo
     if (scoreText) {
         ctx.fillStyle = `rgba(120, 179, 224, ${scoreText.opacity})`; // Imposta trasparenza
         ctx.font = "16px Arial";
@@ -441,6 +442,23 @@ function updateGame(ctx) {
         // Rimuovi la scritta quando diventa completamente trasparente
         if (scoreText.opacity <= 0) {
             scoreText = null;
+        }
+    }
+
+    // Gestione animazione della scritta del punteggio positivo
+    if (scoreTextNo) {
+        ctx.fillStyle = `rgba(120, 179, 224, ${scoreTextNo.opacity})`; // Imposta trasparenza
+        ctx.font = "16px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(scoreTextNo.value, scoreTextNo.x, scoreTextNo.y);
+
+        // Aggiorna la posizione e la trasparenza
+        scoreTextNo.y += 1; // Si sposta verso il basso
+        scoreTextNo.opacity -= 0.02; // Si dissolve
+
+        // Rimuovi la scritta quando diventa completamente trasparente
+        if (scoreTextNo.opacity <= 0) {
+            scoreTextNo = null;
         }
     }
 
