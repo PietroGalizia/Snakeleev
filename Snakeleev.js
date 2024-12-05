@@ -370,8 +370,8 @@ function updateGame(ctx) {
 
             scoreText = {
                 value: "+10",
-                x: food.x + SIZE,
-                y: food.y + SIZE,
+                x: food.x - SIZE,
+                y: food.y - SIZE,
                 opacity: 1.0 // Trasparenza iniziale
             };
 
@@ -450,22 +450,20 @@ function updateGame(ctx) {
         const rect = infoRects[i];
     
         // Disegna il rettangolo
-        ctx.fillStyle = `rgba(128, 128, 128, ${rect.opacity})`; // Sfondo grigio con opacità
-        ctx.strokeStyle = `rgba(0, 255, 0, ${rect.opacity})`; // Bordo verde con opacità
+        ctx.fillStyle = `rgba(173, 176, 184, ${rect.opacity})`; // Sfondo grigio con opacità
+        ctx.strokeStyle = `rgba(150, 174, 33, ${rect.opacity})`; // Bordo verde con opacità
         ctx.lineWidth = 2;
-        ctx.fillRect(rect.x, rect.y, 80, 100); // Rettangolo
-        ctx.strokeRect(rect.x, rect.y, 80, 100); // Bordo
+        ctx.fillRect(rect.x, rect.y, 70, 80); // Rettangolo
+        ctx.strokeRect(rect.x, rect.y, 70, 80); // Bordo
 
         // Disegna il testo
-        ctx.fillStyle = `rgba(0, 0, 255, ${rect.opacity})`; // Testo blu con opacità
+        ctx.fillStyle = `rgba(0, 47, 95, ${rect.opacity})`; // Testo blu con opacità
         ctx.font = "14px Arial";
         ctx.textAlign = "left";
         ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
         ctx.font = "24px Arial";
-        ctx.textAlign = "centre";
         ctx.fillText(rect.symbol, rect.x + 50, rect.y + 50); // Simbolo
         ctx.font = "16px Arial";
-        ctx.textAlign = "centre";
         ctx.fillText(rect.name, rect.x + 50, rect.y + 90); // Nome dell'elemento
 
         // Aggiorna la posizione e l'opacità
