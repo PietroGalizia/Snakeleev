@@ -33,10 +33,26 @@
             color: white;
             cursor: pointer;
         }
+        #logo-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10; /* Assicura che sia sopra il canvas */
+            cursor: pointer; /* Cambia il cursore sopra il logo */
+        }
+        #logo {
+            width: 100px; /* Dimensione del logo */
+            height: auto; /* Mantiene proporzioni */
+        }
     </style>
 </head>
 <body>
     <h1>Snakeleev</h1>
+        <!-- Logo cliccabile -->
+        <div id="logo-container" onclick="window.open('https://www.issmc.cnr.it/en/', '_blank')">
+            <img id="logo" src="logo.png" alt="Logo Istituto">
+        </div>
+    
     <div id="mainMenu">
         <button class="button" onclick="showDietSelection()">New Game</button>
         <button class="button" onclick="exitGame()">Exit</button>
