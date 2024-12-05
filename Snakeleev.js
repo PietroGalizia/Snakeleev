@@ -517,7 +517,7 @@ function updateGame(ctx) {
         //rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
 
         // Rimuovi il rettangolo se esce dall'area di gioco o è completamente trasparente
-        if (rect.y + 100 < 0 || rect.opacity <= 0) {
+        if (rect.y + 70 < 0 || rect.opacity <= 0) {
             infoRects.splice(i, 1); // Rimuovi dall'array
         }
     }
@@ -550,7 +550,7 @@ function updateGame(ctx) {
         //rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
 
         // Rimuovi il rettangolo se esce dall'area di gioco o è completamente trasparente
-        if (rect.y + 100 > 1000 || rect.opacity <= 0) {
+        if (rect.y > 520 || rect.opacity <= 0) {
             infoRectsNo.splice(i, 1); // Rimuovi dall'array
         }
     }
