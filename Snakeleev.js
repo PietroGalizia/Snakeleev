@@ -370,8 +370,8 @@ function updateGame(ctx) {
 
             scoreText = {
                 value: "+10",
-                x: food.x + SIZE / 2,
-                y: food.y,
+                x: food.x + SIZE,
+                y: food.y + SIZE,
                 opacity: 1.0 // Trasparenza iniziale
             };
 
@@ -446,37 +446,37 @@ function updateGame(ctx) {
     }
 
     // Gestione animazione dei rettangoli informativi
-for (let i = infoRects.length - 1; i >= 0; i--) {
-    const rect = infoRects[i];
+    for (let i = infoRects.length - 1; i >= 0; i--) {
+        const rect = infoRects[i];
     
-    // Disegna il rettangolo
-    ctx.fillStyle = `rgba(128, 128, 128, ${rect.opacity})`; // Sfondo grigio con opacità
-    ctx.strokeStyle = `rgba(0, 255, 0, ${rect.opacity})`; // Bordo verde con opacità
-    ctx.lineWidth = 2;
-    ctx.fillRect(rect.x, rect.y, 100, 150); // Rettangolo
-    ctx.strokeRect(rect.x, rect.y, 100, 150); // Bordo
+        // Disegna il rettangolo
+        ctx.fillStyle = `rgba(128, 128, 128, ${rect.opacity})`; // Sfondo grigio con opacità
+        ctx.strokeStyle = `rgba(0, 255, 0, ${rect.opacity})`; // Bordo verde con opacità
+        ctx.lineWidth = 2;
+        ctx.fillRect(rect.x, rect.y, 80, 100); // Rettangolo
+        ctx.strokeRect(rect.x, rect.y, 80, 100); // Bordo
 
-    // Disegna il testo
-    ctx.fillStyle = `rgba(0, 0, 255, ${rect.opacity})`; // Testo blu con opacità
-    ctx.font = "14px Arial";
-    ctx.textAlign = "left";
-    ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
-    ctx.font = "24px Arial";
-    ctx.textAlign = "centre";
-    ctx.fillText(rect.symbol, rect.x + 50, rect.y + 50); // Simbolo
-    ctx.font = "16px Arial";
-    ctx.textAlign = "centre";
-    ctx.fillText(rect.name, rect.x + 50, rect.y + 90); // Nome dell'elemento
+        // Disegna il testo
+        ctx.fillStyle = `rgba(0, 0, 255, ${rect.opacity})`; // Testo blu con opacità
+        ctx.font = "14px Arial";
+        ctx.textAlign = "left";
+        ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
+        ctx.font = "24px Arial";
+        ctx.textAlign = "centre";
+        ctx.fillText(rect.symbol, rect.x + 50, rect.y + 50); // Simbolo
+        ctx.font = "16px Arial";
+        ctx.textAlign = "centre";
+        ctx.fillText(rect.name, rect.x + 50, rect.y + 90); // Nome dell'elemento
 
-    // Aggiorna la posizione e l'opacità
-    rect.y -= 1; // Si sposta verso l'alto
-    rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
+        // Aggiorna la posizione e l'opacità
+        rect.y -= 1; // Si sposta verso l'alto
+        rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
 
-    // Rimuovi il rettangolo se esce dall'area di gioco o è completamente trasparente
-    if (rect.y + 150 < 0 || rect.opacity <= 0) {
-        infoRects.splice(i, 1); // Rimuovi dall'array
+        // Rimuovi il rettangolo se esce dall'area di gioco o è completamente trasparente
+        if (rect.y + 100 < 0 || rect.opacity <= 0) {
+            infoRects.splice(i, 1); // Rimuovi dall'array
+        }
     }
-}
 
     // Draw the snake
        snake.forEach((part, index) => {
