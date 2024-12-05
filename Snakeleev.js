@@ -383,8 +383,7 @@ function updateGame(ctx) {
             
             snakeColors.unshift("green");
             expandFoodEffect(food.x, food.y); // Espansione prima di sparire
-            createInfoRect(currentFoodElement, foodPosition.x * boxSize, foodPosition.y * boxSize);
-
+            
         } else {
             score -= 5;
             snakeColors.unshift("red");
