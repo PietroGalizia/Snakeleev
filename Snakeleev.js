@@ -370,8 +370,8 @@ function updateGame(ctx) {
 
             scoreText = {
                 value: "+10",
-                x: food.x - SIZE,
-                y: food.y - SIZE,
+                x: food.x + SIZE/20,
+                y: food.y + SIZE/20,
                 opacity: 1.0 // Trasparenza iniziale
             };
 
@@ -453,8 +453,8 @@ function updateGame(ctx) {
         ctx.fillStyle = `rgba(173, 176, 184, ${rect.opacity})`; // Sfondo grigio con opacità
         ctx.strokeStyle = `rgba(150, 174, 33, ${rect.opacity})`; // Bordo verde con opacità
         ctx.lineWidth = 2;
-        ctx.fillRect(rect.x, rect.y, 70, 80); // Rettangolo
-        ctx.strokeRect(rect.x, rect.y, 70, 80); // Bordo
+        ctx.fillRect(rect.x, rect.y, 60, 70); // Rettangolo
+        ctx.strokeRect(rect.x, rect.y, 60, 70); // Bordo
 
         // Disegna il testo
         ctx.fillStyle = `rgba(0, 47, 95, ${rect.opacity})`; // Testo blu con opacità
@@ -462,9 +462,9 @@ function updateGame(ctx) {
         ctx.textAlign = "left";
         ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
         ctx.font = "24px Arial";
-        ctx.fillText(rect.symbol, rect.x + 50, rect.y + 50); // Simbolo
+        ctx.fillText(rect.symbol, rect.x + 15, rect.y + 25); // Simbolo
         ctx.font = "16px Arial";
-        ctx.fillText(rect.name, rect.x + 50, rect.y + 90); // Nome dell'elemento
+        ctx.fillText(rect.name, rect.x + 5, rect.y + 45); // Nome dell'elemento
 
         // Aggiorna la posizione e l'opacità
         rect.y -= 1; // Si sposta verso l'alto
