@@ -497,24 +497,24 @@ function updateGame(ctx) {
         ctx.fillStyle = `rgba(173, 176, 184, ${rect.opacity})`; // Sfondo grigio con opacità
         ctx.strokeStyle = `rgba(150, 174, 33, ${rect.opacity})`; // Bordo verde con opacità
         ctx.lineWidth = 2;
-        ctx.fillRect(rect.x, rect.y, 70, 70); // Rettangolo
-        ctx.strokeRect(rect.x, rect.y, 70, 70); // Bordo
+        ctx.fillRect(rect.x, rect.y, 80, 80); // Rettangolo
+        ctx.strokeRect(rect.x, rect.y, 80, 80); // Bordo
 
         // Disegna il testo
         ctx.fillStyle = `rgba(0, 47, 95, ${rect.opacity})`; // Testo blu con opacità
         ctx.font = "14px Arial";
         ctx.textAlign = "left";
-        ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
-        ctx.font = "24px Arial";
-        ctx.textAlign = "centre";
-        ctx.fillText(rect.symbol, rect.x + 30, rect.y + 30); // Simbolo
-        ctx.font = "16px Arial";
-        ctx.textAlign = "centre";
-        ctx.fillText(rect.name, rect.x + 5, rect.y + 60); // Nome dell'elemento
+        ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 5); // Numero atomico
+        ctx.font = "bold 24px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(rect.symbol, rect.x + 40, rect.y + 40); // Simbolo
+        ctx.font = "bold 16px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(rect.name, rect.x + 40, rect.y + 60); // Nome dell'elemento
 
         // Aggiorna la posizione e l'opacità
         rect.y -= 1; // Si sposta verso l'alto
-        //rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
+        rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
 
         // Rimuovi il rettangolo se esce dall'area di gioco o è completamente trasparente
         if (rect.y + 70 < 0 || rect.opacity <= 0) {
@@ -530,24 +530,24 @@ function updateGame(ctx) {
         ctx.fillStyle = `rgba(173, 176, 184, ${rect.opacity})`; // Sfondo grigio con opacità
         ctx.strokeStyle = `rgba(229, 26, 75, ${rect.opacity})`; // Bordo rosso con opacità
         ctx.lineWidth = 2;
-        ctx.fillRect(rect.x, rect.y, 70, 70); // Rettangolo
-        ctx.strokeRect(rect.x, rect.y, 70, 70); // Bordo
+        ctx.fillRect(rect.x, rect.y, 80, 80); // Rettangolo
+        ctx.strokeRect(rect.x, rect.y, 80, 80); // Bordo
 
         // Disegna il testo
         ctx.fillStyle = `rgba(229, 26, 75, ${rect.opacity})`; // Testo rosso con opacità
         ctx.font = "14px Arial";
         ctx.textAlign = "left";
-        ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
-        ctx.font = "24px Arial";
-        ctx.textAlign = "centre";
-        ctx.fillText(rect.symbol, rect.x + 30, rect.y + 30); // Simbolo
-        ctx.font = "16px Arial";
-        ctx.textAlign = "centre";
-        ctx.fillText(rect.name, rect.x + 5, rect.y + 60); // Nome dell'elemento
+        ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 5); // Numero atomico
+        ctx.font = "bold 24px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(rect.symbol, rect.x + 40, rect.y + 40); // Simbolo
+        ctx.font = "bold 16px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(rect.name, rect.x + 40, rect.y + 60); // Nome dell'elemento
 
         // Aggiorna la posizione e l'opacità
         rect.y += 1; // Si sposta verso il basso
-        //rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
+        rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
 
         // Rimuovi il rettangolo se esce dall'area di gioco o è completamente trasparente
         if (rect.y > 520 || rect.opacity <= 0) {
