@@ -12,8 +12,8 @@
             color: white;
             text-align: center;
         }
-        #mainMenu, #dietSelection, #gameCanvas {
-            display: block; /* Rendi visibili gli elementi per il test */
+        #mainMenu, #gameCanvas {
+            display: none;
         }
         #gameCanvas {
             background-color: #002F5F;
@@ -38,12 +38,12 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            z-index: 10; /* Assicura che sia sopra il canvas */
-            cursor: pointer; /* Cambia il cursore sopra il logo */
+            z-index: 10;
+            cursor: pointer;
         }
         #logo {
-            width: 300px; /* Tripla dimensione */
-            height: auto; /* Mantiene proporzioni */
+            width: 300px;
+            height: auto;
         }
         #citation {
             margin-top: 20px;
@@ -52,35 +52,36 @@
         }
         #citation a {
             text-decoration: none;
-            color: #96AE21; /* Verde per link */
+            color: #96AE21;
         }
         #citation a:hover {
-            color: #e51a4b; /* Rosso al passaggio del mouse */
-        }
-        #citation b {
-            font-weight: bold; /* Testo in grassetto */
+            color: #e51a4b;
         }
     </style>
 </head>
 <body>
     <h1>Snakeleev</h1>
-        <!-- Logo cliccabile -->
-        <div id="logo-container" onclick="window.open('https://www.issmc.cnr.it/en/', '_blank')">
-            <img id="logo" src="logo.png" alt="Logo Istituto">
-        </div>
-   
+    <div id="logo-container" onclick="window.open('https://www.issmc.cnr.it/en/', '_blank')">
+        <img id="logo" src="logo.png" alt="Logo Istituto">
+    </div>
+
     <div id="mainMenu">
-        <button class="button" onclick="showDietSelection()">New Game</button>
-            </div>
-    <div id="dietSelection">
         <h2>Select Diet</h2>
         <select id="dietDropdown"></select>
+        <h3>Select Speed</h3>
+        <select id="speedDropdown">
+            <option value="250">Level 1</option>
+            <option value="200">Level 2</option>
+            <option value="150" selected>Level 3</option>
+            <option value="100">Level 4</option>
+            <option value="50">Level 5</option>
+        </select>
         <button class="button" onclick="startNewGame()">Play</button>
     </div>
+
     <div id="scoreBoard"></div>
     <canvas id="gameCanvas"></canvas>
 
-    <!-- Frase con il link sotto l'area di gioco -->
     <div id="citation">
         <a href="https://zenodo.org/records/10643098" target="_blank">
             Pietro Galizia, <i>"Snakeleev: The Snake videogame for Exploring the Periodic Table of Elements with Real-World Contexts"</i> 
