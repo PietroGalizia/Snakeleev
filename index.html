@@ -46,7 +46,7 @@
         }
         #citation {
             margin-top: 20px;
-            font-size: 14px;
+            font-size: 16px;
             line-height: 1.5;
         }
         #citation a {
@@ -68,13 +68,21 @@
             <img id="logo" src="logo.png" alt="Logo Istituto">
         </div>
    
-    <canvas id="gameCanvas"></canvas>
+    <div id="mainMenu">
+        <button class="button" onclick="showDietSelection()">New Game</button>
+            </div>
+    <div id="dietSelection">
+        <h2>Select Diet</h2>
+        <select id="dietDropdown"></select>
+        <button class="button" onclick="startNewGame()">Play</button>
+    </div>
     <div id="scoreBoard"></div>
+    <canvas id="gameCanvas"></canvas>
 
     <!-- Frase con il link sotto l'area di gioco -->
     <div id="citation">
         <a href="https://zenodo.org/records/10643098" target="_blank">
-            Galizia, P. <i>Snakeleev — Videogame for Exploring the Periodic Table of Elements with Real-World Contexts</i> 
+            Pietro Galizia, <i>"Snakeleev: The Snake videogame for Exploring the Periodic Table of Elements with Real-World Contexts"</i> 
             <br>J. Chem. Educ. <b>2025</b>, Vol., n., DOI: 10.1021/acs.jchemed.
         </a>
     </div>
