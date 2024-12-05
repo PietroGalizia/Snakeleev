@@ -384,7 +384,7 @@ function updateGame(ctx) {
             scoreText = {
                 value: "+10",
                 x: food.x + SIZE/2 ,
-                y: food.y - 50,
+                y: food.y - 10,
                 opacity: 1.0 // Trasparenza iniziale
             };
 
@@ -506,9 +506,11 @@ function updateGame(ctx) {
         ctx.textAlign = "left";
         ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
         ctx.font = "24px Arial";
-        ctx.fillText(rect.symbol, rect.x + 15, rect.y + 50); // Simbolo
+        ctx.textAlign = "centre";
+        ctx.fillText(rect.symbol, rect.x, rect.y + 30); // Simbolo
         ctx.font = "16px Arial";
-        ctx.fillText(rect.name, rect.x + 5, rect.y + 100); // Nome dell'elemento
+        ctx.textAlign = "centre";
+        ctx.fillText(rect.name, rect.x, rect.y + 60); // Nome dell'elemento
 
         // Aggiorna la posizione e l'opacità
         rect.y -= 1; // Si sposta verso l'alto
@@ -537,12 +539,14 @@ function updateGame(ctx) {
         ctx.textAlign = "left";
         ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
         ctx.font = "24px Arial";
-        ctx.fillText(rect.symbol, rect.x + 15, rect.y + 30); // Simbolo
+        ctx.textAlign = "centre";
+        ctx.fillText(rect.symbol, rect.x, rect.y + 30); // Simbolo
         ctx.font = "16px Arial";
-        ctx.fillText(rect.name, rect.x + 5, rect.y + 60); // Nome dell'elemento
+        ctx.textAlign = "centre";
+        ctx.fillText(rect.name, rect.x, rect.y + 60); // Nome dell'elemento
 
         // Aggiorna la posizione e l'opacità
-        rect.y -= 1; // Si sposta verso l'alto
+        rect.y += 1; // Si sposta verso il basso
         rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
 
         // Rimuovi il rettangolo se esce dall'area di gioco o è completamente trasparente
