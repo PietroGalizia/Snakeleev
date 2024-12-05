@@ -504,13 +504,13 @@ function updateGame(ctx) {
         ctx.fillStyle = `rgba(0, 47, 95, ${rect.opacity})`; // Testo blu con opacità
         ctx.font = "14px Arial";
         ctx.textAlign = "left";
-        ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 5); // Numero atomico
+        ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 10); // Numero atomico
         ctx.font = "bold 24px Arial";
         ctx.textAlign = "center";
         ctx.fillText(rect.symbol, rect.x + 40, rect.y + 40); // Simbolo
         ctx.font = "bold 16px Arial";
         ctx.textAlign = "center";
-        ctx.fillText(rect.name, rect.x + 40, rect.y + 60); // Nome dell'elemento
+        ctx.fillText(rect.name, rect.x + 40, rect.y + 70); // Nome dell'elemento
 
         // Aggiorna la posizione e l'opacità
         rect.y -= 1; // Si sposta verso l'alto
@@ -537,13 +537,13 @@ function updateGame(ctx) {
         ctx.fillStyle = `rgba(229, 26, 75, ${rect.opacity})`; // Testo rosso con opacità
         ctx.font = "14px Arial";
         ctx.textAlign = "left";
-        ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 5); // Numero atomico
+        ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 10); // Numero atomico
         ctx.font = "bold 24px Arial";
         ctx.textAlign = "center";
         ctx.fillText(rect.symbol, rect.x + 40, rect.y + 40); // Simbolo
         ctx.font = "bold 16px Arial";
         ctx.textAlign = "center";
-        ctx.fillText(rect.name, rect.x + 40, rect.y + 60); // Nome dell'elemento
+        ctx.fillText(rect.name, rect.x + 40, rect.y + 70); // Nome dell'elemento
 
         // Aggiorna la posizione e l'opacità
         rect.y += 1; // Si sposta verso il basso
