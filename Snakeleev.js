@@ -93,6 +93,7 @@ let snakeColors = ["green"];
 let scoreText = null;
 let SPEED = 150;
 let infoRects = [];
+let infoRectsNo = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mainMenu').style.display = 'block';
@@ -116,7 +117,7 @@ function showStartScreen() {
     startScreen.style.fontFamily = 'Arial, sans-serif';
 
     const title = document.createElement('h1');
-    title.innerText = 'Serpendeleev';
+    title.innerText = 'Snakeleev';
     title.style.marginBottom = '20px';
 
     const instructions = document.createElement('p');
@@ -325,6 +326,17 @@ function createInfoRect(element, x, y) {
     });
 }
 
+function createInfoRectNo(element, x, y) {
+    infoRects.push({
+        x: x, // Posizione iniziale
+        y: y,
+        atomicNumber: element.atomicNumber,
+        symbol: element.symbol,
+        name: element.name,
+        opacity: 1 // Opacità iniziale
+    });
+}
+
 function updateScore(newScore) {
     document.getElementById('scoreBoard').style.color = "rgb(173, 176, 184)";
     document.getElementById('scoreBoard').innerText = 
@@ -370,8 +382,8 @@ function updateGame(ctx) {
 
             scoreText = {
                 value: "+10",
-                x: food.x + SIZE/20,
-                y: food.y + SIZE/20,
+                x: food.x + SIZE/2 ,
+                y: food.y - 10,
                 opacity: 1.0 // Trasparenza iniziale
             };
 
@@ -386,6 +398,20 @@ function updateGame(ctx) {
             
         } else {
             score -= 5;
+
+             scoreText = {
+                value: "+10",
+                x: food.x + SIZE/2 ,
+                y: food.y - 10,
+                opacity: 1.0 // Trasparenza iniziale
+            };
+
+            createInfoRectNo({
+                atomicNumber: foodElementNumber,
+                symbol: foodElement,
+                name: foodElementName
+            }, food.x, food.y);
+            
             snakeColors.unshift("red");
             flashEffect("rgba(229, 26, 75, 0.5)", food.x, food.y); // Lampeggio per errore
         }
@@ -453,8 +479,8 @@ function updateGame(ctx) {
         ctx.fillStyle = `rgba(173, 176, 184, ${rect.opacity})`; // Sfondo grigio con opacità
         ctx.strokeStyle = `rgba(150, 174, 33, ${rect.opacity})`; // Bordo verde con opacità
         ctx.lineWidth = 2;
-        ctx.fillRect(rect.x, rect.y, 60, 70); // Rettangolo
-        ctx.strokeRect(rect.x, rect.y, 60, 70); // Bordo
+        ctx.fillRect(rect.x, rect.y, 70, 70); // Rettangolo
+        ctx.strokeRect(rect.x, rect.y, 70, 70); // Bordo
 
         // Disegna il testo
         ctx.fillStyle = `rgba(0, 47, 95, ${rect.opacity})`; // Testo blu con opacità
@@ -462,9 +488,9 @@ function updateGame(ctx) {
         ctx.textAlign = "left";
         ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
         ctx.font = "24px Arial";
-        ctx.fillText(rect.symbol, rect.x + 15, rect.y + 25); // Simbolo
+        ctx.fillText(rect.symbol, rect.x + 15, rect.y + 30); // Simbolo
         ctx.font = "16px Arial";
-        ctx.fillText(rect.name, rect.x + 5, rect.y + 45); // Nome dell'elemento
+        ctx.fillText(rect.name, rect.x + 5, rect.y + 60); // Nome dell'elemento
 
         // Aggiorna la posizione e l'opacità
         rect.y -= 1; // Si sposta verso l'alto
@@ -476,6 +502,37 @@ function updateGame(ctx) {
         }
     }
 
+    // Gestione animazione dei rettangoli informativi
+    for (let i = infoRectsNo.length - 1; i >= 0; i--) {
+        const rect = infoRectsNo[i];
+    
+        // Disegna il rettangolo
+        ctx.fillStyle = `rgba(173, 176, 184, ${rect.opacity})`; // Sfondo grigio con opacità
+        ctx.strokeStyle = `rgba(229, 26, 75, ${rect.opacity})`; // Bordo rosso con opacità
+        ctx.lineWidth = 2;
+        ctx.fillRect(rect.x, rect.y, 70, 70); // Rettangolo
+        ctx.strokeRect(rect.x, rect.y, 70, 70); // Bordo
+
+        // Disegna il testo
+        ctx.fillStyle = `rgba(229, 26, 75, ${rect.opacity})`; // Testo rosso con opacità
+        ctx.font = "14px Arial";
+        ctx.textAlign = "left";
+        ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 15); // Numero atomico
+        ctx.font = "24px Arial";
+        ctx.fillText(rect.symbol, rect.x + 15, rect.y + 30); // Simbolo
+        ctx.font = "16px Arial";
+        ctx.fillText(rect.name, rect.x + 5, rect.y + 60); // Nome dell'elemento
+
+        // Aggiorna la posizione e l'opacità
+        rect.y -= 1; // Si sposta verso l'alto
+        rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
+
+        // Rimuovi il rettangolo se esce dall'area di gioco o è completamente trasparente
+        if (rect.y + 100 < 0 || rect.opacity <= 0) {
+            infoRects.splice(i, 1); // Rimuovi dall'array
+        }
+    }
+    
     // Draw the snake
        snake.forEach((part, index) => {
         if (index === 0) { // La testa del serpente
