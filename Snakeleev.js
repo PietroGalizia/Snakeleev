@@ -134,6 +134,44 @@ document.addEventListener('DOMContentLoaded', () => {
     updateScore(score);
 });
 
+document.getElementById("lower-bound").addEventListener("input", (event) => {
+  const lowerValue = document.getElementById("lower-value");
+  const upperValue = document.getElementById("upper-bound").value;
+  
+  // Assicurati che il valore minimo non superi il massimo
+  if (parseInt(event.target.value) > parseInt(upperValue)) {
+    event.target.value = upperValue;
+  }
+  lowerValue.textContent = event.target.value;
+});
+
+document.getElementById("upper-bound").addEventListener("input", (event) => {
+  const upperValue = document.getElementById("upper-value");
+  const lowerValue = document.getElementById("lower-bound").value;
+  
+  // Assicurati che il valore massimo non sia inferiore al minimo
+  if (parseInt(event.target.value) < parseInt(lowerValue)) {
+    event.target.value = lowerValue;
+  }
+  upperValue.textContent = event.target.value;
+});
+
+document.getElementById("confirm-selection").addEventListener("click", () => {
+  const lower = parseInt(document.getElementById("lower-bound").value);
+  const upper = parseInt(document.getElementById("upper-bound").value);
+
+  // Filtra gli elementi in base ai numeri atomici
+  const erasedElements = elements.filter((_, index) => {
+    const atomicNumber = index + 1; // Indice parte da 0, aggiungi 1 per il numero atomico
+    return atomicNumber >= lower && atomicNumber <= upper;
+  });
+
+  console.log("Elementi cancellati:", erasedElements);
+  // Usa erasedElements come necessario nel resto del gioco
+  // Ad esempio, puoi salvare in una variabile globale
+});
+
+
 function startGame() {
     initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
     gameLoop();
@@ -212,6 +250,13 @@ function drawFood() {
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
     console.log(`Drawing new food: ${foodElement} at (${food.x}, ${food.y})`);
 }
+
+function showElementSelector() {
+  document.getElementById("element-selector").style.display = "block";
+}
+
+// Chiama questa funzione dopo la selezione della velocità
+showElementSelector();
 
 function showDietSelection() {
     const dietDropdown = document.getElementById("dietDropdown");
