@@ -12,16 +12,41 @@
             text-align: center;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Assicura che il layout riempia l'altezza della finestra */
         }
+
+        #logo-container {
+            margin: 10px auto; /* Centra il logo orizzontalmente */
+            cursor: pointer;
+        }
+        #logo {
+            width: 300px;
+            height: auto;
+        }
+
+        /* Aggiungi spazio sotto il logo */
+        #content {
+            flex: 1; /* Spinge il contenuto verso il basso */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
         #startScreen, #dietSelection, #gameCanvas {
             display: none;
         }
+
         #gameCanvas {
             background-color: #002F5F;
             width: 620px;
             height: 520px;
             margin: 20px auto;
         }
+        
         .button {
             margin: 10px;
             padding: 10px 20px;
@@ -30,21 +55,13 @@
             color: white;
             cursor: pointer;
         }
-        #logo-container {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            cursor: pointer;
-        }
-        #logo {
-            width: 300px;
-            height: auto;
-        }
+        
         #citation {
             margin-top: 20px;
             font-size: 14px;
             line-height: 1.5;
         }
+        
         #citation a {
             text-decoration: none;
             color: #96AE21;
