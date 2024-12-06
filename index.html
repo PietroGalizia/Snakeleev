@@ -55,6 +55,22 @@
             color: white;
             cursor: pointer;
         }
+
+        #instructions {
+            margin: 20px auto;
+            text-align: left;
+            width: 80%;
+            color: white;
+        }
+        #instructions h3 {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        #instructions ol {
+            padding-left: 20px;
+        }
         
         #citation {
             margin-top: 20px;
@@ -72,10 +88,12 @@
     </style>
 </head>
 <body>
-    <h1>Snakeleev</h1>
     <div id="logo-container" onclick="window.open('https://www.issmc.cnr.it/en/', '_blank')">
         <img id="logo" src="logo.png" alt="Logo Istituto">
     </div>
+    
+    <div id="content">
+        <h1>Snakeleev</h1>
 
     <!-- Schermata iniziale: scelta della velocità -->
     <div id="startScreen">
@@ -85,9 +103,18 @@
 
     <!-- Selezione della dieta -->
     <div id="dietSelection">
-        <h2>Select Diet</h2>
+        <h2>Select the Snake's Diet</h2>
         <select id="dietDropdown"></select>
         <button class="button" onclick="startNewGame()">Play</button>
+        <div id="instructions">
+            <h3>INSTRUCTIONS</h3>
+            <ol>
+                <li>Move the snake using the arrow keys or the W, A, S, D keys.</li>
+                <li>Eat the elements that belong to the selected diet.</li>
+                <li>Skip the elements that don’t belong to this diet by pressing the spacebar.</li>
+                <li>Stay Hungry! Stay Periodic!</li>
+            </ol>
+        </div>
     </div>
 
     <!-- Canvas del gioco -->
