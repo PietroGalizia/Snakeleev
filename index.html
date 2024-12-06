@@ -20,6 +20,8 @@
 
         #logo-container {
             margin: 10px auto; /* Centra il logo orizzontalmente */
+            top: 10px;
+            left: 10px;
             cursor: pointer;
         }
         #logo {
@@ -29,11 +31,9 @@
 
         /* Aggiungi spazio sotto il logo */
         #content {
-            flex: 1; /* Spinge il contenuto verso il basso */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
+            margin-top: 150px; /* Spazio sufficiente per evitare sovrapposizione con il logo */
+            text-align: center; /* Centra il contenuto orizzontalmente */
+            width: 100%;
         }
 
         #startScreen, #dietSelection, #gameCanvas {
