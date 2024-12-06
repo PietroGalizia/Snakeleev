@@ -31,7 +31,7 @@
 
         /* Aggiungi spazio sotto il logo */
         #content {
-            margin-top: 150px; /* Spazio sufficiente per evitare sovrapposizione con il logo */
+            margin-top: 50px; /* Spazio sufficiente per evitare sovrapposizione con il logo */
             text-align: center; /* Centra il contenuto orizzontalmente */
             width: 100%;
         }
@@ -57,7 +57,7 @@
         }
 
         #instructions {
-            margin: 20px auto;
+            margin: 50px auto;
             text-align: left;
             width: 80%;
             color: white;
@@ -73,7 +73,7 @@
         }
         
         #citation {
-            margin-top: 20px;
+            margin-top: 30px;
             font-size: 14px;
             line-height: 1.5;
         }
@@ -97,7 +97,7 @@
 
     <!-- Schermata iniziale: scelta della velocità -->
     <div id="startScreen">
-        <h2>Choose your speed</h2>
+        <h2>Choose the Snake's speed</h2>
         <div id="speedButtons"></div>
     </div>
 
@@ -110,7 +110,7 @@
             <h3>INSTRUCTIONS</h3>
             <ol>
                 <li>Move the snake using the arrow keys or the W, A, S, D keys.</li>
-                <li>Eat the elements that belong to the selected diet.</li>
+                <li id="eat-instruction">Eat the elements that belong to the selected diet.</li>
                 <li>Skip the elements that don’t belong to this diet by pressing the spacebar.</li>
                 <li>Stay Hungry! Stay Periodic!</li>
             </ol>
