@@ -102,6 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showStartScreen() {
+    console.log("Mostrando la schermata iniziale...");
+    
     const startScreen = document.createElement('div');
     startScreen.id = 'startScreen';
     startScreen.style.position = 'absolute';
@@ -120,6 +122,7 @@ function showStartScreen() {
     const title = document.createElement('h1');
     title.innerText = 'Snakeleev';
     title.style.marginBottom = '20px';
+    startScreen.appendChild(title);
 
     const instructions = document.createElement('p');
     instructions.innerText = 'Choose your speed level:';
@@ -128,6 +131,7 @@ function showStartScreen() {
     const levelContainer = document.createElement('div');
     levelContainer.style.display = 'flex';
     levelContainer.style.gap = '10px';
+    startScreen.appendChild(instructions);
 
     const levels = [250, 200, 150, 100, 50];
     levels.forEach((speed, index) => {
@@ -142,21 +146,75 @@ function showStartScreen() {
         levelButton.style.borderRadius = '5px';
         levelButton.addEventListener('click', () => {
             SPEED = speed;
+            console.log(`Livello ${index + 1} selezionato, velocità impostata a ${speed}ms.`);
+            SPEED = speed;
             document.body.removeChild(startScreen); // Rimuove la schermata iniziale
-            startGame(); // Avvia il gioco
+            showDietSelectionScreen(); // Passa alla schermata di selezione della dieta
         });
         levelContainer.appendChild(levelButton);
     });
+}
 
-    startScreen.appendChild(title);
-    startScreen.appendChild(instructions);
-    startScreen.appendChild(levelContainer);
+// Mostra la schermata per selezionare la dieta
+function showDietSelectionScreen() {
+    const dietScreen = document.createElement('div');
+    dietScreen.id = 'dietScreen';
+    dietScreen.style.position = 'absolute';
+    dietScreen.style.top = '0';
+    dietScreen.style.left = '0';
+    dietScreen.style.width = '100%';
+    dietScreen.style.height = '100%';
+    dietScreen.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    dietScreen.style.color = 'white';
+    dietScreen.style.display = 'flex';
+    dietScreen.style.flexDirection = 'column';
+    dietScreen.style.alignItems = 'center';
+    dietScreen.style.justifyContent = 'center';
+    dietScreen.style.fontFamily = 'Arial, sans-serif';
 
-    document.body.appendChild(startScreen);
+    const title = document.createElement('h1');
+    title.innerText = 'Choose Your Diet';
+    title.style.marginBottom = '20px';
+    dietScreen.appendChild(title);
+
+    const dietContainer = document.createElement('div');
+    dietContainer.style.display = 'flex';
+    dietContainer.style.flexWrap = 'wrap';
+    dietContainer.style.gap = '10px';
+    dietContainer.style.justifyContent = 'center';
+    dietScreen.appendChild(dietContainer);
+
+    DietsList.forEach(diet => {
+        const dietButton = document.createElement('button');
+        dietButton.innerText = diet;
+        dietButton.style.padding = '10px 20px';
+        dietButton.style.fontSize = '14px';
+        dietButton.style.cursor = 'pointer';
+        dietButton.style.backgroundColor = 'rgb(120, 179, 224)';
+        dietButton.style.border = 'none';
+        dietButton.style.color = 'black';
+        dietButton.style.borderRadius = '5px';
+        dietButton.addEventListener('click', () => {
+            console.log(`Dieta selezionata: ${diet}`);
+            selectedDiet = diet;
+            document.body.removeChild(dietScreen); // Rimuove la schermata di selezione dieta
+            startGame(); // Avvia il gioco
+        });
+        dietContainer.appendChild(dietButton);
+    });
 }
 
 function startGame() {
     initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
+    
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = CANVAS_WIDTH;
+    canvas.height = CANVAS_HEIGHT;
+
+    document.getElementById('dietSelection')?.style.display = 'none';
+    canvas.style.display = 'block';
+    
     gameLoop();
 }
 
