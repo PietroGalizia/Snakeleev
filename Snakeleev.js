@@ -262,16 +262,9 @@ function generateFood() {
 }
 
 function startGameLoop(ctx) {
-    clearInterval(gameInterval);
     gameInterval = setInterval(() => {
         updateGame(ctx);
-    }, window.SPEED);
-}
-
-function selectSpeed(speed) {
-    window.SPEED = speed; // Associa la velocità selezionata
-    document.getElementById('startScreen').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'block';
+    }, SPEED);
 }
 
 function createInfoRect(element, x, y) {
