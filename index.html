@@ -49,6 +49,21 @@
             margin: 10px;
         }
 
+        #elementSelection {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #elementSelection div {
+            margin: 10px 0;
+        }
+
+        input[type="range"] {
+            width: 300px;
+            margin: 10px;
+        }
+
+
         #dietSelection {
             text-align: center;
             margin-bottom: 10px; 
@@ -124,6 +139,23 @@
         <h2>Choose the Snake's speed</h2>
         <div id="speedButtons"></div>
     </div>
+
+    <!-- Selezione dell'intervallo degli elementi -->
+<div id="elementSelection" style="display: none;">
+    <h2>Select Elements by Atomic Number</h2>
+    <p>Choose the range of atomic numbers to erase:</p>
+    <div>
+        <label for="minAtomicNumber">Minimum Atomic Number:</label>
+        <input id="minAtomicNumber" type="range" min="1" max="118" value="1" oninput="updateRange()">
+        <span id="minValue">1</span>
+    </div>
+    <div>
+        <label for="maxAtomicNumber">Maximum Atomic Number:</label>
+        <input id="maxAtomicNumber" type="range" min="1" max="118" value="118" oninput="updateRange()">
+        <span id="maxValue">118</span>
+    </div>
+    <button class="button" onclick="confirmElementSelection()">Confirm</button>
+</div>
 
     <!-- Selezione della dieta -->
     <div id="dietSelection">
