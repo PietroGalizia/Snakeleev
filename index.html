@@ -12,16 +12,51 @@
             text-align: center;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Assicura che il layout riempia l'altezza della finestra */
         }
+
+        #logo-container {
+            position: absolute; /* Rende il posizionamento relativo al bordo della finestra */
+            top: 10px;
+            left: 10px;
+            cursor: pointer;
+        }
+        #logo {
+            width: 300px;
+            height: auto;
+        }
+
+        /* Aggiungi spazio sotto il logo */
+        #content {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra orizzontalmente */
+            justify-content: space-between; /* Distribuisce gli elementi equamente */
+            height: 80vh; /* Spazio totale disponibile per il contenuto */
+            margin-top: 100px; /* Spazio dal logo */
+            text-align: center;
+        }
+
+        #content h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
         #startScreen, #dietSelection, #gameCanvas {
             display: none;
         }
+
         #gameCanvas {
             background-color: #002F5F;
             width: 620px;
             height: 520px;
             margin: 20px auto;
         }
+        
         .button {
             margin: 10px;
             padding: 10px 20px;
@@ -30,21 +65,29 @@
             color: white;
             cursor: pointer;
         }
-        #logo-container {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            cursor: pointer;
+
+        #instructions {
+            margin: 50px auto;
+            text-align: left;
+            width: 80%;
+            color: white;
         }
-        #logo {
-            width: 100px;
-            height: auto;
+        #instructions h3 {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 20px;
+            margin-bottom: 10px;
         }
+        #instructions ol {
+            padding-left: 20px;
+        }
+        
         #citation {
-            margin-top: 20px;
+            margin-top: 30px;
             font-size: 14px;
             line-height: 1.5;
         }
+        
         #citation a {
             text-decoration: none;
             color: #96AE21;
@@ -52,25 +95,44 @@
         #citation a:hover {
             color: #e51a4b;
         }
+
+        #scoreBoard {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+        
     </style>
 </head>
 <body>
-    <h1>Snakeleev</h1>
     <div id="logo-container" onclick="window.open('https://www.issmc.cnr.it/en/', '_blank')">
         <img id="logo" src="logo.png" alt="Logo Istituto">
     </div>
+    
+    <div id="content">
+        <h1>Snakeleev</h1>
 
     <!-- Schermata iniziale: scelta della velocità -->
     <div id="startScreen">
-        <h2>Choose your speed</h2>
+        <h2>Choose the Snake's speed</h2>
         <div id="speedButtons"></div>
     </div>
 
     <!-- Selezione della dieta -->
     <div id="dietSelection">
-        <h2>Select Diet</h2>
+        <h2>Select the Snake's Diet</h2>
         <select id="dietDropdown"></select>
         <button class="button" onclick="startNewGame()">Play</button>
+        <div id="instructions">
+            <h3>INSTRUCTIONS</h3>
+            <ol>
+                <li>Move the snake using the arrow keys or the W, A, S, D keys.</li>
+                <li id="eat-instruction">Eat the elements that belong to the selected diet.</li>
+                <li>Skip the elements that don’t belong to this diet by pressing the spacebar.</li>
+                <li>Stay Hungry! Stay Periodic!</li>
+            </ol>
+        </div>
     </div>
 
     <!-- Canvas del gioco -->
@@ -80,7 +142,7 @@
     <!-- Citazione -->
     <div id="citation">
         <a href="https://zenodo.org/records/10643098" target="_blank">
-            Pietro Galizia, <i>"Snakeleev: The Snake videogame for Exploring the Periodic Table of Elements with Real-World Contexts"</i> 
+            Pietro Galizia <i>"Snakeleev: The Snake videogame for Exploring the Periodic Table of Elements with Real-World Contexts"</i> 
             <br>J. Chem. Educ. <b>2025</b>, Vol., n., DOI: 10.1021/acs.jchemed.
         </a>
     </div>
@@ -110,8 +172,24 @@
 
             const dietDropdown = document.getElementById("dietDropdown");
             const diets = [
-                "Elements of a smartphone", "Elements of life", "Critical raw elements"
-            ]; // Aggiungi altre opzioni
+                "Elements of a smartphone", "Elements of life", "Critical raw elements", "Elements of DNA", "Radioactive elements (U-Th decay series)",
+                "Elements considered safety (grades A-E) in the first wall of fusion power plan",
+                "Elements dedicated to scientists", "Elements with names of latin derivation",
+                "Elements with names of greek derivation",
+                "Elements with names derived from cities, countries, or elsewhere",
+                "Elements with names not derived from latin or greek, nor from cities or countries",
+                "Elements in solid state at standard temperature and pressure",
+                "Elements in liquid state at standard temperature and pressure",
+                "Elements in gas state at standard temperature and pressure", "Metals", "Nonmetals",
+                "Elements of group I (Hydrogen & alkali metals)",
+                "Elements of group II (Alkaline earth metals)", "elements of group XV (Pnictogens)",
+                "Elements of group XVI (Chalcogens)", "elements of group XVII (Halogens)",
+                "Elements of group XVIII (Noblegases)", "Lanthanides", "Actinides",
+                "Transition metals", "Post-transition metals", "Metalloids", "Reactive nonmetals",
+                "s-block elements", "p-block elements", "d-block elements", "f-block elemnts"
+            ]; 
+            
+            // Aggiungi altre opzioni
             diets.forEach(diet => {
                 const option = document.createElement("option");
                 option.value = diet;
