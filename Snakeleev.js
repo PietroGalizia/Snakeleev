@@ -106,6 +106,9 @@ function startGame() {
     gameLoop();
 }
 
+// Chiamata iniziale per mostrare la schermata iniziale
+showStartScreen();
+
 document.addEventListener('keydown', (event) => {
     console.log(event.key);
 
