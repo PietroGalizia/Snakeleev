@@ -6,25 +6,21 @@
     <title>Snakeleev</title>
     <style>
         body {
-            margin-top: 20px;
             font-family: Arial, sans-serif;
             background-color: #002F5F;
             color: white;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
-        #mainMenu, #gameCanvas {
+        #startScreen, #dietSelection, #gameCanvas {
             display: none;
         }
         #gameCanvas {
             background-color: #002F5F;
             width: 620px;
             height: 520px;
-            margin: auto;
-        }
-        #scoreBoard {
-            font-size: 24px;
-            color: #96AE21;
-            padding: 10px;
+            margin: 20px auto;
         }
         .button {
             margin: 10px;
@@ -38,16 +34,15 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            z-index: 10;
             cursor: pointer;
         }
         #logo {
-            width: 300px;
+            width: 100px;
             height: auto;
         }
         #citation {
             margin-top: 20px;
-            font-size: 16px;
+            font-size: 14px;
             line-height: 1.5;
         }
         #citation a {
@@ -65,23 +60,24 @@
         <img id="logo" src="logo.png" alt="Logo Istituto">
     </div>
 
-    <div id="mainMenu">
+    <!-- Schermata iniziale: scelta della velocità -->
+    <div id="startScreen">
+        <h2>Choose your speed</h2>
+        <div id="speedButtons"></div>
+    </div>
+
+    <!-- Selezione della dieta -->
+    <div id="dietSelection">
         <h2>Select Diet</h2>
         <select id="dietDropdown"></select>
-        <h3>Select Speed</h3>
-        <select id="speedDropdown">
-            <option value="250">Level 1</option>
-            <option value="200">Level 2</option>
-            <option value="150" selected>Level 3</option>
-            <option value="100">Level 4</option>
-            <option value="50">Level 5</option>
-        </select>
         <button class="button" onclick="startNewGame()">Play</button>
     </div>
 
+    <!-- Canvas del gioco -->
     <div id="scoreBoard"></div>
     <canvas id="gameCanvas"></canvas>
 
+    <!-- Citazione -->
     <div id="citation">
         <a href="https://zenodo.org/records/10643098" target="_blank">
             Pietro Galizia, <i>"Snakeleev: The Snake videogame for Exploring the Periodic Table of Elements with Real-World Contexts"</i> 
@@ -89,6 +85,50 @@
         </a>
     </div>
 
+    <script>
+        // Setup degli elementi principali
+        const SPEED_LEVELS = [250, 200, 150, 100, 50];
+
+        // Mostra la schermata iniziale
+        document.addEventListener('DOMContentLoaded', () => {
+            const speedButtons = document.getElementById('speedButtons');
+            SPEED_LEVELS.forEach((speed, index) => {
+                const button = document.createElement('button');
+                button.className = 'button';
+                button.innerText = `Level ${index + 1}`;
+                button.onclick = () => selectSpeed(speed);
+                speedButtons.appendChild(button);
+            });
+            document.getElementById('startScreen').style.display = 'block';
+        });
+
+        // Funzione per selezionare la velocità e passare alla selezione della dieta
+        function selectSpeed(speed) {
+            window.SPEED = speed;
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('dietSelection').style.display = 'block';
+
+            const dietDropdown = document.getElementById("dietDropdown");
+            const diets = [
+                "Elements of a smartphone", "Elements of life", "Critical raw elements"
+            ]; // Aggiungi altre opzioni
+            diets.forEach(diet => {
+                const option = document.createElement("option");
+                option.value = diet;
+                option.textContent = diet;
+                dietDropdown.appendChild(option);
+            });
+        }
+
+        // Funzione per avviare il gioco
+        function startNewGame() {
+            window.selectedDiet = document.getElementById("dietDropdown").value;
+            document.getElementById('dietSelection').style.display = 'none';
+            document.getElementById('gameCanvas').style.display = 'block';
+            alert(`1) Eat the ${window.selectedDiet}\n2) Skip unrelated elements with the spacebar.\n3) Stay Hungry! Stay Periodic!`);
+            startGame(); // Funzione definita in Snakeleev.js
+        }
+    </script>
     <script src="Snakeleev.js"></script>
 </body>
 </html>
