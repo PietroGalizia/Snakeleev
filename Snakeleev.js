@@ -96,6 +96,34 @@ let SPEED = 150;
 let infoRects = [];
 let infoRectsNo = [];
 
+function resizeCanvas() {
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Imposta la dimensione del canvas
+    canvas.width = window.innerWidth * 0.9; // Il 90% della larghezza della finestra
+    canvas.height = window.innerHeight * 0.8; // L'80% dell'altezza della finestra
+
+    // Ridimensiona anche il contesto per evitare immagini sfocate
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+    // Aggiorna i limiti del gioco
+    CANVAS_WIDTH = canvas.width;
+    CANVAS_HEIGHT = canvas.height;
+}
+
+// Chiamare la funzione durante il caricamento della pagina e ogni volta che la finestra viene ridimensionata
+window.addEventListener('load', resizeCanvas);
+window.addEventListener('resize', resizeCanvas);
+
+// Evitare il comportamento predefinito dei tasti freccia
+document.addEventListener('keydown', (event) => {
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+        event.preventDefault();
+    }
+});
+
+
 function updateInstructions(selectedDiet) {
     const instruction = document.getElementById("eat-instruction");
     instruction.innerHTML = `Eat the elements that belong to the <b>${selectedDiet}</b>.`;
