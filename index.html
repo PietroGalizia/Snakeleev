@@ -19,7 +19,7 @@
         }
 
         #logo-container {
-            margin: 10px auto; /* Centra il logo orizzontalmente */
+            position: absolute; /* Rende il posizionamento relativo al bordo della finestra */
             top: 10px;
             left: 10px;
             cursor: pointer;
@@ -31,9 +31,19 @@
 
         /* Aggiungi spazio sotto il logo */
         #content {
-            margin-top: 50px; /* Spazio sufficiente per evitare sovrapposizione con il logo */
-            text-align: center; /* Centra il contenuto orizzontalmente */
-            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra orizzontalmente */
+            justify-content: space-between; /* Distribuisce gli elementi equamente */
+            height: 80vh; /* Spazio totale disponibile per il contenuto */
+            margin-top: 100px; /* Spazio dal logo */
+            text-align: center;
+        }
+
+        #content h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
         }
 
         #startScreen, #dietSelection, #gameCanvas {
@@ -85,6 +95,14 @@
         #citation a:hover {
             color: #e51a4b;
         }
+
+        #scoreBoard {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+        
     </style>
 </head>
 <body>
