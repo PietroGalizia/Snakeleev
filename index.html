@@ -63,6 +63,10 @@
             margin: 10px;
         }
 
+        input[type="range"] {
+            width: 300px;
+            margin: 10px;
+        }
 
         #dietSelection {
             text-align: center;
@@ -134,15 +138,19 @@
     <div id="content">
         <h1>Snakeleev</h1>
 
-    <!-- Schermata iniziale: scelta della velocità -->
-    <div id="startScreen">
-        <h2>Choose the Snake's speed</h2>
-        <div id="speedButtons"></div>
+    <!-- Selezione velocità e intervallo degli elementi -->
+<div id="elementSelection">
+    <h2>Game Setup</h2>
+    <div>
+        <label for="speed">Select the Snake's Speed:</label>
+        <select id="speed">
+            <option value="250">Slow</option>
+            <option value="200">Normal</option>
+            <option value="150">Fast</option>
+            <option value="100">Very Fast</option>
+            <option value="50">Insane</option>
+        </select>
     </div>
-
-    <!-- Selezione dell'intervallo degli elementi -->
-<div id="elementSelection" style="display: none;">
-    <h2>Select Elements by Atomic Number</h2>
     <p>Choose the range of atomic numbers to erase:</p>
     <div>
         <label for="minAtomicNumber">Minimum Atomic Number:</label>
@@ -154,7 +162,7 @@
         <input id="maxAtomicNumber" type="range" min="1" max="118" value="118" oninput="updateRange()">
         <span id="maxValue">118</span>
     </div>
-    <button class="button" onclick="confirmElementSelection()">Confirm</button>
+    <button class="button" onclick="confirmSettings()">Start Game</button>
 </div>
 
     <!-- Selezione della dieta -->
