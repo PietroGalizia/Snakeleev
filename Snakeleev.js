@@ -92,7 +92,7 @@ let snake = [{ x: 100, y: 100 }];
 let snakeColors = ["green"];
 let scoreText = null;
 let scoreTextNo = null;
-let SPEED = 150;
+//let SPEED = 150;
 let infoRects = [];
 let infoRectsNo = [];
 
@@ -292,7 +292,7 @@ function generateFood() {
 function startGameLoop(ctx) {
     gameInterval = setInterval(() => {
         updateGame(ctx);
-    }, SPEED);
+    }, window.SPEED);
 }
 
 function createInfoRect(element, x, y) {
