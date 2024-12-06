@@ -96,6 +96,41 @@ let scoreTextNo = null;
 let infoRects = [];
 let infoRectsNo = [];
 
+// Aggiorna i valori visibili accanto agli slider
+function updateRange() {
+    const minAtomicNumber = document.getElementById("minAtomicNumber").value;
+    const maxAtomicNumber = document.getElementById("maxAtomicNumber").value;
+    document.getElementById("minValue").textContent = minAtomicNumber;
+    document.getElementById("maxValue").textContent = maxAtomicNumber;
+}
+
+// Conferma le impostazioni e avvia il gioco
+function confirmSettings() {
+    // Imposta la velocità
+    const speed = parseInt(document.getElementById("speed").value);
+    window.SPEED = speed;
+
+    // Seleziona l'intervallo di elementi da cancellare
+    const min = parseInt(document.getElementById("minAtomicNumber").value);
+    const max = parseInt(document.getElementById("maxAtomicNumber").value);
+    const elements = [
+        "H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar",
+        "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Se", "Br", "Kr",
+        "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Sb", "Te", "I", "Xe",
+        "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu",
+        "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac",
+        "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg",
+        "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og"
+    ];
+    window.erasedElements = elements.slice(min - 1, max);
+
+    alert(`Game Speed: ${window.SPEED} ms\nErased Elements: ${window.erasedElements.join(", ")}`);
+
+    // Nascondi la schermata e avvia il gioco
+    document.getElementById('elementSelection').style.display = 'none';
+    startGame(); // Funzione per iniziare il gioco
+}
+
 function resizeCanvas() {
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
