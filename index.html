@@ -138,7 +138,7 @@
     <div id="dietSelection">
         <h2>Select the Snake's Diet</h2>
         <select id="dietDropdown"></select>
-        <button class="button" onclick="elementSelection()">Play</button>
+        <button class="button" onclick="finalSelection()">Play</button>
         <div id="instructions">
             <h3>INSTRUCTIONS</h3>
             <ol>
@@ -195,15 +195,6 @@
             document.getElementById('selectedElementCount').textContent = `Selected: 1 ≤ Z ≤ ${maxElementsToUse}`;
         }
 
-         function elementSelection() {
-            selectedDiet = document.getElementById("dietDropdown").value;
-            window.selectedDiet = document.getElementById("dietDropdown").value;
-            document.getElementById('dietSelection').style.display = 'none';
-            document.getElementById('gameCanvas').style.display = 'block';
-            document.getElementById('scoreBoard').style.display = 'block';
-            startGame();
-        }
-
         function proceedToDietSelection() {
                 document.getElementById('startScreen').style.display = 'none';
                 document.getElementById('elementSelection').style.display = 'none';
@@ -236,6 +227,16 @@
                 dietDropdown.appendChild(option);
             });
         }
+
+        function finalSelection() {
+            selectedDiet = document.getElementById("dietDropdown").value;
+            window.selectedDiet = document.getElementById("dietDropdown").value;
+            document.getElementById('dietSelection').style.display = 'none';
+            document.getElementById('gameCanvas').style.display = 'block';
+            document.getElementById('scoreBoard').style.display = 'block';
+            startNewGame();
+        }
+
 
         // Funzione per avviare il gioco
         function startNewGame() {
