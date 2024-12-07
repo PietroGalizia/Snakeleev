@@ -95,6 +95,7 @@ let scoreTextNo = null;
 //let SPEED = 150;
 let infoRects = [];
 let infoRectsNo = [];
+let inputQueue = [];
 
 function resizeCanvas() {
     const canvas = document.getElementById('gameCanvas');
@@ -116,13 +117,6 @@ function resizeCanvas() {
 window.addEventListener('load', resizeCanvas);
 window.addEventListener('resize', resizeCanvas);
 
-// Evitare il comportamento predefinito dei tasti freccia
-document.addEventListener('keydown', (event) => {
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-        event.preventDefault();
-    }
-});
-
 
 function updateInstructions(selectedDiet) {
     const instruction = document.getElementById("eat-instruction");
@@ -139,49 +133,43 @@ function startGame() {
     gameLoop();
 }
 
+// Evitare il comportamento predefinito dei tasti freccia
 document.addEventListener('keydown', (event) => {
-    console.log(event.key);
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+        event.preventDefault();
+    }
 
-    if (event.key === ' ') {
-        event.preventDefault(); // Previene il comportamento predefinito della barra spaziatrice
-        changeFoodElement();    // Cambia l'elemento del cibo senza cambiarne la posizione
-    } else {
-        const newDirection = { x: direction.x, y: direction.y };
+    // Aggiungi i comandi alla coda
+    const newDirection = { x: direction.x, y: direction.y };
 
-        // Determina la nuova direzione in base al tasto premuto
-        switch (event.key) {
-            case 'ArrowUp':
-            case 'w':
-            case 'W':
-                if (direction.y === 0) newDirection.x = 0, newDirection.y = -1;
-                break;
-            case 'ArrowDown':
-            case 's':
-            case 'S':
-                if (direction.y === 0) newDirection.x = 0, newDirection.y = 1;
-                break;
-            case 'ArrowLeft':
-            case 'a':
-            case 'A':
-                if (direction.x === 0) newDirection.x = -1, newDirection.y = 0;
-                break;
-            case 'ArrowRight':
-            case 'd':
-            case 'D':
-                if (direction.x === 0) newDirection.x = 1, newDirection.y = 0;
-                break;
-        }
+    switch (event.key) {
+        case 'ArrowUp':
+        case 'w':
+        case 'W':
+            if (direction.y === 0) newDirection.x = 0, newDirection.y = -1;
+            break;
+        case 'ArrowDown':
+        case 's':
+        case 'S':
+            if (direction.y === 0) newDirection.x = 0, newDirection.y = 1;
+            break;
+        case 'ArrowLeft':
+        case 'a':
+        case 'A':
+            if (direction.x === 0) newDirection.x = -1, newDirection.y = 0;
+            break;
+        case 'ArrowRight':
+        case 'd':
+        case 'D':
+            if (direction.x === 0) newDirection.x = 1, newDirection.y = 0;
+            break;
+        default:
+            return; // Ignora altri tasti
+    }
 
-        // Verifica che il cambio di direzione non causi una collisione immediata
-        const nextHead = {
-            x: snake[0].x + newDirection.x * SIZE,
-            y: snake[0].y + newDirection.y * SIZE
-        };
-
-        // Se la nuova posizione della testa non collide con il corpo, aggiorna la direzione
-        if (!snake.some(part => part.x === nextHead.x && part.y === nextHead.y)) {
-            direction = newDirection;
-        }
+    // Aggiungi il nuovo comando alla coda, se è valido
+    if (!inputQueue.length || (inputQueue[inputQueue.length - 1].x !== newDirection.x || inputQueue[inputQueue.length - 1].y !== newDirection.y)) {
+        inputQueue.push(newDirection);
     }
 });
 
@@ -346,7 +334,7 @@ function updateGame(ctx) {
     // Controlla se il serpente si scontra con se stesso
     for (let i = 1; i < snake.length; i++) {
         if (snake[i].x === head.x && snake[i].y === head.y) {
-            alert("Stay Hungry! Stay Periodic!");
+            alert("<b>Stay Hungry! Stay Periodic!<\b><br>Refresh the page if you want to start a new game");
             exitGame();
             return;
         }
