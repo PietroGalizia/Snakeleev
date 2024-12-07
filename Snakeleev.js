@@ -120,7 +120,6 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-
 function updateInstructions(selectedDiet) {
     const instruction = document.getElementById("eat-instruction");
     instruction.innerHTML = `Eat the elements that belong to the <b>${selectedDiet}</b>.`;
@@ -131,16 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
     updateScore(score);
 });
 
-// Funzione per aggiornare il conteggio degli elementi fino a Z
 function updateElementCount() {
-    const rangeValue = document.getElementById('elementRange').value; // Ottieni il valore da 1 a 118
-    maxElementsToUse = parseInt(rangeValue);
+    const rangeValue = parseInt(document.getElementById('elementRange').value);
+    maxElementsToUse = rangeValue;
 
-    // Aggiorna la scritta sulla pagina
+    // Aggiorna il conteggio mostrato all'utente
     document.getElementById('selectedElementCount').textContent = `Selected: 1 ≤ Z ≤ ${maxElementsToUse}`;
 
-    // Aggiorna erasedElements fino al valore Z
-    erasedElements = elements.slice(0, maxElementsToUse);
+    // Aggiorna erasedElements fino al massimo valore Z selezionato
+    erasedElements = elements.slice(0, rangeValue);
+    console.log("erasedElements:", erasedElements); // Log per debug
 }
 
 function startGame() {
