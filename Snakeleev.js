@@ -95,7 +95,6 @@ let scoreTextNo = null;
 //let SPEED = 150;
 let infoRects = [];
 let infoRectsNo = [];
-let inputQueue = [];
 
 function resizeCanvas() {
     const canvas = document.getElementById('gameCanvas');
@@ -117,6 +116,14 @@ function resizeCanvas() {
 window.addEventListener('load', resizeCanvas);
 window.addEventListener('resize', resizeCanvas);
 
+// Evitare il comportamento predefinito dei tasti freccia
+document.addEventListener('keydown', (event) => {
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+        event.preventDefault();
+    }
+});
+
+
 function updateInstructions(selectedDiet) {
     const instruction = document.getElementById("eat-instruction");
     instruction.innerHTML = `Eat the elements that belong to the <b>${selectedDiet}</b>.`;
@@ -132,42 +139,49 @@ function startGame() {
     gameLoop();
 }
 
-// Evitare il comportamento predefinito dei tasti freccia
 document.addEventListener('keydown', (event) => {
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd'].includes(event.key.toLowerCase())) {
-        event.preventDefault();
-    }
+    console.log(event.key);
 
-    const newDirection = { x: direction.x, y: direction.y };
+    if (event.key === ' ') {
+        event.preventDefault(); // Previene il comportamento predefinito della barra spaziatrice
+        changeFoodElement();    // Cambia l'elemento del cibo senza cambiarne la posizione
+    } else {
+        const newDirection = { x: direction.x, y: direction.y };
 
-    switch (event.key.toLowerCase()) {
-        case 'arrowup':
-        case 'w':
-            if (direction.y === 0) newDirection.x = 0, newDirection.y = -1;
-            break;
-        case 'arrowdown':
-        case 's':
-            if (direction.y === 0) newDirection.x = 0, newDirection.y = 1;
-            break;
-        case 'arrowleft':
-        case 'a':
-            if (direction.x === 0) newDirection.x = -1, newDirection.y = 0;
-            break;
-        case 'arrowright':
-        case 'd':
-            if (direction.x === 0) newDirection.x = 1, newDirection.y = 0;
-            break;
-        default:
-            return; // Ignora tasti non validi
-    }
+        // Determina la nuova direzione in base al tasto premuto
+        switch (event.key) {
+            case 'ArrowUp':
+            case 'w':
+            case 'W':
+                if (direction.y === 0) newDirection.x = 0, newDirection.y = -1;
+                break;
+            case 'ArrowDown':
+            case 's':
+            case 'S':
+                if (direction.y === 0) newDirection.x = 0, newDirection.y = 1;
+                break;
+            case 'ArrowLeft':
+            case 'a':
+            case 'A':
+                if (direction.x === 0) newDirection.x = -1, newDirection.y = 0;
+                break;
+            case 'ArrowRight':
+            case 'd':
+            case 'D':
+                if (direction.x === 0) newDirection.x = 1, newDirection.y = 0;
+                break;
+        }
 
-    // Aggiungi alla coda solo se è una direzione diversa dall'ultima nella coda
-    if (
-        !inputQueue.length ||
-        inputQueue[inputQueue.length - 1].x !== newDirection.x ||
-        inputQueue[inputQueue.length - 1].y !== newDirection.y
-    ) {
-        inputQueue.push(newDirection);
+        // Verifica che il cambio di direzione non causi una collisione immediata
+        const nextHead = {
+            x: snake[0].x + newDirection.x * SIZE,
+            y: snake[0].y + newDirection.y * SIZE
+        };
+
+        // Se la nuova posizione della testa non collide con il corpo, aggiorna la direzione
+        if (!snake.some(part => part.x === nextHead.x && part.y === nextHead.y)) {
+            direction = newDirection;
+        }
     }
 });
 
@@ -215,13 +229,6 @@ function showDietSelection() {
 }
 
 function startNewGame() {
-// Aggiungi l'event listener per aggiornare le istruzioni quando cambia la selezione della dieta
-    document.getElementById("dietDropdown").addEventListener('change', (event) => {
-        const newDiet = event.target.value;
-        updateInstructions(newDiet); // Aggiorna le istruzioni in base alla nuova dieta selezionata
-    });
-
-    // Ottieni la dieta selezionata iniziale
     selectedDiet = document.getElementById("dietDropdown").value;
 
     // Aggiorna le istruzioni dinamicamente con la dieta selezionata
@@ -284,18 +291,8 @@ function generateFood() {
 
 function startGameLoop(ctx) {
     gameInterval = setInterval(() => {
-        if (inputQueue.length > 0) {
-            direction = inputQueue.shift(); // Aggiorna la direzione dal primo elemento nella coda
-        }
-        updateGame(ctx); // Aggiorna il gioco
+        updateGame(ctx);
     }, window.SPEED);
-}
-
-    // Aggiorna il movimento del serpente qui
-    updateSnake();
-
-    // Chiamata ricorsiva del loop
-    setTimeout(gameLoop, window.SPEED);
 }
 
 function createInfoRect(element, x, y) {
