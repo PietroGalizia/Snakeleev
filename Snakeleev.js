@@ -346,7 +346,6 @@ function updateGame(ctx) {
     // Controlla se il serpente si scontra con se stesso
     for (let i = 1; i < snake.length; i++) {
         if (snake[i].x === head.x && snake[i].y === head.y) {
-            alert("Stay Hungry! Stay Periodic!");
             exitGame();
             return;
         }
