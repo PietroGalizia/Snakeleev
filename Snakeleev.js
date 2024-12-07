@@ -134,40 +134,39 @@ function startGame() {
 
 // Evitare il comportamento predefinito dei tasti freccia
 document.addEventListener('keydown', (event) => {
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd'].includes(event.key.toLowerCase())) {
         event.preventDefault();
     }
 
-    // Aggiungi i comandi alla coda
     const newDirection = { x: direction.x, y: direction.y };
 
-    switch (event.key) {
-        case 'ArrowUp':
+    switch (event.key.toLowerCase()) {
+        case 'arrowup':
         case 'w':
-        case 'W':
             if (direction.y === 0) newDirection.x = 0, newDirection.y = -1;
             break;
-        case 'ArrowDown':
+        case 'arrowdown':
         case 's':
-        case 'S':
             if (direction.y === 0) newDirection.x = 0, newDirection.y = 1;
             break;
-        case 'ArrowLeft':
+        case 'arrowleft':
         case 'a':
-        case 'A':
             if (direction.x === 0) newDirection.x = -1, newDirection.y = 0;
             break;
-        case 'ArrowRight':
+        case 'arrowright':
         case 'd':
-        case 'D':
             if (direction.x === 0) newDirection.x = 1, newDirection.y = 0;
             break;
         default:
-            return; // Ignora altri tasti
+            return; // Ignora tasti non validi
     }
 
-    // Aggiungi il nuovo comando alla coda, se è valido
-    if (!inputQueue.length || (inputQueue[inputQueue.length - 1].x !== newDirection.x || inputQueue[inputQueue.length - 1].y !== newDirection.y)) {
+    // Aggiungi alla coda solo se è una direzione diversa dall'ultima nella coda
+    if (
+        !inputQueue.length ||
+        inputQueue[inputQueue.length - 1].x !== newDirection.x ||
+        inputQueue[inputQueue.length - 1].y !== newDirection.y
+    ) {
         inputQueue.push(newDirection);
     }
 });
@@ -278,16 +277,12 @@ function generateFood() {
 
 function startGameLoop(ctx) {
     gameInterval = setInterval(() => {
-        updateGame(ctx);
+        if (inputQueue.length > 0) {
+            direction = inputQueue.shift(); // Aggiorna la direzione dal primo elemento nella coda
+        }
+        updateGame(ctx); // Aggiorna il gioco
     }, window.SPEED);
 }
-
-function gameLoop() {
-    // Processa il prossimo input dalla coda
-    if (inputQueue.length > 0) {
-        const nextDirection = inputQueue.shift(); // Rimuove il primo elemento della coda
-        direction = nextDirection; // Aggiorna la direzione
-    }
 
     // Aggiorna il movimento del serpente qui
     updateSnake();
