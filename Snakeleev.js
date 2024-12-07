@@ -282,6 +282,20 @@ function startGameLoop(ctx) {
     }, window.SPEED);
 }
 
+function gameLoop() {
+    // Processa il prossimo input dalla coda
+    if (inputQueue.length > 0) {
+        const nextDirection = inputQueue.shift(); // Rimuove il primo elemento della coda
+        direction = nextDirection; // Aggiorna la direzione
+    }
+
+    // Aggiorna il movimento del serpente qui
+    updateSnake();
+
+    // Chiamata ricorsiva del loop
+    setTimeout(gameLoop, window.SPEED);
+}
+
 function createInfoRect(element, x, y) {
     infoRects.push({
         x: x, // Posizione iniziale
