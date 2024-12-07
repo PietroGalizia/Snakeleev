@@ -136,6 +136,7 @@
                 <li>Move the snake using the arrow keys or the W, A, S, D keys.</li>
                 <li id="eat-instruction">Eat the elements that belong to the selected diet.</li>
                 <li>Skip the elements that don’t belong to this diet by pressing the spacebar.</li>
+                <li><strong>Refresh the page if you want to start a new game.</strong></li>
                 <li>Stay Hungry! Stay Periodic!</li>
             </ol>
         </div>
@@ -144,14 +145,6 @@
     <!-- Canvas del gioco -->
     <div id="scoreBoard"></div>
     <canvas id="gameCanvas"></canvas>
-
-    <!-- Schermata di Game Over -->
-    <div id="gameOverScreen" style="display: none; text-align: center;">
-        <h1>Stay hungry! Stay periodic!</h1>
-        <p id="dietMessage"></p>
-        <button class="button" onclick="restartWithSpeed()">Restart with same speed</button>
-        <button class="button" onclick="goToStartScreen()">Select new speed</button>
-    </div>
 
     <!-- Citazione -->
     <div id="citation">
@@ -217,6 +210,7 @@
             window.selectedDiet = document.getElementById("dietDropdown").value;
             document.getElementById('dietSelection').style.display = 'none';
             document.getElementById('gameCanvas').style.display = 'block';
+            alert(`1) Eat the ${window.selectedDiet}\n2) Skip unrelated elements with the spacebar.\n3) Stay Hungry! Stay Periodic!`);
             startGame(); // Funzione definita in Snakeleev.js
         }
     </script>
