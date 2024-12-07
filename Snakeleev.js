@@ -130,52 +130,9 @@ function updateInstructions(selectedDiet) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Mostra il menu principale
     document.getElementById('mainMenu').style.display = 'block';
     updateScore(score);
-
-    // Event listener per il cursore inferiore
-    document.getElementById('lower-bound').addEventListener('input', function () {
-        document.getElementById('lower-value').innerText = this.value;
-    });
-
-    // Event listener per il cursore superiore
-    document.getElementById('upper-bound').addEventListener('input', function () {
-        document.getElementById('upper-value').innerText = this.value;
-    });
 });
-
-function selectSpeed(speed) {
-    window.SPEED = speed; // Salva la velocità scelta
-    // Nasconde la schermata iniziale
-    document.getElementById('startScreen').style.display = 'none';
-    // Mostra la schermata per scegliere il range atomico
-    document.getElementById('rangeSelection').style.display = 'block';
-}
-
-document.getElementById('confirmRange').onclick = function () {
-    const lowerBound = document.getElementById('lower-bound').value;
-    const upperBound = document.getElementById('upper-bound').value;
-
-    // Salva i valori scelti
-    window.atomicRange = { lower: lowerBound, upper: upperBound };
-
-    // Nasconde la schermata del range
-    document.getElementById('rangeSelection').style.display = 'none';
-
-    // Mostra la schermata della dieta
-    document.getElementById('dietSelection').style.display = 'block';
-};
-
-
-function showRangeSelection() {
-    // Nasconde la schermata iniziale
-    document.getElementById('startScreen').style.display = 'none';
-
-    // Mostra la schermata del range
-    document.getElementById('rangeSelection').style.display = 'block';
-}
-
 
 function startGame() {
     initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
