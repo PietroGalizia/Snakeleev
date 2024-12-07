@@ -215,10 +215,12 @@
             });
         }
 
-        function goToElementSelection() {
+        function elementSelection() {
             selectedDiet = document.getElementById("dietDropdown").value;
+            window.selectedDiet = document.getElementById("dietDropdown").value;
             document.getElementById('dietSelection').style.display = 'none';
             document.getElementById('elementSelection').style.display = 'block';
+            updateElementCount();
         }
 
         function updateElementCount() {
@@ -229,8 +231,6 @@
 
         // Funzione per avviare il gioco
         function startNewGame() {
-            window.selectedDiet = document.getElementById("dietDropdown").value;
-            console.log("Number of elements selected:", maxElementsToUse);
             document.getElementById('elementSelection').style.display = 'none';
             document.getElementById('gameCanvas').style.display = 'block';
             startGame(); // Funzione definita in Snakeleev.js
