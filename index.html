@@ -142,6 +142,15 @@
         </div>
     </div>
 
+    <!-- Schermata per scegliere il numero di elementi -->
+    <div id="elementSelection" style="display: none;">
+        <h2>Choose the Elements</h2>
+        <label for="elementRange">Select the maximum atomic number (1 to 118):</label>
+        <input id="elementRange" type="range" min="1" max="118" value="50" oninput="updateElementCount()">
+        <p id="selectedElementCount">Selected: 50</p>
+        <button class="button" onclick="startGameWithSelection()">Play</button>
+     </div>
+
     <!-- Canvas del gioco -->
     <div id="scoreBoard"></div>
     <canvas id="gameCanvas"></canvas>
@@ -157,6 +166,7 @@
     <script>
         // Setup degli elementi principali
         const SPEED_LEVELS = [250, 200, 150, 100, 50];
+        let maxElementsToUse = 50;
 
         // Mostra la schermata iniziale
         document.addEventListener('DOMContentLoaded', () => {
@@ -205,10 +215,24 @@
             });
         }
 
+        function goToElementSelection() {
+            selectedDiet = document.getElementById("dietDropdown").value;
+            document.getElementById('dietSelection').style.display = 'none';
+            document.getElementById('elementSelection').style.display = 'block';
+            updateElementCount();
+        }
+
+        function updateElementCount() {
+            const rangeValue = document.getElementById('elementRange').value;
+            maxElementsToUse = parseInt(rangeValue);
+            document.getElementById('selectedElementCount').textContent = `Selected: ${maxElementsToUse}`;
+        }
+
         // Funzione per avviare il gioco
         function startNewGame() {
             window.selectedDiet = document.getElementById("dietDropdown").value;
-            document.getElementById('dietSelection').style.display = 'none';
+            console.log("Number of elements selected:", maxElementsToUse);
+            document.getElementById('elementSelection').style.display = 'none';
             document.getElementById('gameCanvas').style.display = 'block';
             startGame(); // Funzione definita in Snakeleev.js
         }
