@@ -336,7 +336,7 @@ function updateGame(ctx) {
     // Controlla se il serpente si scontra con se stesso
     for (let i = 1; i < snake.length; i++) {
         if (snake[i].x === head.x && snake[i].y === head.y) {
-            exitGame();
+            exitGame(); // Chiama la nuova funzione
             return;
         }
     }
@@ -569,13 +569,39 @@ function updateGame(ctx) {
             
 }
 
-// Function to exit the game
-function exitGame() {
-    document.getElementById('mainMenu').style.display = 'block';
+function restartWithSpeed() {
+    // Nasconde la schermata di Game Over e riavvia il gioco
+    document.getElementById('gameOverScreen').style.display = 'none';
+    document.getElementById('gameCanvas').style.display = 'block';
+    startGame(); // Riavvia il gioco mantenendo la velocità e la dieta
+}
+
+function goToStartScreen() {
+    // Torna alla schermata iniziale
+    document.getElementById('gameOverScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'block';
     document.getElementById('dietSelection').style.display = 'none';
     document.getElementById('gameCanvas').style.display = 'none';
-
-    if (gameInterval) {
-        clearInterval(gameInterval);
-    }
 }
+
+function exitGame() {
+    // Mostra la schermata di Game Over
+    document.getElementById('gameCanvas').style.display = 'none';
+    document.getElementById('scoreBoard').style.display = 'none';
+    document.getElementById('gameOverScreen').style.display = 'block';
+
+    // Mostra il messaggio personalizzato in base alla dieta selezionata
+    const dietMessages = {
+        "Elements of a smartphone": "Mobile phones have a high embedded value of interest within a circular economy.",
+        "Elements of life": "Oxygen, carbon, hydrogen, and nitrogen are the main building blocks of every living creature, including human beings.",
+        "Critical raw elements": "Raw materials are crucial to Europe’s economy.",
+        "Elements of DNA": "DNA is made up of carbon, hydrogen, oxygen, nitrogen, and phosphorus. (A. Rathi, *Elements of Life*, 2011)",
+        "Radioactive elements (U-Th decay series)": "Radioactive elements can be naturally occurring or anthropogenic, and are found throughout the geosphere.",
+        // Aggiungi altri messaggi per le diete qui
+    };
+
+    const selectedDiet = window.selectedDiet || "Unknown diet";
+    const message = dietMessages[selectedDiet] || "Explore more elements to learn new facts!";
+    document.getElementById('dietMessage').innerText = message;
+}
+
