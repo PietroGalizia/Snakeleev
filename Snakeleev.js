@@ -71,10 +71,6 @@ const diets = {
 // Ref. elements of a smartphone: https://meg.resourcesregulator.nsw.gov.au/sites/default/files/2022-11/periodic-table-of-mobile-phones-a3complete.pdf
 // Ref. elements of a smartphone: https://doi.org/10.1016/j.resourpol.2020.101750
 
-const erasedElements = [
-    "Sc", "V", "Ga", "Ge", "Br", "Kr", "Rb", "Y", "Nb", "Mo", "Tc", "Ru", "Rh", "In", "Te", "Xe", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "Re", "Os", "Ir", "Tl", "Po", "At", "Fr", "Ac", "Th", "Pa", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md"
-];
-
 // Initialize game state
 const SIZE = 20;
 const CANVAS_WIDTH = 620;
@@ -95,6 +91,7 @@ let scoreTextNo = null;
 //let SPEED = 150;
 let infoRects = [];
 let infoRectsNo = [];
+let erasedElements = [];
 
 function resizeCanvas() {
     const canvas = document.getElementById('gameCanvas');
@@ -133,6 +130,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mainMenu').style.display = 'block';
     updateScore(score);
 });
+
+// Funzione per aggiornare il conteggio degli elementi fino a Z
+function updateElementCount() {
+    const rangeValue = document.getElementById('elementRange').value; // Ottieni il valore da 1 a 118
+    maxElementsToUse = parseInt(rangeValue);
+
+    // Aggiorna la scritta sulla pagina
+    document.getElementById('selectedElementCount').textContent = `Selected: 1 ≤ Z ≤ ${maxElementsToUse}`;
+
+    // Aggiorna erasedElements fino al valore Z
+    erasedElements = elements.slice(0, maxElementsToUse);
+}
 
 function startGame() {
     initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
