@@ -125,18 +125,17 @@
         <div id="speedButtons"></div>
     </div>
 
-     <!-- Schermata di selezione degli elementi -->
+     <!-- Schermata per scegliere gli elementi -->
         <div id="elementSelection" style="display: none;">
-        <h2>Choose the Elements</h2>
-        <label for="elementRange">Select the maximum atomic number (1 to 118):</label>
-        <input id="elementRange" type="range" min="1" max="118" value="118" oninput="updateElementCount(this.value)">
-        <p id="selectedElementCount">Selected: All elements</p>
-        <button class="button" onclick="proceedToDietSelection()">Next</button>
-    </div>
-
+            <h2>Choose the Elements to Skip</h2>
+            <p>Move the slider to choose up to which element to keep:</p>
+            <input type="range" id="elementRange" min="1" max="118" value="118" oninput="updateSelectedElement()">
+            <span id="selectedElement">118</span>
+            <button class="button" onclick="confirmElementSelection()">Next</button>
+        </div>
 
     <!-- Selezione della dieta -->
-    <div id="dietSelection">
+    <div id="dietSelection" style="display: none;">
         <h2>Select the Snake's Diet</h2>
         <select id="dietDropdown"></select>
         <button class="button" onclick="startNewGame()">Play</button>
