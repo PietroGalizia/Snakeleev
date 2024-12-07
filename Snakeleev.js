@@ -116,6 +116,12 @@ function resizeCanvas() {
 window.addEventListener('load', resizeCanvas);
 window.addEventListener('resize', resizeCanvas);
 
+// Evitare il comportamento predefinito dei tasti freccia
+document.addEventListener('keydown', (event) => {
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+        event.preventDefault();
+    }
+});
 
 function updateInstructions(selectedDiet) {
     const instruction = document.getElementById("eat-instruction");
@@ -132,54 +138,49 @@ function startGame() {
     gameLoop();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('mainMenu').style.display = 'block';
-    updateScore(score);
-});
-
 document.addEventListener('keydown', (event) => {
-    console.log(event.key); 
-    
+    console.log(event.key);
+
     if (event.key === ' ') {
-        event.preventDefault();
-        changeFoodElement();
+        event.preventDefault(); // Previene il comportamento predefinito della barra spaziatrice
+        changeFoodElement();    // Cambia l'elemento del cibo senza cambiarne la posizione
     } else {
+        const newDirection = { x: direction.x, y: direction.y };
+
+        // Determina la nuova direzione in base al tasto premuto
         switch (event.key) {
             case 'ArrowUp':
-                if (direction.y === 0) direction = { x: 0, y: -1 };
-                break;
-            case 'ArrowDown':
-                if (direction.y === 0) direction = { x: 0, y: 1 };
-                break;
-            case 'ArrowLeft':
-                if (direction.x === 0) direction = { x: -1, y: 0 };
-                break;
-            case 'ArrowRight':
-                if (direction.x === 0) direction = { x: 1, y: 0 };
-                break;
             case 'w':
             case 'W':
-                if (direction.y === 0) direction = { x: 0, y: -1 };
+                if (direction.y === 0) newDirection.x = 0, newDirection.y = -1;
                 break;
+            case 'ArrowDown':
             case 's':
             case 'S':
-                if (direction.y === 0) direction = { x: 0, y: 1 };
+                if (direction.y === 0) newDirection.x = 0, newDirection.y = 1;
                 break;
+            case 'ArrowLeft':
             case 'a':
             case 'A':
-                if (direction.x === 0) direction = { x: -1, y: 0 };
+                if (direction.x === 0) newDirection.x = -1, newDirection.y = 0;
                 break;
+            case 'ArrowRight':
             case 'd':
             case 'D':
-                if (direction.x === 0) direction = { x: 1, y: 0 };
+                if (direction.x === 0) newDirection.x = 1, newDirection.y = 0;
                 break;
         }
-    }
-});
 
-    // Aggiungi il nuovo comando alla coda, se è valido
-    if (!inputQueue.length || (inputQueue[inputQueue.length - 1].x !== newDirection.x || inputQueue[inputQueue.length - 1].y !== newDirection.y)) {
-        inputQueue.push(newDirection);
+        // Verifica che il cambio di direzione non causi una collisione immediata
+        const nextHead = {
+            x: snake[0].x + newDirection.x * SIZE,
+            y: snake[0].y + newDirection.y * SIZE
+        };
+
+        // Se la nuova posizione della testa non collide con il corpo, aggiorna la direzione
+        if (!snake.some(part => part.x === nextHead.x && part.y === nextHead.y)) {
+            direction = newDirection;
+        }
     }
 });
 
