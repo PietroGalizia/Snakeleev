@@ -374,7 +374,6 @@ function updateGame(ctx) {
 }
             
     // Controlla se il serpente mangia il cibo
-function handleEating(foodElement) {
     const validDietElementsCount = calculateValidDietElements();
     const rangeValue = parseInt(document.getElementById('elementRange').value);
 
@@ -431,7 +430,6 @@ function handleEating(foodElement) {
     } else {
         snake.pop();
     }
-}
 
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
