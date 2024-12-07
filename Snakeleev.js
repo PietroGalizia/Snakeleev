@@ -428,7 +428,7 @@ function handleEating() {
         updateScore(score);
         generateFood();
     } else {
-        if (snake.length > 0) snake.pop();
+        snake.pop();
     }
 }
 
