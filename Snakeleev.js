@@ -145,13 +145,6 @@ function updateElementCount() {
     console.log("Erased Elements:", erasedElements);
 }
 
-function calculateValidDietElements() {
-    // Calcola il numero di elementi nella dieta effettivamente validi
-    const selectedDietElements = diets[selectedDiet] || [];
-    const validDietElements = selectedDietElements.filter(el => !erasedElements.includes(el));
-    return validDietElements.length;
-}
-
 function startGame() {
     initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
     gameLoop();
@@ -372,6 +365,13 @@ function updateGame(ctx) {
             
     // Aggiungi la nuova testa
     snake.unshift(head);
+
+    function calculateValidDietElements() {
+    // Calcola il numero di elementi nella dieta effettivamente validi
+    const selectedDietElements = diets[selectedDiet] || [];
+    const validDietElements = selectedDietElements.filter(el => !erasedElements.includes(el));
+    return validDietElements.length;
+}
             
     // Controlla se il serpente mangia il cibo
 function handleEating(foodElement) {
