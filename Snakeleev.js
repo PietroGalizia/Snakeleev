@@ -380,7 +380,7 @@ function handleEating() {
     if (head.x === food.x && head.y === food.y) {
         if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
             // Se l'elemento appartiene alla dieta
-            const scoreIncrement = (rangeValue - validDietElementsCount) / rangeValue;
+            const scoreIncrement = Math.round(100 * (rangeValue - validDietElementsCount) / rangeValue);
             score += scoreIncrement;
 
             scoreText = {
@@ -400,7 +400,7 @@ function handleEating() {
             expandFoodEffect(food.x, food.y);
         } else {
             // Se l'elemento non appartiene alla dieta
-            const scoreDecrement = validDietElementsCount / rangeValue;
+            const scoreDecrement = Math.round(100 * validDietElementsCount / rangeValue);
             score -= scoreDecrement;
 
             scoreTextNo = {
