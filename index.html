@@ -125,11 +125,20 @@
         <div id="speedButtons"></div>
     </div>
 
+    <!-- Schermata per scegliere il numero di elementi -->
+    <div id="elementSelection" style="display: none;">
+        <h2>Select the biggest atomic number, <b>Z</b></h2>
+        <label for="elementRange">1 ≤ <b>Z</b> ≤ 118 </label>
+        <input id="elementRange" type="range" min="1" max="118" value="50" oninput="updateElementCount()">
+        <p id="selectedElementCount">Selected: 50</p>
+        <button class="button" onclick="proceedToDietSelection()()">Next</button>
+     </div>
+
     <!-- Selezione della dieta -->
     <div id="dietSelection">
         <h2>Select the Snake's Diet</h2>
         <select id="dietDropdown"></select>
-        <button class="button" onclick="elementSelection()">Next</button>
+        <button class="button" onclick="elementSelection()">Play</button>
         <div id="instructions">
             <h3>INSTRUCTIONS</h3>
             <ol>
@@ -141,15 +150,6 @@
             </ol>
         </div>
     </div>
-
-    <!-- Schermata per scegliere il numero di elementi -->
-    <div id="elementSelection" style="display: none;">
-        <h2>Select the biggest atomic number, <b>Z</b></h2>
-        <label for="elementRange">1 ≤ <b>Z</b> ≤ 118 </label>
-        <input id="elementRange" type="range" min="1" max="118" value="50" oninput="updateElementCount()">
-        <p id="selectedElementCount">Selected: 50</p>
-        <button class="button" onclick="startNewGame()">Play</button>
-     </div>
 
     <!-- Canvas del gioco -->
     <div id="scoreBoard"></div>
@@ -185,7 +185,27 @@
         function selectSpeed(speed) {
             window.SPEED = speed;
             document.getElementById('startScreen').style.display = 'none';
-            document.getElementById('dietSelection').style.display = 'block';
+            document.getElementById('elementSelection').style.display = 'block';
+            updateElementCount();
+        }
+
+        function updateElementCount() {
+            const rangeValue = document.getElementById('elementRange').value;
+            maxElementsToUse = parseInt(rangeValue);
+            document.getElementById('selectedElementCount').textContent = `Selected: 1 ≤ Z ≤ ${maxElementsToUse}`;
+        }
+
+         function elementSelection() {
+            selectedDiet = document.getElementById("dietDropdown").value;
+            window.selectedDiet = document.getElementById("dietDropdown").value;
+            document.getElementById('dietSelection').style.display = 'none';
+            document.getElementById('gameCanvas').style.display = 'block';
+            startGame();
+        }
+
+        function proceedToDietSelection() {
+                document.getElementById('elementSelection').style.display = 'none';
+                document.getElementById('dietSelection').style.display = 'block';
 
             const dietDropdown = document.getElementById("dietDropdown");
             const diets = [
@@ -215,23 +235,9 @@
             });
         }
 
-        function elementSelection() {
-            selectedDiet = document.getElementById("dietDropdown").value;
-            window.selectedDiet = document.getElementById("dietDropdown").value;
-            document.getElementById('dietSelection').style.display = 'none';
-            document.getElementById('elementSelection').style.display = 'block';
-            updateElementCount();
-        }
-
-        function updateElementCount() {
-            const rangeValue = document.getElementById('elementRange').value;
-            maxElementsToUse = parseInt(rangeValue);
-            document.getElementById('selectedElementCount').textContent = `Selected: 1 ≤ Z ≤ ${maxElementsToUse}`;
-        }
-
         // Funzione per avviare il gioco
         function startNewGame() {
-            document.getElementById('elementSelection').style.display = 'none'; // Nascondi la schermata
+            document.getElementById('dietSelection').style.display = 'none'; // Nascondi la schermata
             document.getElementById('gameCanvas').style.display = 'block'; // Mostra il canvas del gioco
             startGame(); // Funzione definita in Snakeleev.js
         }
