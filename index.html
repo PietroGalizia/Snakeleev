@@ -145,6 +145,14 @@
     <div id="scoreBoard"></div>
     <canvas id="gameCanvas"></canvas>
 
+    <!-- Schermata di Game Over -->
+    <div id="gameOverScreen" style="display: none; text-align: center;">
+        <h1>Stay hungry! Stay periodic!</h1>
+        <p id="dietMessage"></p>
+        <button class="button" onclick="restartWithSpeed()">Restart with same speed</button>
+        <button class="button" onclick="goToStartScreen()">Select new speed</button>
+    </div>
+
     <!-- Citazione -->
     <div id="citation">
         <a href="https://zenodo.org/records/10643098" target="_blank">
