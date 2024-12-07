@@ -185,43 +185,61 @@
             window.SPEED = speed;
             document.getElementById('startScreen').style.display = 'none';
             document.getElementById('dietSelection').style.display = 'block';
-
-            const dietDropdown = document.getElementById("dietDropdown");
-            const diets = [
-                "Elements of a smartphone", "Elements of life", "Critical raw elements", "Elements of DNA", "Radioactive elements (U-Th decay series)",
-                "Elements considered safety (grades A-E) in the first wall of fusion power plan",
-                "Elements dedicated to scientists", "Elements with names of latin derivation",
-                "Elements with names of greek derivation",
-                "Elements with names derived from cities, countries, or elsewhere",
-                "Elements with names not derived from latin or greek, nor from cities or countries",
-                "Elements in solid state at standard temperature and pressure",
-                "Elements in liquid state at standard temperature and pressure",
-                "Elements in gas state at standard temperature and pressure", "Metals", "Nonmetals",
-                "Elements of group I (Hydrogen & alkali metals)",
-                "Elements of group II (Alkaline earth metals)", "elements of group XV (Pnictogens)",
-                "Elements of group XVI (Chalcogens)", "elements of group XVII (Halogens)",
-                "Elements of group XVIII (Noblegases)", "Lanthanides", "Actinides",
-                "Transition metals", "Post-transition metals", "Metalloids", "Reactive nonmetals",
-                "s-block elements", "p-block elements", "d-block elements", "f-block elemnts"
-            ]; 
-            
-            // Aggiungi altre opzioni
-            diets.forEach(diet => {
-                const option = document.createElement("option");
-                option.value = diet;
-                option.textContent = diet;
-                dietDropdown.appendChild(option);
-            });
         }
 
-        // Funzione per avviare il gioco
-        function startNewGame() {
-            window.selectedDiet = document.getElementById("dietDropdown").value;
-            document.getElementById('dietSelection').style.display = 'none';
-            document.getElementById('gameCanvas').style.display = 'block';
-            startGame(); // Funzione definita in Snakeleev.js
+        // Funzione per gestire la conferma nella schermata di selezione elementi
+        function confirmElementSelection() {
+            const rangeValue = parseInt(document.getElementById('elementRange').value);
+            erasedElements = elements.slice(rangeValue); // Aggiorna gli elementi da scartare
+
+            console.log("Elements skipped:", erasedElements);
+
+            document.getElementById('elementSelection').style.display = 'none';
+            document.getElementById('dietSelection').style.display = 'block';
+            showDietSelection();
         }
-    </script>
+
+
+
+    // Funzione per mostrare la schermata di selezione della dieta
+    function showDietSelection() {
+        const dietDropdown = document.getElementById("dietDropdown");
+        dietDropdown.innerHTML = "";
+
+        DietsList.forEach(diet => {
+            let option = document.createElement("option");
+            option.value = diet;
+            option.textContent = diet;
+            dietDropdown.appendChild(option);
+        });
+
+        document.getElementById('dietSelection').style.display = 'block';
+    }
+
+    // Funzione per avviare il gioco
+    function startNewGame() {
+        selectedDiet = document.getElementById("dietDropdown").value;
+
+        // Aggiorna dinamicamente le istruzioni
+        updateInstructions(selectedDiet);
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = CANVAS_WIDTH;
+        canvas.height = CANVAS_HEIGHT;
+
+        document.getElementById('dietSelection').style.display = 'none';
+        canvas.style.display = 'block';
+
+        startGame();
+    }
+
+    // Funzione per aggiornare le istruzioni basate sulla dieta selezionata
+    function updateInstructions(selectedDiet) {
+        const instruction = document.getElementById("eat-instruction");
+        instruction.innerHTML = `Eat the elements that belong to the <b>${selectedDiet}</b>.`;
+    }
+</script>
     <script src="Snakeleev.js"></script>
 </body>
 </html>
