@@ -123,6 +123,7 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+
 function updateInstructions(selectedDiet) {
     const instruction = document.getElementById("eat-instruction");
     instruction.innerHTML = `Eat the elements that belong to the <b>${selectedDiet}</b>.`;
@@ -345,7 +346,7 @@ function updateGame(ctx) {
     // Controlla se il serpente si scontra con se stesso
     for (let i = 1; i < snake.length; i++) {
         if (snake[i].x === head.x && snake[i].y === head.y) {
-            alert("<b>Stay Hungry! Stay Periodic!<\b><br>Refresh the page if you want to start a new game");
+            alert("Stay Hungry! Stay Periodic!");
             exitGame();
             return;
         }
