@@ -95,7 +95,6 @@ let scoreTextNo = null;
 //let SPEED = 150;
 let infoRects = [];
 let infoRectsNo = [];
-let inputQueue = [];
 
 function resizeCanvas() {
     const canvas = document.getElementById('gameCanvas');
@@ -133,39 +132,50 @@ function startGame() {
     gameLoop();
 }
 
-// Evitare il comportamento predefinito dei tasti freccia
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('mainMenu').style.display = 'block';
+    updateScore(score);
+});
+
 document.addEventListener('keydown', (event) => {
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+    console.log(event.key); 
+    
+    if (event.key === ' ') {
         event.preventDefault();
+        changeFoodElement();
+    } else {
+        switch (event.key) {
+            case 'ArrowUp':
+                if (direction.y === 0) direction = { x: 0, y: -1 };
+                break;
+            case 'ArrowDown':
+                if (direction.y === 0) direction = { x: 0, y: 1 };
+                break;
+            case 'ArrowLeft':
+                if (direction.x === 0) direction = { x: -1, y: 0 };
+                break;
+            case 'ArrowRight':
+                if (direction.x === 0) direction = { x: 1, y: 0 };
+                break;
+            case 'w':
+            case 'W':
+                if (direction.y === 0) direction = { x: 0, y: -1 };
+                break;
+            case 's':
+            case 'S':
+                if (direction.y === 0) direction = { x: 0, y: 1 };
+                break;
+            case 'a':
+            case 'A':
+                if (direction.x === 0) direction = { x: -1, y: 0 };
+                break;
+            case 'd':
+            case 'D':
+                if (direction.x === 0) direction = { x: 1, y: 0 };
+                break;
+        }
     }
-
-    // Aggiungi i comandi alla coda
-    const newDirection = { x: direction.x, y: direction.y };
-
-    switch (event.key) {
-        case 'ArrowUp':
-        case 'w':
-        case 'W':
-            if (direction.y === 0) newDirection.x = 0, newDirection.y = -1;
-            break;
-        case 'ArrowDown':
-        case 's':
-        case 'S':
-            if (direction.y === 0) newDirection.x = 0, newDirection.y = 1;
-            break;
-        case 'ArrowLeft':
-        case 'a':
-        case 'A':
-            if (direction.x === 0) newDirection.x = -1, newDirection.y = 0;
-            break;
-        case 'ArrowRight':
-        case 'd':
-        case 'D':
-            if (direction.x === 0) newDirection.x = 1, newDirection.y = 0;
-            break;
-        default:
-            return; // Ignora altri tasti
-    }
+});
 
     // Aggiungi il nuovo comando alla coda, se è valido
     if (!inputQueue.length || (inputQueue[inputQueue.length - 1].x !== newDirection.x || inputQueue[inputQueue.length - 1].y !== newDirection.y)) {
