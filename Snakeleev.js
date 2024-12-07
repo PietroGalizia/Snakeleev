@@ -95,7 +95,6 @@ let scoreTextNo = null;
 //let SPEED = 150;
 let infoRects = [];
 let infoRectsNo = [];
-let inputQueue = [];
 
 function resizeCanvas() {
     const canvas = document.getElementById('gameCanvas');
@@ -117,23 +116,10 @@ function resizeCanvas() {
 window.addEventListener('load', resizeCanvas);
 window.addEventListener('resize', resizeCanvas);
 
-// Assegna un listener ai tasti premuti
+// Evitare il comportamento predefinito dei tasti freccia
 document.addEventListener('keydown', (event) => {
-    if ([' ', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd'].includes(event.key)) {
-        event.preventDefault(); // Previene comportamenti indesiderati
-    }
-
-    if (event.key === ' ') {
-        // Cambia elemento cibo
-        changeFoodElement();
-        return; // Non aggiungere alla coda
-    }
-
-    const newDirection = getDirectionFromKey(event.key);
-
-    // Verifica che la direzione non sia opposta a quella attuale
-    if (newDirection && !isOppositeDirection(newDirection, direction)) {
-        inputQueue.push(newDirection); // Aggiungi la nuova direzione alla coda
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+        event.preventDefault();
     }
 });
 
@@ -153,42 +139,51 @@ function startGame() {
     gameLoop();
 }
 
-// Funzione per convertire i tasti in direzioni
-function getDirectionFromKey(key) {
-    switch (key) {
-        case 'ArrowUp':
-        case 'w':
-        case 'W':
-            return { x: 0, y: -1 };
-        case 'ArrowDown':
-        case 's':
-        case 'S':
-            return { x: 0, y: 1 };
-        case 'ArrowLeft':
-        case 'a':
-        case 'A':
-            return { x: -1, y: 0 };
-        case 'ArrowRight':
-        case 'd':
-        case 'D':
-            return { x: 1, y: 0 };
-        default:
-            return null;
-    }
-}
+document.addEventListener('keydown', (event) => {
+    console.log(event.key);
 
-// Funzione per verificare se due direzioni sono opposte
-function isOppositeDirection(dir1, dir2) {
-    return dir1.x === -dir2.x && dir1.y === -dir2.y;
-}
+    if (event.key === ' ') {
+        event.preventDefault(); // Previene il comportamento predefinito della barra spaziatrice
+        changeFoodElement();    // Cambia l'elemento del cibo senza cambiarne la posizione
+    } else {
+        const newDirection = { x: direction.x, y: direction.y };
 
-// Logica del gioco: aggiorna la direzione del serpente dalla coda
-function updateSnakeDirection() {
-    if (inputQueue.length > 0) {
-        const nextDirection = inputQueue.shift(); // Prendi il prossimo comando dalla coda
-        direction = nextDirection; // Aggiorna la direzione del serpente
+        // Determina la nuova direzione in base al tasto premuto
+        switch (event.key) {
+            case 'ArrowUp':
+            case 'w':
+            case 'W':
+                if (direction.y === 0) newDirection.x = 0, newDirection.y = -1;
+                break;
+            case 'ArrowDown':
+            case 's':
+            case 'S':
+                if (direction.y === 0) newDirection.x = 0, newDirection.y = 1;
+                break;
+            case 'ArrowLeft':
+            case 'a':
+            case 'A':
+                if (direction.x === 0) newDirection.x = -1, newDirection.y = 0;
+                break;
+            case 'ArrowRight':
+            case 'd':
+            case 'D':
+                if (direction.x === 0) newDirection.x = 1, newDirection.y = 0;
+                break;
+        }
+
+        // Verifica che il cambio di direzione non causi una collisione immediata
+        const nextHead = {
+            x: snake[0].x + newDirection.x * SIZE,
+            y: snake[0].y + newDirection.y * SIZE
+        };
+
+        // Se la nuova posizione della testa non collide con il corpo, aggiorna la direzione
+        if (!snake.some(part => part.x === nextHead.x && part.y === nextHead.y)) {
+            direction = newDirection;
+        }
     }
-}
+});
 
 function changeFoodElement() {
     console.log("Changing food element...");
@@ -359,18 +354,6 @@ function updateGame(ctx) {
             
     // Aggiungi la nuova testa
     snake.unshift(head);
-
-    function updateGame(ctx) {
-    updateSnakeDirection(); // Applica la prossima direzione dalla coda
-
-    // Aggiorna la posizione del serpente
-    let head = {
-        x: snake[0].x + direction.x * SIZE,
-        y: snake[0].y + direction.y * SIZE
-    };
-
-    // (Resto della funzione rimane invariato)
-}
             
     // Controlla se il serpente mangia il cibo
     if (head.x === food.x && head.y === food.y) {
