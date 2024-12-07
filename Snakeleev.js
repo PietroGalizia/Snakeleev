@@ -130,16 +130,19 @@ document.addEventListener('DOMContentLoaded', () => {
     updateScore(score);
 });
 
+// Funzione per aggiornare la selezione e la lista di elementi scartati
 function updateElementCount() {
-    const rangeValue = parseInt(document.getElementById('elementRange').value);
-    maxElementsToUse = rangeValue;
+    const rangeValue = document.getElementById('elementRange').value; // Valore massimo di Z
+    const maxZ = parseInt(rangeValue);
 
-    // Aggiorna il conteggio mostrato all'utente
-    document.getElementById('selectedElementCount').textContent = `Selected: 1 ≤ Z ≤ ${maxElementsToUse}`;
+    // Aggiorna il contenuto della variabile erasedElements con elementi oltre il valore massimo di Z
+    erasedElements = elements.slice(maxZ);
 
-    // Aggiorna erasedElements fino al massimo valore Z selezionato
-    erasedElements = elements.slice(0, rangeValue);
-    console.log("erasedElements:", erasedElements); // Log per debug
+    // Aggiorna il testo mostrato all'utente
+    document.getElementById('selectedElementCount').textContent = `Selected: 1 ≤ Z ≤ ${maxZ}`;
+    
+    // Debug: stampa la lista degli elementi scartati
+    console.log("Erased Elements:", erasedElements);
 }
 
 function startGame() {
