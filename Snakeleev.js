@@ -71,6 +71,10 @@ const diets = {
 // Ref. elements of a smartphone: https://meg.resourcesregulator.nsw.gov.au/sites/default/files/2022-11/periodic-table-of-mobile-phones-a3complete.pdf
 // Ref. elements of a smartphone: https://doi.org/10.1016/j.resourpol.2020.101750
 
+const erasedElements = [
+    "Sc", "V", "Ga", "Ge", "Br", "Kr", "Rb", "Y", "Nb", "Mo", "Tc", "Ru", "Rh", "In", "Te", "Xe", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "Re", "Os", "Ir", "Tl", "Po", "At", "Fr", "Ac", "Th", "Pa", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md"
+];
+
 // Initialize game state
 const SIZE = 20;
 const CANVAS_WIDTH = 620;
@@ -91,7 +95,6 @@ let scoreTextNo = null;
 //let SPEED = 150;
 let infoRects = [];
 let infoRectsNo = [];
-let erasedElements = [];
 
 function resizeCanvas() {
     const canvas = document.getElementById('gameCanvas');
@@ -120,21 +123,6 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-function updateSelectedElement() {
-    const rangeValue = document.getElementById('elementRange').value;
-    document.getElementById('selectedElement').textContent = rangeValue;
-}
-
-function confirmElementSelection() {
-    const rangeValue = parseInt(document.getElementById('elementRange').value);
-
-    // Popola erasedElements in base alla selezione
-    erasedElements = elements.slice(rangeValue); // Conserva solo gli elementi da `rangeValue` a 118
-
-    // Mostra la schermata successiva (selezione dieta)
-    document.getElementById('elementSelection').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'block';
-}
 
 function updateInstructions(selectedDiet) {
     const instruction = document.getElementById("eat-instruction");
@@ -237,7 +225,7 @@ function showDietSelection() {
     });
 
     document.getElementById('mainMenu').style.display = 'none';
-    document.getElementById('elementSelection').style.display = 'block';
+    document.getElementById('dietSelection').style.display = 'block';
 }
 
 function startNewGame() {
@@ -261,8 +249,6 @@ function startNewGame() {
     score = 0;
     updateScore(score);
 
-    // Qui puoi utilizzare erasedElements nel tuo gioco per scartare gli elementi selezionati
-    console.log("Erased Elements:", erasedElements);
     
     generateFood();
     startGameLoop(ctx);
@@ -360,7 +346,7 @@ function updateGame(ctx) {
     // Controlla se il serpente si scontra con se stesso
     for (let i = 1; i < snake.length; i++) {
         if (snake[i].x === head.x && snake[i].y === head.y) {
-            alert("<b>Stay Hungry! Stay Periodic!<\b><br>Refresh the page if you want to start a new game");
+            alert("Stay Hungry! Stay Periodic!");
             exitGame();
             return;
         }
