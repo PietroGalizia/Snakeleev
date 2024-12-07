@@ -215,6 +215,13 @@ function showDietSelection() {
 }
 
 function startNewGame() {
+// Aggiungi l'event listener per aggiornare le istruzioni quando cambia la selezione della dieta
+    document.getElementById("dietDropdown").addEventListener('change', (event) => {
+        const newDiet = event.target.value;
+        updateInstructions(newDiet); // Aggiorna le istruzioni in base alla nuova dieta selezionata
+    });
+
+    // Ottieni la dieta selezionata iniziale
     selectedDiet = document.getElementById("dietDropdown").value;
 
     // Aggiorna le istruzioni dinamicamente con la dieta selezionata
