@@ -129,7 +129,7 @@
     <div id="dietSelection">
         <h2>Select the Snake's Diet</h2>
         <select id="dietDropdown"></select>
-        <button class="button" onclick="startNewGame()">Play</button>
+        <button class="button" onclick="elementSelection()">Next</button>
         <div id="instructions">
             <h3>INSTRUCTIONS</h3>
             <ol>
@@ -148,7 +148,7 @@
         <label for="elementRange">Select the maximum atomic number (1 to 118):</label>
         <input id="elementRange" type="range" min="1" max="118" value="50" oninput="updateElementCount()">
         <p id="selectedElementCount">Selected: 50</p>
-        <button class="button" onclick="startGameWithSelection()">Play</button>
+        <button class="button" onclick="startNewGame()">Play</button>
      </div>
 
     <!-- Canvas del gioco -->
@@ -219,7 +219,6 @@
             selectedDiet = document.getElementById("dietDropdown").value;
             document.getElementById('dietSelection').style.display = 'none';
             document.getElementById('elementSelection').style.display = 'block';
-            updateElementCount();
         }
 
         function updateElementCount() {
