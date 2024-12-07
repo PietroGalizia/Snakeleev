@@ -372,15 +372,15 @@ function calculateValidDietElements() {
     return validDietElements.length;
 }
             
-// Controlla se il serpente mangia il cibo
 function handleEating() {
     const validDietElementsCount = calculateValidDietElements();
-    const rangeValue = parseInt(document.getElementById('elementRange').value);
+    const rangeValue = Math.round(parseInt(document.getElementById('elementRange').value));
 
     if (head.x === food.x && head.y === food.y) {
         if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
             // Se l'elemento appartiene alla dieta
-            const scoreIncrement = (rangeValue - validDietElementsCount) / rangeValue;
+            const scoreIncrement = Math.round((rangeValue - validDietElementsCount) / rangeValue * 10);
+
             score += scoreIncrement;
 
             scoreText = {
@@ -400,7 +400,8 @@ function handleEating() {
             expandFoodEffect(food.x, food.y);
         } else {
             // Se l'elemento non appartiene alla dieta
-            const scoreDecrement = validDietElementsCount / rangeValue;
+            const scoreDecrement = Math.round(validDietElementsCount / rangeValue * 10);
+
             score -= scoreDecrement;
 
             scoreTextNo = {
@@ -420,21 +421,16 @@ function handleEating() {
             flashEffect("rgba(229, 26, 75, 0.5)", food.x, food.y);
         }
 
-        // Aggiorna la lista dei colori in base alla lunghezza del serpente
         if (snakeColors.length > snake.length) {
             snakeColors.pop();
         }
 
         updateScore(score);
-
-        // Rigenerare il cibo dopo un mangiamento riuscito
         generateFood();
     } else {
-        // Qui si gestisce il comportamento quando il serpente non "mangia"
         if (snake.length > 0) snake.pop();
     }
 }
-
 
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
