@@ -200,10 +200,12 @@
             window.selectedDiet = document.getElementById("dietDropdown").value;
             document.getElementById('dietSelection').style.display = 'none';
             document.getElementById('gameCanvas').style.display = 'block';
+            document.getElementById('scoreBoard').style.display = 'block';
             startGame();
         }
 
         function proceedToDietSelection() {
+                document.getElementById('startScreen').style.display = 'none';
                 document.getElementById('elementSelection').style.display = 'none';
                 document.getElementById('dietSelection').style.display = 'block';
 
