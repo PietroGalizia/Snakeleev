@@ -366,14 +366,14 @@ function updateGame(ctx) {
     // Aggiungi la nuova testa
     snake.unshift(head);
 
-    function calculateValidDietElements() {
-    // Calcola il numero di elementi nella dieta effettivamente validi
+function calculateValidDietElements() { 
     const selectedDietElements = diets[selectedDiet] || [];
     const validDietElements = selectedDietElements.filter(el => !erasedElements.includes(el));
     return validDietElements.length;
 }
             
-    // Controlla se il serpente mangia il cibo
+// Controlla se il serpente mangia il cibo
+function handleEating() {
     const validDietElementsCount = calculateValidDietElements();
     const rangeValue = parseInt(document.getElementById('elementRange').value);
 
@@ -420,16 +420,21 @@ function updateGame(ctx) {
             flashEffect("rgba(229, 26, 75, 0.5)", food.x, food.y);
         }
 
-        // Mantieni la lunghezza della lista dei colori
+        // Aggiorna la lista dei colori in base alla lunghezza del serpente
         if (snakeColors.length > snake.length) {
             snakeColors.pop();
         }
 
         updateScore(score);
+
+        // Rigenerare il cibo dopo un mangiamento riuscito
         generateFood();
     } else {
-        snake.pop();
+        // Qui si gestisce il comportamento quando il serpente non "mangia"
+        if (snake.length > 0) snake.pop();
     }
+}
+
 
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
