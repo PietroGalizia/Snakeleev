@@ -147,7 +147,7 @@
         <h2>Select the biggest atomic number, <b>Z</b> </h2>
         <label for="elementRange">1 ≤ <b>Z</b> ≤ 118 </label>
         <input id="elementRange" type="range" min="1" max="118" value="50" oninput="updateElementCount()">
-        <p id="selectedElementCount">Selected 1 ≤ <b>Z</b> ≤: 50</p>
+        <p id="selectedElementCount">Selected: 50</p>
         <button class="button" onclick="startNewGame()">Play</button>
      </div>
 
@@ -226,13 +226,13 @@
         function updateElementCount() {
             const rangeValue = document.getElementById('elementRange').value;
             maxElementsToUse = parseInt(rangeValue);
-            document.getElementById('selectedElementCount').textContent = `Selected: ${maxElementsToUse}`;
+            document.getElementById('selectedElementCount').textContent = `Selected: 1 ≤ <b>Z<b\> ≤ ${maxElementsToUse}`;
         }
 
         // Funzione per avviare il gioco
         function startNewGame() {
-            document.getElementById('elementSelection').style.display = 'none';
-            document.getElementById('gameCanvas').style.display = 'block';
+            document.getElementById('elementSelection').style.display = 'none'; // Nascondi la schermata
+            document.getElementById('gameCanvas').style.display = 'block'; // Mostra il canvas del gioco
             startGame(); // Funzione definita in Snakeleev.js
         }
     </script>
