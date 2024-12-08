@@ -351,28 +351,16 @@ function updateGame(ctx) {
     // Aggiungi la nuova testa
     snake.unshift(head);
 
-function calculateValidDietElements() { 
-    const selectedDietElements = diets[selectedDiet] || [];
-    const validDietElements = selectedDietElements.filter(el => !erasedElements.includes(el));
-    return validDietElements.length;
-}
-            
-// Controlla se il serpente mangia il cibo
-function handleEating() {
-    const validDietElementsCount = calculateValidDietElements();
-    const rangeValue = parseInt(document.getElementById('elementRange').value);
-
+    // Controlla se il serpente mangia il cibo
     if (head.x === food.x && head.y === food.y) {
         if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
-            // Se l'elemento appartiene alla dieta
-            const scoreIncrement = 10;
-            score += scoreIncrement;
+            score += 10;
 
             scoreText = {
-                value: `+${scoreIncrement}`,
-                x: food.x + SIZE / 2,
+                value: "+10",
+                x: food.x + SIZE/2 ,
                 y: food.y - 10,
-                opacity: 1.0
+                opacity: 1.0 // Trasparenza iniziale
             };
 
             createInfoRect({
@@ -380,19 +368,18 @@ function handleEating() {
                 symbol: foodElement,
                 name: foodElementName
             }, food.x, food.y);
-
+            
             snakeColors.unshift("green");
-            expandFoodEffect(food.x, food.y);
+            expandFoodEffect(food.x, food.y); // Espansione prima di sparire
+            
         } else {
-            // Se l'elemento non appartiene alla dieta
-            const scoreDecrement = 5;
-            score -= scoreDecrement;
+            score -= 5;
 
-            scoreTextNo = {
-                value: `-${scoreDecrement}`,
-                x: food.x + SIZE / 2,
+             scoreTextNo = {
+                value: "-5",
+                x: food.x + SIZE/2 ,
                 y: food.y - 10,
-                opacity: 1.0
+                opacity: 1.0 // Trasparenza iniziale
             };
 
             createInfoRectNo({
@@ -400,25 +387,19 @@ function handleEating() {
                 symbol: foodElement,
                 name: foodElementName
             }, food.x, food.y);
-
+            
             snakeColors.unshift("red");
-            flashEffect("rgba(229, 26, 75, 0.5)", food.x, food.y);
+            flashEffect("rgba(229, 26, 75, 0.5)", food.x, food.y); // Lampeggio per errore
         }
-
-        // Aggiorna la lista dei colori in base alla lunghezza del serpente
+         // Rimuove i colori extra se il serpente è più corto della lista colori
         if (snakeColors.length > snake.length) {
             snakeColors.pop();
         }
-
         updateScore(score);
-
-        // Rigenerare il cibo dopo un mangiamento riuscito
         generateFood();
     } else {
-        // Qui si gestisce il comportamento quando il serpente non "mangia"
-        if (snake.length > 0) snake.pop();
+        snake.pop();
     }
-}
 
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
