@@ -144,7 +144,7 @@ document.addEventListener('keydown', (event) => {
     if (event.key === ' ') {
         event.preventDefault(); // Previene il comportamento predefinito della barra spaziatrice
         if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
-            updateHealth(currentHP - 10); // Riduce di 10 HP
+            //updateHealth(currentHP - 10); // Riduce di 10 HP
             createInfoRectNo({
                 atomicNumber: foodElementNumber,
                 symbol: foodElement,
@@ -155,7 +155,7 @@ document.addEventListener('keydown', (event) => {
             }
             
         } else {
-            updateHealth(currentHP + 15); // Aumenta di 15 HP
+            //updateHealth(currentHP + 15); // Aumenta di 15 HP
             createInfoRect({
                 atomicNumber: foodElementNumber,
                 symbol: foodElement,
