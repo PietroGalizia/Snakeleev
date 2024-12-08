@@ -476,7 +476,7 @@ function updateGame(ctx) {
         ctx.strokeRect(rect.x, rect.y, 80, 80); // Bordo
 
         // Disegna il testo
-        ctx.fillStyle = `rgba(65, 127, 69, ${rect.opacity})`; // Testo verde con opacità
+        ctx.fillStyle = `rgba(150, 174, 33, ${rect.opacity})`; // Testo verde con opacità
         ctx.font = "14px Arial";
         ctx.textAlign = "left";
         ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 10); // Numero atomico
