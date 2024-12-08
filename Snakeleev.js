@@ -257,8 +257,8 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeScoreValues() {
     const rangeValue = parseInt(document.getElementById('elementRange').value);
     const validDietElementsCount = calculateValidDietElements();
-    scoreIncrement = (rangeValue - validDietElementsCount) / rangeValue;
-    scoreDecrement = validDietElementsCount / rangeValue;
+    scoreIncrement = Math.round(100 * (rangeValue - validDietElementsCount) / rangeValue);
+    scoreDecrement = Math.round(100 * validDietElementsCount / rangeValue);
 }
 
 function calculateValidDietElements() {
