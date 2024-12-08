@@ -166,14 +166,6 @@
     <div id="scoreBoard" style="display: none;"></div>
     <canvas id="gameCanvas"></canvas>
 
-    <!-- Citazione -->
-    <div id="citation">
-        <a href="https://zenodo.org/records/10643098" target="_blank">
-            Pietro Galizia <i>"Snakeleev: The Snake videogame for Exploring the Periodic Table of Elements with Real-World Contexts"</i> 
-            <br>J. Chem. Educ. <b>2025</b>, Vol., n., DOI: 10.1021/acs.jchemed.
-        </a>
-    </div>
-
     <!-- Game Over -->
     <div id="gameover style="display: none;">
         <h2>Elements and Their Interesting Facts</h2>
@@ -182,6 +174,14 @@
         <button class="button" onclick="resetGameState()">New Game</button>
     </div>
 
+    <!-- Citazione -->
+    <div id="citation">
+        <a href="https://zenodo.org/records/10643098" target="_blank">
+            Pietro Galizia <i>"Snakeleev: The Snake videogame for Exploring the Periodic Table of Elements with Real-World Contexts"</i> 
+            <br>J. Chem. Educ. <b>2025</b>, Vol., n., DOI: 10.1021/acs.jchemed.
+        </a>
+    </div>
+        
     <script>
         // Setup degli elementi principali
         const SPEED_LEVELS = [250, 200, 150, 100, 50];
@@ -197,6 +197,7 @@
                 button.onclick = () => selectSpeed(speed);
                 speedButtons.appendChild(button);
             });
+            document.getElementById('gameover').style.display = 'none';
             document.getElementById('startScreen').style.display = 'block';
         });
 
