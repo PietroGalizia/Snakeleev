@@ -142,7 +142,7 @@
         <h2>Select the biggest atomic number</h2>
         <label for="elementRange">Z<SUB>max</SUB></label>
         <input id="elementRange" type="range" min="1" max="118" value="50" oninput="updateElementCount()">
-        <p id="selectedElementCount">Selected range: 50</p>
+        <p id="selectedElementCount"> 50</p>
         <button class="button" onclick="proceedToDietSelection()()">Next</button>
      </div>
 
@@ -170,9 +170,7 @@
     <div id="gameover style="display: none;" >
         <h4>Stay Hungry! Stay Periodic!</h4>
         <h3>Elements and Their Interesting Facts</h3>
-        <ol>
         Coming soon...
-        </ol>
         <button class="button" onclick="finalSelection()">New Game</button>
     </div>
 
@@ -213,7 +211,7 @@
         function updateElementCount() {
             const rangeValue = document.getElementById('elementRange').value;
             maxElementsToUse = parseInt(rangeValue);
-            document.getElementById('selectedElementCount').textContent = `Selected: 1 ≤ Z ≤ ${maxElementsToUse}`;
+            document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
         }
 
         function proceedToDietSelection() {
