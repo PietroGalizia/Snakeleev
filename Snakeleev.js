@@ -90,6 +90,8 @@ let scoreTextNo = null;
 let infoRects = [];
 let infoRectsNo = [];
 let erasedElements = [];
+let scoreIncrement = 0;
+let scoreDecrement = 0;
 
 function resizeCanvas() {
     const canvas = document.getElementById('gameCanvas');
@@ -116,16 +118,6 @@ document.addEventListener('keydown', (event) => {
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
         event.preventDefault();
     }
-});
-
-function updateInstructions(selectedDiet) {
-    const instruction = document.getElementById("eat-instruction");
-    instruction.innerHTML = `Eat the elements that belong to the <b>${selectedDiet}</b>.`;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('mainMenu').style.display = 'block';
-    updateScore(score);
 });
 
 // Funzione per aggiornare la selezione e la lista di elementi scartati
@@ -232,7 +224,9 @@ function startNewGame() {
     // Aggiorna le istruzioni dinamicamente con la dieta selezionata
     updateInstructions(selectedDiet);
 
-    
+    // Calcola i valori di incremento e decremento del punteggio
+    initializeScoreValues();
+
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = CANVAS_WIDTH;
@@ -250,6 +244,24 @@ function startNewGame() {
     
     generateFood();
     startGameLoop(ctx);
+}
+
+function updateInstructions(selectedDiet) {
+    const instruction = document.getElementById("eat-instruction");
+    instruction.innerHTML = `Eat the elements that belong to the <b>${selectedDiet}</b>.`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('mainMenu').style.display = 'block';
+    updateScore(score);
+});
+
+function initializeScoreValues() {
+    const rangeValue = parseInt(document.getElementById('elementRange').value);
+    const validDietElementsCount = calculateValidDietElements();
+
+    scoreIncrement = rangeValue - validDietElementsCount;
+    scoreDecrement = validDietElementsCount / rangeValue;
 }
 
 function generateFood() {
@@ -354,10 +366,10 @@ function updateGame(ctx) {
     // Controlla se il serpente mangia il cibo
     if (head.x === food.x && head.y === food.y) {
         if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
-            score += 10;
+            score += scoreIncrement;
 
             scoreText = {
-                value: "+10",
+                value: `+${scoreIncrement}`,
                 x: food.x + SIZE/2 ,
                 y: food.y - 10,
                 opacity: 1.0 // Trasparenza iniziale
@@ -373,10 +385,10 @@ function updateGame(ctx) {
             expandFoodEffect(food.x, food.y); // Espansione prima di sparire
             
         } else {
-            score -= 5;
+            score -= scoreDecrement;
 
              scoreTextNo = {
-                value: "-5",
+                value: `-${scoreDecrement}`,
                 x: food.x + SIZE/2 ,
                 y: food.y - 10,
                 opacity: 1.0 // Trasparenza iniziale
@@ -422,7 +434,7 @@ function updateGame(ctx) {
 
     // Gestione animazione della scritta del punteggio negativo
     if (scoreTextNo) {
-        ctx.fillStyle = `rgba(229, 26, 75, ${scoreTextNo.opacity})`; // Imposta trasparenza
+        ctx.fillStyle = `rgba(247, 157, 39, ${scoreTextNo.opacity})`; // Imposta trasparenza
         ctx.font = "16px Arial";
         ctx.textAlign = "center";
         ctx.fillText(scoreTextNo.value, scoreTextNo.x, scoreTextNo.y);
