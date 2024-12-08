@@ -147,7 +147,7 @@
      </div>
 
     <!-- Selezione della dieta -->
-    <div id="dietSelection" style="display: none;>
+    <div id="dietSelection">
         <h2>Select the Snake's Diet</h2>
         <select id="dietDropdown"></select>
         <button class="button" onclick="finalSelection()">Play</button>
@@ -163,7 +163,7 @@
     </div>
 
     <!-- Canvas del gioco -->
-    <div id="scoreBoard" style="display: none;></div>
+    <div id="scoreBoard"></div>
     <canvas id="gameCanvas"></canvas>
 
     <!-- Game Over -->
@@ -213,7 +213,7 @@
         function updateElementCount() {
             const rangeValue = document.getElementById('elementRange').value;
             maxElementsToUse = parseInt(rangeValue);
-            document.getElementById('selectedElementCount').textContent = `Selected range: 1 ≤ Z ≤ ${maxElementsToUse}`;
+            document.getElementById('selectedElementCount').textContent = `Selected: 1 ≤ Z ≤ ${maxElementsToUse}`;
         }
 
         function proceedToDietSelection() {
