@@ -1,5 +1,3 @@
-console.log("Snakeleev.js è stato caricato correttamente");
-
 // Define the elements
 const elements = [
     "H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Sb", "Te", "I", "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og"
@@ -140,9 +138,6 @@ function updateElementCount() {
 
     // Aggiorna il testo mostrato all'utente
     document.getElementById('selectedElementCount').textContent = `Selected: 1 ≤ Z ≤ ${maxZ}`;
-    
-    // Debug: stampa la lista degli elementi scartati
-    console.log("Erased Elements:", erasedElements);
 }
 
 function startGame() {
@@ -151,7 +146,6 @@ function startGame() {
 }
 
 document.addEventListener('keydown', (event) => {
-    console.log(event.key);
 
     if (event.key === ' ') {
         event.preventDefault(); // Previene il comportamento predefinito della barra spaziatrice
@@ -197,12 +191,7 @@ document.addEventListener('keydown', (event) => {
 });
 
 function changeFoodElement() {
-    console.log("Changing food element...");
-
     generateFood();
-
-    console.log("New food element:", foodElement, foodElementName, foodElementNumber);
-
     drawFood();
     updateScore(score); 
 }
@@ -211,7 +200,6 @@ function drawFood() {
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
-    console.log(`Clearing old food at (${food.x}, ${food.y})`);
     ctx.clearRect(food.x, food.y, SIZE, SIZE);
 
     ctx.fillStyle = "red"; // Colore per il simbolo dell'elemento
@@ -221,7 +209,6 @@ function drawFood() {
 
     // Disegna il simbolo dell'elemento nel punto (x, y) del cibo
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
-    console.log(`Drawing new food: ${foodElement} at (${food.x}, ${food.y})`);
 }
 
 function showDietSelection() {
@@ -282,8 +269,6 @@ function generateFood() {
         // Verifica che il cibo non sia sopra il serpente
         foodPositionValid = !snake.some(part => part.x === food.x && part.y === food.y);
     }
-
-    console.log(`Valid food position: (${food.x}, ${food.y})`);
     
     let elementIndex;
     // Continua a generare un elemento finché non ne trovi uno che non è in erasedElements
