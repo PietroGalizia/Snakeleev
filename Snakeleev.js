@@ -213,8 +213,8 @@ function showDietSelection() {
         option.textContent = diet;
         dietDropdown.appendChild(option);
     });
-    
-    document.getElementById('gameover').style.display = 'none';
+
+    document.getElementById('mainMenu').style.display = 'none';
     document.getElementById('dietSelection').style.display = 'block';
 }
 
@@ -233,7 +233,6 @@ function startNewGame() {
     canvas.height = CANVAS_HEIGHT;
 
     document.getElementById('dietSelection').style.display = 'none';
-    document.getElementById('gameover').style.display = 'none';
     canvas.style.display = 'block';
 
     snake = [{ x: 100, y: 100 }];
@@ -251,7 +250,7 @@ function updateInstructions(selectedDiet) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('gameover').style.display = 'none';
+    document.getElementById('mainMenu').style.display = 'block';
     updateScore(score);
 });
 
