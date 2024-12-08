@@ -215,7 +215,6 @@ function showDietSelection() {
     });
 
     document.getElementById('mainMenu').style.display = 'none';
-    document.getElementById('gameover').style.display = 'none';
     document.getElementById('dietSelection').style.display = 'block';
 }
 
@@ -233,10 +232,7 @@ function startNewGame() {
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
-    document.getElementById('startScreen').style.display = 'none';
-    document.getElementById('elementSelection').style.display = 'none';
     document.getElementById('dietSelection').style.display = 'none';
-    document.getElementById('gameover').style.display = 'none';
     canvas.style.display = 'block';
 
     snake = [{ x: 100, y: 100 }];
@@ -430,7 +426,7 @@ function updateGame(ctx) {
         ctx.fillText(scoreText.value, scoreText.x, scoreText.y);
 
         // Aggiorna la posizione e la trasparenza
-        scoreText.y -= 4; // Si sposta verso l'alto
+        scoreText.y -= 2; // Si sposta verso l'alto
         scoreText.opacity -= 0.02; // Si dissolve
 
         // Rimuovi la scritta quando diventa completamente trasparente
@@ -447,8 +443,8 @@ function updateGame(ctx) {
         ctx.fillText(scoreTextNo.value, scoreTextNo.x, scoreTextNo.y);
 
         // Aggiorna la posizione e la trasparenza
-        scoreTextNo.y += 1; // Si sposta verso il basso
-        scoreTextNo.opacity -= 0.04; // Si dissolve
+        scoreTextNo.y += 0.5; // Si sposta verso il basso
+        scoreTextNo.opacity -= 0.02; // Si dissolve
 
         // Rimuovi la scritta quando diventa completamente trasparente
         if (scoreTextNo.opacity <= 0) {
@@ -540,7 +536,7 @@ function updateGame(ctx) {
         ctx.fillText(rect.name, rect.x + 40, rect.y + 70); // Nome dell'elemento
 
         // Aggiorna la posizione e l'opacità
-        rect.y += 2; // Si sposta verso il basso
+        rect.y += 1; // Si sposta verso il basso
         rect.opacity -= 0.01; // (Opzionale, rimuovi questa linea se non vuoi trasparenza)
 
         // Rimuovi il rettangolo se esce dall'area di gioco o è completamente trasparente
