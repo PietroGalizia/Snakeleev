@@ -358,7 +358,6 @@ function updateGame(ctx) {
     // Controlla se il serpente si scontra con se stesso
     for (let i = 1; i < snake.length; i++) {
         if (snake[i].x === head.x && snake[i].y === head.y) {
-            alert("Stay Hungry! Stay Periodic!");
             exitGame();
             return;
         }
@@ -594,9 +593,9 @@ function updateGame(ctx) {
 
 // Function to exit the game
 function exitGame() {
-    document.getElementById('mainMenu').style.display = 'block';
-    document.getElementById('dietSelection').style.display = 'none';
     document.getElementById('gameCanvas').style.display = 'none';
+    document.getElementById('scoreBoard').style.display = 'none';
+    document.getElementById('gameover').style.display = 'block';
 
     if (gameInterval) {
         clearInterval(gameInterval);
