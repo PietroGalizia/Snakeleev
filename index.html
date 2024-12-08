@@ -198,7 +198,6 @@
                 speedButtons.appendChild(button);
             });
             document.getElementById('startScreen').style.display = 'block';
-            document.getElementById('gameover').style.display = 'none';
         });
 
         // Funzione per selezionare la velocità e passare alla selezione della dieta
@@ -206,7 +205,6 @@
             window.SPEED = speed;
             document.getElementById('startScreen').style.display = 'none';
             document.getElementById('elementSelection').style.display = 'block';
-            document.getElementById('gameover').style.display = 'none';
             updateElementCount();
         }
 
@@ -220,7 +218,6 @@
                 document.getElementById('startScreen').style.display = 'none';
                 document.getElementById('elementSelection').style.display = 'none';
                 document.getElementById('dietSelection').style.display = 'block';
-                document.getElementById('gameover').style.display = 'none';
 
             const dietDropdown = document.getElementById("dietDropdown");
             const diets = [
@@ -256,7 +253,6 @@
             document.getElementById('dietSelection').style.display = 'none';
             document.getElementById('gameCanvas').style.display = 'block';
             document.getElementById('scoreBoard').style.display = 'block';
-            document.getElementById('gameover').style.display = 'none';
             startNewGame();
         }
 
@@ -265,7 +261,6 @@
         function startNewGame() {
             document.getElementById('dietSelection').style.display = 'none'; // Nascondi la schermata
             document.getElementById('gameCanvas').style.display = 'block'; // Mostra il canvas del gioco
-            document.getElementById('gameover').style.display = 'none';
             startGame(); // Funzione definita in Snakeleev.js
         }
 
