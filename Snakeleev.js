@@ -90,8 +90,6 @@ let scoreTextNo = null;
 let infoRects = [];
 let infoRectsNo = [];
 let erasedElements = [];
-let scoreIncrement = 0;
-let scoreDecrement = 0;
 
 function resizeCanvas() {
     const canvas = document.getElementById('gameCanvas');
@@ -247,15 +245,8 @@ function startNewGame() {
     snakeColors = ["green"]; // Resetta i colori del serpente, partendo con la testa verde
     direction = { x: 1, y: 0 };
     score = 0;
-
-    const rangeValue = parseInt(document.getElementById('elementRange').value);
-    const validDietElementsCount = calculateValidDietElements();
-
-    // Calcola i valori di incremento e decremento del punteggio
-    scoreIncrement = rangeValue - validDietElementsCount;
-    scoreDecrement = validDietElementsCount / rangeValue;
-    
     updateScore(score);
+
     
     generateFood();
     startGameLoop(ctx);
@@ -363,10 +354,10 @@ function updateGame(ctx) {
     // Controlla se il serpente mangia il cibo
     if (head.x === food.x && head.y === food.y) {
         if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
-            score += scoreIncrement;
+            score += 10;
 
             scoreText = {
-                value: `+${scoreIncrement}`,
+                value: "+10",
                 x: food.x + SIZE/2 ,
                 y: food.y - 10,
                 opacity: 1.0 // Trasparenza iniziale
@@ -382,10 +373,10 @@ function updateGame(ctx) {
             expandFoodEffect(food.x, food.y); // Espansione prima di sparire
             
         } else {
-            score -= scoreDecrement;
+            score -= 5;
 
              scoreTextNo = {
-                value: `-${scoreDecrement}`,
+                value: "-5",
                 x: food.x + SIZE/2 ,
                 y: food.y - 10,
                 opacity: 1.0 // Trasparenza iniziale
@@ -431,7 +422,7 @@ function updateGame(ctx) {
 
     // Gestione animazione della scritta del punteggio negativo
     if (scoreTextNo) {
-        ctx.fillStyle = `rgba(247, 157, 39, ${scoreTextNo.opacity})`; // Imposta trasparenza
+        ctx.fillStyle = `rgba(229, 26, 75, ${scoreTextNo.opacity})`; // Imposta trasparenza
         ctx.font = "16px Arial";
         ctx.textAlign = "center";
         ctx.fillText(scoreTextNo.value, scoreTextNo.x, scoreTextNo.y);
