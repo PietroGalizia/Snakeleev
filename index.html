@@ -140,14 +140,14 @@
     <!-- Schermata per scegliere il numero di elementi -->
     <div id="elementSelection" style="display: none;">
         <h2>Select the biggest atomic number, <b>Z</b></h2>
-        <label for="elementRange">1 ≤ <b>Z</b> ≤ 118 </label>
+        <label for="elementRange">Z<SUB>max</SUB> ≤ 118 </label>
         <input id="elementRange" type="range" min="1" max="118" value="50" oninput="updateElementCount()">
         <p id="selectedElementCount">Selected: 50</p>
         <button class="button" onclick="proceedToDietSelection()()">Next</button>
      </div>
 
     <!-- Selezione della dieta -->
-    <div id="dietSelection">
+    <div id="dietSelection" style="display: none;>
         <h2>Select the Snake's Diet</h2>
         <select id="dietDropdown"></select>
         <button class="button" onclick="finalSelection()">Play</button>
@@ -172,7 +172,7 @@
         <h2>Stay Hungry! Stay Periodic!</h2>
         <h3>Elements and Their Interesting Facts</h3>
         <ol>
-            <li>Coming soon...</li>
+            Coming soon...
         </ol>
         <button class="button" onclick="finalSelection()">New Game</button>
     </div>
@@ -214,7 +214,7 @@
         function updateElementCount() {
             const rangeValue = document.getElementById('elementRange').value;
             maxElementsToUse = parseInt(rangeValue);
-            document.getElementById('selectedElementCount').textContent = `Selected: 1 ≤ Z ≤ ${maxElementsToUse}`;
+            document.getElementById('selectedElementCount').textContent = `Selected range: 1 ≤ Z ≤ ${maxElementsToUse}`;
         }
 
         function proceedToDietSelection() {
