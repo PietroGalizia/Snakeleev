@@ -172,7 +172,7 @@
         <h2>Stay Hungry! Stay Periodic!</h2>
         <h3>Elements and Their Interesting Facts</h3>
         <ol>
-            Coming soon...
+            <li>Coming soon...</li>
         </ol>
         <button class="button" onclick="finalSelection()">New Game</button>
     </div>
@@ -201,11 +201,6 @@
                 speedButtons.appendChild(button);
             });
             document.getElementById('startScreen').style.display = 'block';
-            document.getElementById('gameover').style.display = 'none';
-            document.getElementById('elementSelection').style.display = 'none';
-            document.getElementById('dietSelection').style.display = 'none';
-            document.getElementById('gameCanvas').style.display = 'none';
-            document.getElementById('scoreBoard').style.display = 'none';
         });
 
         // Funzione per selezionare la velocità e passare alla selezione della dieta
@@ -271,6 +266,10 @@
             document.getElementById('gameCanvas').style.display = 'block'; // Mostra il canvas del gioco
             startGame(); // Funzione definita in Snakeleev.js
         }
+    </script>
+    <script src="Snakeleev.js"></script>
+</body>
+</html>
     </script>
     <script src="Snakeleev.js"></script>
 </body>
