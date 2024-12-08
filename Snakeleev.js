@@ -420,7 +420,7 @@ function updateGame(ctx) {
         }
     }
 
-    // Gestione animazione della scritta del punteggio positivo
+    // Gestione animazione della scritta del punteggio negativo
     if (scoreTextNo) {
         ctx.fillStyle = `rgba(229, 26, 75, ${scoreTextNo.opacity})`; // Imposta trasparenza
         ctx.font = "16px Arial";
@@ -476,7 +476,7 @@ function updateGame(ctx) {
         ctx.strokeRect(rect.x, rect.y, 80, 80); // Bordo
 
         // Disegna il testo
-        ctx.fillStyle = `rgba(0, 47, 95, ${rect.opacity})`; // Testo blu con opacità
+        ctx.fillStyle = `rgba(150, 174, 33, ${rect.opacity})`; // Testo blu con opacità
         ctx.font = "14px Arial";
         ctx.textAlign = "left";
         ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 10); // Numero atomico
