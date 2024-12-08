@@ -197,7 +197,6 @@
                 button.onclick = () => selectSpeed(speed);
                 speedButtons.appendChild(button);
             });
-            document.getElementById('gameover').style.display = 'none';
             document.getElementById('startScreen').style.display = 'block';
         });
 
@@ -205,7 +204,6 @@
         function selectSpeed(speed) {
             window.SPEED = speed;
             document.getElementById('startScreen').style.display = 'none';
-            document.getElementById('gameover').style.display = 'none';
             document.getElementById('elementSelection').style.display = 'block';
             updateElementCount();
         }
@@ -218,7 +216,6 @@
 
         function proceedToDietSelection() {
                 document.getElementById('startScreen').style.display = 'none';
-                document.getElementById('gameover').style.display = 'none';
                 document.getElementById('elementSelection').style.display = 'none';
                 document.getElementById('dietSelection').style.display = 'block';
 
@@ -254,7 +251,6 @@
             selectedDiet = document.getElementById("dietDropdown").value;
             window.selectedDiet = document.getElementById("dietDropdown").value;
             document.getElementById('dietSelection').style.display = 'none';
-            document.getElementById('gameover').style.display = 'none';
             document.getElementById('gameCanvas').style.display = 'block';
             document.getElementById('scoreBoard').style.display = 'block';
             startNewGame();
@@ -263,7 +259,6 @@
 
         // Funzione per avviare il gioco
         function startNewGame() {
-            document.getElementById('gameover').style.display = 'none';
             document.getElementById('dietSelection').style.display = 'none'; // Nascondi la schermata
             document.getElementById('gameCanvas').style.display = 'block'; // Mostra il canvas del gioco
             startGame(); // Funzione definita in Snakeleev.js
