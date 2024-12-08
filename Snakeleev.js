@@ -575,7 +575,7 @@ function updateGame(ctx) {
     
     // Draw the food element symbol
     ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
-    ctx.font = "bold 14px Arial";
+    ctx.font = "14px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
@@ -595,6 +595,8 @@ function updateGame(ctx) {
 function exitGame() {
     document.getElementById('gameCanvas').style.display = 'none';
     document.getElementById('scoreBoard').style.display = 'none';
+    document.getElementById('elementSelection').style.display = 'none';
+    document.getElementById('dietSelection').style.display = 'none';
     document.getElementById('gameover').style.display = 'block';
 
     if (gameInterval) {
