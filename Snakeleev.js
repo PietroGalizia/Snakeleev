@@ -426,7 +426,7 @@ function updateGame(ctx) {
         ctx.fillText(scoreText.value, scoreText.x, scoreText.y);
 
         // Aggiorna la posizione e la trasparenza
-        scoreText.y -= 2; // Si sposta verso l'alto
+        scoreText.y -= 1; // Si sposta verso l'alto
         scoreText.opacity -= 0.02; // Si dissolve
 
         // Rimuovi la scritta quando diventa completamente trasparente
@@ -443,7 +443,7 @@ function updateGame(ctx) {
         ctx.fillText(scoreTextNo.value, scoreTextNo.x, scoreTextNo.y);
 
         // Aggiorna la posizione e la trasparenza
-        scoreTextNo.y += 0.5; // Si sposta verso il basso
+        scoreTextNo.y += 1; // Si sposta verso il basso
         scoreTextNo.opacity -= 0.02; // Si dissolve
 
         // Rimuovi la scritta quando diventa completamente trasparente
@@ -575,7 +575,7 @@ function updateGame(ctx) {
     
     // Draw the food element symbol
     ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
-    ctx.font = "14px Arial";
+    ctx.font = "bold 14px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
@@ -595,8 +595,6 @@ function updateGame(ctx) {
 function exitGame() {
     document.getElementById('gameCanvas').style.display = 'none';
     document.getElementById('scoreBoard').style.display = 'none';
-    document.getElementById('elementSelection').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'none';
     document.getElementById('gameover').style.display = 'block';
 
     if (gameInterval) {
