@@ -470,13 +470,13 @@ function updateGame(ctx) {
     
         // Disegna il rettangolo
         ctx.fillStyle = `rgba(173, 176, 184, ${rect.opacity})`; // Sfondo grigio con opacità
-        ctx.strokeStyle = `rgba(150, 174, 33, ${rect.opacity})`; // Bordo verde con opacità
+        ctx.strokeStyle = `rgba(150, 174, 69, ${rect.opacity})`; // Bordo verde con opacità
         ctx.lineWidth = 2;
         ctx.fillRect(rect.x, rect.y, 80, 80); // Rettangolo
         ctx.strokeRect(rect.x, rect.y, 80, 80); // Bordo
 
         // Disegna il testo
-        ctx.fillStyle = `rgba(150, 174, 33, ${rect.opacity})`; // Testo verde con opacità
+        ctx.fillStyle = `rgba(65, 127, 33, ${rect.opacity})`; // Testo verde con opacità
         ctx.font = "14px Arial";
         ctx.textAlign = "left";
         ctx.fillText(rect.atomicNumber, rect.x + 5, rect.y + 10); // Numero atomico
