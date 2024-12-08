@@ -252,8 +252,8 @@ function startNewGame() {
     const validDietElementsCount = calculateValidDietElements();
 
     // Calcola i valori di incremento e decremento del punteggio
-    scoreIncrement = rangeValue - validDietElementsCount;
-    scoreDecrement = validDietElementsCount / rangeValue;
+    scoreIncrement = Math.round(100 * (rangeValue - validDietElementsCount) / rangeValue);
+    scoreDecrement = Math.round(100 *validDietElementsCount / rangeValue);
     
     updateScore(score);
     
