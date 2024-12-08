@@ -129,7 +129,7 @@ function updateElementCount() {
     erasedElements = elements.slice(maxZ);
 
     // Aggiorna il testo mostrato all'utente
-    document.getElementById('selectedElementCount').textContent = `Selected: 1 ≤ Z ≤ ${maxZ}`;
+    document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxZ}`;
 }
 
 function startGame() {
