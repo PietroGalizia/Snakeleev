@@ -426,7 +426,7 @@ function updateGame(ctx) {
         ctx.fillText(scoreText.value, scoreText.x, scoreText.y);
 
         // Aggiorna la posizione e la trasparenza
-        scoreText.y -= 1; // Si sposta verso l'alto
+        scoreText.y -= 2; // Si sposta verso l'alto
         scoreText.opacity -= 0.02; // Si dissolve
 
         // Rimuovi la scritta quando diventa completamente trasparente
@@ -443,7 +443,7 @@ function updateGame(ctx) {
         ctx.fillText(scoreTextNo.value, scoreTextNo.x, scoreTextNo.y);
 
         // Aggiorna la posizione e la trasparenza
-        scoreTextNo.y += 1; // Si sposta verso il basso
+        scoreTextNo.y += 2; // Si sposta verso il basso
         scoreTextNo.opacity -= 0.02; // Si dissolve
 
         // Rimuovi la scritta quando diventa completamente trasparente
