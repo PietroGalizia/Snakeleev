@@ -147,7 +147,7 @@
      </div>
 
     <!-- Selezione della dieta -->
-    <div id="dietSelection"  style="display: none;>
+    <div id="dietSelection">
         <h2>Select the Snake's Diet</h2>
         <select id="dietDropdown"></select>
         <button class="button" onclick="finalSelection()">Play</button>
@@ -171,7 +171,7 @@
         <h4>Stay Hungry! Stay Periodic!</h4>
         <h3>Elements and Their Interesting Facts</h3>
         Coming soon...<br>
-        <button class="button" onclick="startScreen()">New Game</button>
+        <button class="button" onclick="resetGameState()">New Game</button>
     </div>
 
     <!-- Citazione -->
@@ -262,6 +262,11 @@
             document.getElementById('dietSelection').style.display = 'none'; // Nascondi la schermata
             document.getElementById('gameCanvas').style.display = 'block'; // Mostra il canvas del gioco
             startGame(); // Funzione definita in Snakeleev.js
+        }
+
+        function resetGameState() {
+            // Ricarica la pagina
+            location.reload();
         }
     </script>
     <script src="Snakeleev.js"></script>
