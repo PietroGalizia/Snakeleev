@@ -121,6 +121,26 @@
             max-height: 90%;
         }
 
+        #hpBarContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 10px; /* Sopra l'area di gioco */
+            left: 50%;
+            transform: translateX(-50%);
+            height: 30px; /* Altezza dei quadratini */
+            margin: 10px auto;
+        }
+
+        .hpSquare {
+            width: 30px;
+            height: 30px;
+            margin: 0 2px;
+            background-color: green; /* Colore iniziale */
+            border: 2px solid black;
+        }
+
     </style>
 </head>
 <body>
@@ -165,13 +185,13 @@
     <!-- Canvas del gioco -->
     <div id="selectedDietText" style="display: none;"></div>
     <div id="scoreBoard" style="display: none;"></div>
+    <div id="hpBarContainer" style="display: none;"></div>
     <canvas id="gameCanvas"></canvas>
 
 
     <div id="healthBarContainer  style="display: none;">
         <div id="healthBar  style="display: none;"></div>
     </div>
-
 
     <!-- Game Over -->
     <div id="gameover" style="display: none;">
@@ -282,18 +302,6 @@
             // Ricarica la pagina
             location.reload();
         }
-    </script>
-    <script src="Snakeleev.js"></script>
-</body>
-</html>
-    </script>
-    <script src="Snakeleev.js"></script>
-</body>
-</html>
-    </script>
-    <script src="Snakeleev.js"></script>
-</body>
-</html>
     </script>
     <script src="Snakeleev.js"></script>
 </body>
