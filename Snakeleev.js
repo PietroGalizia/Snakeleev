@@ -224,6 +224,11 @@ function startNewGame() {
     startGameLoop(ctx);
 }
 
+function updateInstructions(selectedDiet) {
+    const instruction = document.getElementById("eat-instruction");
+    instruction.innerHTML = `Eat the elements that belong to the <b>${selectedDiet}</b>.`;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mainMenu').style.display = 'block';
     updateScore(score);
