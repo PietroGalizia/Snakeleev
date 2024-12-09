@@ -121,12 +121,42 @@
             max-height: 90%;
         }
 
+        #scoreBoard {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(173, 176, 184);
+        border: 3px solid #f79d27;
+        border-radius: 12px;
+        color: rgb(0, 47, 95);
+        font-size: 1.2em;
+        font-weight: bold;
+        height: 40px;
+        position: absolute;
+        top: 0; /* Sopra il canvas */
+        width: 620px; /* Stessa larghezza del canvas */
+        margin: 0 auto;
+        left: 50%;
+        transform: translateX(-50%);
+        }
+
+        #selectedDietText {
+        position: absolute;
+        top: -40px; /* Sopra il rettangolo grigio */
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 1.5em;
+        font-weight: bold;
+        text-align: center;
+        }
+
         #healthBarContainer {
             width: 300px;
             height: 20px;
-            border: 2px solid #adb0b8;
+            border: 2px solid #8f7dcf;
             border-radius: 10px;
-            background-color: #2c2f33;
+            background-color: #78b3e0;
             margin: 10px auto;
             position: relative;
         }
@@ -159,8 +189,8 @@
     <div id="elementSelection" style="display: none;">
         <h2>Select the biggest atomic number</h2>
         <label for="elementRange">Z<SUB>max</SUB></label>
-        <input id="elementRange" type="range" min="1" max="118" value="50" oninput="updateElementCount()">
-        <p id="selectedElementCount"> 50</p>
+        <input id="elementRange" type="range" min="1" max="118" value="30" oninput="updateElementCount()">
+        <p id="selectedElementCount"> 30</p>
         <button class="button" onclick="proceedToDietSelection()()">Next</button>
      </div>
 
@@ -181,13 +211,12 @@
     </div>
 
     <!-- Canvas del gioco -->
+    <div id="selectedDietText"></div>
     <div id="scoreBoard" style="display: none;"></div>
     <canvas id="gameCanvas"></canvas>
-
     <div id="healthBarContainer">
-        <div id="healthBar"></div>
+    <div id="healthBar"></div>
     </div>
-
 
     <!-- Game Over -->
     <div id="gameover" style="display: none;">
