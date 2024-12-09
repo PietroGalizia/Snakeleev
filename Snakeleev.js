@@ -213,7 +213,7 @@ function showDietSelection() {
         option.textContent = diet;
         dietDropdown.appendChild(option);
     });
-
+    document.getElementById('title').style.display = 'block';
     document.getElementById('mainMenu').style.display = 'none';
     document.getElementById('dietSelection').style.display = 'block';
 }
@@ -332,19 +332,18 @@ function createInfoRectNo(element, x, y) {
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
     scoreBoard.style.color = "rgb(0, 47, 95)";
-    scoreBoard.style.padding = "5px";
-    scoreBoard.style.border = "2px solid #ccc";
-    scoreBoard.style.borderRadius = "4px";
+    scoreBoard.style.padding = "15px";
+    scoreBoard.style.border = "3px solid #f79d27";
+    scoreBoard.style.borderRadius = "12px";
     scoreBoard.style.fontFamily = "Arial, sans-serif";
     scoreBoard.style.backgroundColor = "rgb(173, 176, 184)";
     scoreBoard.style.textAlign = "center";
     scoreBoard.style.margin = "5px auto";
-    scoreBoard.style.maxWidth = "300px";
+    scoreBoard.style.maxWidth = "450px";
 
     scoreBoard.innerHTML = `
         <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 5px; color: #8f7dcf;">
             ${selectedDiet}
-            <b>Score:</b> ${newScore}
         </div>
         <div style="font-size: 1.2em; margin-bottom: 5px;">
             <b>${newScore}</b>
@@ -612,6 +611,7 @@ function updateGame(ctx) {
 
 // Function to exit the game
 function exitGame() {
+    document.getElementById('title').style.display = 'block';
     document.getElementById('gameCanvas').style.display = 'none';
     document.getElementById('scoreBoard').style.display = 'none';
     document.getElementById('elementSelection').style.display = 'none';
