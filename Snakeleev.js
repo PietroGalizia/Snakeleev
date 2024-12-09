@@ -122,9 +122,9 @@ document.addEventListener('keydown', (event) => {
 
     if (event.key === ' ') {
         event.preventDefault(); // Previene il comportamento predefinito della barra spaziatrice
+        updateHPBar();
         changeFoodElement();    // Cambia l'elemento del cibo senza cambiarne la posizione
-        const isDietCorrect = checkDietCorrectness(); // Funzione che verifica l'elemento
-        updateHPBar(isDietCorrect);
+        
     } else {
         const newDirection = { x: direction.x, y: direction.y };
 
@@ -616,7 +616,7 @@ function updateHPBar(isDietCorrect) {
     const hpBarContainer = document.getElementById('hpBarContainer');
     const squares = hpBarContainer.getElementsByClassName('hpSquare');
 
-    if (isDietCorrect) {
+    if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) 
         // Rimuovi un quadratino
         if (hpSquares > 0) {
             hpBarContainer.removeChild(squares[hpSquares - 1]);
