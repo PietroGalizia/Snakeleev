@@ -542,15 +542,15 @@ function updateGame(ctx) {
     });
 
     // Effetto glow intorno al cibo
-    //ctx.shadowColor = "rgb(247, 157, 39)"; // Colore del bagliore
-    //ctx.shadowBlur = 10;
+    ctx.shadowColor = "rgb(247, 157, 39)"; // Colore del bagliore
+    ctx.shadowBlur = 10;
 
     // Disegna sfondo cibo
     ctx.fillStyle = "rgb(120, 179, 224)";
     ctx.fillRect(food.x, food.y, SIZE, SIZE);
 
     // Reset shadowBlur per evitare che influenzi altri elementi
-    //ctx.shadowBlur = 0;
+    ctx.shadowBlur = 0;
     
     // Draw the food element symbol
     ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
@@ -558,10 +558,6 @@ function updateGame(ctx) {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
-
-    // Disegna il numero atomico sotto il simbolo
-    //ctx.font = "12px Arial"; // Numero atomico più piccolo
-    //ctx.fillText(foodElementNumber, food.x + SIZE / 2, food.y + (2 * SIZE) / 3);
 
     // Draw game area border
     ctx.strokeStyle = "#83B7DE";
