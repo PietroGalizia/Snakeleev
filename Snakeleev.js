@@ -331,32 +331,20 @@ function createInfoRectNo(element, x, y) {
 
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
-
-    // Carica il font Matchpoint
-    const fontLink = document.createElement('link');
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Matchpoint&display=swap';
-    fontLink.rel = 'stylesheet';
-    document.head.appendChild(fontLink);
-
-    // Stile del contenitore dello score
-    scoreBoard.style.color = "#002f5f";
-    scoreBoard.style.padding = "15px";
-    scoreBoard.style.border = "3px solid #8f7dcf";
-    scoreBoard.style.borderRadius = "12px";
-    scoreBoard.style.fontFamily = "'Matchpoint', Arial, sans-serif";
-    scoreBoard.style.backgroundColor = "#dde1e7";
+    scoreBoard.style.color = "rgb(0, 47, 95)";
+    scoreBoard.style.padding = "10px";
+    scoreBoard.style.border = "2px solid #ccc";
+    scoreBoard.style.borderRadius = "8px";
+    scoreBoard.style.fontFamily = "Arial, sans-serif";
+    scoreBoard.style.backgroundColor = "rgb(173, 176, 184)";
     scoreBoard.style.textAlign = "center";
-    scoreBoard.style.margin = "20px auto";
-    scoreBoard.style.maxWidth = "350px";
-    scoreBoard.style.boxShadow = "0px 4px 10px rgba(0, 0, 0, 0.2)";
+    scoreBoard.style.margin = "10px auto";
+    scoreBoard.style.maxWidth = "300px";
 
-    // Contenuto dello score
     scoreBoard.innerHTML = `
-        <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 15px; color: #6a4fb0;">
+        <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 10px; color: #8f7dcf;">
             ${selectedDiet}
-        </div>
-        <div style="font-size: 1.2em; margin-bottom: 5px;">
-            ${newScore}
+            <b>Score:</b> ${newScore}
         </div>
     `;
 }
