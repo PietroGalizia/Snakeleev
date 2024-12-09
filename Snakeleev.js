@@ -613,30 +613,40 @@ function initializeHPBar() {
 }
 
 function updateHPBar() {
-    const hpBarContainer = document.getElementById('hpBarContainer');
-    const squares = hpBarContainer.getElementsByClassName('hpSquare');
-
-    if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) 
-        // Rimuovi un quadratino
+      if (selectedDiet && diets[selectedDiet]?.includes(foodElement)) {
+        // L'elemento corrente è valido
         if (hpSquares > 0) {
-            hpBarContainer.removeChild(squares[hpSquares - 1]);
+            // Rimuovi un quadratino dalla barra HP
+            const hpBarContainer = document.getElementById('hpBarContainer');
+            hpBarContainer.removeChild(hpBarContainer.lastChild);
             hpSquares--;
+            console.log("Elemento valido! HP -1");
+        } else {
+            console.log("Non ci sono più HP disponibili!");
         }
     } else {
-        // Aggiungi un quadratino
+        // L'elemento corrente non è valido
         if (hpSquares < 10) {
             const square = document.createElement('div');
             square.className = 'hpSquare';
-            if (hpSquares < 4) square.style.backgroundColor = 'red';
-            else if (hpSquares < 6) square.style.backgroundColor = 'orange';
-            else square.style.backgroundColor = 'green';
-            hpBarContainer.appendChild(square);
+
+            // Imposta il colore in base alla posizione
+            if (hpSquares < 4) {
+                square.style.backgroundColor = 'red';
+            } else if (hpSquares < 6) {
+                square.style.backgroundColor = 'orange';
+            } else {
+                square.style.backgroundColor = 'green';
+            }
+
+            document.getElementById('hpBarContainer').appendChild(square);
             hpSquares++;
+            console.log("Elemento non valido! HP +1");
         }
     }
 
-    // Controlla se il gioco deve terminare
-    if (hpSquares === 0) {
+    // Controlla se la barra HP è a 0, termina il gioco
+    if (hpSquares <= 0) {
         exitGame();
     }
 }
