@@ -123,13 +123,18 @@
 
         #scoreBoard {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             background-color: rgb(173, 176, 184);
             border: 2px solid #78b3e0;
             border-radius: 0;
             position: absolute;
-        }
+            padding: 10px; /* Spazio interno */
+        width: 90%; /* Larghezza relativa */
+        top: 10%; /* Posizionato rispetto alla finestra */
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
         #scoreBoard div {
             font-family: Arial, sans-serif;
@@ -210,11 +215,10 @@
     </div>
 
     <!-- Canvas del gioco -->
-    <div id="selectedDietText"></div>
-    <div id="scoreBoard">
-        <span id="score">Score: 0</span>
-        <div id="healthBarContainer">
-            <div id="healthBar"></div>
+    <div id="selectedDietText" style="display: none;"></div>
+    <div id="scoreBoard" style="display: none;">
+        <div id="healthBarContainer" style="display: none;">
+            <div id="healthBar" style="display: none;"></div>
         </div>
     </div>
     <canvas id="gameCanvas"></canvas>
@@ -311,8 +315,11 @@
             document.getElementById('dietSelection').style.display = 'none';
             document.getElementById('selectedDietText').textContent = selectedDiet;
             document.getElementById('selectedDietText').style.display = 'block';
-            document.getElementById('gameCanvas').style.display = 'block';
             document.getElementById('scoreBoard').style.display = 'block';
+            document.getElementById('healthBarContainer').style.display = 'block';
+            document.getElementById('healthBar').style.display = 'block';
+            document.getElementById('gameCanvas').style.display = 'block';
+            document.getElementById('scoreBoard').style.display = 'block';           
             startNewGame();
         }
 
