@@ -612,7 +612,7 @@ function initializeHPBar() {
     hpBarContainer.style.display = 'flex'; // Mostra la barra
 }
 
-function updateHPBar(isDietCorrect) {
+function updateHPBar() {
     const hpBarContainer = document.getElementById('hpBarContainer');
     const squares = hpBarContainer.getElementsByClassName('hpSquare');
 
