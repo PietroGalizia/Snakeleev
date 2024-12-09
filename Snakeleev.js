@@ -97,13 +97,11 @@ function positionScoreBoard() {
     const canvas = document.getElementById('gameCanvas');
     const scoreBoard = document.getElementById('scoreBoard');
 
-    // Ottieni le dimensioni e la posizione del canvas
+    // Calcola la posizione del rettangolo del punteggio rispetto al canvas
     const canvasRect = canvas.getBoundingClientRect();
-
-    // Posiziona il bordo inferiore della barra del punteggio al bordo superiore del canvas
-    scoreBoard.style.top = `${canvasRect.top - scoreBoard.offsetHeight}px`;
+    scoreBoard.style.width = `${canvas.width}px`;
     scoreBoard.style.left = `${canvasRect.left}px`;
-    scoreBoard.style.width = `${canvasRect.width}px`;
+    scoreBoard.style.top = `${canvasRect.top - scoreBoard.offsetHeight}px`; // Sopra al canvas
 }
 
 // Evitare il comportamento predefinito dei tasti freccia
@@ -227,6 +225,12 @@ function startNewGame() {
 
     document.getElementById('dietSelection').style.display = 'none';
     canvas.style.display = 'block';
+
+    // Visualizza la dieta selezionata
+    const selectedDietText = document.getElementById('selectedDietText');
+    selectedDietText.textContent = `Selected Diet: ${selectedDiet}`;
+    selectedDietText.style.color = '#fff'; // Testo bianco
+    selectedDietText.style.textAlign = 'center';
 
     // Posiziona dinamicamente la barra del punteggio
     positionScoreBoard();
