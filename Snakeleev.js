@@ -92,8 +92,6 @@ let infoRectsNo = [];
 let erasedElements = [];
 let scoreIncrement = 0;
 let scoreDecrement = 0;
-let maxHP = 100; // Salute massima
-let currentHP = maxHP; // Salute iniziale
 
 function resizeCanvas() {
     const canvas = document.getElementById('gameCanvas');
@@ -143,25 +141,6 @@ document.addEventListener('keydown', (event) => {
 
     if (event.key === ' ') {
         event.preventDefault(); // Previene il comportamento predefinito della barra spaziatrice
-        if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
-            //updateHealth(currentHP - 10); // Riduce di 10 HP
-            createInfoRectNo({
-                atomicNumber: foodElementNumber,
-                symbol: foodElement,
-                name: foodElementName
-            }, food.x, food.y);
-            if (currentHP <= 0) {
-                exitGame(); // Funzione per mostrare la schermata di Game Over
-            }
-            
-        } else {
-            //updateHealth(currentHP + 15); // Aumenta di 15 HP
-            createInfoRect({
-                atomicNumber: foodElementNumber,
-                symbol: foodElement,
-                name: foodElementName
-            }, food.x, food.y);
-        };
         changeFoodElement();    // Cambia l'elemento del cibo senza cambiarne la posizione
     } else {
         const newDirection = { x: direction.x, y: direction.y };
@@ -368,6 +347,7 @@ function updateScore(newScore) {
         </div>
         <div style="font-size: 1em; margin-bottom: 5px;">
             <b>Score:</b> ${newScore}
+        </div>
         </div>
     `;
 }
@@ -627,25 +607,6 @@ function updateGame(ctx) {
     ctx.lineWidth = 4;
     ctx.strokeRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
             
-}
-
-let maxHP = 100; // Salute massima
-let currentHP = maxHP; // Salute iniziale
-
-function updateHealth(newHP) {
-    currentHP = Math.max(0, Math.min(newHP, maxHP)); // Evita valori fuori dal range
-    const healthBar = document.getElementById('healthBar');
-    const healthPercentage = (currentHP / maxHP) * 100;
-    healthBar.style.width = healthPercentage + "%";
-
-    // Cambia colore della barra a seconda della percentuale di salute
-    if (healthPercentage > 60) {
-        healthBar.style.backgroundColor = "#58a6ff"; // Blu per alta salute
-    } else if (healthPercentage > 30) {
-        healthBar.style.backgroundColor = "#ffc107"; // Giallo per salute media
-    } else {
-        healthBar.style.backgroundColor = "#dc3545"; // Rosso per bassa salute
-    }
 }
 
 // Function to exit the game
