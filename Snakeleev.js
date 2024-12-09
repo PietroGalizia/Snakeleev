@@ -319,7 +319,7 @@ function updateScore(newScore) {
     scoreBoard.style.backgroundColor = "rgb(173, 176, 184)";
     scoreBoard.style.textAlign = "center";
     scoreBoard.style.margin = "5px auto";
-    scoreBoard.style.maxWidth = "250px";
+    scoreBoard.style.maxWidth = "25px";
 
     scoreBoard.innerHTML = `
         <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 5px; color: #f79d27#8f7dcf;">
@@ -327,8 +327,7 @@ function updateScore(newScore) {
         </div>
         <div style="font-size: 1.2em; margin-bottom: 5px;">
             <b>${newScore}</b>
-        </div>
-    `;
+        </div>`;
 }
 
 
