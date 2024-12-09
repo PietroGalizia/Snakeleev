@@ -92,6 +92,7 @@ let infoRectsNo = [];
 let erasedElements = [];
 let scoreIncrement = 0;
 let scoreDecrement = 0;
+let hpSquares = 10;
 
 // Evitare il comportamento predefinito dei tasti freccia
 document.addEventListener('keydown', (event) => {
@@ -122,6 +123,8 @@ document.addEventListener('keydown', (event) => {
     if (event.key === ' ') {
         event.preventDefault(); // Previene il comportamento predefinito della barra spaziatrice
         changeFoodElement();    // Cambia l'elemento del cibo senza cambiarne la posizione
+        const isDietCorrect = checkDietCorrectness(); // Funzione che verifica l'elemento
+        updateHPBar(isDietCorrect);
     } else {
         const newDirection = { x: direction.x, y: direction.y };
 
@@ -206,6 +209,8 @@ function startNewGame() {
 
     // Calcola i valori di incremento e decremento del punteggio
     initializeScoreValues();
+
+    initializeHPBar();
 
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
@@ -589,6 +594,51 @@ function updateGame(ctx) {
     ctx.lineWidth = 4;
     ctx.strokeRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
             
+}
+
+function initializeHPBar() {
+    const hpBarContainer = document.getElementById('hpBarContainer');
+    hpBarContainer.innerHTML = ''; // Pulisci il contenitore
+
+    for (let i = 0; i < hpSquares; i++) {
+        const square = document.createElement('div');
+        square.className = 'hpSquare';
+        if (i < 4) square.style.backgroundColor = 'red';
+        else if (i < 6) square.style.backgroundColor = 'orange';
+        else square.style.backgroundColor = 'green';
+        hpBarContainer.appendChild(square);
+    }
+
+    hpBarContainer.style.display = 'flex'; // Mostra la barra
+}
+
+function updateHPBar(isDietCorrect) {
+    const hpBarContainer = document.getElementById('hpBarContainer');
+    const squares = hpBarContainer.getElementsByClassName('hpSquare');
+
+    if (isDietCorrect) {
+        // Rimuovi un quadratino
+        if (hpSquares > 0) {
+            hpBarContainer.removeChild(squares[hpSquares - 1]);
+            hpSquares--;
+        }
+    } else {
+        // Aggiungi un quadratino
+        if (hpSquares < 10) {
+            const square = document.createElement('div');
+            square.className = 'hpSquare';
+            if (hpSquares < 4) square.style.backgroundColor = 'red';
+            else if (hpSquares < 6) square.style.backgroundColor = 'orange';
+            else square.style.backgroundColor = 'green';
+            hpBarContainer.appendChild(square);
+            hpSquares++;
+        }
+    }
+
+    // Controlla se il gioco deve terminare
+    if (hpSquares === 0) {
+        exitGame();
+    }
 }
 
 // Function to exit the game
