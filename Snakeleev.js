@@ -224,6 +224,11 @@ function startNewGame() {
     startGameLoop(ctx);
 }
 
+function updateInstructions(selectedDiet) {
+    const instruction = document.getElementById("eat-instruction");
+    instruction.innerHTML = `Eat the elements that belong to the <b>${selectedDiet}</b>.`;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mainMenu').style.display = 'block';
     updateScore(score);
@@ -462,7 +467,7 @@ function updateGame(ctx) {
         const expandInterval = setInterval(() => {
             size += 2;
             ctx.clearRect(x - size / 2, y - size / 2, size, size);
-            ctx.fillStyle = "rgb(150, 1749, 33)";
+            ctx.fillStyle = "rgb(120, 179, 224)";
             ctx.fillRect(x - size / 2, y - size / 2, size, size);
         }, 30);
         setTimeout(() => {
@@ -571,6 +576,10 @@ function updateGame(ctx) {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
+
+    // Disegna il numero atomico sotto il simbolo
+    //ctx.font = "12px Arial"; // Numero atomico più piccolo
+    //ctx.fillText(foodElementNumber, food.x + SIZE / 2, food.y + (2 * SIZE) / 3);
 
     // Draw game area border
     ctx.strokeStyle = "#83B7DE";
