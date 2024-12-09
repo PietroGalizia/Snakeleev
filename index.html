@@ -12,7 +12,7 @@
         }
         body {
             font-family: Arial, sans-serif;
-            background-color: #002F5F;bar
+            background-color: #002F5F;
             color: white;
             text-align: center;
             display: flex;
@@ -123,10 +123,11 @@
 
         #healthBarContainer {
             width: 300px;
-            height: 15px;
+            height: 20px;
             border: 2px solid #adb0b8;
             border-radius: 10px;
-            background-color: #00305f;
+            background-color: #2c2f33;
+            margin: 10px auto;
             position: relative;
         }
 
@@ -187,6 +188,7 @@
         <div id="healthBar"></div>
     </div>
 
+
     <!-- Game Over -->
     <div id="gameover" style="display: none;">
         <h2>Elements and Their Interesting Facts</h2>
@@ -220,7 +222,6 @@
             });
             document.getElementById('title').style.display = 'block';
             document.getElementById('gameover').style.display = 'none';
-            document.getElementById('healthBarContainer').style.display = 'none';
             document.getElementById('startScreen').style.display = 'block';
         });
 
@@ -229,7 +230,6 @@
             window.SPEED = speed;
             document.getElementById('title').style.display = 'block';
             document.getElementById('startScreen').style.display = 'none';
-            document.getElementById('healthBarContainer').style.display = 'none';
             document.getElementById('elementSelection').style.display = 'block';
             updateElementCount();
         }
@@ -244,7 +244,6 @@
                 document.getElementById('title').style.display = 'block';
                 document.getElementById('startScreen').style.display = 'none';
                 document.getElementById('elementSelection').style.display = 'none';
-                document.getElementById('healthBarContainer').style.display = 'none';
                 document.getElementById('dietSelection').style.display = 'block';
 
             const dietDropdown = document.getElementById("dietDropdown");
@@ -282,7 +281,6 @@
             document.getElementById('dietSelection').style.display = 'none';
             document.getElementById('gameCanvas').style.display = 'block';
             document.getElementById('scoreBoard').style.display = 'block';
-            document.getElementById('healthBarContainer').style.display = 'block';
             startNewGame();
         }
 
@@ -299,10 +297,6 @@
             // Ricarica la pagina
             location.reload();
         }
-    </script>
-    <script src="Snakeleev.js"></script>
-</body>
-</html>
     </script>
     <script src="Snakeleev.js"></script>
 </body>
