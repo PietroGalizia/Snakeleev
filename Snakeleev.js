@@ -311,7 +311,7 @@ function createInfoRectNo(element, x, y) {
 
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
-    scoreBoard.style.color = "white";
+    scoreBoard.style.color = "fff";
     scoreBoard.style.padding = "5px";
     scoreBoard.style.border = "2px solid #78b3e0";
     scoreBoard.style.borderRadius = "0px";
@@ -321,23 +321,20 @@ function updateScore(newScore) {
     scoreBoard.style.margin = "0px auto";
     scoreBoard.style.width = "620px";
 
-    // Mostra il testo di ${selectedDiet} sopra il rettangolo
     const selectedDietDiv = document.getElementById('selectedDietText');
-    selectedDietDiv.style.display = 'block'; // Mostra l'elemento
-    selectedDietDiv.style.position = 'absolute';
-    selectedDietDiv.style.top = `${scoreBoard.offsetTop - 30}px`; // Posizionamento sopra il rettangolo
-    selectedDietDiv.style.left = '50%';
-    selectedDietDiv.style.transform = 'translateX(-50%)';
-    selectedDietDiv.style.fontSize = '1.2em';
+    selectedDietDiv.style.display = 'block';
+    selectedDietDiv.style.fontSize = '1.5em';
     selectedDietDiv.style.fontWeight = 'bold';
+    selectedDietDiv.style.marginBottom = '5px';
+    selectedDietDiv.style.color = 'white'; // Colore del testo
     selectedDietDiv.textContent = selectedDiet;
 
-    // Aggiorna il contenuto del rettangolo del punteggio
     scoreBoard.innerHTML = `
         <div style="font-size: 1.2em; margin-bottom: 5px;">
             <b>${newScore}</b>
         </div>`;
 }
+
 function updateGame(ctx) {
     // Aggiorna la posizione del serpente
     let head = {
