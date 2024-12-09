@@ -356,7 +356,7 @@ function updateScore(newScore) {
             ${selectedDiet}
         </div>
         <div style="font-size: 1.2em; margin-bottom: 5px;">
-            <b>Score:</b> ${newScore}
+            ${newScore}
         </div>
     `;
 }
