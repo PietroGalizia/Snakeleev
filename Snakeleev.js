@@ -558,15 +558,15 @@ function updateGame(ctx) {
     });
 
     // Effetto glow intorno al cibo
-    ctx.shadowColor = "rgb(247, 157, 39)"; // Colore del bagliore
-    ctx.shadowBlur = 10;
+    // ctx.shadowColor = "rgb(247, 157, 39)"; // Colore del bagliore
+    // ctx.shadowBlur = 10;
 
     // Disegna sfondo cibo
     ctx.fillStyle = "rgb(120, 179, 224)";
     ctx.fillRect(food.x, food.y, SIZE, SIZE);
 
     // Reset shadowBlur per evitare che influenzi altri elementi
-    ctx.shadowBlur = 0;
+    // ctx.shadowBlur = 0;
     
     // Draw the food element symbol
     ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
@@ -580,110 +580,4 @@ function updateGame(ctx) {
     ctx.lineWidth = 4;
     ctx.strokeRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
             
-}
-
-// Aggiorna la barra della salute
-let playerHealth = 100; // Salute iniziale
-
-function decreaseHealth(amount) {
-    playerHealth -= amount;
-    if (playerHealth < 0) playerHealth = 0;
-    updateHealthBar(playerHealth);
-}
-
-function increaseHealth(amount) {
-    playerHealth += amount;
-    if (playerHealth > 100) playerHealth = 100;
-    updateHealthBar(playerHealth);
-}
-
-// Simula una riduzione della salute
-setInterval(() => {
-    decreaseHealth(10);
-}, 1000);
-
-
-
-function updateHealthBar(healthPercentage) {
-    const healthBar = document.getElementById('healthBar');
-    healthBar.style.width = healthPercentage + '%';
-}
-
-function decreaseHealth(amount) {
-    playerHealth -= amount;
-    if (playerHealth < 0) playerHealth = 0;
-    updateHealthBar(playerHealth);
-}
-
-function increaseHealth(amount) {
-    playerHealth += amount;
-    if (playerHealth > 100) playerHealth = 100;
-    updateHealthBar(playerHealth);
-}
-
-function updateHealth(newHP) {
-    currentHP = Math.max(0, Math.min(newHP, maxHP)); // Limita gli HP tra 0 e maxHP
-    const healthBar = document.getElementById('healthBar');
-    const healthPercentage = (currentHP / maxHP) * 100;
-    healthBar.style.width = healthPercentage + "%";
-    // Cambia il colore della barra come descritto prima
-}
-
-if (event.key === ' ') {
-    event.preventDefault(); // Previene lo scroll della pagina
-    handleSpaceBar();
-} else {
-    const newDirection = { x: direction.x, y: direction.y };
-}
-
-// Gestisce la pressione della barra spaziatrice
-function handleSpaceBar() {
-    if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
-        decreaseHealth(10, false); // Riduci salute di 10 senza premiare
-    } else {
-        increaseHealth(15, true); // Aumenta salute di 15 con premio
-    }
-    changeFoodElement(); // Cambia l'elemento del cibo
-}
-
-// Riduce la salute
-function decreaseHealth(amount, showInfo = true) {
-    updateHealth(currentHP - amount); // Riduce salute
-    if (showInfo) {
-        createInfoRectNo({
-            atomicNumber: foodElementNumber,
-            symbol: foodElement,
-            name: foodElementName
-        }, food.x, food.y);
-    }
-    if (currentHP <= 0) {
-        exitGame(); // Termina il gioco se la salute è zero
-    }
-}
-
-// Aumenta la salute
-function increaseHealth(amount, showInfo = true) {
-    updateHealth(currentHP + amount); // Aumenta salute
-    if (showInfo) {
-        createInfoRect({
-            atomicNumber: foodElementNumber,
-            symbol: foodElement,
-            name: foodElementName
-        }, food.x, food.y);
-    }
-}
-
-
-// Function to exit the game
-function exitGame() {
-    document.getElementById('title').style.display = 'block';
-    document.getElementById('gameCanvas').style.display = 'none';
-    document.getElementById('scoreBoard').style.display = 'none';
-    document.getElementById('elementSelection').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'none';
-    document.getElementById('gameover').style.display = 'block';
-
-    if (gameInterval) {
-        clearInterval(gameInterval);
-    }
 }
