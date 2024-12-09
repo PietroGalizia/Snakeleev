@@ -93,6 +93,26 @@ let erasedElements = [];
 let scoreIncrement = 0;
 let scoreDecrement = 0;
 
+function resizeCanvas() {
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Imposta la dimensione del canvas
+    canvas.width = window.innerWidth * 0.9; // Il 90% della larghezza della finestra
+    canvas.height = window.innerHeight * 0.8; // L'80% dell'altezza della finestra
+
+    // Ridimensiona anche il contesto per evitare immagini sfocate
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+    // Aggiorna i limiti del gioco
+    CANVAS_WIDTH = canvas.width;
+    CANVAS_HEIGHT = canvas.height;
+}
+
+// Chiamare la funzione durante il caricamento della pagina e ogni volta che la finestra viene ridimensionata
+window.addEventListener('load', resizeCanvas);
+window.addEventListener('resize', resizeCanvas);
+
 // Evitare il comportamento predefinito dei tasti freccia
 document.addEventListener('keydown', (event) => {
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
@@ -193,7 +213,7 @@ function showDietSelection() {
         option.textContent = diet;
         dietDropdown.appendChild(option);
     });
-    document.getElementById('title').style.display = 'block';
+
     document.getElementById('mainMenu').style.display = 'none';
     document.getElementById('dietSelection').style.display = 'block';
 }
@@ -311,23 +331,34 @@ function createInfoRectNo(element, x, y) {
 
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
-    scoreBoard.style.color = "rgb(0, 47, 95)";
-    scoreBoard.style.padding = "15px";
-    scoreBoard.style.border = "3px solid #f79d27";
-    scoreBoard.style.borderRadius = "12px";
-    scoreBoard.style.fontFamily = "Arial, sans-serif";
-    scoreBoard.style.backgroundColor = "rgb(173, 176, 184)";
-    scoreBoard.style.textAlign = "center";
-    scoreBoard.style.margin = "5px auto";
-    scoreBoard.style.maxWidth = "25px";
 
+    // Carica il font Matchpoint
+    const fontLink = document.createElement('link');
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Matchpoint&display=swap';
+    fontLink.rel = 'stylesheet';
+    document.head.appendChild(fontLink);
+
+    // Stile del contenitore dello score
+    scoreBoard.style.color = "#002f5f";
+    scoreBoard.style.padding = "15px";
+    scoreBoard.style.border = "3px solid #8f7dcf";
+    scoreBoard.style.borderRadius = "12px";
+    scoreBoard.style.fontFamily = "'Matchpoint', Arial, sans-serif";
+    scoreBoard.style.backgroundColor = "#dde1e7";
+    scoreBoard.style.textAlign = "center";
+    scoreBoard.style.margin = "20px auto";
+    scoreBoard.style.maxWidth = "350px";
+    scoreBoard.style.boxShadow = "0px 4px 10px rgba(0, 0, 0, 0.2)";
+
+    // Contenuto dello score
     scoreBoard.innerHTML = `
-        <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 5px; color: #f79d27#8f7dcf;">
+        <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 15px; color: #6a4fb0;">
             ${selectedDiet}
         </div>
         <div style="font-size: 1.2em; margin-bottom: 5px;">
-            <b>${newScore}</b>
-        </div>`;
+            ${newScore}
+        </div>
+    `;
 }
 
 
@@ -590,7 +621,6 @@ function updateGame(ctx) {
 
 // Function to exit the game
 function exitGame() {
-    document.getElementById('title').style.display = 'block';
     document.getElementById('gameCanvas').style.display = 'none';
     document.getElementById('scoreBoard').style.display = 'none';
     document.getElementById('elementSelection').style.display = 'none';
