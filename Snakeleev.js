@@ -93,17 +93,6 @@ let erasedElements = [];
 let scoreIncrement = 0;
 let scoreDecrement = 0;
 
-function positionScoreBoard() {
-    const canvas = document.getElementById('gameCanvas');
-    const scoreBoard = document.getElementById('scoreBoard');
-
-    // Calcola la posizione del rettangolo del punteggio rispetto al canvas
-    const canvasRect = canvas.getBoundingClientRect();
-    scoreBoard.style.width = `${canvas.width}px`;
-    scoreBoard.style.left = `${canvasRect.left}px`;
-    scoreBoard.style.top = `${canvasRect.top - scoreBoard.offsetHeight}px`; // Sopra al canvas
-}
-
 // Evitare il comportamento predefinito dei tasti freccia
 document.addEventListener('keydown', (event) => {
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
@@ -226,15 +215,6 @@ function startNewGame() {
     document.getElementById('dietSelection').style.display = 'none';
     canvas.style.display = 'block';
 
-    // Visualizza la dieta selezionata
-    const selectedDietText = document.getElementById('selectedDietText');
-    selectedDietText.textContent = `Selected Diet: ${selectedDiet}`;
-    selectedDietText.style.color = '#fff'; // Testo bianco
-    selectedDietText.style.textAlign = 'center';
-
-    // Posiziona dinamicamente la barra del punteggio
-    positionScoreBoard();
-
     snake = [{ x: 100, y: 100 }];
     snakeColors = ["green"]; // Resetta i colori del serpente, partendo con la testa verde
     direction = { x: 1, y: 0 };
@@ -331,8 +311,26 @@ function createInfoRectNo(element, x, y) {
 
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
-    scoreBoard.innerHTML = `<b>${newScore}</b>`;
+    scoreBoard.style.color = "rgb(0, 47, 95)";
+    scoreBoard.style.padding = "15px";
+    scoreBoard.style.border = "3px solid #f79d27";
+    scoreBoard.style.borderRadius = "12px";
+    scoreBoard.style.fontFamily = "Arial, sans-serif";
+    scoreBoard.style.backgroundColor = "rgb(173, 176, 184)";
+    scoreBoard.style.textAlign = "center";
+    scoreBoard.style.margin = "5px auto";
+    scoreBoard.style.maxWidth = "25px";
+
+    scoreBoard.innerHTML = `
+        <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 5px; color: #f79d27#8f7dcf;">
+            ${selectedDiet}
+        </div>
+        <div style="font-size: 1.2em; margin-bottom: 5px;">
+            <b>${newScore}</b>
+        </div>`;
 }
+
+
 
 function updateGame(ctx) {
     // Aggiorna la posizione del serpente
@@ -562,15 +560,15 @@ function updateGame(ctx) {
     });
 
     // Effetto glow intorno al cibo
-    // ctx.shadowColor = "rgb(247, 157, 39)"; // Colore del bagliore
-    // ctx.shadowBlur = 10;
+    //ctx.shadowColor = "rgb(247, 157, 39)"; // Colore del bagliore
+    //ctx.shadowBlur = 10;
 
     // Disegna sfondo cibo
     ctx.fillStyle = "rgb(120, 179, 224)";
     ctx.fillRect(food.x, food.y, SIZE, SIZE);
 
     // Reset shadowBlur per evitare che influenzi altri elementi
-    // ctx.shadowBlur = 0;
+    //ctx.shadowBlur = 0;
     
     // Draw the food element symbol
     ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
@@ -579,105 +577,16 @@ function updateGame(ctx) {
     ctx.textBaseline = "middle";
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
 
+    // Disegna il numero atomico sotto il simbolo
+    //ctx.font = "12px Arial"; // Numero atomico più piccolo
+    //ctx.fillText(foodElementNumber, food.x + SIZE / 2, food.y + (2 * SIZE) / 3);
+
     // Draw game area border
     ctx.strokeStyle = "#83B7DE";
     ctx.lineWidth = 4;
     ctx.strokeRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
             
 }
-
-
-// Aggiorna la barra della salute
-let playerHealth = 100; // Salute iniziale
-
-function decreaseHealth(amount) {
-    playerHealth -= amount;
-    if (playerHealth < 0) playerHealth = 0;
-    updateHealthBar(playerHealth);
-}
-
-function increaseHealth(amount) {
-    playerHealth += amount;
-    if (playerHealth > 100) playerHealth = 100;
-    updateHealthBar(playerHealth);
-}
-
-// Simula una riduzione della salute
-setInterval(() => {
-    decreaseHealth(10);
-}, 1000);
-
-
-
-function updateHealthBar(healthPercentage) {
-    const healthBar = document.getElementById('healthBar');
-    healthBar.style.width = healthPercentage + '%';
-}
-
-function decreaseHealth(amount) {
-    playerHealth -= amount;
-    if (playerHealth < 0) playerHealth = 0;
-    updateHealthBar(playerHealth);
-}
-
-function increaseHealth(amount) {
-    playerHealth += amount;
-    if (playerHealth > 100) playerHealth = 100;
-    updateHealthBar(playerHealth);
-}
-
-function updateHealth(newHP) {
-    currentHP = Math.max(0, Math.min(newHP, maxHP)); // Limita gli HP tra 0 e maxHP
-    const healthBar = document.getElementById('healthBar');
-    const healthPercentage = (currentHP / maxHP) * 100;
-    healthBar.style.width = healthPercentage + "%";
-    // Cambia il colore della barra come descritto prima
-}
-
-if (event.key === ' ') {
-    event.preventDefault(); // Previene lo scroll della pagina
-    handleSpaceBar();
-} else {
-    const newDirection = { x: direction.x, y: direction.y };
-}
-
-// Gestisce la pressione della barra spaziatrice
-function handleSpaceBar() {
-    if (diets[selectedDiet] && diets[selectedDiet].includes(foodElement)) {
-        decreaseHealth(10, false); // Riduci salute di 10 senza premiare
-    } else {
-        increaseHealth(15, true); // Aumenta salute di 15 con premio
-    }
-    changeFoodElement(); // Cambia l'elemento del cibo
-}
-
-// Riduce la salute
-function decreaseHealth(amount, showInfo = true) {
-    updateHealth(currentHP - amount); // Riduce salute
-    if (showInfo) {
-        createInfoRectNo({
-            atomicNumber: foodElementNumber,
-            symbol: foodElement,
-            name: foodElementName
-        }, food.x, food.y);
-    }
-    if (currentHP <= 0) {
-        exitGame(); // Termina il gioco se la salute è zero
-    }
-}
-
-// Aumenta la salute
-function increaseHealth(amount, showInfo = true) {
-    updateHealth(currentHP + amount); // Aumenta salute
-    if (showInfo) {
-        createInfoRect({
-            atomicNumber: foodElementNumber,
-            symbol: foodElement,
-            name: foodElementName
-        }, food.x, food.y);
-    }
-}
-
 
 // Function to exit the game
 function exitGame() {
