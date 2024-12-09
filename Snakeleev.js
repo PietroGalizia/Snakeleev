@@ -319,12 +319,17 @@ function updateScore(newScore) {
     scoreBoard.style.backgroundColor = "rgb(0, 47, 95)";
     scoreBoard.style.textAlign = "center";
     scoreBoard.style.margin = "0px auto";
-    scoreBoard.style.width = CANVAS_WIDTH;
+    scoreBoard.style.width = "620px";
+
+    const selectedDietDiv = document.getElementById('selectedDietText');
+    selectedDietDiv.style.display = 'block';
+    selectedDietDiv.style.fontSize = '1.5em';
+    selectedDietDiv.style.fontWeight = 'bold';
+    selectedDietDiv.style.marginBottom = '5px';
+    selectedDietDiv.style.color = 'white'; // Colore del testo
+    selectedDietDiv.textContent = selectedDiet;
 
     scoreBoard.innerHTML = `
-        <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 5px; color: #f79d27#8f7dcf;">
-            ${selectedDiet}
-        </div>
         <div style="font-size: 1.2em; margin-bottom: 5px;">
             <b>${newScore}</b>
         </div>`;
