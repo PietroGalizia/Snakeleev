@@ -311,15 +311,16 @@ function createInfoRectNo(element, x, y) {
 
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
-    scoreBoard.style.color = "rgb(0, 47, 95)";
-    scoreBoard.style.padding = "15px";
-    scoreBoard.style.border = "3px solid #f79d27";
-    scoreBoard.style.borderRadius = "12px";
+    scoreBoard.style.color = "fff";
+    scoreBoard.style.padding = "0px";
+    scoreBoard.style.border = "2px solid #78b3e0";
+    scoreBoard.style.borderRadius = "0px";
     scoreBoard.style.fontFamily = "Arial, sans-serif";
-    scoreBoard.style.backgroundColor = "rgb(173, 176, 184)";
+    scoreBoard.style.backgroundColor = "rgb(0, 47, 95)";
     scoreBoard.style.textAlign = "center";
-    scoreBoard.style.margin = "5px auto";
-    scoreBoard.style.maxWidth = CANVAS_WIDTH;
+    scoreBoard.style.margin = "0px auto";
+    const canvasWidth = canvas.offsetWidth;
+    scoreBoard.style.width = `${canvasWidth}px`;
 
     scoreBoard.innerHTML = `
         <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 5px; color: #f79d27#8f7dcf;">
