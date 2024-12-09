@@ -159,8 +159,8 @@
     <div id="elementSelection" style="display: none;">
         <h2>Select the biggest atomic number</h2>
         <label for="elementRange">Z<SUB>max</SUB></label>
-        <input id="elementRange" type="range" min="1" max="118" value="30" oninput="updateElementCount()">
-        <p id="selectedElementCount"> 30</p>
+        <input id="elementRange" type="range" min="1" max="118" value="50" oninput="updateElementCount()">
+        <p id="selectedElementCount"> 50</p>
         <button class="button" onclick="proceedToDietSelection()()">Next</button>
      </div>
 
@@ -173,7 +173,7 @@
             <h3>INSTRUCTIONS</h3>
             <ol>
                 <li>Move the snake using the arrow keys or the W, A, S, D keys.</li>
-                <li>Eat the elements that belong to the selected diet.</li>
+                <li id="eat-instruction">Eat the elements that belong to the selected diet.</li>
                 <li>Skip the elements that don’t belong to the diet by pressing the spacebar.</li>
                 <li>Refresh the page if you want to start a new game.</li>
             </ol>
