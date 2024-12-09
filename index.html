@@ -124,20 +124,20 @@
         #scoreBoard {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             background-color: rgb(173, 176, 184);
             border: 3px solid #f79d27;
             border-radius: 12px;
             color: rgb(0, 47, 95);
             font-size: 1.2em;
             font-weight: bold;
-            height: 60px;
+            height: 50px;
             position: absolute;
             top: 0; /* Sopra il canvas */
-            width: 620px; /* Stessa larghezza del canvas */
-            margin: 0 auto;
-            left: 50%;
-            transform: translateX(-50%);
+            width: 100%; /* Larghezza adattabile */
+            top: calc(50% - 300px); /* Regola questa distanza per allinearla all'area di gioco */
+            left: 0;
+            margin: 0;
         }
 
         #selectedDietText {
@@ -152,21 +152,22 @@
         }
 
         #healthBarContainer {
-            position: absolute;
-            bottom: 0; /* Posiziona la barra HP nel bordo inferiore del rettangolo del punteggio */
-            left: 0; /* Allinea con il bordo sinistro */
-            width: 300px;
-            height: 20px;
+            width: 200px; /* Larghezza della barra HP */
+            height: 20px; /* Altezza */
             border: 2px solid #8f7dcf;
             border-radius: 10px;
             background-color: #78b3e0;
+            overflow: hidden; /* Evita overflow visivo */
+            position: relative;
         }
 
         #healthBar {
             height: 100%;
             background-color: #58a6ff;
-            border-radius: 10px;
+            border-radius: 8px;
+            width: 100%;
             transition: width 0.3s ease-in-out;
+            position: absolute;
         }
 
     </style>
@@ -213,6 +214,7 @@
     <!-- Canvas del gioco -->
     <div id="selectedDietText"></div>
     <div id="scoreBoard" style="display: none;">
+        <span id="score">Score: 0</span>
         <div id="healthBarContainer">
             <div id="healthBar"></div>
         </div>
