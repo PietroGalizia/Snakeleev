@@ -124,11 +124,12 @@
         #healthBarContainer {
             width: 300px;
             height: 20px;
-            border: 2px solid #adb0b8;
-            border-radius: 10px;
-            background-color: #2c2f33;
-            margin: 10px auto;
-            position: relative;
+            border: 2px solid #58a6ff;
+            border-radius: 0px;
+            background-color: #002F5F;
+            position: absolute; /* Rende il posizionamento relativo al bordo della finestra */
+            top: 500px;
+            left: 50px;
         }
 
         #healthBar {
@@ -159,8 +160,8 @@
     <div id="elementSelection" style="display: none;">
         <h2>Select the biggest atomic number</h2>
         <label for="elementRange">Z<SUB>max</SUB></label>
-        <input id="elementRange" type="range" min="1" max="118" value="50" oninput="updateElementCount()">
-        <p id="selectedElementCount"> 50</p>
+        <input id="elementRange" type="range" min="1" max="118" value="30" oninput="updateElementCount()">
+        <p id="selectedElementCount"> 30</p>
         <button class="button" onclick="proceedToDietSelection()()">Next</button>
      </div>
 
@@ -184,8 +185,8 @@
     <div id="scoreBoard" style="display: none;"></div>
     <canvas id="gameCanvas"></canvas>
 
-    <div id="healthBarContainer">
-        <div id="healthBar"></div>
+    <div id="healthBarContainer  style="display: none;">
+        <div id="healthBar  style="display: none;"></div>
     </div>
 
 
@@ -222,6 +223,9 @@
             });
             document.getElementById('title').style.display = 'block';
             document.getElementById('gameover').style.display = 'none';
+            document.getElementById('scoreBoard').style.display = 'none';
+            document.getElementById('healthBarContainer').style.display = 'none';
+            document.getElementById('healthBar').style.display = 'none';
             document.getElementById('startScreen').style.display = 'block';
         });
 
@@ -230,6 +234,9 @@
             window.SPEED = speed;
             document.getElementById('title').style.display = 'block';
             document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('scoreBoard').style.display = 'none';
+            document.getElementById('healthBarContainer').style.display = 'none';
+            document.getElementById('healthBar').style.display = 'none';
             document.getElementById('elementSelection').style.display = 'block';
             updateElementCount();
         }
@@ -244,6 +251,9 @@
                 document.getElementById('title').style.display = 'block';
                 document.getElementById('startScreen').style.display = 'none';
                 document.getElementById('elementSelection').style.display = 'none';
+                document.getElementById('scoreBoard').style.display = 'none';
+                document.getElementById('healthBarContainer').style.display = 'none';
+                document.getElementById('healthBar').style.display = 'none';
                 document.getElementById('dietSelection').style.display = 'block';
 
             const dietDropdown = document.getElementById("dietDropdown");
@@ -281,6 +291,8 @@
             document.getElementById('dietSelection').style.display = 'none';
             document.getElementById('gameCanvas').style.display = 'block';
             document.getElementById('scoreBoard').style.display = 'block';
+            document.getElementById('healthBarContainer').style.display = 'block';
+            document.getElementById('healthBar').style.display = 'block';
             startNewGame();
         }
 
