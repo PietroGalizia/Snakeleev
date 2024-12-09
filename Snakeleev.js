@@ -93,22 +93,6 @@ let erasedElements = [];
 let scoreIncrement = 0;
 let scoreDecrement = 0;
 
-function resizeCanvas() {
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    
-    // Imposta la dimensione del canvas
-    canvas.width = window.innerWidth * 0.9; // Il 90% della larghezza della finestra
-    canvas.height = window.innerHeight * 0.8; // L'80% dell'altezza della finestra
-
-    // Ridimensiona anche il contesto per evitare immagini sfocate
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-
-    // Aggiorna i limiti del gioco
-    CANVAS_WIDTH = canvas.width;
-    CANVAS_HEIGHT = canvas.height;
-}
-
 // Chiamare la funzione durante il caricamento della pagina e ogni volta che la finestra viene ridimensionata
 window.addEventListener('load', resizeCanvas);
 window.addEventListener('resize', resizeCanvas);
@@ -213,7 +197,7 @@ function showDietSelection() {
         option.textContent = diet;
         dietDropdown.appendChild(option);
     });
-
+    document.getElementById('title').style.display = 'block';
     document.getElementById('mainMenu').style.display = 'none';
     document.getElementById('dietSelection').style.display = 'block';
 }
@@ -609,6 +593,7 @@ function updateGame(ctx) {
 
 // Function to exit the game
 function exitGame() {
+    document.getElementById('title').style.display = 'block';
     document.getElementById('gameCanvas').style.display = 'none';
     document.getElementById('scoreBoard').style.display = 'none';
     document.getElementById('elementSelection').style.display = 'none';
