@@ -93,10 +93,6 @@ let erasedElements = [];
 let scoreIncrement = 0;
 let scoreDecrement = 0;
 
-// Chiamare la funzione durante il caricamento della pagina e ogni volta che la finestra viene ridimensionata
-window.addEventListener('load', resizeCanvas);
-window.addEventListener('resize', resizeCanvas);
-
 // Evitare il comportamento predefinito dei tasti freccia
 document.addEventListener('keydown', (event) => {
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
@@ -316,21 +312,22 @@ function createInfoRectNo(element, x, y) {
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
     scoreBoard.style.color = "rgb(0, 47, 95)";
-    scoreBoard.style.padding = "10px";
-    scoreBoard.style.border = "2px solid #ccc";
-    scoreBoard.style.borderRadius = "8px";
+    scoreBoard.style.padding = "15px";
+    scoreBoard.style.border = "3px solid #f79d27";
+    scoreBoard.style.borderRadius = "12px";
     scoreBoard.style.fontFamily = "Arial, sans-serif";
     scoreBoard.style.backgroundColor = "rgb(173, 176, 184)";
     scoreBoard.style.textAlign = "center";
-    scoreBoard.style.margin = "10px auto";
-    scoreBoard.style.maxWidth = "300px";
+    scoreBoard.style.margin = "5px auto";
+    scoreBoard.style.maxWidth = "25px";
 
     scoreBoard.innerHTML = `
-        <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 10px; color: #8f7dcf;">
+        <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 5px; color: #f79d27#8f7dcf;">
             ${selectedDiet}
-            <b>Score:</b> ${newScore}
         </div>
-    `;
+        <div style="font-size: 1.2em; margin-bottom: 5px;">
+            <b>${newScore}</b>
+        </div>`;
 }
 
 
