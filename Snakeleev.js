@@ -332,19 +332,22 @@ function createInfoRectNo(element, x, y) {
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
     scoreBoard.style.color = "rgb(0, 47, 95)";
-    scoreBoard.style.padding = "10px";
+    scoreBoard.style.padding = "5px";
     scoreBoard.style.border = "2px solid #ccc";
-    scoreBoard.style.borderRadius = "8px";
+    scoreBoard.style.borderRadius = "4px";
     scoreBoard.style.fontFamily = "Arial, sans-serif";
     scoreBoard.style.backgroundColor = "rgb(173, 176, 184)";
     scoreBoard.style.textAlign = "center";
-    scoreBoard.style.margin = "10px auto";
+    scoreBoard.style.margin = "5px auto";
     scoreBoard.style.maxWidth = "300px";
 
     scoreBoard.innerHTML = `
-        <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 10px; color: #8f7dcf;">
+        <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 5px; color: #8f7dcf;">
             ${selectedDiet}
             <b>Score:</b> ${newScore}
+        </div>
+        <div style="font-size: 1.2em; margin-bottom: 5px;">
+            <b>${newScore}</b>
         </div>
     `;
 }
