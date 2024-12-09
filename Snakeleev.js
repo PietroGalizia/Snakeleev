@@ -598,6 +598,7 @@ function exitGame() {
     document.getElementById('scoreBoard').style.display = 'none';
     document.getElementById('elementSelection').style.display = 'none';
     document.getElementById('dietSelection').style.display = 'none';
+    document.getElementById('selectedDietText').style.display = 'none';
     document.getElementById('gameover').style.display = 'block';
 
     if (gameInterval) {
