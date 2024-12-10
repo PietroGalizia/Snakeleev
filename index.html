@@ -126,9 +126,11 @@
             justify-content: flex-start;
             align-items: center;
             position: absolute;
-            transform: translateX(-50%);
             height: 10px; /* Altezza dei quadratini */
             margin: 0;
+            top: calc(var(--canvas-top) - 15px); /* Posiziona sopra il canvas */
+            left: calc(var(--canvas-left) + 0px); /* Allineato al bordo sinistro del canvas */
+            transform: translate(0, -100%);
         }
 
         .hpSquare {
