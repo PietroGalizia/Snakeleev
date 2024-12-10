@@ -121,23 +121,21 @@
             max-height: 90%;
         }
 
-        #hpBarContainer {
+        #hpBarContainer { 
             display: flex;
             justify-content: flex-start;
             align-items: center;
             position: absolute;
-            height: 10px; /* Altezza dei quadratini */
-            margin: 0;
-            top: calc(var(--canvas-top) + 150px); /* Posiziona sopra il canvas */
-            left: calc(var(--canvas-left) +150px); /* Allineato al bordo sinistro del canvas */
-            transform: translate(0, -100%);
+            transform: translateX(-50%);
+            height: 10px;
+            margin: 10px auto 0;
         }
 
         .hpSquare {
             width: 10px;
             height: 10px;
             margin: 0 1px;
-            background-color: green; /* Colore iniziale */
+            background-color: green;
             border: 0px solid black;
         }
 
