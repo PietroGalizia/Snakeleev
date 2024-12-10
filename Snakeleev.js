@@ -93,6 +93,7 @@ let erasedElements = [];
 let scoreIncrement = 0;
 let scoreDecrement = 0;
 let hpSquares = 10;
+const hpBarContainer = document.getElementById('hpBarContainer');
 
 // Evitare il comportamento predefinito dei tasti freccia
 document.addEventListener('keydown', (event) => {
@@ -597,30 +598,33 @@ function updateGame(ctx) {
 }
 
 function initializeHPBar() {
-    const hpBarContainer = document.getElementById('hpBarContainer');
-    hpBarContainer.innerHTML = ''; // Pulisci il contenitore
-
-    for (let i = 0; i < hpSquares; i++) {
+    hpBarContainer.innerHTML = ''; // Pulisce la barra HP
+    for (let i = 0; i < 10; i++) {
         const square = document.createElement('div');
         square.className = 'hpSquare';
-        if (i < 4) square.style.backgroundColor = 'red';
-        else if (i < 6) square.style.backgroundColor = 'orange';
-        else square.style.backgroundColor = 'green';
+        if (i < 4) {
+            square.style.backgroundColor = 'red';
+        } else if (i < 6) {
+            square.style.backgroundColor = 'orange';
+        } else {
+            square.style.backgroundColor = 'green';
+        }
         hpBarContainer.appendChild(square);
     }
-
-    hpBarContainer.style.display = 'flex'; // Mostra la barra
+    hpSquares = 10; // Ripristina il conteggio
 }
 
 function updateHPBar() {
-      if (selectedDiet && diets[selectedDiet]?.includes(foodElement)) {
+if (selectedDiet && diets[selectedDiet]?.includes(foodElement)) {
         // L'elemento corrente è valido
         if (hpSquares > 0) {
-            // Rimuovi un quadratino dalla barra HP
-            const hpBarContainer = document.getElementById('hpBarContainer');
-            hpBarContainer.removeChild(hpBarContainer.lastChild);
-            hpSquares--;
-            console.log("Elemento valido! HP -1");
+            // Rimuovi solo il quadratino più a destra senza spostare gli altri
+            const lastSquare = hpBarContainer.lastChild;
+            if (lastSquare) {
+                hpBarContainer.removeChild(lastSquare);
+                hpSquares--;
+                console.log("Elemento valido! HP -1");
+            }
         } else {
             console.log("Non ci sono più HP disponibili!");
         }
@@ -639,7 +643,7 @@ function updateHPBar() {
                 square.style.backgroundColor = 'green';
             }
 
-            document.getElementById('hpBarContainer').appendChild(square);
+            hpBarContainer.appendChild(square);
             hpSquares++;
             console.log("Elemento non valido! HP +1");
         }
