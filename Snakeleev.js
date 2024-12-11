@@ -603,9 +603,10 @@ function initializeHPBar() {
     for (let i = 0; i < hpSquares; i++) {
         const square = document.createElement('div');
         square.className = 'hpSquare';
-        if (i < 4) square.style.backgroundColor = 'red';
-        else if (i < 6) square.style.backgroundColor = 'orange';
-        else square.style.backgroundColor = 'green';
+        if (i < 3) square.style.backgroundColor = 'rgb(229, 26, 75)';
+        else if (i < 4) square.style.backgroundColor = 'rgb(247, 157, 39)';
+        else if (i < 7) square.style.backgroundColor = 'rgb(150, 174, 33)';
+        else square.style.backgroundColor = 'rgb(65, 127, 69)';
         hpBarContainer.appendChild(square);
     }
 
