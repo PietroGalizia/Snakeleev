@@ -80,68 +80,37 @@ const diets = {
             "Oxygen is critical for respiration in living organisms.",
             "Nitrogen forms the basis of amino acids and DNA."
             ],
-            "Critical elements": [""
-            ],
-            "Elements of DNA": [""
-            ],
-            "Radioactive elements (U-Th decay series)": [""
-            ],
-            "Elements considered safety (grades A-E) in the first wall of fusion power plan": [""
-            ],
-            "Potentially toxic trace elements (PTEs)": [""
-            ],
-            "Elements dedicated to scientists": [""
-            ],
-            "Elements with names of latin derivation: [""
-            ],
-            "Elements with names of greek derivation": [""
-            ],
-            "Elements with names derived from cities, countries, or elsewhere: [""
-            ],
-            "Elements with names not derived from latin or greek, nor from cities or countries": [""
-            ],
-            "Elements in solid state at standard temperature and pressure": [""
-            ],
-            "Elements in liquid state at standard temperature and pressure: [""
-            ],
-            "Elements in gas state at standard temperature and pressure": [""
-            ],
-            "Metals": [""
-            ],
-            "Nonmetals": [""
-            ],
-            "Elements of group I (Hydrogen & alkali metals)": [""
-            ],
-            "Elements of group II (Alkaline earth metals)": [""
-            ],
-            "Elements of group XV (Pnictogens)": [""
-            ],
-            "Elements of group XVI (Chalcogens)": [""
-            ],
-            "Elements of group XVII (Halogens)": [""
-            ],
-            "Elements of group XVIII (Noblegases)": [""
-            ],
-            "Lanthanides": [""
-            ],
-            "Actinides": [""
-            ],
-            "Transition metals": [""
-            ],
-            "Post-transition metals": [""
-            ],
-            "Metalloids": [""
-            ],
-            "Reactive nonmetals": [""
-            ],
-            "s-block elements": [""
-            ],
-            "p-block elements": [""
-            ],
-            "d-block elements": [""
-            ],
-            "f-block elements": [""
-            ]
+            "Critical elements": [],
+            "Elements of DNA": [],
+            "Radioactive elements (U-Th decay series)": [],
+            "Elements considered safety (grades A-E) in the first wall of fusion power plan": [],
+            "Potentially toxic trace elements (PTEs)": [],
+            "Elements dedicated to scientists": [],
+            "Elements with names of latin derivation: [],
+            "Elements with names of greek derivation": [],
+            "Elements with names derived from cities, countries, or elsewhere: [],
+            "Elements with names not derived from latin or greek, nor from cities or countries": [],
+            "Elements in solid state at standard temperature and pressure": [],
+            "Elements in liquid state at standard temperature and pressure: [],
+            "Elements in gas state at standard temperature and pressure": [],
+            "Metals": [],
+            "Nonmetals": [],
+            "Elements of group I (Hydrogen & alkali metals)": [],
+            "Elements of group II (Alkaline earth metals)": [],
+            "Elements of group XV (Pnictogens)": [],
+            "Elements of group XVI (Chalcogens)": [],
+            "Elements of group XVII (Halogens)": [],
+            "Elements of group XVIII (Noblegases)": [],
+            "Lanthanides": [],
+            "Actinides": [],
+            "Transition metals": [],
+            "Post-transition metals": [],
+            "Metalloids": [],
+            "Reactive nonmetals": [],
+            "s-block elements": [],
+            "p-block elements": [],
+            "d-block elements": [],
+            "f-block elements": []
         };
 
 
