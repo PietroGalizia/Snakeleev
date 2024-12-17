@@ -25,11 +25,11 @@ const DietsList = [
     "Elements in liquid state at standard temperature and pressure",
     "Elements in gas state at standard temperature and pressure", "Metals", "Nonmetals",
     "Elements of group I (Hydrogen & alkali metals)",
-    "Elements of group II (Alkaline earth metals)", "elements of group XV (Pnictogens)",
-    "Elements of group XVI (Chalcogens)", "elements of group XVII (Halogens)",
+    "Elements of group II (Alkaline earth metals)", "Elements of group XV (Pnictogens)",
+    "Elements of group XVI (Chalcogens)", "Elements of group XVII (Halogens)",
     "Elements of group XVIII (Noblegases)", "Lanthanides", "Actinides",
     "Transition metals", "Post-transition metals", "Metalloids", "Reactive nonmetals",
-    "s-block elements", "p-block elements", "d-block elements", "f-block elemnts"
+    "s-block elements", "p-block elements", "d-block elements", "f-block elements"
 ];
 
 const diets = {
@@ -68,8 +68,92 @@ const diets = {
     "f-block elements": ["La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No"],
 };
 
-// Ref. elements of a smartphone: https://meg.resourcesregulator.nsw.gov.au/sites/default/files/2022-11/periodic-table-of-mobile-phones-a3complete.pdf
-// Ref. elements of a smartphone: https://doi.org/10.1016/j.resourpol.2020.101750
+// Messages for diets
+        const dietMessages = {
+            "Elements of a smartphone": [
+            "Did you know? Gold is used in smartphone connectors for its conductivity and resistance to corrosion.",
+            "Indium is essential for touchscreen technology.",
+            "Lithium powers your smartphone battery."
+            ],
+            "Elements of life": [""
+            "Carbon is the backbone of organic molecules.",
+            "Oxygen is critical for respiration in living organisms.",
+            "Nitrogen forms the basis of amino acids and DNA."
+            ],
+            "Critical elements": [""
+            ],
+            "Elements of DNA": [""
+            ],
+            "Radioactive elements (U-Th decay series)": [""
+            ],
+            "Elements considered safety (grades A-E) in the first wall of fusion power plan": [""
+            ],
+            "Potentially toxic trace elements (PTEs)": [""
+            ],
+            "Elements dedicated to scientists": [""
+            ],
+            "Elements with names of latin derivation: [""
+            ],
+            "Elements with names of greek derivation": [""
+            ],
+            "Elements with names derived from cities, countries, or elsewhere: [""
+            ],
+            "Elements with names not derived from latin or greek, nor from cities or countries": [""
+            ],
+            "Elements in solid state at standard temperature and pressure": [""
+            ],
+            "Elements in liquid state at standard temperature and pressure: [""
+            ],
+            "Elements in gas state at standard temperature and pressure": [""
+            ],
+            "Metals": [""
+            ],
+            "Nonmetals": [""
+            ],
+            "Elements of group I (Hydrogen & alkali metals)": [""
+            ],
+            "Elements of group II (Alkaline earth metals)": [""
+            ],
+            "Elements of group XV (Pnictogens)": [""
+            ],
+            "Elements of group XVI (Chalcogens)": [""
+            ],
+            "Elements of group XVII (Halogens)": [""
+            ],
+            "Elements of group XVIII (Noblegases)": [""
+            ],
+            "Lanthanides": [""
+            ],
+            "Actinides": [""
+            ],
+            "Transition metals": [""
+            ],
+            "Post-transition metals": [""
+            ],
+            "Metalloids": [""
+            ],
+            "Reactive nonmetals": [""
+            ],
+            "s-block elements": [""
+            ],
+            "p-block elements": [""
+            ],
+            "d-block elements": [""
+            ],
+            "f-block elements": [""
+            ]
+        };
+
+
+        function getRandomDietMessage(diet) {
+            const messages = dietMessages[diet];
+            if (!messages || messages.length === 0) {
+                return "– Forza Signor Simpson, non supererà mai questo corso se non sa la tavola periodica!<br>– Me la scriverò sulla mano..<br>– Ahah! Inclusi tutti i lantanidi e gli attidici? Buona fortuna! (I Simpson)";
+            }
+            return messages[Math.floor(Math.random() * messages.length)];
+        }
+
+
 
 // Initialize game state
 const SIZE = 20;
@@ -663,8 +747,21 @@ function exitGame() {
     document.getElementById('dietSelection').style.display = 'none';
     document.getElementById('selectedDietText').style.display = 'none';
     document.getElementById('gameover').style.display = 'block';
+    showGameOverScreen();
 
     if (gameInterval) {
         clearInterval(gameInterval);
     }
+}
+
+function showGameOverScreen() {
+    const gameOverElement = document.getElementById("gameover");
+    const randomMessage = getRandomDietMessage(window.selectedDiet);
+
+    gameOverElement.innerHTML = `
+        <h2>Stay Hungry! Stay Periodic!</h2>
+        <p>${randomMessage}</p>
+        <button class="button" onclick="resetGameState()">Reset</button>
+    `;
+    gameOverElement.style.display = "block";
 }
