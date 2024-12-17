@@ -75,7 +75,7 @@ const diets = {
             "Indium is essential for touchscreen technology.",
             "Lithium powers your smartphone battery."
             ],
-            "Elements of life": [""
+            "Elements of life": [
             "Carbon is the backbone of organic molecules.",
             "Oxygen is critical for respiration in living organisms.",
             "Nitrogen forms the basis of amino acids and DNA."
