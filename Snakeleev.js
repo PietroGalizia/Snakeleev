@@ -113,7 +113,6 @@ const diets = {
             "f-block elements": []
         };
 
-
         function getRandomDietMessage(diet) {
             const messages = dietMessages[diet];
             if (!messages || messages.length === 0) {
@@ -121,8 +120,6 @@ const diets = {
             }
             return messages[Math.floor(Math.random() * messages.length)];
         }
-
-
 
 // Initialize game state
 const SIZE = 20;
@@ -725,6 +722,7 @@ function exitGame() {
 
 function showGameOverScreen() {
     const gameOverElement = document.getElementById("gameover");
+    const diet = window.selectedDiet || "default";
     const randomMessage = getRandomDietMessage(window.selectedDiet);
 
     gameOverElement.innerHTML = `
