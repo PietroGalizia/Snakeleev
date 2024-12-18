@@ -106,7 +106,7 @@ const dietMessages = {
     "Elements considered safety (grades A-E) in the first wall of fusion power plan": [
         "A true 'low-activation' material should ideally achieve the possible prompt dose at the site boundary from 100% release of the inventory should be <2 Sv (200 rem); hence, the design would be 'inherently safe'.<br><a href='https://doi.org/10.13182/FST19-1-146' target='_blank'>S. J. Piet et al. Initial Integration of Accident Safety, Waste Management, Recycling, Effluent, and Maintenance Considerations for Low-Activation Materials. Fusion Technology, 19(1991)46–161</a>",
         "A true 'low-activation' material should ideally achieve the possible cancers from realistic releases should be limited such that the accident risk is <0.1%/yr of the existing background cancer risk to local residents.<br><a href='https://doi.org/10.13182/FST19-1-146' target='_blank'>S. J. Piet et al. Initial Integration of Accident Safety, Waste Management, Recycling, Effluent, and Maintenance Considerations for Low-Activation Materials. Fusion Technology, 19(1991)46–161</a>",
-        "A true 'low-activation' material should ideally achieve the decay heat should be limited so that active mitigative measures are not needed to protect the investment from cooling transients; hence, the design would be passively safe with respect to decay heat.<br><a href='https://doi.org/10.13182/FST19-1-146' target='_blank'>S. J. Piet et al. Initial Integration of Accident Safety, Waste Management, Recycling, Effluent, and Maintenance Considerations for Low-Activation Materials. Fusion Technology, 19(1991)46–161</a>"
+        "A true 'low-activation' material should ideally achieve the decay heat should be limited so that active mitigative measures are not needed to protect the investment from cooling transients; hence, the design would be passively safe with respect to decay heat.<br><a href='https://doi.org/10.13182/FST19-1-146' target='_blank'>S. J. Piet et al. Initial Integration of Accident Safety, Waste Management, Recycling, Effluent, and Maintenance Considerations for Low-Activation Materials. Fusion Technology, 19(1991)46–161</a>",
         "With a true 'low-activation' used materials could be either recycled or disposed of as near-surface waste.<br><a href='https://doi.org/10.13182/FST19-1-146' target='_blank'>S. J. Piet et al. Initial Integration of Accident Safety, Waste Management, Recycling, Effluent, and Maintenance Considerations for Low-Activation Materials. Fusion Technology, 19(1991)46–161</a>",
         "With a true 'low-activation' hands-on maintenance should be possible around coolant system piping and components such as the heat exchanger.<br><a href='https://doi.org/10.13182/FST19-1-146' target='_blank'>S. J. Piet et al. Initial Integration of Accident Safety, Waste Management, Recycling, Effluent, and Maintenance Considerations for Low-Activation Materials. Fusion Technology, 19(1991)46–161</a>",
         "With a true 'low-activation' effluents of activation products should be minor compared to the major challenge of limiting tritium effluents.<br><a href='https://doi.org/10.13182/FST19-1-146' target='_blank'>S. J. Piet et al. Initial Integration of Accident Safety, Waste Management, Recycling, Effluent, and Maintenance Considerations for Low-Activation Materials. Fusion Technology, 19(1991)46–161</a>",
@@ -143,7 +143,7 @@ const dietMessages = {
         "Si from Latin *silex* ('flint'), a mineral containing silicon.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank'>Tottola M., Righetti A., Allegrezza - Chimica per noi A., Mondadori Scuola © 2010</a>",
         "S from Latin *sulphur* ('sulfur'), a pre-Latin word. It is one of nine elements known since antiquity.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank'>Tottola M., Righetti A., Allegrezza - Chimica per noi A., Mondadori Scuola © 2010</a>",
         "K from English 'pot' and 'ash,' named by Humphry Davy in 1807. The symbol 'K' derives from Latin *kalium*, based on Arabic *al qali*.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank'>Tottola M., Righetti A., Allegrezza - Chimica per noi A., Mondadori Scuola © 2010</a>",
-        "Ca from Latin *calx* ('lime'), a compound containing calcium.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank'>Tottola M., Righetti A., Allegrezza - Chimica per noi A., Mondadori Scuola © 2010</a>"
+        "Ca from Latin *calx* ('lime'), a compound containing calcium.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank'>Tottola M., Righetti A., Allegrezza - Chimica per noi A., Mondadori Scuola © 2010</a>",
         "Sc from Latin *Scandia* ('Scandinavia'), as it was first isolated (1879) from a Swedish mineral. Its existence had been predicted by Dmitri Mendeleev (1834–1907), who named it ekaboron (eka- means 'one' in Sanskrit), as it was supposed to occupy a slot near boron in the periodic table.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank'>Source</a>",
         "Mn from Latin *Magnésion* ('Magnesia'), a city in Thessaly with deposits of magnetic ore resembling pyrolusite, a black manganese compound. Others suggest the name comes from a corruption of the Latin *magalaea*, an ancient term for pyrolusite.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank'>Source</a>",
         "Fe from Latin *ferrum* ('iron'), one of nine elements known since antiquity, along with carbon, gold, silver, copper, sulfur, tin, lead, and mercury.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank'>Source</a>",
@@ -277,16 +277,46 @@ const dietMessages = {
     "Elements of group XVI (Chalcogens)": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>"],
     "Elements of group XVII (Halogens)": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>"],
     "Elements of group XVIII (Noblegases)": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>"],
-    "Lanthanides": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>"],
-    "Actinides": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>"],
-    "Transition metals": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>"],
-    "Post-transition metals": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>"],
-    "Metalloids": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>"],
-    "Reactive nonmetals": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>"],
-    "s-block elements": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>"],
-    "p-block elements": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>"],
-    "d-block elements": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>"],
-    "f-block elements": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>"]
+    "Lanthanides": [
+        "Discover more on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>.",
+        "Explore the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table</a>."
+    ],
+    "Actinides": [
+        "Discover more on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>.",
+        "Explore the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table</a>."
+    ],
+    "Transition metals": [
+        "Learn more on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>.",
+        "Check out the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table</a>."
+    ],
+    "Post-transition metals": [
+        "Learn more on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>.",
+        "Check out the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table</a>."
+    ],
+    "Metalloids": [
+        "Discover more on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>.",
+        "Explore the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table</a>."
+    ],
+    "Reactive nonmetals": [
+        "Learn more on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>.",
+        "Check out the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table</a>."
+    ],
+    "s-block elements": [
+        "Explore more about s-block elements on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>.",
+        "Check out the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a> for detailed insights."
+    ],
+    "p-block elements": [
+        "Dive deeper into p-block elements on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>.",
+        "Learn more from the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>."
+    ],
+    "d-block elements": [
+        "Discover the properties of d-block elements on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>.",
+        "Visit the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a> for further details."
+    ],
+    "f-block elements": [
+        "Find out more about f-block elements on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank'>Ptable</a>.",
+        "Get comprehensive information on the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank'>Periodic Table of Elements</a>."
+    ]
 };
 
 function getRandomDietMessage(diet) {
