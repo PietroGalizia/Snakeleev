@@ -953,6 +953,7 @@ function exitGame() {
     document.getElementById('dietSelection').style.display = 'none';
     document.getElementById('selectedDietText').style.display = 'none';
     document.getElementById('gameover').style.display = 'block';
+    document.getElementById('touchArea').style.zIndex = -1;
     showGameOverScreen();
 
     if (gameInterval) {
