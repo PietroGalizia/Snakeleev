@@ -131,8 +131,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 10; /* Sta sopra il canvas */
-            background: transparent; /* Invisibile */
+            z-index: -1;
+            background: transparent;
         }
 
         #gameCanvas {
@@ -304,6 +304,7 @@
             document.getElementById('gameCanvas').style.display = 'block';
             document.getElementById('selectedDietText').style.display = 'block';
             document.getElementById('scoreBoard').style.display = 'block';
+            document.getElementById('touchArea').style.zIndex = 10;
             startNewGame();
         }
 
