@@ -133,8 +133,7 @@ const dietMessages = {
         "Mt (Meitnerium): Honors Lise Meitner, who elucidated nuclear fission.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank'>Source</a>",
         "Rg (Roentgenium): Named for Wilhelm Roentgen, discoverer of X-rays. First synthesized in 1994.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank'>Source</a>",
         "Og (Oganesson): First observed in 1996, with the proposed name Copernicium to honor Nicolaus Copernicus.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank'>Source</a>"
-    ]
-
+    ],
     "Elements with names of latin derivation": [
         "B from the French bore, which is from the Latin borax, 'borax', a compound in which boron is abundant; 'borax' in turn derives from the Persian burak, 'saltpeter', similar in appearance to borax and with which it could be confused.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank'>Tottola M. Righetti A. Allegrezza Chimica per noi A. Mondadori Scuola © by Mondadori Education, 2010</a>",
         "C from the Latin carbo, 'coal', composed predominantly of carbon; it is one of the nine elements known since antiquity, along with gold, silver, copper, sulfur, tin, lead, mercury, and iron.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank'>Tottola M. Righetti A. Allegrezza Chimica per noi A. Mondadori Scuola © by Mondadori Education, 2010</a>",
