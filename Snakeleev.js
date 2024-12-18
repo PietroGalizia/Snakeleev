@@ -353,6 +353,8 @@ let erasedElements = [];
 let scoreIncrement = 0;
 let scoreDecrement = 0;
 let hpSquares = 10;
+let touchStartX = 0;
+let touchStartY = 0;
 
 // Evitare il comportamento predefinito dei tasti freccia
 document.addEventListener('keydown', (event) => {
@@ -377,6 +379,36 @@ function startGame() {
     initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
     gameLoop();
 }
+
+function handleTouchStart(event) {
+    const touch = event.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+}
+
+function handleTouchMove(event) {
+    const touch = event.touches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY
+
+   // Determina la nuova direzione in base al movimento
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX > 20 && direction.x !== -1) {
+            direction = { x: 1, y: 0 }; // Sposta verso destra
+        } else if (deltaX < -20 && direction.x !== 1) {
+            direction = { x: -1, y: 0 }; // Sposta verso sinistra
+        }
+    } else if (Math.abs(deltaY) > 20) {
+        if (deltaY > 20 && direction.y !== -1) {
+            direction = { x: 0, y: 1 }; // Sposta verso il basso
+        } else if (deltaY < -20 && direction.y !== 1) {
+            direction = { x: 0, y: -1 }; // Sposta verso l'alto
+        }
+    }
+}
+
+document.getElementById('touchArea').addEventListener('touchstart', handleTouchStart);
+document.getElementById('touchArea').addEventListener('touchmove', handleTouchMove);
 
 document.addEventListener('keydown', (event) => {
 
