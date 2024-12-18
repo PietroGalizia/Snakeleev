@@ -108,6 +108,14 @@ const dietMessages = {
     "f-block elements": []
 };
 
+function getRandomDietMessage(diet) {
+    const messages = dietMessages[diet];
+    if (!messages || messages.length === 0) {
+         return "– Forza Signor Simpson, non supererà mai questo corso se non sa la tavola periodica!<br>– Me la scriverò sulla mano..<br>– Ahah! Inclusi tutti i lantanidi e gli attidici? Buona fortuna! (I Simpson)";
+    }
+    return messages[Math.floor(Math.random() * messages.length)];
+}
+
 // Initialize game state
 const SIZE = 20;
 const CANVAS_WIDTH = 620;
@@ -700,8 +708,22 @@ function exitGame() {
     document.getElementById('dietSelection').style.display = 'none';
     document.getElementById('selectedDietText').style.display = 'none';
     document.getElementById('gameover').style.display = 'block';
+    showGameOverScreen();
 
     if (gameInterval) {
         clearInterval(gameInterval);
     }
+}
+
+function showGameOverScreen() {
+    const gameOverElement = document.getElementById("gameover");
+    const diet = window.selectedDiet || "default";
+    const randomMessage = getRandomDietMessage(window.selectedDiet);
+
+    gameOverElement.innerHTML = `
+        <h2>Stay Hungry! Stay Periodic!</h2>
+        <p>${randomMessage}</p>
+        <button class="button" onclick="resetGameState()">Reset</button>
+    `;
+    gameOverElement.style.display = "block";
 }
