@@ -1,4 +1,3 @@
-// Define the elements
 const elements = [
     "H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Sb", "Te", "I", "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og"
 ];
@@ -11,12 +10,10 @@ const elementNumbers = [
     "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116", "117", "118"
 ];
 
-// List of diet options and elements associated with each diet
 const DietsList = [
     "Elements of a smartphone", "Elements of life", "Critical elements",
     "Elements of DNA", "Radioactive elements (U-Th decay series)",
     "Elements considered safety (grades A-E) in the first wall of fusion power plan",
-    "Potentially toxic trace elements (PTEs)",
     "Elements dedicated to scientists", "Elements with names of latin derivation",
     "Elements with names of greek derivation",
     "Elements with names derived from cities, countries, or elsewhere",
@@ -39,7 +36,6 @@ const diets = {
     "Elements of DNA": ["C", "H", "O", "N", "P"],
     "Radioactive elements (U-Th decay series)": ["U", "Th", "Pa", "Ra", "Rn", "Po", "Pb", "Bi", "Pu", "Ac", "Tl", "Am", "Np"],
     "Elements considered safety (grades A-E) in the first wall of fusion power plan": ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Mg", "Al", "Si", "P", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr", "Fe", "Co", "Ni", "Cu", "Ge", "Se", "Kr", "Sr", "Y", "Ru", "Sn", "Te", "I", "Xe", "Cs", "Ba", "Ce", "Nd", "Sm", "Dy", "Yb", "Lu", "Tl"],
-    "Potentially toxic trace elements (PTEs)": ["Pb", "Hg", "Cr", "Cd", "As", "Co", "Cu", "Ni", "Zn", "Ag", "Sb", "Fe", "Mn", "Zr", "Se", "Sr", "Al", "F", "U", "La", "Pr", "Au"], 
     "Elements dedicated to scientists": ["Ge", "Sm", "Gd", "Bi", "Cm", "Es", "Fm", "No", "Lr", "Rf", "Sg", "Bh", "Mt", "Rg", "Og"],
     "Elements with names of latin derivation": ["B", "C", "F", "Na", "Al", "Si", "S", "K", "Ca", "Sc", "Mn", "Fe", "Cu", "Ga", "Ge", "Rb", "Ru", "Pd", "In", "Sn", "Sb", "Te", "Cs", "La", "Ce", "Pm", "Eu", "Ho", "Tm", "Lu", "Hf", "Ta", "Ir", "Au", "Hg", "Pb", "Bi", "Po", "Rn", "Ra", "Np", "Cm", "Hs"],
     "Elements with names of greek derivation": ["H", "He", "Li", "Be", "N", "O", "Ne", "P", "Cl", "Ar", "Ti", "Cr", "Co", "As", "Se", "Br", "Kr", "Nb", "Mo", "Tc", "Rh", "Ag", "Cd", "Sb", "I", "Xe", "Ba", "La", "Pr", "Nd", "Dy", "Os", "Tl", "Bi", "At", "Ac", "Pa", "U", "Pu"],
@@ -68,58 +64,6 @@ const diets = {
     "f-block elements": ["La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No"],
 };
 
-// Messages for diets
-        const dietMessages = {
-            "Elements of a smartphone": [
-            "Did you know? Gold is used in smartphone connectors for its conductivity and resistance to corrosion.",
-            "Indium is essential for touchscreen technology.",
-            "Lithium powers your smartphone battery."
-            ],
-            "Elements of life": [
-            "Carbon is the backbone of organic molecules.",
-            "Oxygen is critical for respiration in living organisms.",
-            "Nitrogen forms the basis of amino acids and DNA."
-            ],
-            "Critical elements": [],
-            "Elements of DNA": [],
-            "Radioactive elements (U-Th decay series)": [],
-            "Elements considered safety (grades A-E) in the first wall of fusion power plan": [],
-            "Potentially toxic trace elements (PTEs)": [],
-            "Elements dedicated to scientists": [],
-            "Elements with names of latin derivation: [],
-            "Elements with names of greek derivation": [],
-            "Elements with names derived from cities, countries, or elsewhere: [],
-            "Elements with names not derived from latin or greek, nor from cities or countries": [],
-            "Elements in solid state at standard temperature and pressure": [],
-            "Elements in liquid state at standard temperature and pressure: [],
-            "Elements in gas state at standard temperature and pressure": [],
-            "Metals": [],
-            "Nonmetals": [],
-            "Elements of group I (Hydrogen & alkali metals)": [],
-            "Elements of group II (Alkaline earth metals)": [],
-            "Elements of group XV (Pnictogens)": [],
-            "Elements of group XVI (Chalcogens)": [],
-            "Elements of group XVII (Halogens)": [],
-            "Elements of group XVIII (Noblegases)": [],
-            "Lanthanides": [],
-            "Actinides": [],
-            "Transition metals": [],
-            "Post-transition metals": [],
-            "Metalloids": [],
-            "Reactive nonmetals": [],
-            "s-block elements": [],
-            "p-block elements": [],
-            "d-block elements": [],
-            "f-block elements": []
-        };
-
-        function getRandomDietMessage(diet) {
-            const messages = dietMessages[diet];
-            if (!messages || messages.length === 0) {
-                return "– Forza Signor Simpson, non supererà mai questo corso se non sa la tavola periodica!<br>– Me la scriverò sulla mano..<br>– Ahah! Inclusi tutti i lantanidi e gli attidici? Buona fortuna! (I Simpson)";
-            }
-            return messages[Math.floor(Math.random() * messages.length)];
-        }
 
 // Initialize game state
 const SIZE = 20;
@@ -713,22 +657,8 @@ function exitGame() {
     document.getElementById('dietSelection').style.display = 'none';
     document.getElementById('selectedDietText').style.display = 'none';
     document.getElementById('gameover').style.display = 'block';
-    showGameOverScreen();
 
     if (gameInterval) {
         clearInterval(gameInterval);
     }
-}
-
-function showGameOverScreen() {
-    const gameOverElement = document.getElementById("gameover");
-    const diet = window.selectedDiet || "default";
-    const randomMessage = getRandomDietMessage(window.selectedDiet);
-
-    gameOverElement.innerHTML = `
-        <h2>Stay Hungry! Stay Periodic!</h2>
-        <p>${randomMessage}</p>
-        <button class="button" onclick="resetGameState()">Reset</button>
-    `;
-    gameOverElement.style.display = "block";
 }
