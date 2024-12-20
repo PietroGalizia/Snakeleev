@@ -82,6 +82,7 @@ const dietMessages = {
         "Oxygen, carbon, hydrogen, and nitrogen are the main building blocks of every living creature, including human beings.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
         "Specifically, our body is primarily composed of just 11 elements, along with trace amounts of boron, chromium, cobalt, copper, fluorine, iodine, iron, manganese, molybdenum, selenium, silicon, nickel, bromine, vanadium, and zinc.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
         "It seems incredible that a complex creature like a human is made up of only 26 types of building blocks. However, let's remember that these elements are not randomly assembled.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
+        "Nitrogen is nitrogen, it passes miraculously from the air into plants, from these into animals, and from animals into us; when its function in our body is exhausted, we eliminate it, but it still remains nitrogen, aseptic, innocent. Primo Levi, The Periodic Table (1975)",
         "Inside our body, just 11 atoms combine in thousands of ways to form simple compounds, which, in turn, are the building blocks of larger and more complex molecules.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)"
     ],
     "Critical elements": [
@@ -92,7 +93,8 @@ const dietMessages = {
         "Critical raw materials are defined as those of high importance to the economy and high risk associated with their supply.<br><a href='https://single-market-economy.ec.europa.eu/sectors/raw-materials/areas-specific-interest/critical-raw-materials_en' target='_blank' style='color: rgb(143, 125, 207);'>European Commission - Critical Raw Materials</a>"
     ],
     "Elements of DNA": [
-        "DNA is made up of carbon (C), hydrogen (H), oxygen (O), nitrogen (N) and phosphorus (P).<br><a href='https://edu.rsc.org/feature/elements-of-life/3007327.article' target='_blank' style='color: rgb(143, 125, 207);'>Rathi, Elements of life. Education in Chemistry 2011</a>"
+        "Nitrogen is nitrogen, it passes miraculously from the air into plants, from these into animals, and from animals into us; when its function in our body is exhausted, we eliminate it, but it still remains nitrogen, aseptic, innocent. Primo Levi, The Periodic Table (1975)",
+       "DNA is made up of carbon (C), hydrogen (H), oxygen (O), nitrogen (N) and phosphorus (P).<br><a href='https://edu.rsc.org/feature/elements-of-life/3007327.article' target='_blank' style='color: rgb(143, 125, 207);'>Rathi, Elements of life. Education in Chemistry 2011</a>"
     ],
     "Radioactive elements (U-Th decay series)": [
         "Radioactive elements are both naturally occurring and anthropogenic in origin, and can be found throughout the geosphere.https://doi.org/10.1016/B978-0-08-095975-7.00906-2' target='_blank' style='color: rgb(143, 125, 207);'>M.D. Siegel and C.R. Bryan, Radioactivity, Geochemistry, and Health. Treatise on Geochemistry (2nd ed.) 2014, 191-256</a>",
@@ -275,7 +277,10 @@ const dietMessages = {
     "Nonmetals": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
     "Elements of group I (Hydrogen & alkali metals)": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
     "Elements of group II (Alkaline earth metals)": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
-    "Elements of group XV (Pnictogens)": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
+    "Elements of group XV (Pnictogens)": [
+        "Nitrogen is nitrogen, it passes miraculously from the air into plants, from these into animals, and from animals into us; when its function in our body is exhausted, we eliminate it, but it still remains nitrogen, aseptic, innocent. Primo Levi, The Periodic Table (1975)",
+        "Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", 
+        "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
     "Elements of group XVI (Chalcogens)": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
     "Elements of group XVII (Halogens)": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
     "Elements of group XVIII (Noblegases)": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
@@ -288,6 +293,7 @@ const dietMessages = {
         "Explore the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table</a>."
     ],
     "Transition metals": [
+        "My favourite dream is of going to the opera (I am Hafnium), sharing a box at the Met with the other heavy transition metals – my old and valued friends – Tantalum, Rhenium, Osmium, Iridium, Platinum, Gold, and Tungsten. ― Oliver Sacks, Uncle Tungsten",
         "Learn more on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>.",
         "Check out the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table</a>."
     ],
