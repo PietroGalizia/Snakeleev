@@ -142,22 +142,7 @@
             max-width: 90%;
             max-height: 90%;
         }
-
-        #hpBarContainer {
-            position: absolute;
-            left: 500px;
-            height: 0px; /* Altezza dei quadratini */
-            margin: 0;
-        }
-
-        .hpSquare {
-            width: 10px;
-            height: 10px;
-            margin: 0 1px;
-            background-color: green; /* Colore iniziale */
-            border: 0px solid black;
-        }
-
+        
     </style>
 </head>
 <body>
@@ -195,11 +180,12 @@
         <div id="instructions">
             <h3>INSTRUCTIONS</h3>
             <ol>
-                <li>Move the snake using the arrow keys or the W, A, S, D keys.</li>
-                <li id="eat-instruction">Eat the elements that belong to the selected diet.</li>
-                <li>The score increases if the eaten element belongs to the selected diet.<br>Random choices will keep the score around 0.</li>
-                <li>Press the spacebar to swap the positions of two elements.</li>
-                <li>Refresh the page if you want to start a new game.</li>
+                <li>Control the snake using the arrow keys or W, A, S, and D.</li>
+                <li id="eat-instruction">Eat elements that match the selected diet.</li>
+                <li>Your score increases when you eat a correct element.<br>Random choices will keep your score near zero.</li>
+                <li>Press the spacebar to swap the positions of the two elements.</li>
+                <li>Press "P" to pause or resume the game.</li>
+                <li>Refresh the page to start a new game.</li>
             </ol>
         </div>
     </div>
