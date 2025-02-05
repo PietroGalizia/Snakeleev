@@ -336,7 +336,6 @@ function getRandomDietMessage(diet) {
     return messages[Math.floor(Math.random() * messages.length)];
 }
 
-// Initialize game state
 const SIZE = 20;
 const CANVAS_WIDTH = 620;
 const CANVAS_HEIGHT = 520;
@@ -344,10 +343,14 @@ let gameInterval = null;
 let direction = { x: 1, y: 0 };
 let score = 0;
 let food = {};
+let foodII = {};
 let selectedDiet = "";
 let foodElement = "";
+let foodIIElement = "";
 let foodElementName = "";
+let foodIIElementName = "";
 let foodElementNumber = "";
+let foodIIElementNumber = "";
 // Posizione iniziale del serpente
 let snake = [{ x: 100, y: 100 }];
 let snakeColors = ["green"];
@@ -359,10 +362,10 @@ let infoRectsNo = [];
 let erasedElements = [];
 let scoreIncrement = 0;
 let scoreDecrement = 0;
-let hpSquares = 10;
 let touchStartX = 0;
 let touchStartY = 0;
 let lastTouchTime = 0;
+let isPaused = false;
 
 // Evitare il comportamento predefinito dei tasti freccia
 document.addEventListener('keydown', (event) => {
@@ -432,56 +435,79 @@ document.getElementById('touchArea').addEventListener('touchstart', handleTouchS
 document.getElementById('touchArea').addEventListener('touchmove', handleTouchMove);
 
 document.addEventListener('keydown', (event) => {
-
     if (event.key === ' ') {
-        event.preventDefault(); // Previene il comportamento predefinito della barra spaziatrice
-        updateHPBar();
-        changeFoodElement();    // Cambia l'elemento del cibo senza cambiarne la posizione
-        
-    } else {
-        const newDirection = { x: direction.x, y: direction.y };
+        event.preventDefault();
+        if (!isPaused) changeFoodElement();
+    } 
+    else if (event.key.toLowerCase() === 'p') { // Controlla se si preme "p"
+        togglePause();
+    } 
+    else {
+        if (!isPaused) { // Solo se il gioco non è in pausa
+            const newDirection = { x: direction.x, y: direction.y };
+            switch (event.key) {
+                case 'ArrowUp': case 'w': case 'W':
+                    if (direction.y === 0) newDirection.x = 0, newDirection.y = -1;
+                    break;
+                case 'ArrowDown': case 's': case 'S':
+                    if (direction.y === 0) newDirection.x = 0, newDirection.y = 1;
+                    break;
+                case 'ArrowLeft': case 'a': case 'A':
+                    if (direction.x === 0) newDirection.x = -1, newDirection.y = 0;
+                    break;
+                case 'ArrowRight': case 'd': case 'D':
+                    if (direction.x === 0) newDirection.x = 1, newDirection.y = 0;
+                    break;
+            }
 
-        // Determina la nuova direzione in base al tasto premuto
-        switch (event.key) {
-            case 'ArrowUp':
-            case 'w':
-            case 'W':
-                if (direction.y === 0) newDirection.x = 0, newDirection.y = -1;
-                break;
-            case 'ArrowDown':
-            case 's':
-            case 'S':
-                if (direction.y === 0) newDirection.x = 0, newDirection.y = 1;
-                break;
-            case 'ArrowLeft':
-            case 'a':
-            case 'A':
-                if (direction.x === 0) newDirection.x = -1, newDirection.y = 0;
-                break;
-            case 'ArrowRight':
-            case 'd':
-            case 'D':
-                if (direction.x === 0) newDirection.x = 1, newDirection.y = 0;
-                break;
-        }
+            const nextHead = {
+                x: snake[0].x + newDirection.x * SIZE,
+                y: snake[0].y + newDirection.y * SIZE
+            };
 
-        // Verifica che il cambio di direzione non causi una collisione immediata
-        const nextHead = {
-            x: snake[0].x + newDirection.x * SIZE,
-            y: snake[0].y + newDirection.y * SIZE
-        };
-
-        // Se la nuova posizione della testa non collide con il corpo, aggiorna la direzione
-        if (!snake.some(part => part.x === nextHead.x && part.y === nextHead.y)) {
-            direction = newDirection;
+            if (!snake.some(part => part.x === nextHead.x && part.y === nextHead.y)) {
+                direction = newDirection;
+            }
         }
     }
 });
 
+function togglePause() {
+    isPaused = !isPaused;
+
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    if (isPaused) {
+        clearInterval(gameInterval); // Ferma il loop del gioco
+
+        // Disegna il messaggio di pausa
+        ctx.fillStyle = "rgba(0, 0, 0, 0.5)"; // Sfondo semi-trasparente
+        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        
+        ctx.fillStyle = "white";
+        ctx.font = "30px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("PAUSA", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+        ctx.font = "20px Arial";
+        ctx.fillText("Premi 'P' per riprendere", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 40);
+    } else {
+        startGameLoop(ctx); // Riprendi il gioco
+    }
+}
+
 function changeFoodElement() {
-    generateFood();
+    // Scambia solo le coordinate dei due cibi
+    let tempX = food.x;
+    let tempY = food.y;
+    food.x = foodII.x;
+    food.y = foodII.y;
+    foodII.x = tempX;
+    foodII.y = tempY;
+
+    // Ridisegna solo i due cibi senza cancellare l'intero canvas
     drawFood();
-    updateScore(score); 
+    drawFoodII();
 }
 
 function drawFood() {
@@ -497,6 +523,21 @@ function drawFood() {
 
     // Disegna il simbolo dell'elemento nel punto (x, y) del cibo
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
+}
+
+function drawFoodII() {
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    ctx.clearRect(foodII.x, foodII.y, SIZE, SIZE);
+
+    ctx.fillStyle = "red"; // Colore per il simbolo dell'elemento
+    ctx.font = "20px Arial"; // Imposta la dimensione del font
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    // Disegna il simbolo dell'elemento nel punto (x, y) del cibo
+    ctx.fillText(foodIIElement, foodII.x + SIZE / 2, foodII.y + SIZE / 2);
 }
 
 function showDietSelection() {
@@ -523,8 +564,6 @@ function startNewGame() {
     // Calcola i valori di incremento e decremento del punteggio
     initializeScoreValues();
 
-    initializeHPBar();
-
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = CANVAS_WIDTH;
@@ -539,6 +578,7 @@ function startNewGame() {
     score = 0;
     updateScore(score);
     generateFood();
+    generateFoodII();
     startGameLoop(ctx);
 }
 
@@ -566,42 +606,103 @@ function calculateValidDietElements() {
     return validDietElements.length;
 }
 
-function generateFood() {
+function generateFood() { 
     const margin = SIZE;
     const maxX = Math.floor((CANVAS_WIDTH - margin * 2) / SIZE);
     const maxY = Math.floor((CANVAS_HEIGHT - margin * 2) / SIZE);
 
     let foodPositionValid = false;
 
-    // Continua a generare una posizione valida finché non trovi una che non è sopra il serpente
+    // Ottieni gli elementi validi della dieta selezionata
+    const validDietElements = (diets[selectedDiet] || []).filter(el => !erasedElements.includes(el));
+
+    // Se non ci sono elementi validi, interrompi la funzione
+    if (validDietElements.length === 0) {
+        console.error("Nessun elemento valido per la dieta selezionata.");
+        return;
+    }
+
+    // Genera una posizione valida per il cibo
     while (!foodPositionValid) {
         food = {
             x: Math.floor(Math.random() * maxX) * SIZE + margin,
             y: Math.floor(Math.random() * maxY) * SIZE + margin
         };
 
-        // Verifica che il cibo non sia sopra il serpente
         foodPositionValid = !snake.some(part => part.x === food.x && part.y === food.y);
     }
     
     let elementIndex;
-    // Continua a generare un elemento finché non ne trovi uno che non è in erasedElements
+    // Seleziona un elemento che appartiene alla dieta selezionata e non è stato cancellato
     do {
-        elementIndex = Math.floor(Math.random() * elements.length);
-        foodElement = elements[elementIndex];
-    } while (erasedElements.includes(foodElement));
+        elementIndex = Math.floor(Math.random() * validDietElements.length);
+        foodElement = validDietElements[elementIndex];
+    } while (erasedElements.includes(foodElement)); 
 
     // Assegna nome e numero dell’elemento selezionato
+    elementIndex = elements.indexOf(foodElement); 
     foodElementName = elementNames[elementIndex];
     foodElementNumber = elementNumbers[elementIndex];
 
     drawFood();
+    drawFoodII();
+    updateScore(score);
+}
+
+function generateFoodII() {
+    const margin = SIZE;
+    const maxX = Math.floor((CANVAS_WIDTH - margin * 2) / SIZE);
+    const maxY = Math.floor((CANVAS_HEIGHT - margin * 2) / SIZE);
+
+    let foodPositionValid = false;
+
+    // Ottieni gli elementi validi della dieta selezionata
+    const validDietElements = (diets[selectedDiet] || []).filter(el => !erasedElements.includes(el));
+
+    // Ottieni gli elementi che NON appartengono alla dieta e non sono stati cancellati
+    const nonDietElements = elements.filter(el => !validDietElements.includes(el) && !erasedElements.includes(el));
+
+    // Se non ci sono elementi non appartenenti alla dieta, interrompi la funzione
+    if (nonDietElements.length === 0) {
+        console.error("Nessun elemento valido al di fuori della dieta selezionata.");
+        return;
+    }
+
+    // Genera una posizione valida per il cibo
+    while (!foodPositionValid) {
+        foodII = {
+            x: Math.floor(Math.random() * maxX) * SIZE + margin,
+            y: Math.floor(Math.random() * maxY) * SIZE + margin
+        };
+
+        foodPositionValid = !snake.some(part => part.x === foodII.x && part.y === foodII.y) &&
+                            !(foodII.x === food.x && foodII.y === food.y);
+    }
+    
+    let elementIndex;
+    // Seleziona un elemento che NON appartiene alla dieta selezionata e non è stato cancellato
+    do {
+        elementIndex = Math.floor(Math.random() * nonDietElements.length);
+        foodIIElement = nonDietElements[elementIndex];
+    } while (erasedElements.includes(foodIIElement));
+
+    // Assegna nome e numero dell’elemento selezionato
+    elementIndex = elements.indexOf(foodIIElement);
+    foodIIElementName = elementNames[elementIndex];
+    foodIIElementNumber = elementNumbers[elementIndex];
+
+    drawFood();
+    drawFoodII();
     updateScore(score);
 }
 
 function startGameLoop(ctx) {
+    if (isPaused) return; // Se il gioco è in pausa, esci subito
+    
     gameInterval = setInterval(() => {
-        updateGame(ctx);
+        if (!isPaused) { // Controlla sempre se il gioco è in pausa
+            updateGame(ctx);
+        }
     }, window.SPEED);
 }
 
@@ -730,7 +831,58 @@ function updateGame(ctx) {
         }
         updateScore(score);
         generateFood();
-    } else {
+        generateFoodII();
+    } 
+    // Controlla se il serpente mangia foodII
+    else if (head.x === foodII.x && head.y === foodII.y) {
+        if (diets[selectedDiet] && diets[selectedDiet].includes(foodIIElement)) {
+            score += scoreIncrement;
+
+            scoreText = {
+                value: `+${scoreIncrement}`,
+                x: foodII.x + SIZE / 2,
+                y: foodII.y - 10,
+                opacity: 1.0 // Trasparenza iniziale
+            };
+
+            createInfoRect({
+                atomicNumber: foodIIElementNumber,
+                symbol: foodIIElement,
+                name: foodIIElementName
+            }, foodII.x, foodII.y);
+
+            snakeColors.unshift("green");
+            expandFoodEffect(foodII.x, foodII.y); // Espansione prima di sparire
+
+        } else {
+            score -= scoreDecrement;
+
+            scoreTextNo = {
+                value: `-${scoreDecrement}`,
+                x: foodII.x + SIZE / 2,
+                y: foodII.y - 10,
+                opacity: 1.0 // Trasparenza iniziale
+            };
+
+            createInfoRectNo({
+                atomicNumber: foodIIElementNumber,
+                symbol: foodIIElement,
+                name: foodIIElementName
+            }, foodII.x, foodII.y);
+
+            snakeColors.unshift("red");
+            flashEffect("rgba(229, 26, 75, 0.5)", foodII.x, foodII.y); // Lampeggio per errore
+        }
+
+        // Rimuove i colori extra se il serpente è più corto della lista colori
+        if (snakeColors.length > snake.length) {
+            snakeColors.pop();
+        }
+        updateScore(score);
+        generateFood();
+        generateFoodII();
+    } 
+    else {
         snake.pop();
     }
 
@@ -887,6 +1039,8 @@ function updateGame(ctx) {
     // Disegna sfondo cibo
     ctx.fillStyle = "rgb(120, 179, 224)";
     ctx.fillRect(food.x, food.y, SIZE, SIZE);
+    ctx.fillStyle = "rgb(120, 179, 224)";
+    ctx.fillRect(foodII.x, foodII.y, SIZE, SIZE);
 
     // Reset shadowBlur per evitare che influenzi altri elementi
     //ctx.shadowBlur = 0;
@@ -897,72 +1051,23 @@ function updateGame(ctx) {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
+    ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
+    ctx.font = "14px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(foodIIElement, foodII.x + SIZE / 2, foodII.y + SIZE / 2);
 
     // Disegna il numero atomico sotto il simbolo
     //ctx.font = "12px Arial"; // Numero atomico più piccolo
     //ctx.fillText(foodElementNumber, food.x + SIZE / 2, food.y + (2 * SIZE) / 3);
+    //ctx.font = "12px Arial"; // Numero atomico più piccolo
+    //ctx.fillText(foodIIElementNumber, foodII.x + SIZE / 2, foodII.y + (2 * SIZE) / 3);
 
     // Draw game area border
     ctx.strokeStyle = "#83B7DE";
     ctx.lineWidth = 4;
     ctx.strokeRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
             
-}
-
-function initializeHPBar() {
-    const hpBarContainer = document.getElementById('hpBarContainer');
-    hpBarContainer.innerHTML = ''; // Pulisci il contenitore
-
-    for (let i = 0; i < hpSquares; i++) {
-        const square = document.createElement('div');
-        square.className = 'hpSquare';
-        if (i < 3) square.style.backgroundColor = 'rgb(229, 26, 75)';
-        else if (i < 5) square.style.backgroundColor = 'rgb(247, 157, 39)';
-        else if (i < 7) square.style.backgroundColor = 'rgb(150, 174, 33)';
-        else square.style.backgroundColor = 'rgb(65, 127, 69)';
-        hpBarContainer.appendChild(square);
-    }
-
-    hpBarContainer.style.display = 'flex'; // Mostra la barra
-}
-
-function updateHPBar() {
-      if (selectedDiet && diets[selectedDiet]?.includes(foodElement)) {
-        // L'elemento corrente è valido
-        if (hpSquares > 0) {
-            // Rimuovi un quadratino dalla barra HP
-            const hpBarContainer = document.getElementById('hpBarContainer');
-            hpBarContainer.removeChild(hpBarContainer.lastChild);
-            hpSquares--;
-            console.log("Elemento valido! HP -1");
-        } else {
-            console.log("Non ci sono più HP disponibili!");
-        }
-    } else {
-        // L'elemento corrente non è valido
-        if (hpSquares < 10) {
-            const square = document.createElement('div');
-            square.className = 'hpSquare';
-
-            // Imposta il colore in base alla posizione
-            if (hpSquares < 4) {
-                square.style.backgroundColor = 'red';
-            } else if (hpSquares < 6) {
-                square.style.backgroundColor = 'orange';
-            } else {
-                square.style.backgroundColor = 'green';
-            }
-
-            document.getElementById('hpBarContainer').appendChild(square);
-            hpSquares++;
-            console.log("Elemento non valido! HP +1");
-        }
-    }
-
-    // Controlla se la barra HP è a 0, termina il gioco
-    if (hpSquares <= 0) {
-        exitGame();
-    }
 }
 
 // Function to exit the game
