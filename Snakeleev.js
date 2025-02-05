@@ -488,9 +488,9 @@ function togglePause() {
         ctx.fillStyle = "white";
         ctx.font = "30px Arial";
         ctx.textAlign = "center";
-        ctx.fillText("PAUSA", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+        ctx.fillText("PAUSE", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
         ctx.font = "20px Arial";
-        ctx.fillText("Premi 'P' per riprendere", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 40);
+        ctx.fillText("Press 'P' to resume", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 40);
     } else {
         startGameLoop(ctx); // Riprendi il gioco
     }
