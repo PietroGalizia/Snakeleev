@@ -733,7 +733,7 @@ function createInfoRectNo(element, x, y) {
     });
 }
 
-let previousPercentage = null; // Memorizza la percentuale precedente per il trend
+let previousPercentage = null; // Memorizza la percentuale precedente
 let previousArrow = "⚪"; // Inizializza il simbolo con il pallino neutro
 
 function updateScore(newScore) {
@@ -760,34 +760,34 @@ function updateScore(newScore) {
     let percentage = totalFoodEaten > 0 ? ((newScore / totalFoodEaten) * 100).toFixed(1) : 0;
 
     // Determina la direzione della freccia e il colore
-    let arrow = "⚪"; // Pallino neutro iniziale
-    let arrowColor = "#fff"; // Bianco iniziale
+    let arrow = previousArrow; // Mantiene l'ultima freccia per default
+    let arrowColor = "#fff"; // Colore predefinito
 
     if (previousPercentage !== null) {
         if (percentage > previousPercentage) {
-            arrow = "🔺"; // Freccia in su
+            arrow = "🔺"; // Freccia su
             arrowColor = "rgb(150, 174, 33)"; // Verde
         } else if (percentage < previousPercentage) {
-            arrow = "🔻"; // Freccia in giù
+            arrow = "🔻"; // Freccia giù
             arrowColor = "rgb(229, 26, 75)"; // Rosso
         }
     }
 
-    // Se il punteggio non cambia, mantiene l'ultima freccia
-    if (percentage === previousPercentage) {
-        arrow = previousArrow;
-        arrowColor = previousArrow === "🔺" ? "rgb(150, 174, 33)" : previousArrow === "🔻" ? "rgb(229, 26, 75)" : "#fff";
+    // Se non è mai stata impostata una freccia e il punteggio è ancora 0
+    if (previousPercentage === null) {
+        arrow = "⚪"; // Pallino iniziale
+        arrowColor = "#fff";
     }
-
-    // Aggiorna la percentuale e la freccia precedente
-    previousPercentage = percentage;
-    previousArrow = arrow;
 
     // Interpolazione dal rosso (229, 26, 75) al verde (150, 174, 33)
     let r = Math.round(229 + (150 - 229) * (percentage / 100));
     let g = Math.round(26 + (174 - 26) * (percentage / 100));
     let b = Math.round(75 + (33 - 75) * (percentage / 100));
     let color = `rgb(${r}, ${g}, ${b})`;
+
+    // Aggiorna il valore precedente
+    previousPercentage = percentage;
+    previousArrow = arrow;
 
     // Layout con riquadri per score e percentuale
     scoreBoard.innerHTML = `
