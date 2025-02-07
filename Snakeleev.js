@@ -736,79 +736,41 @@ function createInfoRectNo(element, x, y) {
 let previousPercentage = null; // Memorizza la percentuale precedente per determinare il trend
 
 function updateScore(newScore) {
-    if (typeof newScore !== "number" || typeof totalFoodEaten !== "number") {
-        console.error("Errore: newScore o totalFoodEaten non sono numeri validi.");
-        return;
-    }
+    const scoreBoard = document.getElementById('scoreBoard');
+    scoreBoard.style.color = "#fff";
+    scoreBoard.style.padding = "5px";
+    scoreBoard.style.border = "2px solid #78b3e0";
+    scoreBoard.style.borderRadius = "0px";
+    scoreBoard.style.fontFamily = "Arial, sans-serif";
+    scoreBoard.style.backgroundColor = "rgb(0, 47, 95)";
+    scoreBoard.style.textAlign = "center";
+    scoreBoard.style.margin = "0px auto";
+    scoreBoard.style.width = CANVAS_WIDTH;
 
-    // Evita la divisione per zero
+    const selectedDietDiv = document.getElementById('selectedDietText');
+    selectedDietDiv.style.display = 'block';
+    selectedDietDiv.style.fontSize = '1.5em';
+    selectedDietDiv.style.fontWeight = 'bold';
+    selectedDietDiv.style.marginBottom = '5px';
+    selectedDietDiv.style.color = 'white';
+    selectedDietDiv.textContent = selectedDiet;
+
+    // Calcola la percentuale degli elementi validi mangiati
     let percentage = totalFoodEaten > 0 ? ((newScore / totalFoodEaten) * 100).toFixed(1) : 0;
 
-    // Protegge contro valori negativi o anomali
-    if (percentage < 0 || percentage > 100) {
-        console.warn("Valore di percentuale fuori range:", percentage);
-        percentage = Math.max(0, Math.min(100, percentage));
-    }
-
-    // Determina la freccia 🔺🔻
+    // Determina la direzione della freccia (🔺 miglioramento, 🔻 peggioramento, nessuna se invariata)
     let arrow = "";
     let arrowColor = "";
-    let arrowAnimation = "";
 
     if (previousPercentage !== null) {
         if (percentage > previousPercentage) {
             arrow = "🔺";
             arrowColor = "rgb(150, 174, 33)"; // Verde
-            arrowAnimation = "move-up";
         } else if (percentage < previousPercentage) {
             arrow = "🔻";
             arrowColor = "rgb(229, 26, 75)"; // Rosso
-            arrowAnimation = "move-down";
         }
     }
-
-    previousPercentage = percentage;
-
-    // Sfumatura colore da rosso a verde
-    let r = Math.round(229 + (150 - 229) * (percentage / 100));
-    let g = Math.round(26 + (174 - 26) * (percentage / 100));
-    let b = Math.round(75 + (33 - 75) * (percentage / 100));
-    let color = `rgb(${r}, ${g}, ${b})`;
-
-    // Aggiorna HTML
-    const scoreBoard = document.getElementById('scoreBoard');
-    if (!scoreBoard) {
-        console.error("Errore: elemento scoreBoard non trovato.");
-        return;
-    }
-
-    scoreBoard.innerHTML = `
-        <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
-            <div style="font-size: 1.5em; font-weight: bold;">
-                ${newScore} / ${totalFoodEaten}
-            </div>
-            <div style="border: 2px solid #78b3e0; padding: 8px 12px; border-radius: 10px; background-color: rgb(10, 57, 110);
-                        box-shadow: inset 3px 3px 6px rgba(255, 255, 255, 0.2), inset -3px -3px 6px rgba(0, 0, 0, 0.4);">
-                <b style="color: ${color}; font-size: 1.3em; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); 
-                        transition: color 0.5s ease-in-out;">
-                    ${percentage}%
-                    <span class="${arrowAnimation}" style="color: ${arrowColor}; display: inline-block; transition: transform 0.3s ease-in-out;">
-                        ${arrow}
-                    </span>
-                </b>
-            </div>
-        </div>
-    `;
-
-    // Applica animazione alla freccia
-    setTimeout(() => {
-        const arrowElement = document.querySelector(`.${arrowAnimation}`);
-        if (arrowElement) {
-            arrowElement.style.transform = "translateY(0px)";
-        }
-    }, 300);
-}
-document.head.appendChild(style);
     
     // Aggiorna la percentuale precedente per il prossimo confronto
     previousPercentage = percentage;
