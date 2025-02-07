@@ -758,24 +758,24 @@ function updateScore(newScore) {
     // Calcola la percentuale degli elementi validi mangiati
     let percentage = totalFoodEaten > 0 ? ((newScore / totalFoodEaten) * 100).toFixed(1) : 0;
 
-    // Determina la direzione della freccia (🔺 miglioramento, 🔻 peggioramento, ⚪ iniziale)
+    // Determina la direzione della freccia
     let arrow = "⚪"; // Pallino iniziale
     let arrowColor = "#fff"; // Bianco iniziale
 
     if (previousPercentage !== null) {
         if (percentage > previousPercentage) {
-            arrow = "🔺";
+            arrow = "🔺"; // Freccia in su
             arrowColor = "rgb(150, 174, 33)"; // Verde
         } else if (percentage < previousPercentage) {
-            arrow = "🔻";
+            arrow = "🔻"; // Freccia in giù
             arrowColor = "rgb(229, 26, 75)"; // Rosso
         }
     }
-    
-    // Aggiorna la percentuale precedente per il prossimo confronto
+
+    // Aggiorna la percentuale precedente
     previousPercentage = percentage;
 
-    // Interpolazione dal rosso (229, 26, 75) al verde (150, 174, 33)
+    // Interpolazione del colore da rosso (229, 26, 75) a verde (150, 174, 33)
     let r = Math.round(229 + (150 - 229) * (percentage / 100));
     let g = Math.round(26 + (174 - 26) * (percentage / 100));
     let b = Math.round(75 + (33 - 75) * (percentage / 100));
@@ -784,9 +784,12 @@ function updateScore(newScore) {
     // Layout con riquadri per score e percentuale
     scoreBoard.innerHTML = `
         <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+            <!-- Riquadro Score -->
             <div style="border: 2px solid #78b3e0; padding: 5px 10px; border-radius: 5px; background-color: rgb(0, 47, 95); font-size: 1.2em;">
                 <b>${newScore} / ${totalFoodEaten}</b>
             </div>
+
+            <!-- Riquadro Percentuale -->
             <div style="border: 2px solid #78b3e0; padding: 5px 10px; border-radius: 5px; background-color: rgb(0, 47, 95); transition: color 0.5s ease-in-out;">
                 <b style="color: ${color}; font-size: 1.2em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); transition: color 0.5s ease-in-out;">
                     ${percentage}% <span style="color: ${arrowColor};">${arrow}</span>
