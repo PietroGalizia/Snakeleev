@@ -734,7 +734,7 @@ function createInfoRectNo(element, x, y) {
 }
 
 let previousPercentage = null; // Memorizza la percentuale precedente per il trend
-let previousArrow = "⚪"; // Memorizza l'ultima freccia mostrata
+let previousArrow = "⚪"; // Inizializza il simbolo con il pallino neutro
 
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
@@ -759,8 +759,8 @@ function updateScore(newScore) {
     // Calcola la percentuale degli elementi validi mangiati
     let percentage = totalFoodEaten > 0 ? ((newScore / totalFoodEaten) * 100).toFixed(1) : 0;
 
-    // Determina la direzione della freccia
-    let arrow = "⚪"; // Pallino iniziale
+    // Determina la direzione della freccia e il colore
+    let arrow = "⚪"; // Pallino neutro iniziale
     let arrowColor = "#fff"; // Bianco iniziale
 
     if (previousPercentage !== null) {
@@ -770,10 +770,13 @@ function updateScore(newScore) {
         } else if (percentage < previousPercentage) {
             arrow = "🔻"; // Freccia in giù
             arrowColor = "rgb(229, 26, 75)"; // Rosso
-        } else {
-            arrow = previousArrow; // Mantiene l'ultima freccia se la percentuale non cambia
-            arrowColor = previousArrow === "🔺" ? "rgb(150, 174, 33)" : previousArrow === "🔻" ? "rgb(229, 26, 75)" : "#fff";
         }
+    }
+
+    // Se il punteggio non cambia, mantiene l'ultima freccia
+    if (percentage === previousPercentage) {
+        arrow = previousArrow;
+        arrowColor = previousArrow === "🔺" ? "rgb(150, 174, 33)" : previousArrow === "🔻" ? "rgb(229, 26, 75)" : "#fff";
     }
 
     // Aggiorna la percentuale e la freccia precedente
@@ -800,6 +803,7 @@ function updateScore(newScore) {
         </div>
     `;
 }
+
 
 function updateGame(ctx) {
     // Aggiorna la posizione del serpente
