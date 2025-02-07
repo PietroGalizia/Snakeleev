@@ -736,29 +736,21 @@ function createInfoRectNo(element, x, y) {
 let previousPercentage = null; // Memorizza la percentuale precedente per determinare il trend
 
 function updateScore(newScore) {
-    const scoreBoard = document.getElementById('scoreBoard');
-    scoreBoard.style.color = "#fff";
-    scoreBoard.style.padding = "5px";
-    scoreBoard.style.border = "2px solid #78b3e0";
-    scoreBoard.style.borderRadius = "8px";
-    scoreBoard.style.fontFamily = "Arial, sans-serif";
-    scoreBoard.style.backgroundColor = "rgb(0, 47, 95)";
-    scoreBoard.style.textAlign = "center";
-    scoreBoard.style.margin = "0px auto";
-    scoreBoard.style.width = CANVAS_WIDTH;
+    if (typeof newScore !== "number" || typeof totalFoodEaten !== "number") {
+        console.error("Errore: newScore o totalFoodEaten non sono numeri validi.");
+        return;
+    }
 
-    const selectedDietDiv = document.getElementById('selectedDietText');
-    selectedDietDiv.style.display = 'block';
-    selectedDietDiv.style.fontSize = '1.5em';
-    selectedDietDiv.style.fontWeight = 'bold';
-    selectedDietDiv.style.marginBottom = '5px';
-    selectedDietDiv.style.color = 'white';
-    selectedDietDiv.textContent = selectedDiet;
-
-    // Calcola la percentuale degli elementi validi mangiati
+    // Evita la divisione per zero
     let percentage = totalFoodEaten > 0 ? ((newScore / totalFoodEaten) * 100).toFixed(1) : 0;
 
-    // Determina la direzione della freccia (🔺 miglioramento, 🔻 peggioramento, nessuna se invariata)
+    // Protegge contro valori negativi o anomali
+    if (percentage < 0 || percentage > 100) {
+        console.warn("Valore di percentuale fuori range:", percentage);
+        percentage = Math.max(0, Math.min(100, percentage));
+    }
+
+    // Determina la freccia 🔺🔻
     let arrow = "";
     let arrowColor = "";
     let arrowAnimation = "";
@@ -767,24 +759,29 @@ function updateScore(newScore) {
         if (percentage > previousPercentage) {
             arrow = "🔺";
             arrowColor = "rgb(150, 174, 33)"; // Verde
-            arrowAnimation = "move-up"; // Classe per animazione
+            arrowAnimation = "move-up";
         } else if (percentage < previousPercentage) {
             arrow = "🔻";
             arrowColor = "rgb(229, 26, 75)"; // Rosso
-            arrowAnimation = "move-down"; // Classe per animazione
+            arrowAnimation = "move-down";
         }
     }
 
-    // Aggiorna la percentuale precedente per il prossimo confronto
     previousPercentage = percentage;
 
-    // Interpolazione dal rosso (229, 26, 75) al verde (150, 174, 33)
+    // Sfumatura colore da rosso a verde
     let r = Math.round(229 + (150 - 229) * (percentage / 100));
     let g = Math.round(26 + (174 - 26) * (percentage / 100));
     let b = Math.round(75 + (33 - 75) * (percentage / 100));
     let color = `rgb(${r}, ${g}, ${b})`;
 
-    // Layout con percentuale accanto allo score
+    // Aggiorna HTML
+    const scoreBoard = document.getElementById('scoreBoard');
+    if (!scoreBoard) {
+        console.error("Errore: elemento scoreBoard non trovato.");
+        return;
+    }
+
     scoreBoard.innerHTML = `
         <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
             <div style="font-size: 1.5em; font-weight: bold;">
@@ -803,27 +800,14 @@ function updateScore(newScore) {
         </div>
     `;
 
-    // Applica animazione alla freccia (se presente)
+    // Applica animazione alla freccia
     setTimeout(() => {
         const arrowElement = document.querySelector(`.${arrowAnimation}`);
         if (arrowElement) {
-            arrowElement.style.transform = "translateY(0px)"; // Reset dopo l'animazione
+            arrowElement.style.transform = "translateY(0px)";
         }
     }, 300);
 }
-
-// Aggiungi animazioni CSS
-const style = document.createElement("style");
-style.innerHTML = `
-    .move-up {
-        transform: translateY(-5px);
-        transition: transform 0.3s ease-in-out;
-    }
-    .move-down {
-        transform: translateY(5px);
-        transition: transform 0.3s ease-in-out;
-    }
-`;
 document.head.appendChild(style);
     
     // Aggiorna la percentuale precedente per il prossimo confronto
