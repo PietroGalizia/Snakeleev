@@ -764,8 +764,9 @@ function updateScore(newScore) {
 
     // Aggiorna il punteggio con il colore sfumato
     scoreBoard.innerHTML = `
-        <div style="font-size: 1.2em; margin-bottom: 5px; color: ${color};">
-            <b>Elementi validi mangiati: ${newScore} / ${totalFoodEaten} (${percentage}%)</b>
+        <div style="font-size: 1.2em; margin-bottom: 5px;">
+            <b style="color: white;">${newScore} / ${totalFoodEaten}</b>
+            <span style="color: ${color}; font-weight: bold;">(${percentage}%)</span>
         </div>`;
 }
 
