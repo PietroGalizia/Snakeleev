@@ -740,7 +740,7 @@ function updateScore(newScore) {
     scoreBoard.style.color = "#fff";
     scoreBoard.style.padding = "5px";
     scoreBoard.style.border = "2px solid #78b3e0";
-    scoreBoard.style.borderRadius = "0px";
+    scoreBoard.style.borderRadius = "8px";
     scoreBoard.style.fontFamily = "Arial, sans-serif";
     scoreBoard.style.backgroundColor = "rgb(0, 47, 95)";
     scoreBoard.style.textAlign = "center";
@@ -761,16 +761,70 @@ function updateScore(newScore) {
     // Determina la direzione della freccia (🔺 miglioramento, 🔻 peggioramento, nessuna se invariata)
     let arrow = "";
     let arrowColor = "";
+    let arrowAnimation = "";
 
     if (previousPercentage !== null) {
         if (percentage > previousPercentage) {
             arrow = "🔺";
             arrowColor = "rgb(150, 174, 33)"; // Verde
+            arrowAnimation = "move-up"; // Classe per animazione
         } else if (percentage < previousPercentage) {
             arrow = "🔻";
             arrowColor = "rgb(229, 26, 75)"; // Rosso
+            arrowAnimation = "move-down"; // Classe per animazione
         }
     }
+
+    // Aggiorna la percentuale precedente per il prossimo confronto
+    previousPercentage = percentage;
+
+    // Interpolazione dal rosso (229, 26, 75) al verde (150, 174, 33)
+    let r = Math.round(229 + (150 - 229) * (percentage / 100));
+    let g = Math.round(26 + (174 - 26) * (percentage / 100));
+    let b = Math.round(75 + (33 - 75) * (percentage / 100));
+    let color = `rgb(${r}, ${g}, ${b})`;
+
+    // Layout con percentuale accanto allo score
+    scoreBoard.innerHTML = `
+        <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+            <div style="font-size: 1.5em; font-weight: bold;">
+                ${newScore} / ${totalFoodEaten}
+            </div>
+            <div style="border: 2px solid #78b3e0; padding: 8px 12px; border-radius: 10px; background-color: rgb(10, 57, 110);
+                        box-shadow: inset 3px 3px 6px rgba(255, 255, 255, 0.2), inset -3px -3px 6px rgba(0, 0, 0, 0.4);">
+                <b style="color: ${color}; font-size: 1.3em; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); 
+                        transition: color 0.5s ease-in-out;">
+                    ${percentage}%
+                    <span class="${arrowAnimation}" style="color: ${arrowColor}; display: inline-block; transition: transform 0.3s ease-in-out;">
+                        ${arrow}
+                    </span>
+                </b>
+            </div>
+        </div>
+    `;
+
+    // Applica animazione alla freccia (se presente)
+    setTimeout(() => {
+        const arrowElement = document.querySelector(`.${arrowAnimation}`);
+        if (arrowElement) {
+            arrowElement.style.transform = "translateY(0px)"; // Reset dopo l'animazione
+        }
+    }, 300);
+}
+
+// Aggiungi animazioni CSS
+const style = document.createElement("style");
+style.innerHTML = `
+    .move-up {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease-in-out;
+    }
+    .move-down {
+        transform: translateY(5px);
+        transition: transform 0.3s ease-in-out;
+    }
+`;
+document.head.appendChild(style);
     
     // Aggiorna la percentuale precedente per il prossimo confronto
     previousPercentage = percentage;
