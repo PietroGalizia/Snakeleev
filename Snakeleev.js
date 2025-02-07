@@ -733,7 +733,7 @@ function createInfoRectNo(element, x, y) {
     });
 }
 
-let previousPercentage = 0; // Memorizza la percentuale precedente per determinare il trend
+let previousPercentage = null; // Memorizza la percentuale precedente per determinare il trend
 
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
@@ -758,10 +758,20 @@ function updateScore(newScore) {
     // Calcola la percentuale degli elementi validi mangiati
     let percentage = totalFoodEaten > 0 ? ((newScore / totalFoodEaten) * 100).toFixed(1) : 0;
 
-    // Determina la direzione della freccia (🔺 miglioramento, 🔻 peggioramento)
-    let arrow = percentage > previousPercentage ? "🔺" : (percentage < previousPercentage ? "🔻" : "⚪");
-    let arrowColor = percentage > previousPercentage ? "rgb(150, 174, 33)" : (percentage < previousPercentage ? "rgb(229, 26, 75)" : "#fff");
+    // Determina la direzione della freccia (🔺 miglioramento, 🔻 peggioramento, nessuna se invariata)
+    let arrow = "";
+    let arrowColor = "";
 
+    if (previousPercentage !== null) {
+        if (percentage > previousPercentage) {
+            arrow = "🔺";
+            arrowColor = "rgb(150, 174, 33)"; // Verde
+        } else if (percentage < previousPercentage) {
+            arrow = "🔻";
+            arrowColor = "rgb(229, 26, 75)"; // Rosso
+        }
+    }
+    
     // Aggiorna la percentuale precedente per il prossimo confronto
     previousPercentage = percentage;
 
@@ -771,15 +781,17 @@ function updateScore(newScore) {
     let b = Math.round(75 + (33 - 75) * (percentage / 100));
     let color = `rgb(${r}, ${g}, ${b})`;
 
-    // Aggiorna il punteggio con animazione del colore
+    // Layout con percentuale accanto allo score
     scoreBoard.innerHTML = `
-        <div style="font-size: 1.2em; margin-bottom: 5px;">
-            <b>${newScore} / ${totalFoodEaten}</b>
-        </div>
-        <div style="border: 2px solid #78b3e0; padding: 5px; border-radius: 5px; display: inline-block; background-color: rgb(0, 47, 95); transition: color 0.5s ease-in-out;">
-            <b style="color: ${color}; font-size: 1.2em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); transition: color 0.5s ease-in-out;">
-                ${percentage}% <span style="color: ${arrowColor};">${arrow}</span>
-            </b>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+            <div style="font-size: 1.2em;">
+                <b>${newScore} / ${totalFoodEaten}</b>
+            </div>
+            <div style="border: 2px solid #78b3e0; padding: 5px; border-radius: 5px; background-color: rgb(0, 47, 95); transition: color 0.5s ease-in-out;">
+                <b style="color: ${color}; font-size: 1.2em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); transition: color 0.5s ease-in-out;">
+                    ${percentage}% <span style="color: ${arrowColor};">${arrow}</span>
+                </b>
+            </div>
         </div>
     `;
 }
