@@ -753,21 +753,24 @@ function updateScore(newScore) {
     selectedDietDiv.style.color = 'white';
     selectedDietDiv.textContent = selectedDiet;
 
-    // Calcola la percentuale degli elementi corretti
+    // Calcola la percentuale degli elementi validi mangiati
     let percentage = totalFoodEaten > 0 ? ((newScore / totalFoodEaten) * 100).toFixed(1) : 0;
 
-    // Interpola tra rosso (229, 26, 75) e verde (150, 174, 33)
-    let r = Math.round(229 + (150 - 229) * (percentage / 100)); // Da 229 a 150
-    let g = Math.round(26 + (174 - 26) * (percentage / 100));   // Da 26 a 174
-    let b = Math.round(75 + (33 - 75) * (percentage / 100));    // Da 75 a 33
+    // Interpolazione dal rosso (229, 26, 75) al verde (65, 127, 69)
+    let r = Math.round(229 + (65 - 229) * (percentage / 100));
+    let g = Math.round(26 + (127 - 26) * (percentage / 100));
+    let b = Math.round(75 + (69 - 75) * (percentage / 100));
     let color = `rgb(${r}, ${g}, ${b})`;
 
-    // Aggiorna il punteggio con il colore sfumato
+    // Aggiorna il punteggio con due riquadri distinti
     scoreBoard.innerHTML = `
         <div style="font-size: 1.2em; margin-bottom: 5px;">
-            <b style="color: white;">${newScore} / ${totalFoodEaten}</b>
-            <span style="color: ${color}; font-weight: bold;">(${percentage}%)</span>
-        </div>`;
+            <b>${newScore} / ${totalFoodEaten}</b>
+        </div>
+        <div style="border: 2px solid #78b3e0; padding: 5px; border-radius: 5px; display: inline-block; background-color: rgb(0, 47, 95);">
+            <b style="color: ${color}; font-size: 1.2em;">${percentage}%</b>
+        </div>
+    `;
 }
 
 function updateGame(ctx) {
