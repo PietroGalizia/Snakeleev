@@ -362,7 +362,7 @@ let infoRectsNo = [];
 let erasedElements = [];
 let scoreIncrement = 0;
 let scoreDecrement = 0;
-let totalFoodEaten = 0;
+let totalFoodEaten = -1;
 let touchStartX = 0;
 let touchStartY = 0;
 let lastTouchTime = 0;
@@ -750,15 +750,22 @@ function updateScore(newScore) {
     selectedDietDiv.style.fontSize = '1.5em';
     selectedDietDiv.style.fontWeight = 'bold';
     selectedDietDiv.style.marginBottom = '5px';
-    selectedDietDiv.style.color = 'white'; // Colore del testo
+    selectedDietDiv.style.color = 'white';
     selectedDietDiv.textContent = selectedDiet;
 
     // Calcola la percentuale degli elementi corretti
     let percentage = totalFoodEaten > 0 ? ((newScore / totalFoodEaten) * 100).toFixed(1) : 0;
 
+    // Interpola tra rosso (229, 26, 75) e verde (150, 174, 33)
+    let r = Math.round(229 + (150 - 229) * (percentage / 100)); // Da 229 a 150
+    let g = Math.round(26 + (174 - 26) * (percentage / 100));   // Da 26 a 174
+    let b = Math.round(75 + (33 - 75) * (percentage / 100));    // Da 75 a 33
+    let color = `rgb(${r}, ${g}, ${b})`;
+
+    // Aggiorna il punteggio con il colore sfumato
     scoreBoard.innerHTML = `
-        <div style="font-size: 1.2em; margin-bottom: 5px;">
-            <b>Correct elements eaten: ${newScore} / ${totalFoodEaten} (${percentage}%)</b>
+        <div style="font-size: 1.2em; margin-bottom: 5px; color: ${color};">
+            <b>Elementi validi mangiati: ${newScore} / ${totalFoodEaten} (${percentage}%)</b>
         </div>`;
 }
 
