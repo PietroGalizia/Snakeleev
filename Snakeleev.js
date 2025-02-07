@@ -733,9 +733,6 @@ function createInfoRectNo(element, x, y) {
     });
 }
 
-let previousPercentage = null; // Memorizza la percentuale precedente
-let previousArrow = "⚪"; // Inizializza il simbolo con il pallino neutro
-
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
     scoreBoard.style.color = "#fff";
@@ -759,35 +756,11 @@ function updateScore(newScore) {
     // Calcola la percentuale degli elementi validi mangiati
     let percentage = totalFoodEaten > 0 ? ((newScore / totalFoodEaten) * 100).toFixed(1) : 0;
 
-    // Determina la direzione della freccia e il colore
-    let arrow = previousArrow; // Mantiene l'ultima freccia per default
-    let arrowColor = "#fff"; // Colore predefinito
-
-    if (previousPercentage !== null) {
-        if (percentage > previousPercentage) {
-            arrow = "🔺"; // Freccia su
-            arrowColor = "rgb(150, 174, 33)"; // Verde
-        } else if (percentage < previousPercentage) {
-            arrow = "🔻"; // Freccia giù
-            arrowColor = "rgb(229, 26, 75)"; // Rosso
-        }
-    }
-
-    // Se non è mai stata impostata una freccia e il punteggio è ancora 0
-    if (previousPercentage === null) {
-        arrow = "⚪"; // Pallino iniziale
-        arrowColor = "#fff";
-    }
-
     // Interpolazione dal rosso (229, 26, 75) al verde (150, 174, 33)
     let r = Math.round(229 + (150 - 229) * (percentage / 100));
     let g = Math.round(26 + (174 - 26) * (percentage / 100));
     let b = Math.round(75 + (33 - 75) * (percentage / 100));
     let color = `rgb(${r}, ${g}, ${b})`;
-
-    // Aggiorna il valore precedente
-    previousPercentage = percentage;
-    previousArrow = arrow;
 
     // Layout con riquadri per score e percentuale
     scoreBoard.innerHTML = `
@@ -795,9 +768,9 @@ function updateScore(newScore) {
             <div style="border: 2px solid #78b3e0; padding: 5px 10px; border-radius: 5px; background-color: rgb(0, 47, 95); font-size: 1.2em;">
                 <b>${newScore} / ${totalFoodEaten}</b>
             </div>
-            <div style="border: 2px solid #78b3e0; padding: 5px 10px; border-radius: 5px; background-color: rgb(0, 47, 95); transition: color 0.5s ease-in-out;">
+            <div style="border: 2px solid #78b3e0; padding: 5px 10px; border-radius: 5px; background-color: rgb(0, 47, 95);">
                 <b style="color: ${color}; font-size: 1.2em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); transition: color 0.5s ease-in-out;">
-                    ${percentage}% <span style="color: ${arrowColor};">${arrow}</span>
+                    ${percentage}%
                 </b>
             </div>
         </div>
