@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snakeleev</title>
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
         body {
             font-family: Arial, sans-serif;
             background-color: #002F5F;
@@ -18,179 +14,102 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            height: 100vh;
+            margin: 0;
         }
-
-        #logoCNR-container {
-            position: absolute;
-            top: 20px;
-            left: 10px;
-            cursor: pointer;
+        .screen {
+            display: none;
         }
-        #logoCNR {
-            width: 300px;
-            height: auto;
-        }
-
-        #logoCG-container {
-            position: absolute;
-            top: 0px;
-            right: 10px;
-            cursor: pointer;
-        }
-        #logoCG {
-            width: 100px;
-            height: auto;
-        }
-
-        #content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding-top: 20px;
-            width: 100%;
-            margin-top: 50px;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin: 20px;
-        }
-
         .button {
             margin: 10px;
             padding: 10px 20px;
-            background-color: #96AE21;
             border: none;
             color: white;
             cursor: pointer;
+            font-size: 1.2em;
         }
-        .button:hover {
-            background-color: #739A1A;
-            transition: background-color 0.3s;
+        .speed-button {
+            background-color: rgb(150, 174, 33);
+            border: 2px solid rgb(78, 130, 24);
+            padding: 8px 16px;
+            margin: 5px;
+            cursor: pointer;
         }
-
-        /* Schermate di selezione */
-        .screen {
-            display: none;
-            text-align: center;
+        .speed-button.active {
+            background-color: rgb(65, 127, 69);
         }
-
-        #instructions {
-            margin: 40px auto;
-            text-align: left;
-            width: 80%;
-            color: white;
+        .next-button {
+            background-color: rgb(150, 174, 33);
         }
-        #instructions h3 {
-            text-align: center;
-            text-transform: uppercase;
-            font-size: 20px;
-            margin-bottom: 20px;
+        .play-button {
+            background-color: rgb(65, 127, 69);
         }
     </style>
 </head>
 <body>
-    <div id="logoCNR-container" onclick="window.open('https://www.issmc.cnr.it/en/', '_blank')">
-        <img id="logoCNR" src="logo.png" alt="Logo CNR-ISSMC">
+    <!-- Pagina di selezione della dieta -->
+    <div id="dietScreen" class="screen" style="display: block;">
+        <h2>Select the Snake's Diet</h2>
+        <select id="dietDropdown"></select>
+        <button class="button next-button" onclick="goToSpeedSelection()">Next</button>
+        <h3>INSTRUCTIONS</h3>
+        <ol>
+            <li>Control the snake using the arrow keys or W, A, S, and D.</li>
+            <li>Eat only the elements that match the selected diet.</li>
+            <li>Press the spacebar to swap the positions of the two elements.</li>
+            <li>Press "P" to pause or resume the game.</li>
+            <li>Refresh the page to start a new game.</li>
+        </ol>
+        <h3>SCORING SYSTEM</h3>
+        <p>Score increases when eating elements from the selected diet. Eating non-diet elements adds to total count but doesn't increase the score.</p>
     </div>
-
-    <div id="logoCG-container" onclick="window.open('https://www.changegame.cnr.it/', '_blank')">
-        <img id="logoCG" src="LogoChangeGame.png" alt="Logo ChangeGame">
+    
+    <!-- Pagina di selezione della velocità e range -->
+    <div id="speedScreen" class="screen">
+        <h2>Choose the Snake's Speed</h2>
+        <div id="speedButtons"></div>
+        <h2>Choose the range of elements</h2>
+        <label for="elementRange">Maximum atomic number (Z):</label>
+        <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
+        <p id="selectedElementCount">1 ≤ Z ≤ 40</p>
+        <button class="button play-button" onclick="startGame()">Play</button>
     </div>
-
-    <div id="content">
-        <h1 id="title">Snakeleev</h1>
-
-        <!-- Schermata 1: Selezione della dieta -->
-        <div id="dietSelection" class="screen">
-            <h2>Select the Snake's Diet</h2>
-            <select id="dietDropdown"></select>
-            <button class="button" onclick="proceedToSettings()">Next</button>
-        </div>
-
-        <!-- Schermata 2: Selezione della velocità e range di elementi -->
-        <div id="settingsScreen" class="screen">
-            <h2>Choose the Snake's Speed</h2>
-            <div id="speedButtons"></div>
-
-            <h2>Choose the Range of Elements</h2>
-            <label for="elementRange">Maximum atomic number (Z):</label>
-            <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
-            <p id="selectedElementCount">1 ≤ Z ≤ 40</p>
-
-            <button class="button" onclick="startGame()">Play</button>
-        </div>
-
-        <!-- Canvas del gioco -->
-        <div id="selectedDietText" style="display: none;"></div>
-        <div id="scoreBoard" style="display: none;"></div>
-        <canvas id="gameCanvas" style="display: none;"></canvas>
-    </div>
-
+    
     <script>
-        const SPEED_LEVELS = [250, 200, 150, 125, 100];
-        let maxElementsToUse = 40;
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Mostra schermata di selezione dieta all'avvio
-            document.getElementById('dietSelection').style.display = 'block';
-
-            // Popola la dropdown delle diete
-            const dietDropdown = document.getElementById("dietDropdown");
-            const diets = [
-                "Elements of a smartphone", "Elements of life", "Critical elements",
-                "Elements of DNA", "Radioactive elements", "Metals", "Nonmetals",
-                "Elements in solid state", "Elements in liquid state", "Elements in gas state"
-            ];
-            diets.forEach(diet => {
-                const option = document.createElement("option");
-                option.value = diet;
-                option.textContent = diet;
-                dietDropdown.appendChild(option);
-            });
-
-            // Crea i pulsanti della velocità
-            const speedButtons = document.getElementById('speedButtons');
-            SPEED_LEVELS.forEach((speed, index) => {
-                const button = document.createElement('button');
-                button.className = 'button';
-                button.innerText = `Level ${index + 1}`;
-                button.onclick = () => selectSpeed(speed);
-                speedButtons.appendChild(button);
-            });
+        let selectedSpeed = 3;
+        const speedLevels = [250, 200, 150, 125, 100];
+        const speedButtonsContainer = document.getElementById('speedButtons');
+        
+        speedLevels.forEach((speed, index) => {
+            const button = document.createElement('button');
+            button.className = 'speed-button';
+            button.innerText = `Level ${index + 1}`;
+            button.onclick = () => selectSpeed(button, index);
+            if (index + 1 === selectedSpeed) {
+                button.classList.add('active');
+            }
+            speedButtonsContainer.appendChild(button);
         });
 
-        function proceedToSettings() {
-            // Nasconde la selezione dieta e mostra le impostazioni
-            document.getElementById('dietSelection').style.display = 'none';
-            document.getElementById('settingsScreen').style.display = 'block';
-        }
-
-        function selectSpeed(speed) {
-            window.SPEED = speed;
+        function selectSpeed(button, index) {
+            document.querySelectorAll('.speed-button').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            selectedSpeed = index + 1;
         }
 
         function updateElementCount() {
             const rangeValue = document.getElementById('elementRange').value;
-            maxElementsToUse = parseInt(rangeValue);
-            document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
+            document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${rangeValue}`;
         }
-
+        
+        function goToSpeedSelection() {
+            document.getElementById('dietScreen').style.display = 'none';
+            document.getElementById('speedScreen').style.display = 'block';
+        }
+        
         function startGame() {
-            selectedDiet = document.getElementById("dietDropdown").value;
-
-            // Nasconde le impostazioni e avvia il gioco
-            document.getElementById('settingsScreen').style.display = 'none';
-            document.getElementById('title').style.display = 'none';
-            document.getElementById('gameCanvas').style.display = 'block';
-            document.getElementById('selectedDietText').style.display = 'block';
-            document.getElementById('scoreBoard').style.display = 'block';
-
-            // Avvia il gioco (definito in Snakeleev.js)
-            startNewGame();
+            alert(`Game starts with Speed Level ${selectedSpeed} and Element Range: ${document.getElementById('elementRange').value}`);
         }
     </script>
-    <script src="Snakeleev.js"></script>
 </body>
 </html>
