@@ -985,7 +985,7 @@ function updateGame(ctx) {
         const expandInterval = setInterval(() => {
             size += 2;
             ctx.clearRect(x - size / 2, y - size / 2, size, size);
-            ctx.fillStyle = "rgb(120, 179, 224)";
+            ctx.fillStyle = "rgb(150, 174, 33)";
             ctx.fillRect(x - size / 2, y - size / 2, size, size);
         }, 30);
         setTimeout(() => {
