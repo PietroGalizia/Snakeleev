@@ -804,7 +804,6 @@ function updateScore(newScore) {
     `;
 }
 
-
 function updateGame(ctx) {
     // Aggiorna la posizione del serpente
     let head = {
