@@ -733,6 +733,8 @@ function createInfoRectNo(element, x, y) {
     });
 }
 
+let previousPercentage = 0; // Memorizza la percentuale precedente per determinare il trend
+
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
     scoreBoard.style.color = "#fff";
@@ -756,29 +758,30 @@ function updateScore(newScore) {
     // Calcola la percentuale degli elementi validi mangiati
     let percentage = totalFoodEaten > 0 ? ((newScore / totalFoodEaten) * 100).toFixed(1) : 0;
 
-    // Interpolazione del colore tra rosso (229, 26, 75) e verde (150, 174, 33)
+    // Determina la direzione della freccia (🔺 miglioramento, 🔻 peggioramento)
+    let arrow = percentage > previousPercentage ? "🔺" : (percentage < previousPercentage ? "🔻" : "⚪");
+    let arrowColor = percentage > previousPercentage ? "rgb(150, 174, 33)" : (percentage < previousPercentage ? "rgb(229, 26, 75)" : "#fff");
+
+    // Aggiorna la percentuale precedente per il prossimo confronto
+    previousPercentage = percentage;
+
+    // Interpolazione dal rosso (229, 26, 75) al verde (150, 174, 33)
     let r = Math.round(229 + (150 - 229) * (percentage / 100));
     let g = Math.round(26 + (174 - 26) * (percentage / 100));
     let b = Math.round(75 + (33 - 75) * (percentage / 100));
     let color = `rgb(${r}, ${g}, ${b})`;
 
-    // Controlla se l'elemento esiste già, altrimenti lo crea
-    let percentageElement = document.getElementById('scorePercentage');
-    if (!percentageElement) {
-        percentageElement = document.createElement('span');
-        percentageElement.id = 'scorePercentage';
-        percentageElement.style.fontSize = '1.2em';
-        percentageElement.style.fontWeight = 'bold';
-        percentageElement.style.marginLeft = '10px'; // Spazio tra punteggio e percentuale
-        percentageElement.style.transition = 'color 0.5s ease-in-out'; // Animazione fluida del colore
-        scoreBoard.appendChild(percentageElement);
-    }
-
-    // Aggiorna i valori del punteggio e della percentuale
-    scoreBoard.innerHTML = `<b>${newScore} / ${totalFoodEaten}</b>`;
-    percentageElement.textContent = ` (${percentage}%)`;
-    percentageElement.style.color = color; // Cambia colore in modo fluido
-    scoreBoard.appendChild(percentageElement); // Assicura che l'elemento sia presente
+    // Aggiorna il punteggio con animazione del colore
+    scoreBoard.innerHTML = `
+        <div style="font-size: 1.2em; margin-bottom: 5px;">
+            <b>${newScore} / ${totalFoodEaten}</b>
+        </div>
+        <div style="border: 2px solid #78b3e0; padding: 5px; border-radius: 5px; display: inline-block; background-color: rgb(0, 47, 95); transition: color 0.5s ease-in-out;">
+            <b style="color: ${color}; font-size: 1.2em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); transition: color 0.5s ease-in-out;">
+                ${percentage}% <span style="color: ${arrowColor};">${arrow}</span>
+            </b>
+        </div>
+    `;
 }
 
 function updateGame(ctx) {
