@@ -173,21 +173,38 @@
      </div>
 
     <!-- Selezione della dieta -->
-    <div id="dietSelection" style="display: none;">
-        <h2>Select the Snake's Diet</h2>
-        <select id="dietDropdown"></select>
-        <button class="button" onclick="finalSelection()">Play</button>
-        <div id="instructions">
-            <h3>INSTRUCTIONS</h3>
-            <ol>
-                <li>Control the snake using the arrow keys or W, A, S, and D.</li>
-                <li id="eat-instruction">Eat elements that match the selected diet.</li>
-                <li>Press the spacebar to swap the positions of the two elements.</li>
-                <li>Press "P" to pause or resume the game.</li>
-                <li>Refresh the page to start a new game.</li>
-            </ol>
-        </div>
+<div id="dietSelection" style="display: none;">
+    <h2>Select the Snake's Diet</h2>
+    <select id="dietDropdown"></select>
+    <button class="button" onclick="finalSelection()">Play</button>
+    <div id="instructions">
+        <h3>INSTRUCTIONS</h3>
+        <ol>
+            <li>Control the snake using the arrow keys or W, A, S, and D.</li>
+            <li id="eat-instruction">Eat only the elements that match the selected diet.</li>
+            <li>Press the spacebar to swap the positions of the two elements.</li>
+            <li>Press "P" to pause or resume the game.</li>
+            <li>Refresh the page to start a new game.</li>
+        </ol>
+        <h3>SCORING SYSTEM</h3>
+        <p>
+            Your score increases when you eat an element that belongs to the selected diet.
+            Eating an element outside the diet does not increase the score but still adds to the total elements eaten.
+        </p>
+        <p>
+            The score display shows:
+            <br><b>Score / Total Elements Eaten (Percentage)</b>
+        </p>
+        <p>
+            The percentage is color-coded:
+            <ul>
+                <li> **Red** (0%) → You have only eaten incorrect elements.</li>
+                <li> **Yellow** (~50%) → Your choices are balanced.</li>
+                <li> **Green** (100%) → You have only eaten correct elements.</li>
+            </ul>
+        </p>
     </div>
+</div>
 
     <!-- Canvas del gioco -->
     <div id="selectedDietText" style="display: none;"></div>
