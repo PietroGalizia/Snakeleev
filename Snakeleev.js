@@ -284,7 +284,10 @@ const dietMessages = {
     ],
     "Elements of group XVI (Chalcogens)": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
     "Elements of group XVII (Halogens)": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
-    "Elements of group XVIII (Noblegases)": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
+    "Elements of group XVIII (Noblegases)": [
+        "Periodicity is driven by the noble-gas-like closed-shell structures<br><a href='https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200800827' target='_blank' style='color: rgb(143, 125, 207);'>Wang, S.-G.; Schwarz, W. H. E. Angew. Chem., Int. Ed. 2009, 48, 3404</a>",
+        "Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"
+    ],
     "Lanthanides": [
         "Discover more on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>.",
         "Explore the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table</a>."
