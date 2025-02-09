@@ -107,9 +107,9 @@ const dietMessages = {
         `<div style="margin-bottom: 15px; text-align: justify;">
             Every living organism is composed of 50-95% water and small ions such as sodium (Na⁺), potassium (K⁺), and calcium (Ca²⁺), which account for no more than 1% of the total mass.
             The remaining part consists mainly of biomolecules, which are composed of a limited number of elements: carbon (C), hydrogen (H), nitrogen (N), oxygen (O), phosphorus (P), and sulfur (S).
-        </div>`,
+        </div>
 
-        `<table style="border-collapse: collapse; width: 100%; text-align: center; margin-bottom: 15px;"> 
+        <table style="border-collapse: collapse; width: 100%; text-align: center; margin-bottom: 15px;"> 
             <tr style="background-color: #78b3e0; color: white;">
                 <th style="border: 1px solid #ccc; padding: 5px;">Element</th>
                 <th style="border: 1px solid #ccc; padding: 5px;">Human</th>
@@ -125,9 +125,9 @@ const dietMessages = {
             <tr style="background-color: #f0f0f0;">
                 <td><b>Total</b></td><td><b>97.90%</b></td><td><b>99.60%</b></td><td><b>99.72%</b></td>
             </tr>
-        </table>`,
+        </table>
 
-        `<div style="margin-bottom: 10px; font-size: 14px; color: #fff; text-align: center;">
+        <div style="margin-bottom: 10px; font-size: 14px; color: #fff; text-align: center;">
             Average atomic composition percentage of three representative organisms.
         </div>`,
 
