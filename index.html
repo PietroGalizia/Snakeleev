@@ -20,25 +20,29 @@
             justify-content: center;
         }
 
-        /* Loghi */
-        #logoCNR-container, #logoCG-container {
-            position: absolute;
-            cursor: pointer;
-        }
         #logoCNR-container {
+            position: absolute;
             top: 20px;
             left: 10px;
+            cursor: pointer;
         }
+        #logoCNR {
+            width: 300px;
+            height: auto;
+        }
+
         #logoCG-container {
-            top: 20px;
+            position: absolute;
+            top: 0px;
             right: 10px;
+            cursor: pointer;
         }
-        #logoCNR, #logoCG {
+
+        #logoCG {
             width: 100px;
             height: auto;
         }
 
-        /* Stili generali */
         #content {
             display: flex;
             flex-direction: column;
@@ -57,37 +61,24 @@
         .button {
             margin: 10px;
             padding: 10px 20px;
+            background-color: #96AE21;
             border: none;
             color: white;
             cursor: pointer;
-            font-size: 1em;
-            border-radius: 5px;
         }
 
-        .button-default {
-            background-color: rgb(65, 127, 69);
-        }
-        
-        .button-default:hover {
-            background-color: rgb(150, 174, 33);
+        .button:hover {
+            background-color: #739A1A;
+            transition: background-color 0.3s;
         }
 
-        .button-light {
-            background-color: rgb(150, 174, 33);
-        }
-
-        .button-light:hover {
-            background-color: rgb(65, 127, 69);
-        }
-
-        /* Contenitori */
-        #dietSelection, #speedSelection, #elementSelection {
+        /* Sezioni */
+        .section {
             display: none;
             text-align: center;
-            margin: 25px 0;
+            margin-bottom: 20px;
         }
 
-        /* Istruzioni */
         #instructions {
             margin: 40px auto;
             text-align: left;
@@ -95,17 +86,33 @@
             color: white;
         }
 
-        /* Input Range */
-        #elementRange {
-            width: 50%;
-            margin: 10px 0;
+        #instructions h3 {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 20px;
+            margin-bottom: 20px;
         }
 
-        /* Area di gioco */
+        #citation {
+            margin: 15px auto;
+            font-size: 14px;
+            text-align: center;
+            color: white;
+            padding: 5px;
+        }
+        
+        #citation a {
+            text-decoration: none;
+            color: #96AE21;
+        }
+        #citation a:hover {
+            color: #e51a4b;
+        }
+
         #gameCanvas {
             display: none;
             background-color: #002F5F;
-            margin: 0 auto;
+            margin: 0px auto;
             max-width: 90%;
             max-height: 90%;
         }
@@ -113,53 +120,59 @@
     </style>
 </head>
 <body>
-    <!-- Loghi -->
+
     <div id="logoCNR-container" onclick="window.open('https://www.issmc.cnr.it/en/', '_blank')">
         <img id="logoCNR" src="logo.png" alt="Logo CNR-ISSMC">
     </div>
+
     <div id="logoCG-container" onclick="window.open('https://www.changegame.cnr.it/', '_blank')">
         <img id="logoCG" src="LogoChangeGame.png" alt="Logo ChangeGame">
     </div>
 
-    <!-- Contenuto principale -->
     <div id="content">
         <h1 id="title">Snakeleev</h1>
 
         <!-- Selezione della dieta -->
-        <div id="dietSelection">
+        <div id="dietSelection" class="section">
             <h2>Select the Snake's Diet</h2>
             <select id="dietDropdown"></select>
-            <button class="button button-default" onclick="proceedToSpeedSelection()">Next</button>
+            <button class="button" onclick="nextStep('speedSelection')">Next</button>
             <div id="instructions">
                 <h3>INSTRUCTIONS</h3>
                 <ol>
                     <li>Control the snake using the arrow keys or W, A, S, and D.</li>
-                    <li>Eat only the elements that match the selected diet.</li>
+                    <li id="eat-instruction">Eat only the elements that match the selected diet.</li>
                     <li>Press the spacebar to swap the positions of the two elements.</li>
                     <li>Press "P" to pause or resume the game.</li>
                     <li>Refresh the page to start a new game.</li>
                 </ol>
-                <h3>SCORING SYSTEM</h3>
-                <p>
-                    Your score increases when you eat an element that belongs to the selected diet.
-                    Eating an element outside the diet does not increase the score but still adds to the total elements eaten.
-                </p>
             </div>
         </div>
 
-        <!-- Selezione della velocità e range di elementi -->
-        <div id="speedSelection">
-            <h2>Choose Snake's Speed</h2>
+        <!-- Selezione della velocità -->
+        <div id="speedSelection" class="section">
+            <h2>Choose the Snake's Speed</h2>
             <div id="speedButtons"></div>
-            <h2>Choose the range of elements</h2>
-            <label for="elementRange">Maximum atomic number (Z):</label>
-            <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
-            <p id="selectedElementCount"> 40</p>
-            <button class="button button-default" onclick="startGame()">Play</button>
         </div>
 
-        <!-- Area di gioco -->
-        <canvas id="gameCanvas"></canvas>
+        <!-- Selezione del range di elementi -->
+        <div id="elementSelection" class="section">
+            <h2>Choose the Range of Elements</h2>
+            <label for="elementRange">Maximum atomic number (Z):</label>
+            <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
+            <p id="selectedElementCount">1 ≤ Z ≤ 40</p>
+            <button class="button" onclick="startGame()">Play</button>
+        </div>
+
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="citation">
+        <a href="https://zenodo.org/records/10643098" target="_blank">
+            Pietro Galizia <i>"Snakeleev: Gamifying the Periodic Table Through the Snake Game"</i> 
+            <br>J. Chem. Educ. <b>2025</b>, Vol., n., DOI: 10.1021/acs.jchemed.
+        </a>
     </div>
 
     <script src="Snakeleev.js"></script>
