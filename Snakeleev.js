@@ -79,12 +79,43 @@ const dietMessages = {
         "The use of End-of-Life Mobile Phones as a secondary resource-rich stream offers a route to close the materials loop. This helps mitigate threats to natural resources, reduce environmental and human health impacts from mining operations, relieve supply demands, and contribute to the economy. <br><a href='https://doi.org/10.1016/j.jclepro.2023.138099' target='_blank' style='color: rgb(143, 125, 207);'>M. Gómez et al. J Clean Prod 419 (2023) 138099</a>"
     ],
     "Elements of life": [
-        "Oxygen, carbon, hydrogen, and nitrogen are the main building blocks of every living creature, including human beings.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
-        "Specifically, our body is primarily composed of just 11 elements, along with trace amounts of boron, chromium, cobalt, copper, fluorine, iodine, iron, manganese, molybdenum, selenium, silicon, nickel, bromine, vanadium, and zinc.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
-        "It seems incredible that a complex creature like a human is made up of only 26 types of building blocks. However, let's remember that these elements are not randomly assembled.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
-        "Nitrogen is nitrogen, it passes miraculously from the air into plants, from these into animals, and from animals into us; when its function in our body is exhausted, we eliminate it, but it still remains nitrogen, aseptic, innocent.<br>Primo Levi, The Periodic Table (1975)",
-        "Inside our body, just 11 atoms combine in thousands of ways to form simple compounds, which, in turn, are the building blocks of larger and more complex molecules.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)"
-    ],
+    "Oxygen, carbon, hydrogen, and nitrogen are the main building blocks of every living creature, including human beings.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
+    "Specifically, our body is primarily composed of just 11 elements, along with trace amounts of boron, chromium, cobalt, copper, fluorine, iodine, iron, manganese, molybdenum, selenium, silicon, nickel, bromine, vanadium, and zinc.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
+    "It seems incredible that a complex creature like a human is made up of only 26 types of building blocks. However, let's remember that these elements are not randomly assembled.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
+    "Nitrogen is nitrogen, it passes miraculously from the air into plants, from these into animals, and from animals into us; when its function in our body is exhausted, we eliminate it, but it still remains nitrogen, aseptic, innocent.<br>Primo Levi, The Periodic Table (1975)",
+    "Inside our body, just 11 atoms combine in thousands of ways to form simple compounds, which, in turn, are the building blocks of larger and more complex molecules.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
+
+    "<div style='margin-bottom: 15px; text-align: justify;'>
+        Every living organism is composed of 50-95% water and small ions such as sodium (Na⁺), potassium (K⁺), and calcium (Ca²⁺), which account for no more than 1% of the total mass. 
+        The remaining part consists mainly of biomolecules, which are composed of a limited number of elements: carbon (C), hydrogen (H), nitrogen (N), oxygen (O), phosphorus (P), and sulfur (S).
+    </div>",
+
+    "<table style='border-collapse: collapse; width: 100%; text-align: center; margin-bottom: 15px;'> 
+        <tr style='background-color: #78b3e0; color: white;'>
+            <th style='border: 1px solid #ccc; padding: 5px;'>Element</th>
+            <th style='border: 1px solid #ccc; padding: 5px;'>Human</th>
+            <th style='border: 1px solid #ccc; padding: 5px;'>Alfalfa</th>
+            <th style='border: 1px solid #ccc; padding: 5px;'>Bacterium</th>
+        </tr>
+        <tr><td style='border: 1px solid #ccc; padding: 5px;'>Carbon (C)</td><td>19.37%</td><td>11.34%</td><td>12.14%</td></tr>
+        <tr><td style='border: 1px solid #ccc; padding: 5px;'>Hydrogen (H)</td><td>9.31%</td><td>8.72%</td><td>9.94%</td></tr>
+        <tr><td style='border: 1px solid #ccc; padding: 5px;'>Nitrogen (N)</td><td>5.14%</td><td>0.83%</td><td>3.04%</td></tr>
+        <tr><td style='border: 1px solid #ccc; padding: 5px;'>Oxygen (O)</td><td>62.81%</td><td>77.90%</td><td>73.68%</td></tr>
+        <tr><td style='border: 1px solid #ccc; padding: 5px;'>Phosphorus (P)</td><td>0.63%</td><td>0.71%</td><td>0.60%</td></tr>
+        <tr><td style='border: 1px solid #ccc; padding: 5px;'>Sulfur (S)</td><td>0.64%</td><td>0.10%</td><td>0.32%</td></tr>
+        <tr style='background-color: #f0f0f0;'>
+            <td><b>Total</b></td><td><b>97.90%</b></td><td><b>99.60%</b></td><td><b>99.72%</b></td>
+        </tr>
+    </table>",
+
+    "<div style='margin-bottom: 10px; font-size: 14px; color: #fff; text-align: center;'>
+        Average atomic composition percentage of three representative organisms.
+    </div>",
+
+    "<div style='font-size: 12px; color: #bbb; text-align: center;'>
+        Reference: Helena Curtis, N. Sue Barnes, Adriana Schnek, Graciela Flores. <i>Invitation to Biology</i>, Fifth Edition, 1994 by Worth Publisher, Inc.
+    </div>"
+],
     "Critical elements": [
         "Raw materials are crucial to the economy.<br><a href='https://single-market-economy.ec.europa.eu/sectors/raw-materials/areas-specific-interest/critical-raw-materials_en' target='_blank' style='color: rgb(143, 125, 207);'>European Commission - Critical Raw Materials</a>",
         "Raw materials form the industrial base for producing a wide range of goods and applications used in everyday life and modern technologies.<br><a href='https://single-market-economy.ec.europa.eu/sectors/raw-materials/areas-specific-interest/critical-raw-materials_en' target='_blank' style='color: rgb(143, 125, 207);'>European Commission - Critical Raw Materials</a>",
