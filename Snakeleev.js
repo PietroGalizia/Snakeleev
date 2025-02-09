@@ -11,17 +11,21 @@ const elementNumbers = [
 ];
 
 const DietsList = [
-    "Elements of a smartphone", "Elements of life", "Critical elements",
-    "Elements of DNA", "Radioactive elements (U-Th decay series)",
+    "Critical elements", "Elements of a smartphone", "Elements of life",
+    "Elements of DNA", "Elements essential for man", "Elements used in therapy", 
+    "Elements used in diagnosis", "Medical radioisotopes",
+    "Radioactive elements (U-Th decay series)",
     "Elements considered safety (grades A-E) in the first wall of fusion power plan",
-    "Potentially toxic trace elements (PTEs)",
+    "Potentially toxic trace elements (PTEs)", "Toxic trace elements in dried mushrooms",
     "Elements dedicated to scientists", "Elements with names of latin derivation",
     "Elements with names of greek derivation",
-    "Elements with names derived from cities, countries, or elsewhere",
+    "Elements named after geographical locations and celestial bodies",
     "Elements with names not derived from latin or greek, nor from cities or countries",
-    "Elements in solid state at standard temperature and pressure",
-    "Elements in liquid state at standard temperature and pressure",
-    "Elements in gas state at standard temperature and pressure", "Metals", "Nonmetals",
+    "Elements known since antiquity",
+    "Elementary substances in solid state at standard temperature and pressure",
+    "Elementary substances in liquid state at standard temperature and pressure",
+    "Elementary substances in gas state at standard temperature and pressure", "Metals", "Nonmetals",
+    "Ferromagnetic elements", "Ultra-high temperature metals",
     "Elements of group I (Hydrogen & alkali metals)",
     "Elements of group II (Alkaline earth metals)", "Elements of group XV (Pnictogens)",
     "Elements of group XVI (Chalcogens)", "Elements of group XVII (Halogens)",
@@ -31,21 +35,29 @@ const DietsList = [
 ];
 
 const diets = {
+    "Critical elements": ["Sb", "Ba", "Al", "Be", "Bi", "B", "Co", "F", "Ga", "Ge", "Hf", "In", "Li", "Mg","Nb","P", "Sc","Si","Sr","Ta","Ti","W","V"],
     "Elements of a smartphone": ["H", "Li", "Be", "B", "C", "O", "F", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "K", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Br", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Sb", "Te", "Ba", "La", "Ce", "Pr", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "W", "Os", "Ir", "Pt", "Au", "Hg", "Pb", "Bi"],
     "Elements of life": ["O", "C", "H", "N", "P", "Ca", "S", "K", "Na", "Cl", "Mg", "Fe", "Zn", "Cr", "Co", "Cu", "Mn", "Mo", "Ni", "V", "Si", "B", "Se", "F", "I", "Br"],
-    "Critical elements": ["Sb", "Ba", "Al", "Be", "Bi", "B", "Co", "F", "Ga", "Ge", "Hf", "In", "Li", "Mg","Nb","P", "Sc","Si","Sr","Ta","Ti","W","V"],
     "Elements of DNA": ["C", "H", "O", "N", "P"],
+    "Elements essential for man": ["H", "C", "N", "O", "F", "Na", "Mg", "Si", "P", "S", "Cl", "K", "Ca", "V", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Se", "Mo", "Sn", "I"],
+    "Elements used in therapy": ["H", "He", "Li", "B", "C", "N", "O", "F", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Cu", "Zn", "Ga", "As", "Se", "Sr", "Mo", "Ru", "Pd", "Ag", "Sb", "Xe", "La", "Ce", "Ta", "Os", "Pt", "Au", "Bi"],
+    "Elements used in diagnosis": ["He", "F", "Cu", "Ga", "Ge", "Rb", "Y, "Zr", "Tc", "In", "I", "Xe", "Ba", "Gd", "Tl"],
+    "Medical radioisotopes": ["Sr", "Y", "Rh", "Pd", "I", "Cs", "Sm", "Ho", "Lu", "Re", "Ir, "Bi", "At", "Ra", "Ac"],
     "Radioactive elements (U-Th decay series)": ["U", "Th", "Pa", "Ra", "Rn", "Po", "Pb", "Bi", "Pu", "Ac", "Tl", "Am", "Np"],
     "Elements considered safety (grades A-E) in the first wall of fusion power plan": ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Mg", "Al", "Si", "P", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr", "Fe", "Co", "Ni", "Cu", "Ge", "Se", "Kr", "Sr", "Y", "Ru", "Sn", "Te", "I", "Xe", "Cs", "Ba", "Ce", "Nd", "Sm", "Dy", "Yb", "Lu", "Tl"],
     "Potentially toxic trace elements (PTEs)": ["Pb", "Hg", "Cr", "Cd", "As", "Co", "Cu", "Ni", "Zn", "Ag", "Sb", "Fe", "Mn", "Zr", "Se", "Sr", "Al", "F", "U", "La", "Pr", "Au"],
-    "Elements dedicated to scientists": ["Ge", "Sm", "Gd", "Bi", "Cm", "Es", "Fm", "No", "Lr", "Rf", "Sg", "Bh", "Mt", "Rg", "Og"],
+    "Toxic trace elements in dried mushrooms": ["As", "Cd", "Hg", "Pb"],
+    "Elements dedicated to scientists": ["Ga", "Ge", "Sm", "Gd", "Bi", "Cm", "Es", "Fm", "No", "Lr", "Rf", "Sg", "Bh", "Mt", "Rg", "Og"],
     "Elements with names of latin derivation": ["B", "C", "F", "Na", "Al", "Si", "S", "K", "Ca", "Sc", "Mn", "Fe", "Cu", "Ga", "Ge", "Rb", "Ru", "Pd", "In", "Sn", "Sb", "Te", "Cs", "La", "Ce", "Pm", "Eu", "Ho", "Tm", "Lu", "Hf", "Ta", "Ir", "Au", "Hg", "Pb", "Bi", "Po", "Rn", "Ra", "Np", "Cm", "Hs"],
     "Elements with names of greek derivation": ["H", "He", "Li", "Be", "N", "O", "Ne", "P", "Cl", "Ar", "Ti", "Cr", "Co", "As", "Se", "Br", "Kr", "Nb", "Mo", "Tc", "Rh", "Ag", "Cd", "Sb", "I", "Xe", "Ba", "La", "Pr", "Nd", "Dy", "Os", "Tl", "Bi", "At", "Ac", "Pa", "U", "Pu"],
-    "Elements with names derived from cities, countries, or elsewhere": ["Mg", "Sc", "Mn", "Ga", "Ge", "Se", "Sr", "Y", "Nb", "Tc", "Ru", "Pd", "Cd", "Te", "Eu", "Tb", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Re", "Bi", "Po", "Fr", "U", "Np", "Am", "Bk", "Cf", "Db", "Hs", "Ds"],
-    "Elements with names not derived from latin or greek, nor from cities or countries": ["V", "Ni", "Zn", "Zr", "Sb", "W", "Pt", "Th"],
-    "Elements in solid state at standard temperature and pressure": ["Li", "Be", "B", "C", "Na", "Mg", "Al", "Si", "P", "S",  "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Se", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Sb", "Te", "I", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Tl", "Pb", "Bi", "Po", "At", "Fr", "Ra", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr"],
-    "Elements in liquid state at standard temperature and pressure": ["Hg", "Br"],
-    "Elements in gas state at standard temperature and pressure": ["H", "He", "N", "O", "F", "Ne","Cl", "Ar", "Kr", "Xe", "Rn"],
+    "Elements named after geographical locations and celestial bodies": ["Mg", "Sc", "Mn", "Ga", "Ge", "Se", "Sr", "Y", "Nb", "Tc", "Ru", "Pd", "Cd", "Te", "Eu", "Tb", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Re", "Bi", "Po", "Fr", "U", "Np", "Am", "Bk", "Cf", "Db", "Hs", "Ds"],
+    "Elements with names not derived from latin or greek, nor from cities or countries": ["V", "Co", "Ni", "Zn", "Zr", "Sb", "W", "Pt", "Bi", "Th"],
+    "Elements known since antiquity": ["C", "S", "Fe", "Cu", "As", "Ag", "Sn", "Sb", "Au", "Hg", "Pb"],
+    "Elementary substances in solid state at standard temperature and pressure": ["Li", "Be", "B", "C", "Na", "Mg", "Al", "Si", "P", "S",  "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Se", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Sb", "Te", "I", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Tl", "Pb", "Bi", "Po", "At", "Fr", "Ra", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr"],
+    "Elementary substances in liquid state at standard temperature and pressure": ["Hg", "Br"],
+    "Elementary substances in gas state at standard temperature and pressure": ["H", "He", "N", "O", "F", "Ne","Cl", "Ar", "Kr", "Xe", "Rn"],
+    "Ferromagnetic elements": ["Fe", "Co", "Ni", "Gd", "Tb", "Dy", "Ho", "Er", "Tm"],
+    "Ultra-high temperature metals": ["W", "Re", "Ta", "Os"],
     "Metals": ["Li", "Be", "Na", "Mg", "Al", "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Tl", "Pb", "Bi", "Po", "Fr", "Ra", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr"],
     "Nonmetals": ["H", "He", "B", "C", "N", "O", "F", "Ne", "Si", "P", "S", "Cl", "Ar", "Ge", "As", "Se", "Br", "Kr", "Sb", "Te", "I", "Xe", "At", "Rn"],
     "Elements of group I (Hydrogen & alkali metals)": ["H", "Li", "Na", "K", "Rb", "Cs", "Fr"],
@@ -67,6 +79,13 @@ const diets = {
 };
 
 const dietMessages = {
+    "Critical elements": [
+        "Raw materials are crucial to the economy.<br><a href='https://single-market-economy.ec.europa.eu/sectors/raw-materials/areas-specific-interest/critical-raw-materials_en' target='_blank' style='color: rgb(143, 125, 207);'>European Commission - Critical Raw Materials</a>",
+        "Raw materials form the industrial base for producing a wide range of goods and applications used in everyday life and modern technologies.<br><a href='https://single-market-economy.ec.europa.eu/sectors/raw-materials/areas-specific-interest/critical-raw-materials_en' target='_blank' style='color: rgb(143, 125, 207);'>European Commission - Critical Raw Materials</a>",
+        "Reliable and unhindered access to certain raw materials is a growing concern across the globe.<br><a href='https://single-market-economy.ec.europa.eu/sectors/raw-materials/areas-specific-interest/critical-raw-materials_en' target='_blank' style='color: rgb(143, 125, 207);'>European Commission - Critical Raw Materials</a>",
+        "The European Commission has created a list of critical raw materials (CRMs) for the EU, which is regularly reviewed and updated.<br><a href='https://single-market-economy.ec.europa.eu/sectors/raw-materials/areas-specific-interest/critical-raw-materials_en' target='_blank' style='color: rgb(143, 125, 207);'>European Commission - Critical Raw Materials</a>",
+        "Critical raw materials are defined as those of high importance to the economy and high risk associated with their supply.<br><a href='https://single-market-economy.ec.europa.eu/sectors/raw-materials/areas-specific-interest/critical-raw-materials_en' target='_blank' style='color: rgb(143, 125, 207);'>European Commission - Critical Raw Materials</a>"
+    ],
     "Elements of a smartphone": [
         "Mobile phones have a high embedded value, which is of significant interest within a circular economy. <br><a href='https://doi.org/10.1016/j.jclepro.2023.138099' target='_blank' style='color: rgb(143, 125, 207);'>M. Gómez et al. J Clean Prod 419 (2023) 138099</a>",
         "The number of mobile devices operating worldwide is expected to reach 18 billion by 2025. However, their low recycling rate results in large volumes of End-of-Life Mobile Phones (EoL-MPs). <br><a href='https://doi.org/10.1016/j.jclepro.2023.138099' target='_blank' style='color: rgb(143, 125, 207);'>M. Gómez et al. J Clean Prod 419 (2023) 138099</a>",
@@ -79,54 +98,51 @@ const dietMessages = {
         "The use of End-of-Life Mobile Phones as a secondary resource-rich stream offers a route to close the materials loop. This helps mitigate threats to natural resources, reduce environmental and human health impacts from mining operations, relieve supply demands, and contribute to the economy. <br><a href='https://doi.org/10.1016/j.jclepro.2023.138099' target='_blank' style='color: rgb(143, 125, 207);'>M. Gómez et al. J Clean Prod 419 (2023) 138099</a>"
     ],
     "Elements of life": [
-    "Oxygen, carbon, hydrogen, and nitrogen are the main building blocks of every living creature, including human beings.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
-    "Specifically, our body is primarily composed of just 11 elements, along with trace amounts of boron, chromium, cobalt, copper, fluorine, iodine, iron, manganese, molybdenum, selenium, silicon, nickel, bromine, vanadium, and zinc.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
-    "It seems incredible that a complex creature like a human is made up of only 26 types of building blocks. However, let's remember that these elements are not randomly assembled.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
-    "Nitrogen is nitrogen, it passes miraculously from the air into plants, from these into animals, and from animals into us; when its function in our body is exhausted, we eliminate it, but it still remains nitrogen, aseptic, innocent.<br>Primo Levi, The Periodic Table (1975)",
-    "Inside our body, just 11 atoms combine in thousands of ways to form simple compounds, which, in turn, are the building blocks of larger and more complex molecules.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
+        "Oxygen, carbon, hydrogen, and nitrogen are the main building blocks of every living creature, including human beings.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
+        "Specifically, our body is primarily composed of just 11 elements, along with trace amounts of boron, chromium, cobalt, copper, fluorine, iodine, iron, manganese, molybdenum, selenium, silicon, nickel, bromine, vanadium, and zinc.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
+        "It seems incredible that a complex creature like a human is made up of only 26 types of building blocks. However, let's remember that these elements are not randomly assembled.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
+        "Nitrogen is nitrogen, it passes miraculously from the air into plants, from these into animals, and from animals into us; when its function in our body is exhausted, we eliminate it, but it still remains nitrogen, aseptic, innocent.<br>Primo Levi, The Periodic Table (1975)",
+        "Inside our body, just 11 atoms combine in thousands of ways to form simple compounds, which, in turn, are the building blocks of larger and more complex molecules.<br>(Isaac Asimov, 'The Building Blocks of the Universe', Milan: A. Mondadori, 1971)",
+        
+        `<div style="margin-bottom: 15px; text-align: justify;">
+            Every living organism is composed of 50-95% water and small ions such as sodium (Na⁺), potassium (K⁺), and calcium (Ca²⁺), which account for no more than 1% of the total mass.
+            The remaining part consists mainly of biomolecules, which are composed of a limited number of elements: carbon (C), hydrogen (H), nitrogen (N), oxygen (O), phosphorus (P), and sulfur (S).
+        </div>`,
 
-    "<div style='margin-bottom: 15px; text-align: justify;'>
-        Every living organism is composed of 50-95% water and small ions such as sodium (Na⁺), potassium (K⁺), and calcium (Ca²⁺), which account for no more than 1% of the total mass. 
-        The remaining part consists mainly of biomolecules, which are composed of a limited number of elements: carbon (C), hydrogen (H), nitrogen (N), oxygen (O), phosphorus (P), and sulfur (S).
-    </div>",
+        `<table style="border-collapse: collapse; width: 100%; text-align: center; margin-bottom: 15px;"> 
+            <tr style="background-color: #78b3e0; color: white;">
+                <th style="border: 1px solid #ccc; padding: 5px;">Element</th>
+                <th style="border: 1px solid #ccc; padding: 5px;">Human</th>
+                <th style="border: 1px solid #ccc; padding: 5px;">Alfalfa</th>
+                <th style="border: 1px solid #ccc; padding: 5px;">Bacterium</th>
+            </tr>
+            <tr><td style="border: 1px solid #ccc; padding: 5px;">Carbon (C)</td><td>19.37%</td><td>11.34%</td><td>12.14%</td></tr>
+            <tr><td style="border: 1px solid #ccc; padding: 5px;">Hydrogen (H)</td><td>9.31%</td><td>8.72%</td><td>9.94%</td></tr>
+            <tr><td style="border: 1px solid #ccc; padding: 5px;">Nitrogen (N)</td><td>5.14%</td><td>0.83%</td><td>3.04%</td></tr>
+            <tr><td style="border: 1px solid #ccc; padding: 5px;">Oxygen (O)</td><td>62.81%</td><td>77.90%</td><td>73.68%</td></tr>
+            <tr><td style="border: 1px solid #ccc; padding: 5px;">Phosphorus (P)</td><td>0.63%</td><td>0.71%</td><td>0.60%</td></tr>
+            <tr><td style="border: 1px solid #ccc; padding: 5px;">Sulfur (S)</td><td>0.64%</td><td>0.10%</td><td>0.32%</td></tr>
+            <tr style="background-color: #f0f0f0;">
+                <td><b>Total</b></td><td><b>97.90%</b></td><td><b>99.60%</b></td><td><b>99.72%</b></td>
+            </tr>
+        </table>`,
 
-    "<table style='border-collapse: collapse; width: 100%; text-align: center; margin-bottom: 15px;'> 
-        <tr style='background-color: #78b3e0; color: white;'>
-            <th style='border: 1px solid #ccc; padding: 5px;'>Element</th>
-            <th style='border: 1px solid #ccc; padding: 5px;'>Human</th>
-            <th style='border: 1px solid #ccc; padding: 5px;'>Alfalfa</th>
-            <th style='border: 1px solid #ccc; padding: 5px;'>Bacterium</th>
-        </tr>
-        <tr><td style='border: 1px solid #ccc; padding: 5px;'>Carbon (C)</td><td>19.37%</td><td>11.34%</td><td>12.14%</td></tr>
-        <tr><td style='border: 1px solid #ccc; padding: 5px;'>Hydrogen (H)</td><td>9.31%</td><td>8.72%</td><td>9.94%</td></tr>
-        <tr><td style='border: 1px solid #ccc; padding: 5px;'>Nitrogen (N)</td><td>5.14%</td><td>0.83%</td><td>3.04%</td></tr>
-        <tr><td style='border: 1px solid #ccc; padding: 5px;'>Oxygen (O)</td><td>62.81%</td><td>77.90%</td><td>73.68%</td></tr>
-        <tr><td style='border: 1px solid #ccc; padding: 5px;'>Phosphorus (P)</td><td>0.63%</td><td>0.71%</td><td>0.60%</td></tr>
-        <tr><td style='border: 1px solid #ccc; padding: 5px;'>Sulfur (S)</td><td>0.64%</td><td>0.10%</td><td>0.32%</td></tr>
-        <tr style='background-color: #f0f0f0;'>
-            <td><b>Total</b></td><td><b>97.90%</b></td><td><b>99.60%</b></td><td><b>99.72%</b></td>
-        </tr>
-    </table>",
+        `<div style="margin-bottom: 10px; font-size: 14px; color: #fff; text-align: center;">
+            Average atomic composition percentage of three representative organisms.
+        </div>`,
 
-    "<div style='margin-bottom: 10px; font-size: 14px; color: #fff; text-align: center;'>
-        Average atomic composition percentage of three representative organisms.
-    </div>",
-
-    "<div style='font-size: 12px; color: #bbb; text-align: center;'>
-        Reference: Helena Curtis, N. Sue Barnes, Adriana Schnek, Graciela Flores. <i>Invitation to Biology</i>, Fifth Edition, 1994 by Worth Publisher, Inc.
-    </div>"
-],
-    "Critical elements": [
-        "Raw materials are crucial to the economy.<br><a href='https://single-market-economy.ec.europa.eu/sectors/raw-materials/areas-specific-interest/critical-raw-materials_en' target='_blank' style='color: rgb(143, 125, 207);'>European Commission - Critical Raw Materials</a>",
-        "Raw materials form the industrial base for producing a wide range of goods and applications used in everyday life and modern technologies.<br><a href='https://single-market-economy.ec.europa.eu/sectors/raw-materials/areas-specific-interest/critical-raw-materials_en' target='_blank' style='color: rgb(143, 125, 207);'>European Commission - Critical Raw Materials</a>",
-        "Reliable and unhindered access to certain raw materials is a growing concern across the globe.<br><a href='https://single-market-economy.ec.europa.eu/sectors/raw-materials/areas-specific-interest/critical-raw-materials_en' target='_blank' style='color: rgb(143, 125, 207);'>European Commission - Critical Raw Materials</a>",
-        "The European Commission has created a list of critical raw materials (CRMs) for the EU, which is regularly reviewed and updated.<br><a href='https://single-market-economy.ec.europa.eu/sectors/raw-materials/areas-specific-interest/critical-raw-materials_en' target='_blank' style='color: rgb(143, 125, 207);'>European Commission - Critical Raw Materials</a>",
-        "Critical raw materials are defined as those of high importance to the economy and high risk associated with their supply.<br><a href='https://single-market-economy.ec.europa.eu/sectors/raw-materials/areas-specific-interest/critical-raw-materials_en' target='_blank' style='color: rgb(143, 125, 207);'>European Commission - Critical Raw Materials</a>"
+        `<div style="font-size: 12px; color: #bbb; text-align: center;">
+            Reference: Helena Curtis, N. Sue Barnes, Adriana Schnek, Graciela Flores. <i>Invitation to Biology</i>, Fifth Edition, 1994 by Worth Publisher, Inc.
+        </div>`
     ],
     "Elements of DNA": [
         "Nitrogen is nitrogen, it passes miraculously from the air into plants, from these into animals, and from animals into us; when its function in our body is exhausted, we eliminate it, but it still remains nitrogen, aseptic, innocent.<br>Primo Levi, The Periodic Table (1975)",
        "DNA is made up of carbon (C), hydrogen (H), oxygen (O), nitrogen (N) and phosphorus (P).<br><a href='https://edu.rsc.org/feature/elements-of-life/3007327.article' target='_blank' style='color: rgb(143, 125, 207);'>Rathi, Elements of life. Education in Chemistry 2011</a>"
     ],
+    "Elements essential for man": [""],
+    "Elements used in therapy": [""],
+    "Elements used in diagnosis": [""],
+    "Medical radioisotopes": [""],
     "Radioactive elements (U-Th decay series)": [
         "Radioactive elements are both naturally occurring and anthropogenic in origin, and can be found throughout the geosphere.https://doi.org/10.1016/B978-0-08-095975-7.00906-2' target='_blank' style='color: rgb(143, 125, 207);'>M.D. Siegel and C.R. Bryan, Radioactivity, Geochemistry, and Health. Treatise on Geochemistry (2nd ed.) 2014, 191-256</a>",
         "Naturally occurring radioactive materials are dominated by members of the uranium and thorium decay chains, including radium and radon.<br><a href='https://doi.org/10.1016/B978-0-08-095975-7.00906-2' target='_blank' style='color: rgb(143, 125, 207);'>M.D. Siegel and C.R. Bryan, Radioactivity, Geochemistry, and Health. Treatise on Geochemistry (2nd ed.) 2014, 191-256</a>",
@@ -151,6 +167,7 @@ const dietMessages = {
     "Potentially toxic trace elements (PTEs)": [
         "Explore the <a href='https://www.issmc.cnr.it/en/research/projects/ministerial-projects/selwa/' target='_blank' style='color: rgb(143, 125, 207);'>SELWA project</a> for more details."
     ],
+    "Toxic trace elements in dried mushrooms": [""],
     "Elements dedicated to scientists": [
         "Ge (Germanium): Named after Latin Germania ('Germany'). Dmitri Mendeleev proposed the name to honor Clemens Winkler, who discovered the element. Mendeleev had predicted its existence as 'ekasilicon,' meaning 'one silicon' in Sanskrit, filling a gap in his periodic table between silicon and tin.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank' style='color: rgb(143, 125, 207);'>Source</a>",
         "Sm (Samarium): Named after Vasilij Samarskij–Bychovec, a Russian geologist who discovered the mineral samarskite. Paul Emile Lecoq de Boisbaudran isolated samarium from this mineral in 1880.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank' style='color: rgb(143, 125, 207);'>Source</a>",
@@ -254,7 +271,7 @@ const dietMessages = {
         "U from the Greek Ouranós, 'Uranus'; identified in 1789 by Martin Heinrich Klaproth (1743-1817), it was named after the planet Uranus, discovered eight years earlier.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank' style='color: rgb(143, 125, 207);'>Tottola M. Righetti A. Allegrezza Chimica per noi A. Mondadori Scuola © by Mondadori Education, 2010</a>",
         "Pu from the Greek Plúton, 'Pluto', the Greek god of the underworld and celestial body, initially considered the ninth planet of the solar system, after Neptune: for this reason, the name of the element that follows neptunium in the periodic table was derived from it, also discovered in 1940, a few months earlier.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank' style='color: rgb(143, 125, 207);'>Tottola M. Righetti A. Allegrezza Chimica per noi A. Mondadori Scuola © by Mondadori Education, 2010</a>"    
     ],
-    "Elements with names derived from cities, countries, or elsewhere": [
+    "Elements named after geographical locations and celestial bodies": [
         "Mg from Magnesia, a city in Thessaly, from which the stone of the same name used as a purgative originated; according to the ancients, it had to be brought near a magnet, which is named after the Greek city of Magnesia: just as the magnet attracted iron, so magnesium had the property of attracting bodily humors.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank' style='color: rgb(143, 125, 207);'>Tottola M. Righetti A. Allegrezza Chimica per noi A. Mondadori Scuola © by Mondadori Education, 2010</a>",
         "Sc from Latin Scandia, 'Scandinavia'; because it was first isolated (1879) from a Swedish mineral; its existence had been predicted by Dmitri Ivanovich Mendeleev (1834-1907), who had named it ekaboron (eka- in Sanskrit means 'one'), because it was supposed to occupy an empty slot in his periodic table next to boron.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank' style='color: rgb(143, 125, 207);'>Tottola M. Righetti A. Allegrezza Chimica per noi A. Mondadori Scuola © by Mondadori Education, 2010</a>",
         "Mn from Latin Magnésion, 'Magnesia', a city in Thessaly near which there were deposits of magnetic ore strongly resembling pyrolusite, a black manganese compound. According to others, the name may derive directly from the corruption of the Latin magalaea, an ancient name for pyrolusite.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank' style='color: rgb(143, 125, 207);'>Tottola M. Righetti A. Allegrezza Chimica per noi A. Mondadori Scuola © by Mondadori Education, 2010</a>",
@@ -301,9 +318,12 @@ const dietMessages = {
         "Pt from Spanish platina, from plata, 'silver'; for its color very similar to that of silver.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank' style='color: rgb(143, 125, 207);'>Tottola M. Righetti A. Allegrezza Chimica per noi A. Mondadori Scuola © by Mondadori Education, 2010</a>",
         "Th from Swedish Thor, the god of thunder in Norse mythology; the name was proposed by Jöns Jacob Berzelius (1779-1848), who discovered it in 1828.<br><a href='http://www.liceorodolico.it/appunti/lim/IVF/SCIENZE/I%20nomi%20degli%20elementi%20e%20la%20loro%20origine-tottola%20biennio.pdf' target='_blank' style='color: rgb(143, 125, 207);'>Tottola M. Righetti A. Allegrezza Chimica per noi A. Mondadori Scuola © by Mondadori Education, 2010</a>"
     ],
-    "Elements in solid state at standard temperature and pressure": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
-    "Elements in liquid state at standard temperature and pressure": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
-    "Elements in gas state at standard temperature and pressure": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
+    "Elements known since antiquity": [""],
+    "Elementary substances in solid state at standard temperature and pressure": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
+    "Elementary substances in liquid state at standard temperature and pressure": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
+    "Elementary substances in gas state at standard temperature and pressure": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
+    "Ferromagnetic elements": [""],
+    "Ultra-high temperature metals": [""],
     "Metals": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
     "Nonmetals": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
     "Elements of group I (Hydrogen & alkali metals)": ["Take a look on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>", "Take a look on <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table of Elements</a>"],
