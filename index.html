@@ -149,7 +149,14 @@
         <!-- SELEZIONE VELOCITÀ E RANGE (SECONDA SCHERMATA) -->
         <div id="speedScreen" class="screen">
             <h2>Choose Speed and Element Range</h2>
-            <div id="speedButtons"></div>
+            <div id="speedButtons">
+            <button class="button" onclick="selectSpeed(250, this)">Level 1</button>
+            <button class="button" onclick="selectSpeed(200, this)">Level 2</button>
+            <button class="button" onclick="selectSpeed(150, this)" style="background-color: rgb(65, 127, 69);">Level 3</button>
+            <button class="button" onclick="selectSpeed(125, this)">Level 4</button>
+            <button class="button" onclick="selectSpeed(100, this)">Level 5</button>
+        </div>
+
             <h3>Choose the range of elements</h3>
             <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
             <p id="selectedElementCount">1 ≤ Z ≤ 40</p>
