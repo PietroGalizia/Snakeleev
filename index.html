@@ -20,104 +20,100 @@
             justify-content: center;
         }
 
-        /* LOGHI */
+        /* Loghi */
+        #logoCNR-container, #logoCG-container {
+            position: absolute;
+            cursor: pointer;
+        }
         #logoCNR-container {
-            position: absolute; 
             top: 20px;
             left: 10px;
-            cursor: pointer;
         }
-        #logoCNR {
-            width: 300px;
-        }
-
         #logoCG-container {
-            position: absolute;
             top: 20px;
             right: 10px;
-            cursor: pointer;
         }
-        #logoCG {
+        #logoCNR, #logoCG {
             width: 100px;
+            height: auto;
         }
 
-        /* CONTENUTO PRINCIPALE */
+        /* Stili generali */
         #content {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            padding-top: 20px;
             width: 100%;
             margin-top: 50px;
         }
 
         h1 {
             font-size: 3rem;
+            margin: 20px;
         }
 
-        /* BOTTONI */
         .button {
             margin: 10px;
             padding: 10px 20px;
-            background-color: #96AE21;
             border: none;
             color: white;
             cursor: pointer;
-            font-size: 1.2em;
-        }
-        .button:hover {
-            background-color: #739A1A;
-            transition: background-color 0.3s;
+            font-size: 1em;
+            border-radius: 5px;
         }
 
-        /* ISTRUZIONI */
+        .button-default {
+            background-color: rgb(65, 127, 69);
+        }
+        
+        .button-default:hover {
+            background-color: rgb(150, 174, 33);
+        }
+
+        .button-light {
+            background-color: rgb(150, 174, 33);
+        }
+
+        .button-light:hover {
+            background-color: rgb(65, 127, 69);
+        }
+
+        /* Contenitori */
+        #dietSelection, #speedSelection, #elementSelection {
+            display: none;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        /* Istruzioni */
         #instructions {
             margin: 40px auto;
             text-align: left;
             width: 80%;
-        }
-        #instructions h3 {
-            text-align: center;
-            text-transform: uppercase;
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-        #instructions ol {
-            padding-left: 20px;
-        }
-
-        /* SCHERMATE DI SELEZIONE */
-        .screen {
-            display: none;
-            text-align: center;
-        }
-
-        /* BOTTONI VELOCITÀ */
-        .speed-button {
-            margin: 5px;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            border: none;
-            cursor: pointer;
             color: white;
         }
-        .speed-selected {
-            background-color: rgb(65, 127, 69);
-        }
-        .speed-unselected {
-            background-color: rgb(150, 174, 33);
+
+        /* Input Range */
+        #elementRange {
+            width: 50%;
+            margin: 10px 0;
         }
 
-        /* RANGE ELEMENTI */
-        #selectedElementCount {
-            font-size: 1.2em;
+        /* Area di gioco */
+        #gameCanvas {
+            display: none;
+            background-color: #002F5F;
+            margin: 0 auto;
+            max-width: 90%;
+            max-height: 90%;
         }
 
     </style>
 </head>
 <body>
-
-    <!-- LOGHI -->
+    <!-- Loghi -->
     <div id="logoCNR-container" onclick="window.open('https://www.issmc.cnr.it/en/', '_blank')">
         <img id="logoCNR" src="logo.png" alt="Logo CNR-ISSMC">
     </div>
@@ -125,14 +121,15 @@
         <img id="logoCG" src="LogoChangeGame.png" alt="Logo ChangeGame">
     </div>
 
-    <!-- CONTENUTO PRINCIPALE -->
+    <!-- Contenuto principale -->
     <div id="content">
         <h1 id="title">Snakeleev</h1>
 
-        <!-- SELEZIONE DIETA (PRIMA SCHERMATA) -->
-        <div id="dietScreen" class="screen">
+        <!-- Selezione della dieta -->
+        <div id="dietSelection">
             <h2>Select the Snake's Diet</h2>
             <select id="dietDropdown"></select>
+            <button class="button button-default" onclick="proceedToSpeedSelection()">Next</button>
             <div id="instructions">
                 <h3>INSTRUCTIONS</h3>
                 <ol>
@@ -142,108 +139,30 @@
                     <li>Press "P" to pause or resume the game.</li>
                     <li>Refresh the page to start a new game.</li>
                 </ol>
+                <h3>SCORING SYSTEM</h3>
+                <p>
+                    Your score increases when you eat an element that belongs to the selected diet.
+                    Eating an element outside the diet does not increase the score but still adds to the total elements eaten.
+                </p>
             </div>
-            <button class="button" onclick="proceedToSpeedSelection()">Next</button>
         </div>
 
-        <!-- SELEZIONE VELOCITÀ E RANGE (SECONDA SCHERMATA) -->
-        <div id="speedScreen" class="screen">
-            <h2>Choose Speed and Element Range</h2>
-            <div id="speedButtons">
-            <button class="button" onclick="selectSpeed(250, this)">Level 1</button>
-            <button class="button" onclick="selectSpeed(200, this)">Level 2</button>
-            <button class="button" onclick="selectSpeed(150, this)" style="background-color: rgb(65, 127, 69);">Level 3</button>
-            <button class="button" onclick="selectSpeed(125, this)">Level 4</button>
-            <button class="button" onclick="selectSpeed(100, this)">Level 5</button>
-        </div>
-
-            <h3>Choose the range of elements</h3>
+        <!-- Selezione della velocità e range di elementi -->
+        <div id="speedSelection">
+            <h2>Choose Snake's Speed</h2>
+            <div id="speedButtons"></div>
+            <h2>Choose the range of elements</h2>
+            <label for="elementRange">Maximum atomic number (Z):</label>
             <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
-            <p id="selectedElementCount">1 ≤ Z ≤ 40</p>
-            <button class="button" onclick="startGame()">Play</button>
+            <p id="selectedElementCount"> 40</p>
+            <button class="button button-default" onclick="startGame()">Play</button>
         </div>
 
+        <!-- Area di gioco -->
+        <canvas id="gameCanvas"></canvas>
     </div>
 
-    <script>
-        let selectedSpeed = 3;
-        let maxElements = 40;
-        let selectedDiet = "";
-
-        document.addEventListener('DOMContentLoaded', () => {
-            showDietSelection();
-        });
-
-function showDietSelection() {
-    document.getElementById('dietScreen').style.display = 'block';
-
-    const dietDropdown = document.getElementById("dietDropdown");
-    dietDropdown.innerHTML = ""; // Pulisce eventuali opzioni precedenti
-
-    // Aggiunge tutte le opzioni al menu a tendina
-    const diets = [
-        "Critical elements", "Elements of a smartphone", "Elements of life", "Elements of DNA", "Radioactive elements (U-Th decay series)",
-        "Elements essential for man", "Elements used in therapy", "Elements used in diagnosis",
-        "Medical radioisotopes", "Elements considered safety (grades A-E) in the first wall of fusion power plan",
-        "Potentially toxic trace elements (PTEs)", "Toxic trace elements in dried mushrooms",
-        "Elements dedicated to scientists", "Elements with names of latin derivation",
-        "Elements with names of greek derivation", "Elements named after geographical locations and celestial bodies",
-        "Elements with names not derived from latin or greek, nor from cities or countries",
-        "Elements known since antiquity", "Elementary substances in solid state at standard temperature and pressure",
-        "Elementary substances in liquid state at standard temperature and pressure",
-        "Elementary substances in gas state at standard temperature and pressure", 
-        "Ferromagnetic elements", "Ultra-high temperature metals", "Metals", "Nonmetals",
-        "Elements of group I (Hydrogen & alkali metals)", "Elements of group II (Alkaline earth metals)",
-        "Elements of group XV (Pnictogens)", "Elements of group XVI (Chalcogens)", 
-        "Elements of group XVII (Halogens)", "Elements of group XVIII (Noblegases)", 
-        "Lanthanides", "Actinides", "Transition metals", "Post-transition metals", 
-        "Metalloids", "Reactive nonmetals", "s-block elements", "p-block elements", 
-        "d-block elements", "f-block elements"
-    ];
-
-    diets.forEach(diet => {
-        const option = document.createElement("option");
-        option.value = diet;
-        option.textContent = diet;
-        dietDropdown.appendChild(option);
-    });
-}
-
-        function proceedToSpeedSelection() {
-            selectedDiet = document.getElementById("dietDropdown").value;
-            document.getElementById('dietScreen').style.display = 'none';
-            document.getElementById('speedScreen').style.display = 'block';
-
-            const speedLevels = [250, 200, 150, 125, 100];
-            const speedButtons = document.getElementById('speedButtons');
-            speedButtons.innerHTML = "";
-
-            speedLevels.forEach((speed, index) => {
-                const button = document.createElement("button");
-                button.className = 'speed-button ' + (index === 2 ? 'speed-selected' : 'speed-unselected');
-                button.innerText = `Speed ${index + 1}`;
-                button.onclick = () => selectSpeed(index, button);
-                speedButtons.appendChild(button);
-            });
-        }
-
-        function selectSpeed(index, button) {
-            document.querySelectorAll('.speed-button').forEach(btn => {
-                btn.className = 'speed-button speed-unselected';
-            });
-            button.className = 'speed-button speed-selected';
-            selectedSpeed = index + 1;
-        }
-
-        function updateElementCount() {
-            maxElements = document.getElementById('elementRange').value;
-            document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElements}`;
-        }
-
-        function startGame() {
-            alert(`Starting game with:\nDiet: ${selectedDiet}\nSpeed: ${selectedSpeed}\nMax Elements: ${maxElements}`);
-        }
-    </script>
-
+    <script src="Snakeleev.js"></script>
 </body>
 </html>
+
