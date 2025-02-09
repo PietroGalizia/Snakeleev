@@ -431,16 +431,19 @@ document.addEventListener('keydown', (event) => {
 
 // Funzione per aggiornare la selezione e la lista di elementi scartati
 function updateElementCount() {
-    const rangeValue = document.getElementById('elementRange').value;
-    maxElementsToUse = parseInt(rangeValue);
-    document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
+    const rangeValue = document.getElementById('elementRange').value; // Valore massimo di Z
+    const maxZ = parseInt(rangeValue);
+
+    // Aggiorna il contenuto della variabile erasedElements con elementi oltre il valore massimo di Z
+    erasedElements = elements.slice(maxZ);
+
+    // Aggiorna il testo mostrato all'utente
+    document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxZ}`;
 }
 
 function startGame() {
-    window.SPEED = SPEED_LEVELS[selectedSpeedIndex];
-    document.getElementById('speedSelection').style.display = 'none';
-    document.getElementById('gameCanvas').style.display = 'block';
-    startNewGame();
+    initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
+    gameLoop();
 }
 
 function handleTouchStart(event) {
@@ -640,37 +643,9 @@ function updateInstructions(selectedDiet) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('dietSelection').style.display = 'block';
+    document.getElementById('mainMenu').style.display = 'block';
+    updateScore(score);
 });
-
-function proceedToSpeedSelection() {
-    selectedDiet = document.getElementById("dietDropdown").value;
-    document.getElementById('dietSelection').style.display = 'none';
-    document.getElementById('speedSelection').style.display = 'block';
-    setupSpeedButtons();
-}
-
-const SPEED_LEVELS = [250, 200, 150, 125, 100];
-let selectedSpeedIndex = 2; // Di default seleziona velocità 3
-
-function setupSpeedButtons() {
-    const speedButtonsContainer = document.getElementById('speedButtons');
-    speedButtonsContainer.innerHTML = "";
-
-    SPEED_LEVELS.forEach((speed, index) => {
-        const button = document.createElement('button');
-        button.className = index === selectedSpeedIndex ? 'button button-default' : 'button button-light';
-        button.innerText = `Level ${index + 1}`;
-        button.onclick = () => selectSpeed(index);
-        speedButtonsContainer.appendChild(button);
-    });
-}
-
-function selectSpeed(index) {
-    selectedSpeedIndex = index;
-    setupSpeedButtons();
-}
-
 
 function initializeScoreValues() {
     const rangeValue = parseInt(document.getElementById('elementRange').value);
