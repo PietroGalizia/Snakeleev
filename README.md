@@ -12,7 +12,7 @@ If you use this code with your students and / or have any feedback, please feel 
 
 Citation
 ========
-UIf you reference this project, please cite:
+If you reference this project, please cite:
 
 - Galizia, P. Jörmungandr's Elemental Diets: The World Snake https://github.com/PietroGalizia/JED.git, 2024.
 - Galizia, P. (2024). Jörmungandr's Elemental Diets: The World Snake — An Immersive Educational Videogame for Exploring the Periodic Table of Elements with Real-World Contexts and Examples. https://doi.org/10.5281/zenodo.10643098
