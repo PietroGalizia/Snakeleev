@@ -667,7 +667,7 @@ function showDietSelection() {
         "s-block elements", "p-block elements", "d-block elements", "f-block elements"
     ]; 
 
-   diets.forEach(diet => {
+    DietsList.forEach(diet => {
         let option = document.createElement("option");
         option.value = diet;
         option.textContent = diet;
