@@ -595,11 +595,23 @@ function drawFoodII() {
     ctx.fillText(foodIIElement, foodII.x + SIZE / 2, foodII.y + SIZE / 2);
 }
 
+function showDietSelection() {
+    const dietDropdown = document.getElementById("dietDropdown");
+    dietDropdown.innerHTML = "";
+
+    DietsList.forEach(diet => {
+        let option = document.createElement("option");
+        option.value = diet;
+        option.textContent = diet;
+        dietDropdown.appendChild(option);
+    });
+    document.getElementById('title').style.display = 'block';
+    document.getElementById('mainMenu').style.display = 'none';
+    document.getElementById('dietSelection').style.display = 'block';
+}
+
 function startNewGame() {
-    // Recupera le impostazioni selezionate
     selectedDiet = document.getElementById("dietDropdown").value;
-    window.SPEED = parseInt(document.getElementById('speed').value);
-    window.maxElementsToUse = parseInt(document.getElementById('elementRange').value);
 
     // Aggiorna le istruzioni dinamicamente con la dieta selezionata
     updateInstructions(selectedDiet);
@@ -612,11 +624,8 @@ function startNewGame() {
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
-    // Nasconde la schermata di configurazione e mostra il gioco
-    document.getElementById('gameSetup').style.display = 'none';
-    document.getElementById('instructions').style.display = 'none';
-    document.getElementById('gameCanvas').style.display = 'block';
-    document.getElementById('scoreBoard').style.display = 'block';
+    document.getElementById('dietSelection').style.display = 'none';
+    canvas.style.display = 'block';
 
     snake = [{ x: 100, y: 100 }];
     snakeColors = ["green"]; // Resetta i colori del serpente, partendo con la testa verde
@@ -634,6 +643,7 @@ function updateInstructions(selectedDiet) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('mainMenu').style.display = 'block';
     updateScore(score);
 });
 
@@ -1137,22 +1147,22 @@ function updateGame(ctx) {
             
 }
 
+// Function to exit the game
 function exitGame() {
-    document.getElementById('title').style.display = 'block';
+    document.getElementById('title').style.display = 'none';
     document.getElementById('gameCanvas').style.display = 'none';
     document.getElementById('scoreBoard').style.display = 'none';
+    document.getElementById('elementSelection').style.display = 'none';
+    document.getElementById('dietSelection').style.display = 'none';
     document.getElementById('selectedDietText').style.display = 'none';
     document.getElementById('gameover').style.display = 'block';
     document.getElementById('touchArea').style.zIndex = -1;
-    document.getElementById('gameSetup').style.display = 'block';
-
     showGameOverScreen();
 
     if (gameInterval) {
         clearInterval(gameInterval);
     }
 }
-
 
 function showGameOverScreen() {
     const gameOverElement = document.getElementById("gameover");
@@ -1162,7 +1172,7 @@ function showGameOverScreen() {
     gameOverElement.innerHTML = `
         <h2>Stay Hungry! Stay Periodic!</h2>
         <p>${randomMessage}</p>
-        <button class="button" onclick="resetGameState()">Restart</button>
+        <button class="button" onclick="resetGameState()">Reset</button>
     `;
     gameOverElement.style.display = "block";
 }
