@@ -195,7 +195,7 @@
         <label for="elementRange">Maximum atomic number (Z):</label>
         <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
         <p id="selectedElementCount"> 40</p>
-        <button class="button" onclick="proceedToDietSelection()">Next</button>
+        <button class="button" onclick="proceedToDietSelection()()">Next</button>
      </div>
 
     <!-- Canvas del gioco -->
@@ -221,21 +221,6 @@
         const SPEED_LEVELS = [250, 200, 150, 125, 100];
         let maxElementsToUse = 50;
 
-        // Mostra la schermata iniziale
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('dietSelection').style.display = 'block'; // Mostra subito la prima schermata
-
-            const speedButtons = document.getElementById('speedButtons');
-            SPEED_LEVELS.forEach((speed, index) => {
-                const button = document.createElement('button');
-                button.className = 'button';
-                button.innerText = `Level ${index + 1}`;
-                button.onclick = () => selectSpeed(speed);
-                speedButtons.appendChild(button);
-            });
-        });
-
-
         // Funzione per selezionare la velocità e passare alla selezione della dieta
         function selectSpeed(speed) {
             window.SPEED = speed;
@@ -251,7 +236,7 @@
             document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+                document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('dietSelection').style.display = 'block';
 
             // Popola il menu a tendina della dieta una sola volta
@@ -298,6 +283,7 @@
     
             document.getElementById('title').style.display = 'none';
             document.getElementById('dietSelection').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'none';
             document.getElementById('gameCanvas').style.display = 'block';
             document.getElementById('selectedDietText').style.display = 'block';
             document.getElementById('scoreBoard').style.display = 'block';
@@ -305,15 +291,24 @@
             startNewGame();
         }
 
+        function proceedToDietSelection() {
+            document.getElementById('title').style.display = 'block';
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('elementSelection').style.display = 'none';
+            document.getElementById('dietSelection').style.display = 'block';
+        }
 
 
         // Funzione per avviare il gioco
         function startNewGame() {
             document.getElementById('title').style.display = 'none';
-            document.getElementById('dietSelection').style.display = 'none'; // Nascondi la schermata
-            document.getElementById('gameCanvas').style.display = 'block'; // Mostra il canvas del gioco
+            document.getElementById('dietSelection').style.display = 'none';
+            document.getElementById('elementSelection').style.display = 'none';
+            document.getElementById('speedSelection').style.display = 'none';
+            document.getElementById('gameCanvas').style.display = 'block';
             startGame(); // Funzione definita in Snakeleev.js
         }
+
 
         function resetGameState() {
             // Ricarica la pagina
