@@ -20,44 +20,17 @@
             justify-content: center;
         }
 
-        #logoCNR-container {
-            position: absolute;
-            top: 20px;
-            left: 10px;
-            cursor: pointer;
-        }
-        #logoCNR {
-            width: 300px;
-            height: auto;
-        }
-
-        #logoCG-container {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-        }
-        #logoCG {
-            width: 100px;
-            height: auto;
-        }
-
-        #content {
+        /* Contenitore generale */
+        #setupScreen {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
+            gap: 20px;
             text-align: center;
-            padding-top: 20px;
-            width: 100%;
-            margin-top: 50px;
         }
 
-        h1 {
-            font-size: 3rem;
-            margin: 20px;
-        }
-
+        /* Stili per i pulsanti */
         .button {
             margin: 10px;
             padding: 10px 20px;
@@ -72,103 +45,140 @@
             transition: background-color 0.3s;
         }
 
-        #selectionContainer {
-            background: rgba(0, 47, 95, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #78b3e0;
+        /* Stili per la selezione della dieta */
+        #dietSelection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Istruzioni */
+        #instructions {
+            margin-top: 20px;
+            text-align: left;
             width: 80%;
-            max-width: 600px;
         }
 
-        select, input {
-            margin: 10px;
-            padding: 5px;
-            font-size: 1rem;
+        #instructions h3 {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
+        /* Canvas del gioco */
         #gameCanvas {
             display: none;
             background-color: #002F5F;
-            margin: 0px auto;
+            margin: 0 auto;
             max-width: 90%;
             max-height: 90%;
         }
     </style>
 </head>
 <body>
-    <div id="logoCNR-container" onclick="window.open('https://www.issmc.cnr.it/en/', '_blank')">
-        <img id="logoCNR" src="logo.png" alt="Logo CNR-ISSMC">
-    </div>
 
-    <div id="logoCG-container" onclick="window.open('https://www.changegame.cnr.it/', '_blank')">
-        <img id="logoCG" src="LogoChangeGame.png" alt="Logo ChangeGame">
-    </div>
+    <h1>Snakeleev</h1>
 
-    <div id="content">
-        <h1 id="title">Snakeleev</h1>
-        
-        <!-- Selezione combinata di velocità, elementi e dieta -->
-        <div id="selectionContainer">
-            <h2>Game Settings</h2>
+    <!-- Contenitore per la selezione di velocità, range ed elementi -->
+    <div id="setupScreen">
+        <h2>Choose the Snake's settings</h2>
 
-            <!-- Scelta della velocità -->
-            <label for="speedSelect"><b>Snake Speed:</b></label>
-            <select id="speedSelect">
-                <option value="250">Level 1 (Slow)</option>
-                <option value="200">Level 2</option>
-                <option value="150">Level 3</option>
-                <option value="125">Level 4</option>
-                <option value="100">Level 5 (Fast)</option>
-            </select>
+        <!-- Selezione velocità -->
+        <div>
+            <h3>Choose the Snake's speed</h3>
+            <div id="speedButtons"></div>
+        </div>
 
-            <!-- Scelta del range di elementi -->
-            <label for="elementRange"><b>Element Range (Max Z):</b></label>
+        <!-- Selezione range elementi -->
+        <div>
+            <h3>Choose the range of elements</h3>
+            <label for="elementRange">Maximum atomic number (Z):</label>
             <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
             <p id="selectedElementCount">1 ≤ Z ≤ 40</p>
+        </div>
 
-            <!-- Selezione della dieta -->
-            <label for="dietDropdown"><b>Select Diet:</b></label>
+        <!-- Selezione dieta -->
+        <div id="dietSelection" style="display: none;">
+            <h3>Select the Snake's Diet</h3>
             <select id="dietDropdown"></select>
-
             <button class="button" onclick="finalSelection()">Play</button>
+        </div>
+
+        <!-- Istruzioni -->
+        <div id="instructions">
+            <h3>Instructions</h3>
+            <ol>
+                <li>Control the snake using the arrow keys or W, A, S, and D.</li>
+                <li id="eat-instruction">Eat only the elements that match the selected diet.</li>
+                <li>Press the spacebar to swap the positions of the two elements.</li>
+                <li>Press "P" to pause or resume the game.</li>
+                <li>Refresh the page to start a new game.</li>
+            </ol>
+            <h3>Scoring System</h3>
+            <p>Your score increases when you eat an element that belongs to the selected diet.</p>
+            <p>Eating an element outside the diet does not increase the score but still adds to the total elements eaten.</p>
+            <p>Score Display: <b>Score / Total Elements Eaten</b></p>
         </div>
     </div>
 
     <!-- Canvas del gioco -->
+    <div id="selectedDietText" style="display: none;"></div>
+    <div id="scoreBoard" style="display: none;"></div>
     <canvas id="gameCanvas"></canvas>
 
     <script>
-        const SPEED_LEVELS = {
-            "Level 1 (Slow)": 250,
-            "Level 2": 200,
-            "Level 3": 150,
-            "Level 4": 125,
-            "Level 5 (Fast)": 100
-        };
-        
+        // Impostazioni di velocità
+        const SPEED_LEVELS = [250, 200, 150, 125, 100];
         let maxElementsToUse = 40;
 
+        // Mostra i pulsanti di velocità
         document.addEventListener('DOMContentLoaded', () => {
-            updateElementCount();
-            populateDiets();
+            const speedButtons = document.getElementById('speedButtons');
+            SPEED_LEVELS.forEach((speed, index) => {
+                const button = document.createElement('button');
+                button.className = 'button';
+                button.innerText = `Level ${index + 1}`;
+                button.onclick = () => selectSpeed(speed);
+                speedButtons.appendChild(button);
+            });
         });
 
+        // Funzione per selezionare la velocità
+        function selectSpeed(speed) {
+            window.SPEED = speed;
+            document.getElementById('dietSelection').style.display = 'block';
+        }
+
+        // Aggiorna il conteggio del range di elementi
         function updateElementCount() {
             const rangeValue = document.getElementById('elementRange').value;
             maxElementsToUse = parseInt(rangeValue);
             document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
         }
 
-        function populateDiets() {
+        // Popola il dropdown della dieta
+        function populateDietSelection() {
             const dietDropdown = document.getElementById("dietDropdown");
             const diets = [
-                "Critical elements", "Elements of a smartphone", "Elements of life", "Elements of DNA",
-                "Radioactive elements (U-Th decay series)", "Elements essential for man",
-                "Medical radioisotopes", "Toxic trace elements in dried mushrooms",
+                "Critical elements", "Elements of a smartphone", "Elements of life", "Elements of DNA", 
+                "Radioactive elements (U-Th decay series)", "Elements essential for man", 
+                "Elements used in therapy", "Elements used in diagnosis", "Medical radioisotopes",
+                "Elements considered safety (grades A-E) in the first wall of fusion power plan",
+                "Potentially toxic trace elements (PTEs)", "Toxic trace elements in dried mushrooms",
+                "Elements dedicated to scientists", "Elements with names of latin derivation",
+                "Elements with names of greek derivation", "Elements named after geographical locations and celestial bodies",
+                "Elements with names not derived from latin or greek, nor from cities or countries",
+                "Elements known since antiquity", "Elementary substances in solid state at standard temperature and pressure",
+                "Elementary substances in liquid state at standard temperature and pressure",
+                "Elementary substances in gas state at standard temperature and pressure", 
                 "Ferromagnetic elements", "Ultra-high temperature metals", "Metals", "Nonmetals",
-                "Transition metals", "Post-transition metals", "Metalloids", "Reactive nonmetals",
-                "s-block elements", "p-block elements", "d-block elements", "f-block elements"
+                "Elements of group I (Hydrogen & alkali metals)", "Elements of group II (Alkaline earth metals)", 
+                "Elements of group XV (Pnictogens)", "Elements of group XVI (Chalcogens)", "Elements of group XVII (Halogens)",
+                "Elements of group XVIII (Noble gases)", "Lanthanides", "Actinides", "Transition metals", 
+                "Post-transition metals", "Metalloids", "Reactive nonmetals", "s-block elements", 
+                "p-block elements", "d-block elements", "f-block elements"
             ];
 
             diets.forEach(diet => {
@@ -179,23 +189,16 @@
             });
         }
 
+        // Finalizza la selezione e avvia il gioco
         function finalSelection() {
-            const selectedSpeed = parseInt(document.getElementById("speedSelect").value);
-            const selectedDiet = document.getElementById("dietDropdown").value;
-
-            window.SPEED = selectedSpeed;
-            window.selectedDiet = selectedDiet;
-
-            document.getElementById('content').style.display = 'none';
+            selectedDiet = document.getElementById("dietDropdown").value;
+            document.getElementById('setupScreen').style.display = 'none';
             document.getElementById('gameCanvas').style.display = 'block';
-
+            document.getElementById('scoreBoard').style.display = 'block';
             startNewGame();
         }
 
-        function startNewGame() {
-            document.getElementById('gameCanvas').style.display = 'block';
-            startGame(); // Funzione definita in Snakeleev.js
-        }
+        populateDietSelection();
     </script>
     <script src="Snakeleev.js"></script>
 </body>
