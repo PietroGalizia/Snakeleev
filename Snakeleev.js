@@ -441,6 +441,51 @@ function updateElementCount() {
     document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxZ}`;
 }
 
+// Passa alla schermata di selezione della velocità
+function proceedToSpeedSelection() {
+    selectedDiet = document.getElementById("dietDropdown").value;
+    document.getElementById('dietSelection').style.display = 'none';
+    document.getElementById('speedSelection').style.display = 'block';
+
+    const speedButtons = document.getElementById('speedButtons');
+    speedButtons.innerHTML = ""; // Pulisce i bottoni precedenti
+    const SPEED_LEVELS = [250, 200, 150, 125, 100];
+
+    SPEED_LEVELS.forEach((speed, index) => {
+        const button = document.createElement('button');
+        button.className = 'button';
+        button.innerText = `Level ${index + 1}`;
+        button.onclick = () => selectSpeed(speed);
+        speedButtons.appendChild(button);
+    });
+}
+
+// Passa alla schermata di selezione del range di elementi
+function selectSpeed(speed) {
+    window.SPEED = speed;
+    document.getElementById('speedSelection').style.display = 'none';
+    document.getElementById('elementSelection').style.display = 'block';
+    updateElementCount();
+}
+
+// Aggiorna il valore del range di elementi selezionati
+function updateElementCount() {
+    const rangeValue = document.getElementById('elementRange').value;
+    maxElementsToUse = parseInt(rangeValue);
+    document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
+}
+
+// Avvia il gioco dopo la selezione del range di elementi
+function finalSelection() {
+    selectedDiet = document.getElementById("dietDropdown").value;
+    document.getElementById('elementSelection').style.display = 'none';
+    document.getElementById('gameCanvas').style.display = 'block';
+    document.getElementById('selectedDietText').style.display = 'block';
+    document.getElementById('scoreBoard').style.display = 'block';
+    document.getElementById('touchArea').style.zIndex = 10;
+    startNewGame();
+}
+
 function startGame() {
     initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
     gameLoop();
@@ -599,33 +644,53 @@ function showDietSelection() {
     const dietDropdown = document.getElementById("dietDropdown");
     dietDropdown.innerHTML = "";
 
-    DietsList.forEach(diet => {
+    const diets = [
+        "Critical elements", "Elements of a smartphone", "Elements of life", "Elements of DNA", "Radioactive elements (U-Th decay series)",
+        "Elements essential for man", "Elements used in therapy", "Elements used in diagnosis",
+        "Medical radioisotopes", "Elements considered safety (grades A-E) in the first wall of fusion power plan",
+        "Potentially toxic trace elements (PTEs)",
+        "Toxic trace elements in dried mushrooms",
+        "Elements dedicated to scientists", "Elements with names of Latin derivation",
+        "Elements with names of Greek derivation",
+        "Elements named after geographical locations and celestial bodies",
+        "Elements with names not derived from Latin or Greek, nor from cities or countries",
+        "Elements known since antiquity",
+        "Elementary substances in solid state at standard temperature and pressure",
+        "Elementary substances in liquid state at standard temperature and pressure",
+        "Elementary substances in gas state at standard temperature and pressure", 
+        "Ferromagnetic elements", "Ultra-high temperature metals", "Metals", "Nonmetals",
+        "Elements of group I (Hydrogen & alkali metals)",
+        "Elements of group II (Alkaline earth metals)", "Elements of group XV (Pnictogens)",
+        "Elements of group XVI (Chalcogens)", "Elements of group XVII (Halogens)",
+        "Elements of group XVIII (Noble gases)", "Lanthanides", "Actinides",
+        "Transition metals", "Post-transition metals", "Metalloids", "Reactive nonmetals",
+        "s-block elements", "p-block elements", "d-block elements", "f-block elements"
+    ]; 
+
+   diets.forEach(diet => {
         let option = document.createElement("option");
         option.value = diet;
         option.textContent = diet;
         dietDropdown.appendChild(option);
     });
     document.getElementById('title').style.display = 'block';
-    document.getElementById('mainMenu').style.display = 'none';
     document.getElementById('dietSelection').style.display = 'block';
 }
 
 function startNewGame() {
-    selectedDiet = document.getElementById("dietDropdown").value;
-
-    // Aggiorna le istruzioni dinamicamente con la dieta selezionata
-    updateInstructions(selectedDiet);
-
-    // Calcola i valori di incremento e decremento del punteggio
-    initializeScoreValues();
+    
+    document.getElementById('title').style.display = 'none';
+    document.getElementById('dietSelection').style.display = 'none';
+    document.getElementById('elementSelection').style.display = 'none';
+    document.getElementById('speedSelection').style.display = 'none';
+    document.getElementById('gameCanvas').style.display = 'block';
+    document.getElementById('selectedDietText').style.display = 'block';
+    document.getElementById('scoreBoard').style.display = 'block';
 
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
-
-    document.getElementById('dietSelection').style.display = 'none';
-    canvas.style.display = 'block';
 
     snake = [{ x: 100, y: 100 }];
     snakeColors = ["green"]; // Resetta i colori del serpente, partendo con la testa verde
@@ -643,8 +708,7 @@ function updateInstructions(selectedDiet) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('mainMenu').style.display = 'block';
-    updateScore(score);
+    showDietSelection(); // Mostra la schermata iniziale di selezione della dieta
 });
 
 function initializeScoreValues() {
