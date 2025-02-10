@@ -154,49 +154,49 @@
         <img id="logoCG" src="LogoChangeGame.png" alt="Logo ChangeGame">
     </div>
     
-    <div id="content">
-        <h1 id="title">Snakeleev</h1>
-        
-    <!-- Schermata iniziale: scelta della velocità -->
-    <div id="startScreen">
+<div id="content">
+    <h1 id="title">Snakeleev</h1>
+    
+    <!-- Selezione della dieta (Prima schermata) -->
+    <div id="dietSelection">
+        <h2>Select the Snake's Diet</h2>
+        <select id="dietDropdown"></select>
+        <button class="button" onclick="proceedToSpeedSelection()">Next</button>
+        <div id="instructions">
+            <h3>INSTRUCTIONS</h3>
+            <ol>
+                <li>Control the snake using the arrow keys or W, A, S, and D.</li>
+                <li id="eat-instruction">Eat only the elements that match the selected diet.</li>
+                <li>Press the spacebar to swap the positions of the two elements.</li>
+                <li>Press "P" to pause or resume the game.</li>
+                <li>Refresh the page to start a new game.</li>
+            </ol>
+            <h3>SCORING SYSTEM</h3>
+            <p>
+                Your score increases when you eat an element that belongs to the selected diet.
+                Eating an element outside the diet does not increase the score but still adds to the total elements eaten.
+            </p>
+            <p>
+                The score display shows:
+                <br><b>Score / Total Elements Eaten (Percentage)</b>
+            </p>
+        </div>
+    </div>
+
+    <!-- Schermata per la scelta della velocità (Seconda schermata) -->
+    <div id="speedSelection" style="display: none;">
         <h2>Choose the Snake's speed</h2>
         <div id="speedButtons"></div>
     </div>
 
-    <!-- Schermata per scegliere il numero di elementi -->
+    <!-- Schermata per scegliere il numero di elementi (Terza schermata) -->
     <div id="elementSelection" style="display: none;">
         <h2>Choose the range of elements to include</h2>
         <label for="elementRange">Maximum atomic number (Z):</label>
         <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
         <p id="selectedElementCount"> 40</p>
-        <button class="button" onclick="proceedToDietSelection()()">Next</button>
-     </div>
-
-    <!-- Selezione della dieta -->
-<div id="dietSelection" style="display: none;">
-    <h2>Select the Snake's Diet</h2>
-    <select id="dietDropdown"></select>
-    <button class="button" onclick="finalSelection()">Play</button>
-    <div id="instructions">
-        <h3>INSTRUCTIONS</h3>
-        <ol>
-            <li>Control the snake using the arrow keys or W, A, S, and D.</li>
-            <li id="eat-instruction">Eat only the elements that match the selected diet.</li>
-            <li>Press the spacebar to swap the positions of the two elements.</li>
-            <li>Press "P" to pause or resume the game.</li>
-            <li>Refresh the page to start a new game.</li>
-        </ol>
-        <h3>SCORING SYSTEM</h3>
-        <p>
-            Your score increases when you eat an element that belongs to the selected diet.
-            Eating an element outside the diet does not increase the score but still adds to the total elements eaten.
-        </p>
-        <p>
-            The score display shows:
-            <br><b>Score / Total Elements Eaten (Percentage)</b>
-        </p>
+        <button class="button" onclick="finalSelection()">Play</button>
     </div>
-</div>
 
     <!-- Canvas del gioco -->
     <div id="selectedDietText" style="display: none;"></div>
@@ -204,9 +204,9 @@
     <div id="touchArea"></div>
     <canvas id="gameCanvas"></canvas>
 
-
     <!-- Game Over -->
     <div id="gameover" style="display: none;"></div>
+</div>
 
     <!-- Citazione -->
     <div id="citation">
