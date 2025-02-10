@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snakeleev</title>
     <style>
-        html, body {
+        html,
+         body {
             height: 100%;
             margin: 0;
+        }
+        body {
             font-family: Arial, sans-serif;
             background-color: #002F5F;
             color: white;
@@ -18,34 +21,57 @@
             justify-content: center;
         }
 
+        #logoCNR-container {
+            position: absolute; /* Rende il posizionamento relativo al bordo della finestra */
+            top: 20px;
+            left: 10px;
+            cursor: pointer;
+        }
+        #logoCNR {
+            width: 300px;
+            height: auto;
+        }
+
+        #logoCG-container {
+            position: absolute;
+            top: 0px;
+            rigth: 10px;
+            cursor: pointer;
+        }
+
+        #logoCG {
+            width: 100px;
+            height: auto;
+        }
+
+        /* Aggiungi spazio sotto il logo */
         #content {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: center; /* Centra orizzontalmente */
+            justify-content: flex-start; /* Non separa troppo gli elementi */
             text-align: center;
             padding-top: 20px;
             width: 100%;
-            margin-top: 50px;
+            margin-top: 50px
         }
 
-        h1 {
+       h1 {
             font-size: 3rem;
             margin: 20px;
         }
 
-        .selection-container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        #dietSelection {
+            text-align: center;
+            margin-bottom: 10px; 
         }
 
-        .selection-container h2 {
-            margin-bottom: 10px;
+        #dietSelection {
+            display: none;
+            text-align: center;
+            margin: 25px 0;
         }
-
+        
         .button {
             margin: 10px;
             padding: 10px 20px;
@@ -53,17 +79,11 @@
             border: none;
             color: white;
             cursor: pointer;
-            border-radius: 5px;
         }
 
         .button:hover {
             background-color: #739A1A;
             transition: background-color 0.3s;
-        }
-
-        select, input {
-            padding: 5px;
-            margin-top: 5px;
         }
 
         #instructions {
@@ -72,55 +92,91 @@
             width: 80%;
             color: white;
         }
+        #instructions h3 {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        #instructions ol {
+            padding-left: 20px;
+        }
+        #instructions h4:last-of-type {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: rgb(229, 26, 75); /* Rosso specifico */
+        }
+
+        #citation {
+            margin: 15px auto;
+            font-size: 14px;
+            text-align: center;
+            color: white;
+            padding: 5px;
+        }
+        
+        #citation a {
+            text-decoration: none;
+            color: #96AE21;
+        }
+        #citation a:hover {
+            color: #e51a4b;
+        }
+
+        #touchArea {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: transparent;
+        }
 
         #gameCanvas {
             display: none;
             background-color: #002F5F;
-            margin: 0 auto;
+            margin: 0px auto;
             max-width: 90%;
             max-height: 90%;
         }
-
-        #scoreBoard {
-            display: none;
-            margin-top: 15px;
-        }
+        
     </style>
 </head>
 <body>
-
-    <h1 id="title">Snakeleev</h1>
-
-    <div class="selection-container" id="gameSetup">
-        <h2>Choose Settings</h2>
-
-        <label for="speed">Snake Speed:</label>
-        <select id="speed">
-            <option value="250">Level 1 (Slow)</option>
-            <option value="200">Level 2</option>
-            <option value="150">Level 3 (Medium)</option>
-            <option value="125">Level 4</option>
-            <option value="100">Level 5 (Fast)</option>
-        </select>
-
-        <br><br>
-
-        <label for="elementRange">Maximum Atomic Number (Z):</label>
-        <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
-        <p id="selectedElementCount"> 1 ≤ Z ≤ 40</p>
-
-        <br>
-
-        <label for="dietDropdown">Select Diet:</label>
-        <select id="dietDropdown"></select>
-
-        <br><br>
-        <button class="button" onclick="startGame()">Play</button>
+    <div id="logoCNR-container" onclick="window.open('https://www.issmc.cnr.it/en/', '_blank')">
+        <img id="logoCNR" src="logo.png" alt="Logo CNR-ISSMC">
     </div>
 
-    <div id="scoreBoard"></div>
-    <canvas id="gameCanvas"></canvas>
+    <div id="logoCG-container" onclick="window.open('https://www.changegame.cnr.it/', '_blank')">
+        <img id="logoCG" src="LogoChangeGame.png" alt="Logo ChangeGame">
+    </div>
+    
+    <div id="content">
+        <h1 id="title">Snakeleev</h1>
+        
+    <!-- Schermata iniziale: scelta della velocità -->
+    <div id="startScreen">
+        <h2>Choose the Snake's speed</h2>
+        <div id="speedButtons"></div>
+    </div>
 
+    <!-- Schermata per scegliere il numero di elementi -->
+    <div id="elementSelection" style="display: none;">
+        <h2>Choose the range of elements to include</h2>
+        <label for="elementRange">Maximum atomic number (Z):</label>
+        <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
+        <p id="selectedElementCount"> 40</p>
+        <button class="button" onclick="proceedToDietSelection()()">Next</button>
+     </div>
+
+    <!-- Selezione della dieta -->
+<div id="dietSelection" style="display: none;">
+    <h2>Select the Snake's Diet</h2>
+    <select id="dietDropdown"></select>
+    <button class="button" onclick="finalSelection()">Play</button>
     <div id="instructions">
         <h3>INSTRUCTIONS</h3>
         <ol>
@@ -140,53 +196,126 @@
             <br><b>Score / Total Elements Eaten (Percentage)</b>
         </p>
     </div>
+</div>
 
+    <!-- Canvas del gioco -->
+    <div id="selectedDietText" style="display: none;"></div>
+    <div id="scoreBoard" style="display: none;"></div>
+    <div id="touchArea"></div>
+    <canvas id="gameCanvas"></canvas>
+
+
+    <!-- Game Over -->
+    <div id="gameover" style="display: none;"></div>
+
+    <!-- Citazione -->
+    <div id="citation">
+        <a href="https://zenodo.org/records/10643098" target="_blank">
+            Pietro Galizia <i>"Snakeleev: Gamifying the Periodic Table Through the Snake Game"</i> 
+            <br>J. Chem. Educ. <b>2025</b>, Vol., n., DOI: 10.1021/acs.jchemed.
+        </a>
+    </div>
+        
     <script>
-        // Carica la lista delle diete
+        // Setup degli elementi principali
+        const SPEED_LEVELS = [250, 200, 150, 125, 100];
+        let maxElementsToUse = 50;
+
+        // Mostra la schermata iniziale
         document.addEventListener('DOMContentLoaded', () => {
+            const speedButtons = document.getElementById('speedButtons');
+            SPEED_LEVELS.forEach((speed, index) => {
+                const button = document.createElement('button');
+                button.className = 'button';
+                button.innerText = `Level ${index + 1}`;
+                button.onclick = () => selectSpeed(speed);
+                speedButtons.appendChild(button);
+            });
+            document.getElementById('title').style.display = 'block';
+            document.getElementById('gameover').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'block';
+        });
+
+        // Funzione per selezionare la velocità e passare alla selezione della dieta
+        function selectSpeed(speed) {
+            window.SPEED = speed;
+            document.getElementById('title').style.display = 'block';
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('elementSelection').style.display = 'block';
+            updateElementCount();
+        }
+
+        function updateElementCount() {
+            const rangeValue = document.getElementById('elementRange').value;
+            maxElementsToUse = parseInt(rangeValue);
+            document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
+        }
+
+        function proceedToDietSelection() {
+                document.getElementById('title').style.display = 'block';
+                document.getElementById('startScreen').style.display = 'none';
+                document.getElementById('elementSelection').style.display = 'none';
+                document.getElementById('dietSelection').style.display = 'block';
+
             const dietDropdown = document.getElementById("dietDropdown");
             const diets = [
-                "Critical elements", "Elements of a smartphone", "Elements of life",
-                "Elements of DNA", "Radioactive elements (U-Th decay series)",
-                "Elements essential for man", "Elements used in therapy",
-                "Medical radioisotopes", "Elements considered safety (grades A-E)",
-                "Toxic trace elements in dried mushrooms", "Elements dedicated to scientists",
-                "Ferromagnetic elements", "Ultra-high temperature metals",
-                "Metals", "Nonmetals", "Transition metals",
-                "Lanthanides", "Actinides", "s-block elements",
-                "p-block elements", "d-block elements", "f-block elements"
-            ];
+                "Critical elements", "Elements of a smartphone", "Elements of life", "Elements of DNA", "Radioactive elements (U-Th decay series)",
+                "Elements essential for man", "Elements used in therapy", "Elements used in diagnosis",
+                "Medical radioisotopes", "Elements considered safety (grades A-E) in the first wall of fusion power plan",
+                "Potentially toxic trace elements (PTEs)",
+                "Toxic trace elements in dried mushrooms",
+                "Elements dedicated to scientists", "Elements with names of latin derivation",
+                "Elements with names of greek derivation",
+                "Elements named after geographical locations and celestial bodies",
+                "Elements with names not derived from latin or greek, nor from cities or countries",
+                "Elements known since antiquity",
+                "Elementary substances in solid state at standard temperature and pressure",
+                "Elementary substances in liquid state at standard temperature and pressure",
+                "Elementary substances in gas state at standard temperature and pressure", 
+                "Ferromagnetic elements", "Ultra-high temperature metals", "Metals", "Nonmetals",
+                "Elements of group I (Hydrogen & alkali metals)",
+                "Elements of group II (Alkaline earth metals)", "Elements of group XV (Pnictogens)",
+                "Elements of group XVI (Chalcogens)", "Elements of group XVII (Halogens)",
+                "Elements of group XVIII (Noblegases)", "Lanthanides", "Actinides",
+                "Transition metals", "Post-transition metals", "Metalloids", "Reactive nonmetals",
+                "s-block elements", "p-block elements", "d-block elements", "f-block elements"
+            ]; 
+            
+            // Aggiungi altre opzioni
             diets.forEach(diet => {
                 const option = document.createElement("option");
                 option.value = diet;
                 option.textContent = diet;
                 dietDropdown.appendChild(option);
             });
-
-            // Imposta il valore iniziale del range
-            updateElementCount();
-        });
-
-        function updateElementCount() {
-            const rangeValue = document.getElementById('elementRange').value;
-            document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${rangeValue}`;
         }
 
-        function startGame() {
-            // Ottieni le impostazioni selezionate
-            window.SPEED = parseInt(document.getElementById('speed').value);
-            window.maxElementsToUse = parseInt(document.getElementById('elementRange').value);
-            window.selectedDiet = document.getElementById('dietDropdown').value;
-
-            // Nasconde il setup iniziale e avvia il gioco
-            document.getElementById('gameSetup').style.display = 'none';
-            document.getElementById('instructions').style.display = 'none';
+        function finalSelection() {
+            selectedDiet = document.getElementById("dietDropdown").value;
+            window.selectedDiet = document.getElementById("dietDropdown").value;
+            document.getElementById('title').style.display = 'none';
+            document.getElementById('dietSelection').style.display = 'none';
             document.getElementById('gameCanvas').style.display = 'block';
+            document.getElementById('selectedDietText').style.display = 'block';
             document.getElementById('scoreBoard').style.display = 'block';
+            document.getElementById('touchArea').style.zIndex = 10;
+            startNewGame();
+        }
 
-            startNewGame(); // Avvia il gioco
+
+        // Funzione per avviare il gioco
+        function startNewGame() {
+            document.getElementById('title').style.display = 'none';
+            document.getElementById('dietSelection').style.display = 'none'; // Nascondi la schermata
+            document.getElementById('gameCanvas').style.display = 'block'; // Mostra il canvas del gioco
+            startGame(); // Funzione definita in Snakeleev.js
+        }
+
+        function resetGameState() {
+            // Ricarica la pagina
+            location.reload();
         }
     </script>
-
+    <script src="Snakeleev.js"></script>
 </body>
 </html>
