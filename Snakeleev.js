@@ -669,6 +669,8 @@ function startNewGame() {
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
+    initializeScoreValues();
+
     snake = [{ x: 100, y: 100 }];
     snakeColors = ["green"]; // Resetta i colori del serpente, partendo con la testa verde
     direction = { x: 1, y: 0 };
