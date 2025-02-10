@@ -441,51 +441,6 @@ function updateElementCount() {
     document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxZ}`;
 }
 
-// Passa alla schermata di selezione della velocità
-function proceedToSpeedSelection() {
-    selectedDiet = document.getElementById("dietDropdown").value;
-    document.getElementById('dietSelection').style.display = 'none';
-    document.getElementById('speedSelection').style.display = 'block';
-
-    const speedButtons = document.getElementById('speedButtons');
-    speedButtons.innerHTML = ""; // Pulisce i bottoni precedenti
-    const SPEED_LEVELS = [250, 200, 150, 125, 100];
-
-    SPEED_LEVELS.forEach((speed, index) => {
-        const button = document.createElement('button');
-        button.className = 'button';
-        button.innerText = `Level ${index + 1}`;
-        button.onclick = () => selectSpeed(speed);
-        speedButtons.appendChild(button);
-    });
-}
-
-// Passa alla schermata di selezione del range di elementi
-function selectSpeed(speed) {
-    window.SPEED = speed;
-    document.getElementById('speedSelection').style.display = 'none';
-    document.getElementById('elementSelection').style.display = 'block';
-    updateElementCount();
-}
-
-// Aggiorna il valore del range di elementi selezionati
-function updateElementCount() {
-    const rangeValue = document.getElementById('elementRange').value;
-    maxElementsToUse = parseInt(rangeValue);
-    document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
-}
-
-// Avvia il gioco dopo la selezione del range di elementi
-function finalSelection() {
-    selectedDiet = document.getElementById("dietDropdown").value;
-    document.getElementById('elementSelection').style.display = 'none';
-    document.getElementById('gameCanvas').style.display = 'block';
-    document.getElementById('selectedDietText').style.display = 'block';
-    document.getElementById('scoreBoard').style.display = 'block';
-    document.getElementById('touchArea').style.zIndex = 10;
-    startNewGame();
-}
-
 function startGame() {
     initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
     gameLoop();
@@ -651,25 +606,26 @@ function showDietSelection() {
         dietDropdown.appendChild(option);
     });
     document.getElementById('title').style.display = 'block';
+    document.getElementById('mainMenu').style.display = 'none';
     document.getElementById('dietSelection').style.display = 'block';
 }
 
 function startNewGame() {
-    
-    document.getElementById('title').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'none';
-    document.getElementById('elementSelection').style.display = 'none';
-    document.getElementById('speedSelection').style.display = 'none';
-    document.getElementById('gameCanvas').style.display = 'block';
-    document.getElementById('selectedDietText').style.display = 'block';
-    document.getElementById('scoreBoard').style.display = 'block';
+    selectedDiet = document.getElementById("dietDropdown").value;
+
+    // Aggiorna le istruzioni dinamicamente con la dieta selezionata
+    updateInstructions(selectedDiet);
+
+    // Calcola i valori di incremento e decremento del punteggio
+    initializeScoreValues();
 
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
-    initializeScoreValues();
+    document.getElementById('dietSelection').style.display = 'none';
+    canvas.style.display = 'block';
 
     snake = [{ x: 100, y: 100 }];
     snakeColors = ["green"]; // Resetta i colori del serpente, partendo con la testa verde
@@ -687,7 +643,8 @@ function updateInstructions(selectedDiet) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    showDietSelection(); // Mostra la schermata iniziale di selezione della dieta
+    document.getElementById('mainMenu').style.display = 'block';
+    updateScore(score);
 });
 
 function initializeScoreValues() {
