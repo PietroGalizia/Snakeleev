@@ -612,7 +612,7 @@ function startNewGame() {
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
-    // Nasconde la schermata iniziale e avvia il gioco
+    // Nasconde la schermata di configurazione e mostra il gioco
     document.getElementById('gameSetup').style.display = 'none';
     document.getElementById('instructions').style.display = 'none';
     document.getElementById('gameCanvas').style.display = 'block';
@@ -1137,22 +1137,22 @@ function updateGame(ctx) {
             
 }
 
-// Function to exit the game
 function exitGame() {
-    document.getElementById('title').style.display = 'none';
+    document.getElementById('title').style.display = 'block';
     document.getElementById('gameCanvas').style.display = 'none';
     document.getElementById('scoreBoard').style.display = 'none';
-    document.getElementById('elementSelection').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'none';
     document.getElementById('selectedDietText').style.display = 'none';
     document.getElementById('gameover').style.display = 'block';
     document.getElementById('touchArea').style.zIndex = -1;
+    document.getElementById('gameSetup').style.display = 'block';
+
     showGameOverScreen();
 
     if (gameInterval) {
         clearInterval(gameInterval);
     }
 }
+
 
 function showGameOverScreen() {
     const gameOverElement = document.getElementById("gameover");
@@ -1162,7 +1162,9 @@ function showGameOverScreen() {
     gameOverElement.innerHTML = `
         <h2>Stay Hungry! Stay Periodic!</h2>
         <p>${randomMessage}</p>
-        <button class="button" onclick="resetGameState()">Reset</button>
+        <button class="button" onclick="resetGameState()">Restart</button>
     `;
     gameOverElement.style.display = "block";
 }
+
+
