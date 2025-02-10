@@ -595,23 +595,11 @@ function drawFoodII() {
     ctx.fillText(foodIIElement, foodII.x + SIZE / 2, foodII.y + SIZE / 2);
 }
 
-function showDietSelection() {
-    const dietDropdown = document.getElementById("dietDropdown");
-    dietDropdown.innerHTML = "";
-
-    DietsList.forEach(diet => {
-        let option = document.createElement("option");
-        option.value = diet;
-        option.textContent = diet;
-        dietDropdown.appendChild(option);
-    });
-    document.getElementById('title').style.display = 'block';
-    document.getElementById('mainMenu').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'block';
-}
-
 function startNewGame() {
+    // Recupera le impostazioni selezionate
     selectedDiet = document.getElementById("dietDropdown").value;
+    window.SPEED = parseInt(document.getElementById('speed').value);
+    window.maxElementsToUse = parseInt(document.getElementById('elementRange').value);
 
     // Aggiorna le istruzioni dinamicamente con la dieta selezionata
     updateInstructions(selectedDiet);
@@ -624,8 +612,11 @@ function startNewGame() {
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
-    document.getElementById('dietSelection').style.display = 'none';
-    canvas.style.display = 'block';
+    // Nasconde la schermata iniziale e avvia il gioco
+    document.getElementById('gameSetup').style.display = 'none';
+    document.getElementById('instructions').style.display = 'none';
+    document.getElementById('gameCanvas').style.display = 'block';
+    document.getElementById('scoreBoard').style.display = 'block';
 
     snake = [{ x: 100, y: 100 }];
     snakeColors = ["green"]; // Resetta i colori del serpente, partendo con la testa verde
@@ -643,7 +634,6 @@ function updateInstructions(selectedDiet) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('mainMenu').style.display = 'block';
     updateScore(score);
 });
 
