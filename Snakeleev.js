@@ -644,6 +644,29 @@ function showDietSelection() {
     const dietDropdown = document.getElementById("dietDropdown");
     dietDropdown.innerHTML = "";
 
+    const diets = [
+        "Critical elements", "Elements of a smartphone", "Elements of life", "Elements of DNA", "Radioactive elements (U-Th decay series)",
+        "Elements essential for man", "Elements used in therapy", "Elements used in diagnosis",
+        "Medical radioisotopes", "Elements considered safety (grades A-E) in the first wall of fusion power plan",
+        "Potentially toxic trace elements (PTEs)",
+        "Toxic trace elements in dried mushrooms",
+        "Elements dedicated to scientists", "Elements with names of Latin derivation",
+        "Elements with names of Greek derivation",
+        "Elements named after geographical locations and celestial bodies",
+        "Elements with names not derived from Latin or Greek, nor from cities or countries",
+        "Elements known since antiquity",
+        "Elementary substances in solid state at standard temperature and pressure",
+        "Elementary substances in liquid state at standard temperature and pressure",
+        "Elementary substances in gas state at standard temperature and pressure", 
+        "Ferromagnetic elements", "Ultra-high temperature metals", "Metals", "Nonmetals",
+        "Elements of group I (Hydrogen & alkali metals)",
+        "Elements of group II (Alkaline earth metals)", "Elements of group XV (Pnictogens)",
+        "Elements of group XVI (Chalcogens)", "Elements of group XVII (Halogens)",
+        "Elements of group XVIII (Noble gases)", "Lanthanides", "Actinides",
+        "Transition metals", "Post-transition metals", "Metalloids", "Reactive nonmetals",
+        "s-block elements", "p-block elements", "d-block elements", "f-block elements"
+    ]; 
+
    diets.forEach(diet => {
         let option = document.createElement("option");
         option.value = diet;
@@ -668,8 +691,6 @@ function startNewGame() {
     const ctx = canvas.getContext('2d');
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
-
-    initializeScoreValues();
 
     snake = [{ x: 100, y: 100 }];
     snakeColors = ["green"]; // Resetta i colori del serpente, partendo con la testa verde
