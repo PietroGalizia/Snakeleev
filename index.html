@@ -195,7 +195,7 @@
         <label for="elementRange">Maximum atomic number (Z):</label>
         <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
         <p id="selectedElementCount"> 40</p>
-        <button class="button" onclick="proceedToDietSelection()()">Next</button>
+        <button class="button" onclick="proceedToDietSelection()">Next</button>
      </div>
 
     <!-- Canvas del gioco -->
@@ -304,7 +304,6 @@
             document.getElementById('title').style.display = 'none';
             document.getElementById('dietSelection').style.display = 'none';
             document.getElementById('elementSelection').style.display = 'none';
-            document.getElementById('speedSelection').style.display = 'none';
             document.getElementById('gameCanvas').style.display = 'block';
             startGame(); // Funzione definita in Snakeleev.js
         }
