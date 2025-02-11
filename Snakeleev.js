@@ -431,32 +431,20 @@ document.addEventListener('keydown', (event) => {
 
 // Funzione per aggiornare la selezione e la lista di elementi scartati
 function updateElementCount() {
-    const maxZ = parseInt(document.getElementById('elementRange').value);
+    const rangeValue = document.getElementById('elementRange').value; // Valore massimo di Z
+    const maxZ = parseInt(rangeValue);
 
-    // Filtra gli elementi da escludere
-    erasedElements = elements.filter(el => el.atomicNumber > maxZ);
+    // Aggiorna il contenuto della variabile erasedElements con elementi oltre il valore massimo di Z
+    erasedElements = elements.slice(maxZ);
 
-    // Aggiorna l'HTML
+    // Aggiorna il testo mostrato all'utente
     document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxZ}`;
 }
 
 function startGame() {
-    // Recupera i valori selezionati dall'HTML
-    selectedDiet = document.getElementById("dietDropdown").value;
-    maxElementsToUse = parseInt(document.getElementById("elementRange").value);
-    
-    // Inizializza il gioco con le nuove impostazioni
-    initializeGameVariables();
-    updateScore(0);
-    generateFood();
-    generateFoodII();
-    
-    // Mostra il canvas e avvia il loop di gioco
-    document.getElementById('gameCanvas').style.display = 'block';
-    document.getElementById('selectionScreen').classList.add('hidden');
-    startGameLoop();
+    initializeGameVariables(); // Reinizializza tutte le variabili per una nuova partita
+    gameLoop();
 }
-
 
 function handleTouchStart(event) {
     const touch = event.touches[0];
@@ -770,11 +758,11 @@ function generateFoodII() {
 function startGameLoop(ctx) {
     if (isPaused) return; // Se il gioco è in pausa, esci subito
     
-gameInterval = setInterval(() => {
-    if (!isPaused) { 
-        updateGame(ctx);
-    }
-}, window.SPEED);
+    gameInterval = setInterval(() => {
+        if (!isPaused) { // Controlla sempre se il gioco è in pausa
+            updateGame(ctx);
+        }
+    }, window.SPEED);
 }
 
 function createInfoRect(element, x, y) {
@@ -1188,5 +1176,3 @@ function showGameOverScreen() {
     `;
     gameOverElement.style.display = "block";
 }
-
-
