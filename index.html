@@ -175,20 +175,16 @@
         }
 
         function startNewGame() {
-            selectedDiet = document.getElementById("dietDropdown").value;
             window.selectedDiet = document.getElementById("dietDropdown").value;
 
-            document.getElementById('title').style.display = 'none';
-            document.getElementById('dietSelection').style.display = 'none';
+            document.getElementById('setupScreen').style.display = 'none';
+            document.getElementById('gameContainer').style.display = 'block';
             document.getElementById('gameCanvas').style.display = 'block';
             document.getElementById('selectedDietText').style.display = 'block';
             document.getElementById('scoreBoard').style.display = 'block';
-            document.getElementById('touchArea').style.zIndex = 10;
 
-            startGame();
-
-            // Avvia il gioco dopo la selezione della dieta
-            startNewGame();
+            // Chiama la funzione definita in Snakeleev.js per avviare il gioco
+            startGame();  
         }
         
     </script>
