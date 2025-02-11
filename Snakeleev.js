@@ -431,14 +431,14 @@ document.addEventListener('keydown', (event) => {
 
 // Funzione per aggiornare la selezione e la lista di elementi scartati
 function updateElementCount() {
-    const rangeValue = document.getElementById('elementRange').value; // Valore massimo di Z
-    const maxZ = parseInt(rangeValue);
-
-    // Aggiorna il contenuto della variabile erasedElements con elementi oltre il valore massimo di Z
-    erasedElements = elements.slice(maxZ);
-
-    // Aggiorna il testo mostrato all'utente
-    document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxZ}`;
+    const rangeValue = document.getElementById('elementRange').value;
+    maxElementsToUse = parseInt(rangeValue);
+    
+    // Aggiorna gli elementi cancellati in base al nuovo range selezionato
+    erasedElements = elements.slice(maxElementsToUse);
+    
+    // Aggiorna il valore mostrato accanto allo slider
+    document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
 }
 
 function startGame() {
@@ -595,28 +595,13 @@ function drawFoodII() {
     ctx.fillText(foodIIElement, foodII.x + SIZE / 2, foodII.y + SIZE / 2);
 }
 
-function showDietSelection() {
-    const dietDropdown = document.getElementById("dietDropdown");
-    dietDropdown.innerHTML = "";
-
-    DietsList.forEach(diet => {
-        let option = document.createElement("option");
-        option.value = diet;
-        option.textContent = diet;
-        dietDropdown.appendChild(option);
-    });
-    document.getElementById('title').style.display = 'block';
-    document.getElementById('mainMenu').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'block';
-}
-
 function startNewGame() {
+    // Recupera le selezioni dell'utente
     selectedDiet = document.getElementById("dietDropdown").value;
+    window.SPEED = window.SPEED || 150; // Se non selezionata, usa velocità di default
+    maxElementsToUse = parseInt(document.getElementById('elementRange').value);
 
-    // Aggiorna le istruzioni dinamicamente con la dieta selezionata
     updateInstructions(selectedDiet);
-
-    // Calcola i valori di incremento e decremento del punteggio
     initializeScoreValues();
 
     const canvas = document.getElementById('gameCanvas');
@@ -624,13 +609,16 @@ function startNewGame() {
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
-    document.getElementById('dietSelection').style.display = 'none';
-    canvas.style.display = 'block';
+    // Mostra il gioco e nasconde la schermata di selezione
+    document.getElementById('setupScreen').style.display = 'none';
+    document.getElementById('gameContainer').style.display = 'block';
 
+    // Inizializza il gioco
     snake = [{ x: 100, y: 100 }];
-    snakeColors = ["green"]; // Resetta i colori del serpente, partendo con la testa verde
+    snakeColors = ["green"];
     direction = { x: 1, y: 0 };
     score = 0;
+
     updateScore(score);
     generateFood();
     generateFoodII();
