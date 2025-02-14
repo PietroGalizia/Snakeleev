@@ -429,15 +429,10 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-// Funzione per aggiornare la selezione e la lista di elementi scartati
 function updateElementCount() {
-    const rangeValue = document.getElementById('elementRange').value; // Valore massimo di Z
+    const rangeValue = document.getElementById('elementRange').value;
     const maxZ = parseInt(rangeValue);
-
-    // Aggiorna il contenuto della variabile erasedElements con elementi oltre il valore massimo di Z
     erasedElements = elements.slice(maxZ);
-
-    // Aggiorna il testo mostrato all'utente
     document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxZ}`;
 }
 
@@ -595,40 +590,19 @@ function drawFoodII() {
     ctx.fillText(foodIIElement, foodII.x + SIZE / 2, foodII.y + SIZE / 2);
 }
 
-function showDietSelection() {
-    const dietDropdown = document.getElementById("dietDropdown");
-    dietDropdown.innerHTML = "";
-
-    DietsList.forEach(diet => {
-        let option = document.createElement("option");
-        option.value = diet;
-        option.textContent = diet;
-        dietDropdown.appendChild(option);
-    });
-    document.getElementById('title').style.display = 'block';
-    document.getElementById('mainMenu').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'block';
-}
 
 function startNewGame() {
     selectedDiet = document.getElementById("dietDropdown").value;
-
-    // Aggiorna le istruzioni dinamicamente con la dieta selezionata
     updateInstructions(selectedDiet);
-
-    // Calcola i valori di incremento e decremento del punteggio
     initializeScoreValues();
-
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
-
-    document.getElementById('dietSelection').style.display = 'none';
+    document.getElementById('selectionScreen').style.display = 'none';
     canvas.style.display = 'block';
-
     snake = [{ x: 100, y: 100 }];
-    snakeColors = ["green"]; // Resetta i colori del serpente, partendo con la testa verde
+    snakeColors = ["green"];
     direction = { x: 1, y: 0 };
     score = 0;
     updateScore(score);
@@ -643,7 +617,14 @@ function updateInstructions(selectedDiet) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('mainMenu').style.display = 'block';
+    const speedButtons = document.getElementById('speedButtons');
+    SPEED_LEVELS.forEach((speed, index) => {
+        const button = document.createElement('button');
+        button.className = 'button';
+        button.innerText = `Level ${index + 1}`;
+        button.onclick = () => selectSpeed(speed);
+        speedButtons.appendChild(button);
+    });
     updateScore(score);
 });
 
@@ -807,21 +788,23 @@ function updateScore(newScore) {
     selectedDietDiv.style.color = 'white';
     selectedDietDiv.textContent = selectedDiet;
 
-    // Calcola la percentuale degli elementi validi mangiati
+    // Calcola la percentuale degli elementi corretti
     let percentage = totalFoodEaten > 0 ? ((newScore / totalFoodEaten) * 100).toFixed(1) : 0;
 
-    // Interpolazione dal rosso (229, 26, 75) al verde (150, 174, 33)
+    // Interpola tra rosso (229, 26, 75) e verde (150, 174, 33)
     let r = Math.round(229 + (150 - 229) * (percentage / 100));
     let g = Math.round(26 + (174 - 26) * (percentage / 100));
     let b = Math.round(75 + (33 - 75) * (percentage / 100));
     let color = `rgb(${r}, ${g}, ${b})`;
 
-    // Layout con riquadri per score e percentuale
+    // Mostra lo score e la percentuale in due riquadri affiancati
     scoreBoard.innerHTML = `
         <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+            <!-- Riquadro del punteggio -->
             <div style="border: 2px solid #78b3e0; padding: 5px 10px; border-radius: 5px; background-color: rgb(0, 47, 95); font-size: 1.2em;">
                 <b>${newScore} / ${totalFoodEaten}</b>
             </div>
+            <!-- Riquadro della percentuale -->
             <div style="border: 2px solid #78b3e0; padding: 5px 10px; border-radius: 5px; background-color: rgb(0, 47, 95);">
                 <b style="color: ${color}; font-size: 1.2em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); transition: color 0.5s ease-in-out;">
                     ${percentage}%
@@ -861,6 +844,7 @@ function updateGame(ctx) {
             
     // Aggiungi la nuova testa
     snake.unshift(head);
+
 
     // Controlla se il serpente mangia il cibo
     if (head.x === food.x && head.y === food.y) {
@@ -1147,18 +1131,15 @@ function updateGame(ctx) {
             
 }
 
-// Function to exit the game
 function exitGame() {
     document.getElementById('title').style.display = 'none';
     document.getElementById('gameCanvas').style.display = 'none';
     document.getElementById('scoreBoard').style.display = 'none';
-    document.getElementById('elementSelection').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'none';
+    document.getElementById('selectionScreen').style.display = 'none';
     document.getElementById('selectedDietText').style.display = 'none';
     document.getElementById('gameover').style.display = 'block';
     document.getElementById('touchArea').style.zIndex = -1;
     showGameOverScreen();
-
     if (gameInterval) {
         clearInterval(gameInterval);
     }
@@ -1166,9 +1147,7 @@ function exitGame() {
 
 function showGameOverScreen() {
     const gameOverElement = document.getElementById("gameover");
-    const diet = window.selectedDiet || "default";
     const randomMessage = getRandomDietMessage(window.selectedDiet);
-
     gameOverElement.innerHTML = `
         <h2>Stay Hungry! Stay Periodic!</h2>
         <p>${randomMessage}</p>
