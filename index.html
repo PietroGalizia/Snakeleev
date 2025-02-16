@@ -231,12 +231,11 @@ select:hover {
 
     <!-- Schermata iniziale-->
 <div id="startScreen">
-    <h2>Snake's speed</h2>
     <!-- Contenitore per la selezione della velocità -->
 <div class="speed-container">
-    <label class="speed-label" for="speedRange">Snake's Speed:</label>
+    <label class="speed-label" for="speedRange"></label>
     <input id="speedRange" class="speed-slider" type="range" min="1" max="5" value="3" oninput="updateSpeedLabel()">
-    <p id="selectedSpeed">Level 3</p>
+    <p id="selectedSpeed">Speed 3</p>
 </div>
 
 
@@ -302,7 +301,7 @@ select:hover {
     // Funzione per aggiornare l'etichetta della velocità
     function updateSpeedLabel() {
         const speedValue = document.getElementById('speedRange').value;
-        document.getElementById('selectedSpeed').textContent = `Level ${speedValue}`;
+        document.getElementById('selectedSpeed').textContent = `Speed ${speedValue}`;
         window.SPEED = SPEED_LEVELS[speedValue]; // Imposta la velocità della partita
     }
 
