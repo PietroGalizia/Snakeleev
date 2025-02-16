@@ -5,114 +5,239 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snakeleev</title>
     <style>
-        html,
-         body {
-            height: 100%;
-            margin: 0;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #002F5F;
-            color: white;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+       /* ---- IMPOSTAZIONI GENERALI ---- */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #002F5F 30%, #013A74 100%);
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
-        #logoCNR-container {
-            position: absolute; /* Rende il posizionamento relativo al bordo della finestra */
-            top: 20px;
-            left: 10px;
-            cursor: pointer;
-        }
-        #logoCNR {
-            width: 300px;
-            height: auto;
-        }
+/* ---- LOGHI ---- */
+#logoCNR-container {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    cursor: pointer;
+}
 
-        #logoCG-container {
-            position: absolute;
-            top: 0px;
-            rigth: 10px;
-            cursor: pointer;
-        }
+#logoCNR {
+    width: 250px;
+    height: auto;
+}
 
-        #logoCG {
-            width: 100px;
-            height: auto;
-        }
+#logoCG-container {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    cursor: pointer;
+}
 
-        /* Aggiungi spazio sotto il logo */
-        #content {
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centra orizzontalmente */
-            justify-content: flex-start; /* Non separa troppo gli elementi */
-            text-align: center;
-            padding-top: 20px;
-            width: 100%;
-            margin-top: 50px
-        }
+#logoCG {
+    width: 90px;
+    height: auto;
+}
 
-       h1 {
-            font-size: 3rem;
-            margin: 20px;
-        }
-        
-        .button {
-            margin: 10px;
-            padding: 10px 20px;
-            background-color: #96AE21;
-            border: none;
-            color: white;
-            cursor: pointer;
-        }
+/* ---- CONTENITORE PRINCIPALE ---- */
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding-top: 20px;
+    width: 90%;
+    max-width: 800px;
+    margin-top: 50px;
+}
 
-        .button:hover {
-            background-color: rgb(65, 127, 69);
-            transition: background-color 0.3s;
-        }
+/* ---- TITOLI ---- */
+h1 {
+    font-size: 3.8rem;
+    margin: 20px;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+}
 
-        #instructions {
-            margin: 40px auto;
-            text-align: left;
-            width: 80%;
-            color: white;
-        }
-        #instructions h3 {
-            text-align: center;
-            text-transform: uppercase;
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-        #instructions ol {
-            padding-left: 20px;
-        }
-        #instructions h4:last-of-type {
-            text-align: center;
-            text-transform: uppercase;
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: rgb(229, 26, 75); /* Rosso specifico */
-        }
+/* ---- CONTENITORE PRINCIPALE ---- */
+#startScreen {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    width: 80%;
+    max-width: 600px;
+}
 
-        #citation {
-            margin: 15px auto;
-            font-size: 14px;
-            text-align: center;
-            color: white;
-            padding: 5px;
-        }
-        
-        #citation a {
-            text-decoration: none;
-            color: #96AE21;
-        }
-        #citation a:hover {
-            color: #e51a4b;
-        }
+/* ---- STILE SLIDER ---- */
+.speed-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 500px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.speed-label {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Stile dello slider */
+input[type="range"].speed-slider {
+    width: 90%;
+    margin: 10px 0;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: #96AE21;
+    border-radius: 5px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input[type="range"].speed-slider:hover {
+    background: rgb(65, 127, 69);
+}
+
+/* Valore dinamico della velocità */
+#selectedSpeed {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #96AE21;
+}
+
+/* ---- PULSANTI ---- */
+.button {
+    margin: 8px;
+    padding: 12px 18px;
+    background-color: #96AE21;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+.button:hover {
+    background-color: rgb(65, 127, 69);
+    transform: scale(1.07);
+    box-shadow: 0px 4px 10px rgba(65, 127, 69, 0.6);
+}
+
+/* ---- SLIDER ---- */
+input[type="range"] {
+    width: 80%;
+    margin: 10px 0;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: #96AE21;
+    border-radius: 5px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input[type="range"]:hover {
+    background: rgb(65, 127, 69);
+}
+
+/* ---- MENU A TENDINA ---- */
+select {
+    width: 80%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.1rem;
+    text-align: center;
+    background: white;
+    color: #002F5F;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+select:hover {
+    background: #f3f3f3;
+}
+
+/* ---- ISTRUZIONI ---- */
+#instructions {
+    margin-top: 20px;
+    text-align: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 18px;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+}
+
+#instructions h3 {
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+}
+
+#instructions ol {
+    text-align: left;
+    margin-left: 20px;
+}
+
+#instructions p {
+    font-size: 1.1rem;
+}
+
+/* ---- CANVAS ---- */
+#gameCanvas {
+    display: none;
+    background-color: #002F5F;
+    margin: 0 auto;
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* ---- PUNTEGGIO ---- */
+#scoreBoard {
+    display: none;
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* ---- CITAZIONE ---- */
+#citation {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+}
+
+#citation a {
+    text-decoration: none;
+    color: #96AE21;
+    transition: color 0.3s;
+}
+
+#citation a:hover {
+    color: #e51a4b;
+}
 
         #touchArea {
             position: absolute;
@@ -149,7 +274,13 @@
     <!-- Schermata iniziale-->
 <div id="startScreen">
     <h2>Snake's speed</h2>
-    <div id="speedButtons"></div>
+    <!-- Contenitore per la selezione della velocità -->
+<div class="speed-container">
+    <label class="speed-label" for="speedRange">Snake's Speed:</label>
+    <input id="speedRange" class="speed-slider" type="range" min="1" max="5" value="3" oninput="updateSpeedLabel()">
+    <p id="selectedSpeed">Level 3</p>
+</div>
+
 
     <h2>Range of elements to include</h2>
     <label for="elementRange">Maximum atomic number (Z):</label>
@@ -198,94 +329,101 @@
         </a>
     </div>
         
-    <script>
-        // Setup degli elementi principali
-        const SPEED_LEVELS = [250, 200, 150, 125, 100];
-        let maxElementsToUse = 50;
+<script>
+    // Mappa dei livelli di velocità
+    const SPEED_LEVELS = {
+        1: 250,
+        2: 200,
+        3: 150,
+        4: 125,
+        5: 100
+    };
+
+    let maxElementsToUse = 50;
+
+    // Funzione per aggiornare l'etichetta della velocità
+    function updateSpeedLabel() {
+        const speedValue = document.getElementById('speedRange').value;
+        document.getElementById('selectedSpeed').textContent = `Level ${speedValue}`;
+        window.SPEED = SPEED_LEVELS[speedValue]; // Imposta la velocità della partita
+    }
+
+    // Funzione per aggiornare il numero massimo di elementi
+    function updateElementCount() {
+        const rangeValue = document.getElementById('elementRange').value;
+        maxElementsToUse = parseInt(rangeValue);
+        document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
+    }
+
+    // Mostra la schermata iniziale al caricamento della pagina
+    document.addEventListener('DOMContentLoaded', () => {
+        // Imposta la velocità predefinita all'avvio
+        const speedSlider = document.getElementById('speedRange');
+        window.SPEED = SPEED_LEVELS[speedSlider.value];
+
+        // Aggiorna dinamicamente la velocità mentre si sposta lo slider
+        speedSlider.addEventListener('input', updateSpeedLabel);
+
+        // Popola il dropdown delle diete
+        const dietDropdown = document.getElementById("dietDropdown");
+        const diets = [
+            "Critical elements", "Elements of a smartphone", "Elements of life", "Elements of DNA",
+            "Radioactive elements (U-Th decay series)", "Elements essential for man", "Elements used in therapy",
+            "Elements used in diagnosis", "Medical radioisotopes",
+            "Elements considered safety (grades A-E) in the first wall of fusion power plan",
+            "Potentially toxic trace elements (PTEs)", "Toxic trace elements in dried mushrooms",
+            "Elements dedicated to scientists", "Elements with names of Latin derivation",
+            "Elements with names of Greek derivation",
+            "Elements named after geographical locations and celestial bodies",
+            "Elements with names not derived from Latin or Greek, nor from cities or countries",
+            "Elements known since antiquity", "Elementary substances in solid state at STP",
+            "Elementary substances in liquid state at STP", "Elementary substances in gas state at STP",
+            "Ferromagnetic elements", "Ultra-high temperature metals", "Metals", "Nonmetals",
+            "Elements of group I (Hydrogen & alkali metals)", "Elements of group II (Alkaline earth metals)",
+            "Elements of group XV (Pnictogens)", "Elements of group XVI (Chalcogens)", "Elements of group XVII (Halogens)",
+            "Elements of group XVIII (Noble gases)", "Lanthanides", "Actinides",
+            "Transition metals", "Post-transition metals", "Metalloids", "Reactive nonmetals",
+            "s-block elements", "p-block elements", "d-block elements", "f-block elements"
+        ];
+
+        // Aggiunge le opzioni al dropdown
+        diets.forEach(diet => {
+            const option = document.createElement("option");
+            option.value = diet;
+            option.textContent = diet;
+            dietDropdown.appendChild(option);
+        });
 
         // Mostra la schermata iniziale
-        document.addEventListener('DOMContentLoaded', () => {
-            const speedButtons = document.getElementById('speedButtons');
-            SPEED_LEVELS.forEach((speed, index) => {
-                const button = document.createElement('button');
-                button.className = 'button';
-                button.innerText = `Level ${index + 1}`;
-                button.onclick = () => {
-                    window.SPEED = speed; // Imposta la velocità scelta
-                    updateElementCount(); // Aggiorna il numero massimo di elementi
-                };
-                speedButtons.appendChild(button);
-            });
-                        const dietDropdown = document.getElementById("dietDropdown");
-            const diets = [
-                "Critical elements", "Elements of a smartphone", "Elements of life", "Elements of DNA", "Radioactive elements (U-Th decay series)",
-                "Elements essential for man", "Elements used in therapy", "Elements used in diagnosis",
-                "Medical radioisotopes", "Elements considered safety (grades A-E) in the first wall of fusion power plan",
-                "Potentially toxic trace elements (PTEs)",
-                "Toxic trace elements in dried mushrooms",
-                "Elements dedicated to scientists", "Elements with names of latin derivation",
-                "Elements with names of greek derivation",
-                "Elements named after geographical locations and celestial bodies",
-                "Elements with names not derived from latin or greek, nor from cities or countries",
-                "Elements known since antiquity",
-                "Elementary substances in solid state at standard temperature and pressure",
-                "Elementary substances in liquid state at standard temperature and pressure",
-                "Elementary substances in gas state at standard temperature and pressure", 
-                "Ferromagnetic elements", "Ultra-high temperature metals", "Metals", "Nonmetals",
-                "Elements of group I (Hydrogen & alkali metals)",
-                "Elements of group II (Alkaline earth metals)", "Elements of group XV (Pnictogens)",
-                "Elements of group XVI (Chalcogens)", "Elements of group XVII (Halogens)",
-                "Elements of group XVIII (Noblegases)", "Lanthanides", "Actinides",
-                "Transition metals", "Post-transition metals", "Metalloids", "Reactive nonmetals",
-                "s-block elements", "p-block elements", "d-block elements", "f-block elements"
-            ]; 
-            
-            // Aggiungi altre opzioni
-            diets.forEach(diet => {
-                const option = document.createElement("option");
-                option.value = diet;
-                option.textContent = diet;
-                dietDropdown.appendChild(option);
-            });
-                document.getElementById('title').style.display = 'block';
-                document.getElementById('gameover').style.display = 'none';
-                document.getElementById('startScreen').style.display = 'block';
-        });
-        
-        function updateElementCount() {
-            const rangeValue = document.getElementById('elementRange').value;
-            maxElementsToUse = parseInt(rangeValue);
-            document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
-        }
+        document.getElementById('title').style.display = 'block';
+        document.getElementById('gameover').style.display = 'none';
+        document.getElementById('startScreen').style.display = 'block';
+    });
 
-        function finalSelection() {
-            selectedDiet = document.getElementById("dietDropdown").value;
-            window.selectedDiet = document.getElementById("dietDropdown").value;
-            document.getElementById('title').style.display = 'none';
-             document.getElementById('startScreen').style.display = 'none';
-            document.getElementById('gameCanvas').style.display = 'block';
-            document.getElementById('selectedDietText').style.display = 'block';
-            document.getElementById('scoreBoard').style.display = 'block';
-            document.getElementById('touchArea').style.zIndex = 10;
-            startNewGame();
-        }
+    // Funzione per avviare il gioco
+    function finalSelection() {
+        selectedDiet = document.getElementById("dietDropdown").value;
+        window.selectedDiet = selectedDiet;
+        document.getElementById('title').style.display = 'none';
+        document.getElementById('startScreen').style.display = 'none';
+        document.getElementById('gameCanvas').style.display = 'block';
+        document.getElementById('selectedDietText').style.display = 'block';
+        document.getElementById('scoreBoard').style.display = 'block';
+        document.getElementById('touchArea').style.zIndex = 10;
+        startNewGame();
+    }
 
+    function startNewGame() {
+        document.getElementById('title').style.display = 'none';
+        document.getElementById('gameCanvas').style.display = 'block';
+        startGame(); // Funzione definita in Snakeleev.js
+    }
 
-        // Funzione per avviare il gioco
-        function startNewGame() {
-            document.getElementById('title').style.display = 'none';
-            document.getElementById('gameCanvas').style.display = 'block'; // Mostra il canvas del gioco
-            startGame(); // Funzione definita in Snakeleev.js
-        }
+    function resetGameState() {
+        location.reload(); // Ricarica la pagina
+    }
+</script>
 
-        function resetGameState() {
-            // Ricarica la pagina
-            location.reload();
-        }
-    </script>
-    <script src="Snakeleev.js"></script>
-</body>
-</html>
     <script src="Snakeleev.js"></script>
 </body>
 </html>
