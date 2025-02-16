@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snakeleev</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-        html, body {
+        html,
+         body {
             height: 100%;
             margin: 0;
-            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            font-family: Arial, sans-serif;
             background-color: #002F5F;
             color: white;
             text-align: center;
@@ -20,129 +21,120 @@
             justify-content: center;
         }
 
-        /* LOGHI */
-        #logoCNR-container, #logoCG-container {
-            position: absolute;
+        #logoCNR-container {
+            position: absolute; /* Rende il posizionamento relativo al bordo della finestra */
             top: 20px;
+            left: 10px;
             cursor: pointer;
         }
-        #logoCNR-container { left: 10px; }
-        #logoCG-container { right: 10px; }
+        #logoCNR {
+            width: 300px;
+            height: auto;
+        }
 
-        #logoCNR { width: 250px; }
-        #logoCG { width: 80px; }
+        #logoCG-container {
+            position: absolute;
+            top: 0px;
+            rigth: 10px;
+            cursor: pointer;
+        }
 
-        /* CONTENUTO PRINCIPALE */
+        #logoCG {
+            width: 100px;
+            height: auto;
+        }
+
+        /* Aggiungi spazio sotto il logo */
         #content {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: center; /* Centra orizzontalmente */
+            justify-content: flex-start; /* Non separa troppo gli elementi */
             text-align: center;
             padding-top: 20px;
             width: 100%;
-            margin-top: 50px;
+            margin-top: 50px
         }
 
-        h1 {
+       h1 {
             font-size: 3rem;
-            font-weight: 600;
-            margin: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            margin: 20px;
         }
-
-        /* CARD PER LE SEZIONI */
-        .selection-box {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            margin: 10px 0;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 400px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .selection-box h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        /* PULSANTI */
+        
         .button {
             margin: 10px;
-            padding: 12px 25px;
+            padding: 10px 20px;
             background-color: #96AE21;
             border: none;
             color: white;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 8px;
-            transition: all 0.3s ease-in-out;
         }
 
         .button:hover {
             background-color: rgb(65, 127, 69);
-            transform: scale(1.05);
+            transition: background-color 0.3s;
         }
 
-        /* SLIDER RANGE */
-        input[type="range"] {
-            width: 80%;
-            margin: 10px 0;
-        }
-
-        /* MENU ISTRUZIONI */
         #instructions {
-            margin: 30px auto;
+            margin: 40px auto;
             text-align: left;
             width: 80%;
             color: white;
         }
-
         #instructions h3 {
             text-align: center;
             text-transform: uppercase;
             font-size: 20px;
             margin-bottom: 20px;
-            color: #96AE21;
         }
-
         #instructions ol {
             padding-left: 20px;
         }
+        #instructions h4:last-of-type {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: rgb(229, 26, 75); /* Rosso specifico */
+        }
 
-        /* CITAZIONE */
         #citation {
-            margin: 20px auto;
+            margin: 15px auto;
             font-size: 14px;
             text-align: center;
             color: white;
             padding: 5px;
         }
-
+        
         #citation a {
             text-decoration: none;
             color: #96AE21;
         }
-
         #citation a:hover {
             color: #e51a4b;
         }
 
-        /* GIOCO */
+        #touchArea {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: transparent;
+        }
+
         #gameCanvas {
             display: none;
             background-color: #002F5F;
-            margin: 0 auto;
+            margin: 0px auto;
             max-width: 90%;
             max-height: 90%;
         }
-
+        
     </style>
 </head>
 <body>
-    <!-- LOGHI -->
     <div id="logoCNR-container" onclick="window.open('https://www.issmc.cnr.it/en/', '_blank')">
         <img id="logoCNR" src="logo.png" alt="Logo CNR-ISSMC">
     </div>
@@ -150,63 +142,62 @@
     <div id="logoCG-container" onclick="window.open('https://www.changegame.cnr.it/', '_blank')">
         <img id="logoCG" src="LogoChangeGame.png" alt="Logo ChangeGame">
     </div>
-
+    
     <div id="content">
         <h1 id="title">Snakeleev</h1>
 
-        <!-- MENU PRINCIPALE -->
-        <div id="startScreen">
-            
-            <!-- Selezione della velocità -->
-            <div class="selection-box">
-                <h2>Snake's Speed</h2>
-                <div id="speedButtons"></div>
-            </div>
+    <!-- Schermata iniziale-->
+<div id="startScreen">
+    <h2>Snake's speed</h2>
+    <div id="speedButtons"></div>
 
-            <!-- Range di elementi -->
-            <div class="selection-box">
-                <h2>Range of Elements</h2>
-                <label for="elementRange">Maximum atomic number (Z):</label>
-                <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
-                <p id="selectedElementCount">40</p>
-            </div>
-
-            <!-- Selezione della dieta -->
-            <div class="selection-box">
-                <h2>Snake's Diet</h2>
-                <select id="dietDropdown"></select>
-                <button class="button" onclick="finalSelection()">Play</button>
-            </div>
-
-        </div>
-
-        <!-- CANVAS DEL GIOCO -->
-        <canvas id="gameCanvas"></canvas>
-
-        <!-- GAME OVER -->
-        <div id="gameover" style="display: none;"></div>
-
-        <!-- ISTRUZIONI -->
-        <div id="instructions">
-            <h3>Instructions</h3>
-            <ol>
-                <li>Control the snake using the arrow keys or W, A, S, and D.</li>
-                <li id="eat-instruction">Eat only the elements that match the selected diet.</li>
-                <li>Press the spacebar to swap the positions of the two elements.</li>
-                <li>Press "P" to pause or resume the game.</li>
-                <li>Refresh the page to start a new game.</li>
-            </ol>
-        </div>
-
-        <!-- CITAZIONE -->
-        <div id="citation">
-            <a href="https://zenodo.org/records/10643098" target="_blank">
-                Pietro Galizia <i>"Snakeleev: Gamifying the Periodic Table Through the Snake Game"</i> 
-                <br>J. Chem. Educ. <b>2025</b>, Vol., n., DOI: 10.1021/acs.jchemed.
-            </a>
-        </div>
-    </div>
+    <h2>Range of elements to include</h2>
+    <label for="elementRange">Maximum atomic number (Z):</label>
+    <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
+    <p id="selectedElementCount"> 40</p>
     
+    <h2>Snake's Diet</h2>
+    <select id="dietDropdown"></select>
+    <button class="button" onclick="finalSelection()">Play</button>
+    <div id="instructions">
+        <h3>INSTRUCTIONS</h3>
+        <ol>
+            <li>Control the snake using the arrow keys or W, A, S, and D.</li>
+            <li id="eat-instruction">Eat only the elements that match the selected diet.</li>
+            <li>Press the spacebar to swap the positions of the two elements.</li>
+            <li>Press "P" to pause or resume the game.</li>
+            <li>Refresh the page to start a new game.</li>
+        </ol>
+        <h3>SCORING SYSTEM</h3>
+        <p>
+            Your score increases when you eat an element that belongs to the selected diet.
+            Eating an element outside the diet does not increase the score but still adds to the total elements eaten.
+        </p>
+        <p>
+            The score display shows:
+            <br><b>Score / Total Elements Eaten (Percentage)</b>
+        </p>
+    </div>
+</div>
+
+    <!-- Canvas del gioco -->
+    <div id="selectedDietText" style="display: none;"></div>
+    <div id="scoreBoard" style="display: none;"></div>
+    <div id="touchArea"></div>
+    <canvas id="gameCanvas"></canvas>
+
+
+    <!-- Game Over -->
+    <div id="gameover" style="display: none;"></div>
+
+    <!-- Citazione -->
+    <div id="citation">
+        <a href="https://zenodo.org/records/10643098" target="_blank">
+            Pietro Galizia <i>"Snakeleev: Gamifying the Periodic Table Through the Snake Game"</i> 
+            <br>J. Chem. Educ. <b>2025</b>, Vol., n., DOI: 10.1021/acs.jchemed.
+        </a>
+    </div>
+        
     <script>
         // Setup degli elementi principali
         const SPEED_LEVELS = [250, 200, 150, 125, 100];
