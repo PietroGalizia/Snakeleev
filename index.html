@@ -273,7 +273,7 @@ select:hover {
 
     <!-- Schermata iniziale-->
 <div id="startScreen">
-    <h2>Snakeleev's speed</h2>
+    <h2>Snake's speed</h2>
     <!-- Contenitore per la selezione della velocità -->
 <div class="speed-container">
     <label class="speed-label" for="speedRange">Snake's Speed:</label>
@@ -290,25 +290,25 @@ select:hover {
     <h2>Snake's Diet</h2>
     <select id="dietDropdown"></select>
     <button class="button" onclick="finalSelection()">Play</button>
-    <button class="button" onclick="toggleInstructions()">INSTRUCTIONS</button>
-<div id="instructions" style="display: none;">
-    <h3>INSTRUCTIONS</h3>
-    <ol>
-        <li>Control the snake using the arrow keys or W, A, S, and D.</li>
-        <li id="eat-instruction">Eat only the elements that match the selected diet.</li>
-        <li>Press the spacebar to swap the positions of the two elements.</li>
-        <li>Press "P" to pause or resume the game.</li>
-        <li>Refresh the page to start a new game.</li>
-    </ol>
-    <h3>SCORING SYSTEM</h3>
-    <p>
-        Your score increases when you eat an element that belongs to the selected diet.
-        Eating an element outside the diet does not increase the score but still adds to the total elements eaten.
-    </p>
-    <p>
-        The score display shows:
-        <br><b>Score / Total Elements Eaten (Percentage)</b>
-    </p>
+    <div id="instructions">
+        <h3>INSTRUCTIONS</h3>
+        <ol>
+            <li>Control the snake using the arrow keys or W, A, S, and D.</li>
+            <li id="eat-instruction">Eat only the elements that match the selected diet.</li>
+            <li>Press the spacebar to swap the positions of the two elements.</li>
+            <li>Press "P" to pause or resume the game.</li>
+            <li>Refresh the page to start a new game.</li>
+        </ol>
+        <h3>SCORING SYSTEM</h3>
+        <p>
+            Your score increases when you eat an element that belongs to the selected diet.
+            Eating an element outside the diet does not increase the score but still adds to the total elements eaten.
+        </p>
+        <p>
+            The score display shows:
+            <br><b>Score / Total Elements Eaten (Percentage)</b>
+        </p>
+    </div>
 </div>
 
     <!-- Canvas del gioco -->
@@ -400,14 +400,6 @@ select:hover {
         document.getElementById('startScreen').style.display = 'block';
     });
 
-    function toggleInstructions() {
-    const instructions = document.getElementById("instructions");
-    if (instructions.style.display === "none") {
-        instructions.style.display = "block";
-    } else {
-        instructions.style.display = "none";
-    }
-}
     // Funzione per avviare il gioco
     function finalSelection() {
         selectedDiet = document.getElementById("dietDropdown").value;
