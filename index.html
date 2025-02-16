@@ -151,25 +151,18 @@
     
     <div id="content">
         <h1 id="title">Snakeleev</h1>
-        
-    <!-- Schermata iniziale: scelta della velocità -->
-    <div id="startScreen">
-        <h2>Choose the Snake's speed</h2>
-        <div id="speedButtons"></div>
-    </div>
 
-    <!-- Schermata per scegliere il numero di elementi -->
-    <div id="elementSelection" style="display: none;">
-        <h2>Choose the range of elements to include</h2>
-        <label for="elementRange">Maximum atomic number (Z):</label>
-        <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
-        <p id="selectedElementCount"> 40</p>
-        <button class="button" onclick="proceedToDietSelection()()">Next</button>
-     </div>
+    <!-- Schermata iniziale-->
+<div id="startScreen">
+    <h2>Snake's speed</h2>
+    <div id="speedButtons"></div>
 
-    <!-- Selezione della dieta -->
-<div id="dietSelection" style="display: none;">
-    <h2>Select the Snake's Diet</h2>
+    <h2>Range of elements to include</h2>
+    <label for="elementRange">Maximum atomic number (Z):</label>
+    <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
+    <p id="selectedElementCount"> 40</p>
+    
+    <h2>Snake's Diet</h2>
     <select id="dietDropdown"></select>
     <button class="button" onclick="finalSelection()">Play</button>
     <div id="instructions">
