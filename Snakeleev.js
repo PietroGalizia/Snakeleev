@@ -607,7 +607,7 @@ function showDietSelection() {
     });
     document.getElementById('title').style.display = 'block';
     document.getElementById('mainMenu').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'block';
+    document.getElementById('startScreen').style.display = 'block';
 }
 
 function startNewGame() {
@@ -624,7 +624,7 @@ function startNewGame() {
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
 
-    document.getElementById('dietSelection').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'none';
     canvas.style.display = 'block';
 
     snake = [{ x: 100, y: 100 }];
@@ -1152,8 +1152,6 @@ function exitGame() {
     document.getElementById('title').style.display = 'none';
     document.getElementById('gameCanvas').style.display = 'none';
     document.getElementById('scoreBoard').style.display = 'none';
-    document.getElementById('elementSelection').style.display = 'none';
-    document.getElementById('dietSelection').style.display = 'none';
     document.getElementById('selectedDietText').style.display = 'none';
     document.getElementById('gameover').style.display = 'block';
     document.getElementById('touchArea').style.zIndex = -1;
