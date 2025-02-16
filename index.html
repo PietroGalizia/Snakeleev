@@ -206,5 +206,92 @@
             </a>
         </div>
     </div>
+    
+    <script>
+        // Setup degli elementi principali
+        const SPEED_LEVELS = [250, 200, 150, 125, 100];
+        let maxElementsToUse = 50;
+
+        // Mostra la schermata iniziale
+        document.addEventListener('DOMContentLoaded', () => {
+            const speedButtons = document.getElementById('speedButtons');
+            SPEED_LEVELS.forEach((speed, index) => {
+                const button = document.createElement('button');
+                button.className = 'button';
+                button.innerText = `Level ${index + 1}`;
+                button.onclick = () => {
+                    window.SPEED = speed; // Imposta la velocità scelta
+                    updateElementCount(); // Aggiorna il numero massimo di elementi
+                };
+                speedButtons.appendChild(button);
+            });
+                        const dietDropdown = document.getElementById("dietDropdown");
+            const diets = [
+                "Critical elements", "Elements of a smartphone", "Elements of life", "Elements of DNA", "Radioactive elements (U-Th decay series)",
+                "Elements essential for man", "Elements used in therapy", "Elements used in diagnosis",
+                "Medical radioisotopes", "Elements considered safety (grades A-E) in the first wall of fusion power plan",
+                "Potentially toxic trace elements (PTEs)",
+                "Toxic trace elements in dried mushrooms",
+                "Elements dedicated to scientists", "Elements with names of latin derivation",
+                "Elements with names of greek derivation",
+                "Elements named after geographical locations and celestial bodies",
+                "Elements with names not derived from latin or greek, nor from cities or countries",
+                "Elements known since antiquity",
+                "Elementary substances in solid state at standard temperature and pressure",
+                "Elementary substances in liquid state at standard temperature and pressure",
+                "Elementary substances in gas state at standard temperature and pressure", 
+                "Ferromagnetic elements", "Ultra-high temperature metals", "Metals", "Nonmetals",
+                "Elements of group I (Hydrogen & alkali metals)",
+                "Elements of group II (Alkaline earth metals)", "Elements of group XV (Pnictogens)",
+                "Elements of group XVI (Chalcogens)", "Elements of group XVII (Halogens)",
+                "Elements of group XVIII (Noblegases)", "Lanthanides", "Actinides",
+                "Transition metals", "Post-transition metals", "Metalloids", "Reactive nonmetals",
+                "s-block elements", "p-block elements", "d-block elements", "f-block elements"
+            ]; 
+            
+            // Aggiungi altre opzioni
+            diets.forEach(diet => {
+                const option = document.createElement("option");
+                option.value = diet;
+                option.textContent = diet;
+                dietDropdown.appendChild(option);
+            });
+                document.getElementById('title').style.display = 'block';
+                document.getElementById('gameover').style.display = 'none';
+                document.getElementById('startScreen').style.display = 'block';
+        });
+        
+        function updateElementCount() {
+            const rangeValue = document.getElementById('elementRange').value;
+            maxElementsToUse = parseInt(rangeValue);
+            document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
+        }
+
+        function finalSelection() {
+            selectedDiet = document.getElementById("dietDropdown").value;
+            window.selectedDiet = document.getElementById("dietDropdown").value;
+            document.getElementById('title').style.display = 'none';
+             document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('gameCanvas').style.display = 'block';
+            document.getElementById('selectedDietText').style.display = 'block';
+            document.getElementById('scoreBoard').style.display = 'block';
+            document.getElementById('touchArea').style.zIndex = 10;
+            startNewGame();
+        }
+
+
+        // Funzione per avviare il gioco
+        function startNewGame() {
+            document.getElementById('title').style.display = 'none';
+            document.getElementById('gameCanvas').style.display = 'block'; // Mostra il canvas del gioco
+            startGame(); // Funzione definita in Snakeleev.js
+        }
+
+        function resetGameState() {
+            // Ricarica la pagina
+            location.reload();
+        }
+    </script>
+    <script src="Snakeleev.js"></script>
 </body>
 </html>
