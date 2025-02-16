@@ -6,6 +6,7 @@
     <title>Snakeleev</title>
     <style>
        /* ---- IMPOSTAZIONI GENERALI ---- */
+/* Generale */
 html, body {
     height: 100%;
     margin: 0;
@@ -19,53 +20,39 @@ html, body {
     justify-content: center;
 }
 
-/* ---- LOGHI ---- */
-#logoCNR-container {
+/* Loghi */
+#logoCNR-container, #logoCG-container {
     position: absolute;
     top: 20px;
-    left: 10px;
     cursor: pointer;
 }
 
-#logoCNR {
-    width: 250px;
-    height: auto;
-}
+#logoCNR-container { left: 10px; }
+#logoCG-container { right: 10px; }
 
-#logoCG-container {
-    position: absolute;
-    top: 20px;
-    right: 10px;
-    cursor: pointer;
-}
+#logoCNR { width: 250px; height: auto; }
+#logoCG { width: 90px; height: auto; }
 
-#logoCG {
-    width: 90px;
-    height: auto;
-}
-
-/* ---- CONTENITORE PRINCIPALE ---- */
+/* Contenitore principale */
 #content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    text-align: center;
     padding-top: 20px;
     width: 90%;
     max-width: 800px;
     margin-top: 50px;
 }
 
-/* ---- TITOLI ---- */
+/* Titoli */
 h1 {
-    font-size: 3.8rem;
+    font-size: 3.5rem;
     margin: 20px;
     text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
     letter-spacing: 2px;
 }
 
-/* ---- CONTENITORE PRINCIPALE ---- */
+/* Schermata iniziale */
 #startScreen {
     background: rgba(255, 255, 255, 0.1);
     padding: 25px;
@@ -76,15 +63,11 @@ h1 {
     max-width: 600px;
 }
 
-/* ---- STILE SLIDER ---- */
-.speed-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Slider */
+.speed-container, input[type="range"] {
     width: 80%;
     max-width: 500px;
     margin-bottom: 20px;
-    padding: 15px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
@@ -97,10 +80,7 @@ h1 {
     margin-bottom: 10px;
 }
 
-/* Stile dello slider */
-input[type="range"].speed-slider {
-    width: 90%;
-    margin: 10px 0;
+input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     height: 6px;
@@ -110,11 +90,11 @@ input[type="range"].speed-slider {
     transition: 0.3s;
 }
 
-input[type="range"].speed-slider:hover {
+input[type="range"]:hover {
     background: rgb(65, 127, 69);
 }
 
-/* Valore dinamico della velocità */
+/* Valore della velocità */
 #selectedSpeed {
     font-size: 1.2rem;
     font-weight: bold;
@@ -122,7 +102,7 @@ input[type="range"].speed-slider:hover {
     color: #96AE21;
 }
 
-/* ---- PULSANTI ---- */
+/* Pulsanti */
 .button {
     margin: 8px;
     padding: 12px 18px;
@@ -141,24 +121,7 @@ input[type="range"].speed-slider:hover {
     box-shadow: 0px 4px 10px rgba(65, 127, 69, 0.6);
 }
 
-/* ---- SLIDER ---- */
-input[type="range"] {
-    width: 80%;
-    margin: 10px 0;
-    -webkit-appearance: none;
-    appearance: none;
-    height: 6px;
-    background: #96AE21;
-    border-radius: 5px;
-    outline: none;
-    transition: 0.3s;
-}
-
-input[type="range"]:hover {
-    background: rgb(65, 127, 69);
-}
-
-/* ---- MENU A TENDINA ---- */
+/* Menu a tendina */
 select {
     width: 80%;
     padding: 12px;
@@ -176,14 +139,12 @@ select:hover {
     background: #f3f3f3;
 }
 
-/* ---- ISTRUZIONI ---- */
+/* Istruzioni */
 #instructions {
     margin-top: 20px;
-    text-align: center;
-    color: white;
-    background: rgba(0, 0, 0, 0.3);
     padding: 18px;
     border-radius: 12px;
+    background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(8px);
 }
 
@@ -198,11 +159,7 @@ select:hover {
     margin-left: 20px;
 }
 
-#instructions p {
-    font-size: 1.1rem;
-}
-
-/* ---- CANVAS ---- */
+/* Canvas */
 #gameCanvas {
     display: none;
     background-color: #002F5F;
@@ -213,7 +170,7 @@ select:hover {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
 }
 
-/* ---- PUNTEGGIO ---- */
+/* Punteggio */
 #scoreBoard {
     display: none;
     font-size: 1.7rem;
@@ -221,7 +178,7 @@ select:hover {
     margin-top: 20px;
 }
 
-/* ---- CITAZIONE ---- */
+/* Citazione */
 #citation {
     margin-top: 20px;
     font-size: 14px;
@@ -238,6 +195,7 @@ select:hover {
 #citation a:hover {
     color: #e51a4b;
 }
+
 
         #touchArea {
             position: absolute;
