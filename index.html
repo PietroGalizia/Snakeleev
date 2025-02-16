@@ -76,18 +76,50 @@ h1 {
     max-width: 600px;
 }
 
-/* ---- CONTENITORE VELOCITÀ ---- */
+/* ---- STILE SLIDER ---- */
 .speed-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 15px;
+    width: 80%;
+    max-width: 500px;
     margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 .speed-label {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Stile dello slider */
+input[type="range"].speed-slider {
+    width: 90%;
+    margin: 10px 0;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: #96AE21;
+    border-radius: 5px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input[type="range"].speed-slider:hover {
+    background: rgb(65, 127, 69);
+}
+
+/* Valore dinamico della velocità */
+#selectedSpeed {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #96AE21;
 }
 
 /* ---- PULSANTI ---- */
@@ -242,7 +274,13 @@ select:hover {
     <!-- Schermata iniziale-->
 <div id="startScreen">
     <h2>Snake's speed</h2>
-    <div id="speedButtons"></div>
+    <!-- Contenitore per la selezione della velocità -->
+<div class="speed-container">
+    <label class="speed-label" for="speedRange">Snake's Speed:</label>
+    <input id="speedRange" class="speed-slider" type="range" min="1" max="5" value="3" oninput="updateSpeedLabel()">
+    <p id="selectedSpeed">Level 3</p>
+</div>
+
 
     <h2>Range of elements to include</h2>
     <label for="elementRange">Maximum atomic number (Z):</label>
@@ -293,22 +331,38 @@ select:hover {
         
     <script>
         // Setup degli elementi principali
-        const SPEED_LEVELS = [250, 200, 150, 125, 100];
+        const SPEED_LEVELS = {
+    1: 250,
+    2: 200,
+    3: 150,
+    4: 125,
+    5: 100
+};
         let maxElementsToUse = 50;
 
+
+function updateSpeedLabel() {
+    const speedValue = document.getElementById('speedRange').value;
+    document.getElementById('selectedSpeed').textContent = `Level ${speedValue}`;
+    window.SPEED = SPEED_LEVELS[speedValue]; // Imposta la velocità della partita
+}
+
         // Mostra la schermata iniziale
-        document.addEventListener('DOMContentLoaded', () => {
-            const speedButtons = document.getElementById('speedButtons');
-            SPEED_LEVELS.forEach((speed, index) => {
-                const button = document.createElement('button');
-                button.className = 'button';
-                button.innerText = `Level ${index + 1}`;
-                button.onclick = () => {
-                    window.SPEED = speed; // Imposta la velocità scelta
-                    updateElementCount(); // Aggiorna il numero massimo di elementi
-                };
-                speedButtons.appendChild(button);
-            });
+document.addEventListener('DOMContentLoaded', () => {
+    // Imposta la velocità predefinita all'avvio
+    const speedSlider = document.getElementById('speedRange');
+    const speedValue = speedSlider.value; // Ottiene il valore iniziale dello slider
+    window.SPEED = SPEED_LEVELS[speedValue]; // Imposta la velocità iniziale
+
+    // Aggiorna il valore della velocità quando l'utente cambia lo slider
+    speedSlider.addEventListener('input', updateSpeedLabel);
+
+    // Mostra la schermata iniziale
+    document.getElementById('title').style.display = 'block';
+    document.getElementById('gameover').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'block';
+});
+
                         const dietDropdown = document.getElementById("dietDropdown");
             const diets = [
                 "Critical elements", "Elements of a smartphone", "Elements of life", "Elements of DNA", "Radioactive elements (U-Th decay series)",
