@@ -127,6 +127,24 @@ input[type="range"]:hover {
     transform: scale(1.07);
     box-shadow: 0px 4px 10px rgba(65, 127, 69, 0.6);
 }
+
+/* Menu a tendina */
+select {
+    width: 80%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.1rem;
+    text-align: center;
+    background: white;
+    color: #002F5F;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+select:hover {
+    background: #f3f3f3;
+}
     </style>
 </head>
 <body>
@@ -143,18 +161,21 @@ input[type="range"]:hover {
 
     <!-- Schermata iniziale-->
     <div id="startScreen">
+        <!-- Selezione della velocità -->
         <div class="slider-container">
             <label class="slider-label" for="speedRange">Speed:</label>
             <input id="speedRange" type="range" min="1" max="5" value="3" oninput="updateSpeedLabel()">
             <p id="selectedSpeed" class="slider-value">Speed 3</p>
         </div>
 
+        <!-- Selezione del numero di elementi -->
         <div class="slider-container">
             <label class="slider-label" for="elementRange">Element Range:</label>
             <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
             <p id="selectedElementCount" class="slider-value">1 ≤ Z ≤ 40</p>
         </div>
 
+        <!-- Selezione dieta -->
         <h2>Snake's Diet</h2>
         <select id="dietDropdown"></select>
         <button class="button" onclick="finalSelection()">Play</button>
@@ -179,17 +200,24 @@ input[type="range"]:hover {
     document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('speedRange').addEventListener('input', updateSpeedLabel);
         document.getElementById('elementRange').addEventListener('input', updateElementCount);
+
+        const dietDropdown = document.getElementById("dietDropdown");
+        const diets = ["Critical elements", "Elements of a smartphone", "Elements of life", "Elements of DNA"];
+        diets.forEach(diet => {
+            const option = document.createElement("option");
+            option.value = diet;
+            option.textContent = diet;
+            dietDropdown.appendChild(option);
+        });
     });
 
     function finalSelection() {
-        window.selectedDiet = document.getElementById("dietDropdown").value;
+        selectedDiet = document.getElementById("dietDropdown").value;
+        window.selectedDiet = selectedDiet;
         document.getElementById('startScreen').style.display = 'none';
-
-        // **Avvia il gioco correttamente**
-        startGame(); // Assicurati che Snakeleev.js abbia questa funzione!
+        console.log("Game Started with Speed:", window.SPEED, "Max Elements:", maxElementsToUse, "Diet:", selectedDiet);
     }
 </script>
 
-<script src="Snakeleev.js"></script>
 </body>
 </html>
