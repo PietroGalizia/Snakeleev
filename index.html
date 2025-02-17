@@ -63,6 +63,28 @@ h1 {
     max-width: 600px;
 }
 
+/* Contenitore per gli slider */
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 500px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+/* Etichette */
+.slider-label {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+        
 /* Slider */
 .speed-container, input[type="range"] {
     width: 80%;
@@ -80,7 +102,10 @@ h1 {
     margin-bottom: 10px;
 }
 
+/* Slider */
 input[type="range"] {
+    width: 90%;
+    margin: 10px 0;
     -webkit-appearance: none;
     appearance: none;
     height: 6px;
@@ -93,9 +118,17 @@ input[type="range"] {
 input[type="range"]:hover {
     background: rgb(65, 127, 69);
 }
-
+        
 /* Valore della velocità */
 #selectedSpeed {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #96AE21;
+}
+
+/* Valori dinamici */
+.slider-value {
     font-size: 1.2rem;
     font-weight: bold;
     margin-top: 10px;
@@ -232,17 +265,17 @@ select:hover {
     <!-- Schermata iniziale-->
 <div id="startScreen">
     <!-- Contenitore per la selezione della velocità -->
-<div class="speed-container">
-    <label class="speed-label" for="speedRange"></label>
-    <input id="speedRange" class="speed-slider" type="range" min="1" max="5" value="3" oninput="updateSpeedLabel()">
-    <p id="selectedSpeed">Speed 3</p>
-</div>
+<div class="slider-container">
+            <label class="slider-label" for="speedRange">Speed:</label>
+            <input id="speedRange" type="range" min="1" max="5" value="3" oninput="updateSpeedLabel()">
+            <p id="selectedSpeed" class="slider-value">Speed 3</p>
+        </div>
 
-
-    <h2>Range of elements to include</h2>
-    <label for="elementRange">Maximum atomic number (Z):</label>
-    <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
-    <p id="selectedElementCount"> 40</p>
+        <div class="slider-container">
+            <label class="slider-label" for="elementRange">Element Range:</label>
+            <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
+            <p id="selectedElementCount" class="slider-value">1 ≤ Z ≤ 40</p>
+        </div>
     
     <h2>Snake's Diet</h2>
     <select id="dietDropdown"></select>
@@ -296,7 +329,8 @@ select:hover {
         5: 100
     };
 
-    let maxElementsToUse = 50;
+    let maxElementsToUse = 40;
+    let isElementCountChanged = false;
 
     // Funzione per aggiornare l'etichetta della velocità
     function updateSpeedLabel() {
@@ -310,10 +344,13 @@ select:hover {
         const rangeValue = document.getElementById('elementRange').value;
         maxElementsToUse = parseInt(rangeValue);
         document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
+        isElementCountChanged = true;
     }
 
     // Mostra la schermata iniziale al caricamento della pagina
     document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('speedRange').addEventListener('input', updateSpeedLabel);
+        document.getElementById('elementRange').addEventListener('input', updateElementCount);
         // Imposta la velocità predefinita all'avvio
         const speedSlider = document.getElementById('speedRange');
         window.SPEED = SPEED_LEVELS[speedSlider.value];
