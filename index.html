@@ -395,7 +395,7 @@ select:hover {
     });
 
     // Funzione per avviare il gioco
-   function finalSelection() {
+function finalSelection() {
     // Se il numero di elementi non è stato modificato, imposta il valore predefinito
     if (!isElementCountChanged) {
         maxElementsToUse = 40;
@@ -404,6 +404,7 @@ select:hover {
 
     selectedDiet = document.getElementById("dietDropdown").value;
     window.selectedDiet = selectedDiet;
+    window.maxElementsToUse = maxElementsToUse; // Passa la variabile al gioco
     
     // Nasconde le schermate di selezione
     document.getElementById('title').style.display = 'none';
