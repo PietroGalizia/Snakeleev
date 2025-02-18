@@ -395,55 +395,32 @@ select:hover {
     });
 
     // Funzione per avviare il gioco
-function finalSelection() {
-    // Se il numero di elementi non è stato modificato, imposta il valore predefinito
-    if (!isElementCountChanged) {
-        maxElementsToUse = 40;
-        //document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
+    function finalSelection() {
+        selectedDiet = document.getElementById("dietDropdown").value;
+        window.selectedDiet = selectedDiet;
+        document.getElementById('title').style.display = 'none';
+        document.getElementById('startScreen').style.display = 'none';
+        document.getElementById('gameCanvas').style.display = 'block';
+        document.getElementById('selectedDietText').style.display = 'block';
+        document.getElementById('scoreBoard').style.display = 'block';
+        document.getElementById('touchArea').style.zIndex = 10;
+        startNewGame();
     }
-
-    selectedDiet = document.getElementById("dietDropdown").value;
-    window.selectedDiet = selectedDiet;
-    window.maxElementsToUse = maxElementsToUse; // Passa la variabile al gioco
-    
-    // Nasconde le schermate di selezione
-    document.getElementById('title').style.display = 'none';
-    document.getElementById('startScreen').style.display = 'none';
-
-if (typeof startGame === "function") {
-            startGame();
-        } else {
-            console.error("startGame() is not defined.");
-        }
-    }
-    
-    // Mostra gli elementi di gioco
-    document.getElementById('gameCanvas').style.display = 'block';
-    document.getElementById('selectedDietText').style.display = 'block';
-    document.getElementById('scoreBoard').style.display = 'block';
-    document.getElementById('touchArea').style.zIndex = 10;
-
-    console.log(`Game starting with maxElementsToUse = ${maxElementsToUse}`); // Debug
-
-    startNewGame();
-}
 
     function startNewGame() {
-    document.getElementById('title').style.display = 'none';
-    document.getElementById('gameCanvas').style.display = 'block';
-    if (typeof startGame === "function") {
-        startGame();
-    } else {
-        console.error("startGame() is not defined. Check if Snakeleev.js is loaded correctly.");
+        document.getElementById('title').style.display = 'none';
+        document.getElementById('gameCanvas').style.display = 'block';
+        startGame(); // Funzione definita in Snakeleev.js
     }
-}
-
 
     function resetGameState() {
         location.reload(); // Ricarica la pagina
     }
 </script>
 
+    <script src="Snakeleev.js"></script>
+</body>
+</html>
     <script src="Snakeleev.js"></script>
 </body>
 </html>
