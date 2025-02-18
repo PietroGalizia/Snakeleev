@@ -48,6 +48,7 @@ html, body {
 h1 {
     font-size: 3.5rem;
     margin: 20px;
+    color: #F79D27;
     text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
     letter-spacing: 2px;
 }
@@ -55,14 +56,12 @@ h1 {
 /* Schermata iniziale */
 #startScreen {
     background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 14px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     width: 80%;
     max-width: 600px;
-    text-align: center;
-    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Contenitore per gli slider */
@@ -71,21 +70,21 @@ h1 {
     flex-direction: column;
     align-items: center;
     width: 90%;
-    max-width: 450px;
-    margin-bottom: 16px;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 10px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(8px);
 }
 
 /* Etichette */
 .slider-label {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    color: #fff;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
         
 /* Slider */
@@ -105,7 +104,6 @@ h1 {
     margin-bottom: 10px;
 }
 
-
 /* Slider */
 input[type="range"] {
     width: 90%;
@@ -113,14 +111,14 @@ input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     height: 8px;
-    background: linear-gradient(90deg, #96AE21 0%, rgb(65, 127, 69) 100%);
+    background: linear-gradient(90deg, #96AE21 0%, #417F45 100%);
     border-radius: 6px;
     outline: none;
     transition: 0.3s;
 }
 
 input[type="range"]:hover {
-    background: linear-gradient(90deg, rgb(75, 147, 45) 0%, rgb(45, 105, 50) 100%);
+    background: linear-gradient(90deg, #96AE21 0%, #417F45 100%);
 }
         
 /* Valore della velocità */
@@ -136,35 +134,28 @@ input[type="range"]:hover {
     font-size: 1.3rem;
     font-weight: bold;
     margin-top: 8px;
-    color: #96AE21;
+    color: #F79D27;
     text-align: center;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); 
 }
 
-/* Pulsanti migliorati */
-.button-container {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 15px;
-}
-        
 /* Pulsanti */
 .button {
-    padding: 12px 20px;
-    background: linear-gradient(90deg, #8DC63F, #5D9C2A);
+    margin: 8px;
+    padding: 12px 18px;
+    background-color: #E51A4B;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     color: white;
     font-size: 1.2rem;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
 .button:hover {
-    background-color: inear-gradient(90deg, #5D9C2A, #497C1E);
-    transform: scale(1.05);
-    box-shadow: 0px 4px 10px rgba(93, 156, 42, 0.6);
+    background-color: #8F7DCF;
+    transform: scale(1.07);
+    box-shadow: 0px 4px 10px rgba(65, 127, 69, 0.6);
 }
 
 /* Menu a tendina */
@@ -188,24 +179,22 @@ select:hover {
 /* Istruzioni */
 #instructions {
     display: none;
-    margin-top: 18px;
-    padding: 15px;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
 }
 
 #instructions h3 {
     text-transform: uppercase;
-    font-size: 1.5rem;
-    color: #fff;
+    font-size: 1.6rem;
+    margin-bottom: 12px;
 }
 
 #instructions ol {
     text-align: left;
     margin-left: 20px;
-    color: #ddd;
 }
 
 /* Canvas */
@@ -282,24 +271,20 @@ select:hover {
     <div id="startScreen">
     <!-- Contenitore per la selezione della velocità -->
     <div class="slider-container">
-        <label class="slider-label">Speed:</label>
-        <p id="selectedSpeed" class="slider-value">3</p>
+        <p id="selectedSpeed" class="slider-value">Speed: 3</p>
         <input id="speedRange" type="range" min="1" max="5" value="3" oninput="updateSpeedLabel()">
     </div>
 
-    <!-- Contenitore del numero di elementi -->
     <div class="slider-container">
-        <label class="slider-label">Element Range:</label>
-        <p id="selectedElementCount" class="slider-value">1 ≤ Z ≤ 40</p>
-        <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
+        <p id="selectedElementCount" class="slider-value">Element Range: 1 ≤ Z ≤ 40</p>
+            <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
+            
     </div>
     
     <h2>Snake's Diet</h2>
     <select id="dietDropdown"></select>
-     <div class="button-container">
-         <button class="button" onclick="toggleInstructions()">Instructions</button>
-         <button class="button" onclick="finalSelection()">Play</button>
-    </div>
+    <button class="button" onclick="toggleInstructions()">Instructions</button>
+    <button class="button" onclick="finalSelection()">Play</button>
 
     <!-- Istruzioni inizialmente nascoste -->
     <div id="instructions">
@@ -426,14 +411,18 @@ select:hover {
         document.getElementById('startScreen').style.display = 'block';
     });
 
-function toggleInstructions() {
-    const instructions = document.getElementById('instructions');
-    if (instructions.style.display === "none" || instructions.style.display === "") {
-        instructions.style.display = "block";
-    } else {
-        instructions.style.display = "none";
+        function toggleInstructions() {
+        var instructions = document.getElementById('instructions');
+        var button = document.querySelector('[onclick="toggleInstructions()"]');
+    
+        if (instructions.style.display === "none") {
+            instructions.style.display = "block";
+            button.textContent = "Hide Instructions";
+        } else {
+            instructions.style.display = "none";
+            button.textContent = "Show Instructions";
+        }
     }
-}
 
     // Funzione per avviare il gioco
     function finalSelection() {
