@@ -55,12 +55,14 @@ h1 {
 /* Schermata iniziale */
 #startScreen {
     background: rgba(255, 255, 255, 0.1);
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
     width: 80%;
     max-width: 600px;
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Contenitore per gli slider */
@@ -69,21 +71,21 @@ h1 {
     flex-direction: column;
     align-items: center;
     width: 90%;
-    max-width: 500px;
-    text-align: center;
-    margin-bottom: 20px;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 450px;
+    margin-bottom: 16px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(8px);
 }
 
 /* Etichette */
 .slider-label {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    color: #fff;
+    margin-bottom: 8px;
 }
         
 /* Slider */
@@ -102,6 +104,7 @@ h1 {
     font-weight: bold;
     margin-bottom: 10px;
 }
+
 
 /* Slider */
 input[type="range"] {
@@ -138,23 +141,30 @@ input[type="range"]:hover {
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); 
 }
 
+/* Pulsanti migliorati */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+        
 /* Pulsanti */
 .button {
-    margin: 8px;
-    padding: 12px 18px;
-    background-color: #96AE21;
+    padding: 12px 20px;
+    background: linear-gradient(90deg, #8DC63F, #5D9C2A);
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     color: white;
     font-size: 1.2rem;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .button:hover {
-    background-color: rgb(65, 127, 69);
-    transform: scale(1.07);
-    box-shadow: 0px 4px 10px rgba(65, 127, 69, 0.6);
+    background-color: inear-gradient(90deg, #5D9C2A, #497C1E);
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(93, 156, 42, 0.6);
 }
 
 /* Menu a tendina */
@@ -178,22 +188,24 @@ select:hover {
 /* Istruzioni */
 #instructions {
     display: none;
-    margin-top: 20px;
-    padding: 18px;
-    border-radius: 12px;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(8px);
+    margin-top: 18px;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 #instructions h3 {
     text-transform: uppercase;
-    font-size: 1.6rem;
-    margin-bottom: 12px;
+    font-size: 1.5rem;
+    color: #fff;
 }
 
 #instructions ol {
     text-align: left;
     margin-left: 20px;
+    color: #ddd;
 }
 
 /* Canvas */
@@ -270,20 +282,24 @@ select:hover {
     <div id="startScreen">
     <!-- Contenitore per la selezione della velocità -->
     <div class="slider-container">
-        <p id="selectedSpeed" class="slider-value">Speed: 3</p>
+        <label class="slider-label">Speed:</label>
+        <p id="selectedSpeed" class="slider-value">3</p>
         <input id="speedRange" type="range" min="1" max="5" value="3" oninput="updateSpeedLabel()">
     </div>
 
+    <!-- Contenitore del numero di elementi -->
     <div class="slider-container">
-        <p id="selectedElementCount" class="slider-value">Element Range: 1 ≤ Z ≤ 40</p>
-            <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
-            
+        <label class="slider-label">Element Range:</label>
+        <p id="selectedElementCount" class="slider-value">1 ≤ Z ≤ 40</p>
+        <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
     </div>
     
     <h2>Snake's Diet</h2>
     <select id="dietDropdown"></select>
-    <button class="button" onclick="toggleInstructions()">Instructions</button>
-    <button class="button" onclick="finalSelection()">Play</button>
+     <div class="button-container">
+         <button class="button" onclick="toggleInstructions()">Instructions</button>
+         <button class="button" onclick="finalSelection()">Play</button>
+    </div>
 
     <!-- Istruzioni inizialmente nascoste -->
     <div id="instructions">
@@ -410,18 +426,14 @@ select:hover {
         document.getElementById('startScreen').style.display = 'block';
     });
 
-        function toggleInstructions() {
-        var instructions = document.getElementById('instructions');
-        var button = document.querySelector('[onclick="toggleInstructions()"]');
-    
-        if (instructions.style.display === "none") {
-            instructions.style.display = "block";
-            button.textContent = "Hide Instructions";
-        } else {
-            instructions.style.display = "none";
-            button.textContent = "Show Instructions";
-        }
+function toggleInstructions() {
+    const instructions = document.getElementById('instructions');
+    if (instructions.style.display === "none" || instructions.style.display === "") {
+        instructions.style.display = "block";
+    } else {
+        instructions.style.display = "none";
     }
+}
 
     // Funzione per avviare il gioco
     function finalSelection() {
