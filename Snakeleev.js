@@ -1150,12 +1150,12 @@ function updateGame(ctx) {
     
     // Draw the food element symbol
     ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
-    ctx.font = "22px Arial";
+    ctx.font = "16px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
     ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
-    ctx.font = "22px Arial";
+    ctx.font = "16px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(foodIIElement, foodII.x + SIZE / 2, foodII.y + SIZE / 2);
