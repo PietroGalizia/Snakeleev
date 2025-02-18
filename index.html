@@ -68,8 +68,9 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
+    width: 90%;
     max-width: 500px;
+    text-align: center;
     margin-bottom: 20px;
     padding: 15px;
     background: rgba(255, 255, 255, 0.15);
@@ -342,7 +343,6 @@ select:hover {
     // Funzione per aggiornare l'etichetta della velocità
     function updateSpeedLabel() {
         const speedValue = document.getElementById('speedRange').value;
-        const selectedSpeed = SPEED_LEVELS[speedValue].speed; // Ottiene la velocità in px/sec
 
         document.getElementById('selectedSpeed').textContent = `Speed: ${selectedSpeed} px/sec`;
         window.SPEED = SPEED_LEVELS[speedValue].delay; // Imposta il ritardo in ms
