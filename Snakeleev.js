@@ -790,22 +790,22 @@ function createInfoRectNo(element, x, y) {
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
     scoreBoard.style.color = "#fff";
-    scoreBoard.style.padding = "5px";
-    scoreBoard.style.border = "2px solid #78b3e0";
-    scoreBoard.style.borderRadius = "0px";
+    scoreBoard.style.padding = "8px";
+    scoreBoard.style.border = "4px solid #83B7DE";  // Stesso colore del bordo dell'area di gioco
+    scoreBoard.style.borderRadius = "8px";  // Angoli leggermente arrotondati
     scoreBoard.style.fontFamily = "Arial, sans-serif";
-    scoreBoard.style.backgroundColor = "rgb(0, 47, 95)";
+    scoreBoard.style.backgroundColor = "rgba(0, 47, 95, 0.9)";  // Leggera trasparenza
     scoreBoard.style.textAlign = "center";
-    scoreBoard.style.margin = "0px auto";
-    scoreBoard.style.width = CANVAS_WIDTH;
+    scoreBoard.style.margin = "10px auto";
+    scoreBoard.style.width = `${CANVAS_WIDTH}px`;
 
     const selectedDietDiv = document.getElementById('selectedDietText');
     selectedDietDiv.style.display = 'block';
-    selectedDietDiv.style.fontSize = '1.5em';
+    selectedDietDiv.style.fontSize = '1.4em';  // Leggermente più grande
     selectedDietDiv.style.fontWeight = 'bold';
-    selectedDietDiv.style.marginBottom = '5px';
-    selectedDietDiv.style.color = 'white';
-    selectedDietDiv.textContent = selectedDiet;
+    selectedDietDiv.style.marginBottom = '10px';
+    selectedDietDiv.style.color = '#78B3E0';  // Stesso colore del bordo del canvas
+    selectedDietDiv.textContent = selectedDiet.toUpperCase();  // Migliore leggibilità
 
     // Calcola la percentuale degli elementi validi mangiati
     let percentage = totalFoodEaten > 0 ? ((newScore / totalFoodEaten) * 100).toFixed(1) : 0;
@@ -818,12 +818,12 @@ function updateScore(newScore) {
 
     // Layout con riquadri per score e percentuale
     scoreBoard.innerHTML = `
-        <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
-            <div style="border: 2px solid #78b3e0; padding: 5px 10px; border-radius: 5px; background-color: rgb(0, 47, 95); font-size: 1.2em;">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+            <div style="border: 4px solid #83B7DE; padding: 8px 15px; border-radius: 6px; background-color: rgba(0, 47, 95, 0.8); font-size: 1.1em;">
                 <b>${newScore} / ${totalFoodEaten}</b>
             </div>
-            <div style="border: 2px solid #78b3e0; padding: 5px 10px; border-radius: 5px; background-color: rgb(0, 47, 95);">
-                <b style="color: ${color}; font-size: 1.2em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); transition: color 0.5s ease-in-out;">
+            <div style="border: 4px solid #83B7DE; padding: 8px 15px; border-radius: 6px; background-color: rgba(0, 47, 95, 0.8);">
+                <b style="color: ${color}; font-size: 1.1em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); transition: color 0.5s ease-in-out;">
                     ${percentage}%
                 </b>
             </div>
