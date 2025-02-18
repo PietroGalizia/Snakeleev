@@ -354,7 +354,7 @@ select:hover {
     // Funzione per aggiornare il numero massimo di elementi
     function updateElementCount() {
         const rangeValue = document.getElementById('elementRange').value;
-        maxElementsToUse = parseInt(document.getElementById('elementRange').value);
+        maxElementsToUse = parseInt(rangeValue);
     
         document.getElementById('selectedElementCount').textContent = `Element Range: 1 ≤ Z ≤ ${maxElementsToUse}`;
     
@@ -430,8 +430,7 @@ select:hover {
 
         // Se l'utente non ha modificato lo slider, imposta il valore predefinito
         if (!isElementCountChanged) {
-            document.getElementById('elementRange').value = 40;
-            updateElementCount();
+            maxElementsToUse = 40;
         }
 
         if (!isSpeedChanged) {
