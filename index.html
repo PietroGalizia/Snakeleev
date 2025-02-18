@@ -352,7 +352,7 @@ select:hover {
         document.getElementById('speedRange').addEventListener('input', updateSpeedLabel);
         document.getElementById('elementRange').addEventListener('input', updateElementCount);
         // Imposta la velocità predefinita all'avvio
-        //const speedSlider = document.getElementById('speedRange');
+        const speedSlider = document.getElementById('speedRange');
         window.SPEED = SPEED_LEVELS[speedSlider.value];
 
         // Aggiorna dinamicamente la velocità mentre si sposta lo slider
@@ -389,9 +389,9 @@ select:hover {
         });
 
         // Mostra la schermata iniziale
-        //document.getElementById('title').style.display = 'block';
-        //document.getElementById('gameover').style.display = 'none';
-        //document.getElementById('startScreen').style.display = 'block';
+        document.getElementById('title').style.display = 'block';
+        document.getElementById('gameover').style.display = 'none';
+        document.getElementById('startScreen').style.display = 'block';
     });
 
     // Funzione per avviare il gioco
