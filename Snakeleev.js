@@ -806,19 +806,20 @@ function createInfoRectNo(element, x, y) {
 
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
-    scoreBoard.style.color = "#fff";
-    scoreBoard.style.padding = "8px";
-    scoreBoard.style.border = "4px solid #83B7DE";  // Stesso colore del bordo del canvas
+    scoreBoard.style.fontSize = "1em";
+    //scoreBoard.style.color = "#fff";
+    scoreBoard.style.padding = "4px";
+    scoreBoard.style.border = "2px solid #83B7DE";  // Stesso colore del bordo del canvas
     scoreBoard.style.borderRadius = "8px";
     scoreBoard.style.fontFamily = "Arial, sans-serif";
     scoreBoard.style.backgroundColor = "rgba(0, 47, 95, 0.9)";  
     scoreBoard.style.textAlign = "center";
-    scoreBoard.style.margin = "10px auto";
-    scoreBoard.style.width = `${CANVAS_WIDTH}px`;
+    scoreBoard.style.margin = "5px auto";
+    scoreBoard.style.width = CANVAS_WIDTH;
 
     const selectedDietDiv = document.getElementById('selectedDietText');
     selectedDietDiv.style.display = 'block';
-    selectedDietDiv.style.fontSize = '1.3em';  
+    selectedDietDiv.style.fontSize = '1em';  
     selectedDietDiv.style.fontWeight = 'bold';
     selectedDietDiv.style.marginBottom = '8px';
     selectedDietDiv.style.color = '#78B3E0';  
