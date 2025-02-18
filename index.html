@@ -422,10 +422,15 @@ function finalSelection() {
 }
 
     function startNewGame() {
-        document.getElementById('title').style.display = 'none';
-        document.getElementById('gameCanvas').style.display = 'block';
-        startGame(); // Funzione definita in Snakeleev.js
+    document.getElementById('title').style.display = 'none';
+    document.getElementById('gameCanvas').style.display = 'block';
+    if (typeof startGame === "function") {
+        startGame();
+    } else {
+        console.error("startGame() is not defined. Check if Snakeleev.js is loaded correctly.");
     }
+}
+
 
     function resetGameState() {
         location.reload(); // Ricarica la pagina
