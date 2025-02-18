@@ -1149,16 +1149,16 @@ function updateGame(ctx) {
     //ctx.shadowBlur = 0;
     
     // Draw the food element symbol
-    //ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
-    //ctx.font = "16px Arial";
-    //ctx.textAlign = "center";
-    //ctx.textBaseline = "middle";
-    //ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
-    //ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
-    //ctx.font = "16px Arial";
-    //ctx.textAlign = "center";
-    //ctx.textBaseline = "middle";
-    //ctx.fillText(foodIIElement, foodII.x + SIZE / 2, foodII.y + SIZE / 2);
+    ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
+    ctx.font = "16px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
+    ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
+    ctx.font = "16px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(foodIIElement, foodII.x + SIZE / 2, foodII.y + SIZE / 2);
 
     // Disegna il numero atomico sotto il simbolo
     //ctx.font = "12px Arial"; // Numero atomico più piccolo
