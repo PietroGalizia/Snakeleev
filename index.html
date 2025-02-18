@@ -353,14 +353,13 @@ select:hover {
 
     // Funzione per aggiornare il numero massimo di elementi
     function updateElementCount() {
-        const rangeValue = document.getElementById('elementRange').value;
-        maxElementsToUse = parseInt(rangeValue);
+        maxElementsToUse = parseInt(document.getElementById('elementRange').value);
     
-        // Aggiorna il testo senza perdere "Element Range:"
         document.getElementById('selectedElementCount').textContent = `Element Range: 1 ≤ Z ≤ ${maxElementsToUse}`;
     
         isElementCountChanged = true; // Segnala che lo slider è stato modificato
     }
+
 
 
 
@@ -441,8 +440,8 @@ select:hover {
         
         selectedDiet = document.getElementById("dietDropdown").value;
         window.selectedDiet = selectedDiet;
-        window.maxElementsToUse = maxElementsToUse;
-        
+        window.maxElementsToUse = parseInt(document.getElementById('elementRange').value);
+
         document.getElementById('title').style.display = 'none';
         document.getElementById('startScreen').style.display = 'none';
         document.getElementById('gameCanvas').style.display = 'block';
