@@ -536,16 +536,17 @@ function togglePause() {
     if (isPaused) {
         clearInterval(gameInterval); // Ferma il loop del gioco
 
-        // Disegna il messaggio di pausa
-        ctx.fillStyle = "rgba(0, 0, 0, 0.5)"; // Sfondo semi-trasparente
+        ctx.fillStyle = "rgba(0, 47, 95, 0.75)";
         ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         
-        ctx.fillStyle = "white";
-        ctx.font = "30px Arial";
+        ctx.fillStyle = "#F79D27";  // Colore del testo (arancione)
+        ctx.font = "bold 40px Arial";
         ctx.textAlign = "center";
-        ctx.fillText("PAUSE", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+        ctx.fillText("PAUSE", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 - 20);
+
         ctx.font = "20px Arial";
-        ctx.fillText("Press 'P' to resume", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 40);
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillText("Press 'P' to resume", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 20);
     } else {
         startGameLoop(ctx); // Riprendi il gioco
     }
@@ -571,13 +572,21 @@ function drawFood() {
 
     ctx.clearRect(food.x, food.y, SIZE, SIZE);
 
-    ctx.fillStyle = "red"; // Colore per il simbolo dell'elemento
-    ctx.font = "20px Arial"; // Imposta la dimensione del font
+    ctx.fillStyle = "rgb(120, 179, 224)";
+    ctx.beginPath();
+    ctx.arc(food.x + SIZE / 2, food.y + SIZE / 2, SIZE / 2, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "#E51A4B"; // Rosso brillante per il testo
+    ctx.font = "bold 18px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    // Disegna il simbolo dell'elemento nel punto (x, y) del cibo
+    // Effetto glow
+    ctx.shadowColor = "#F79D27"; // Glow arancione
+    ctx.shadowBlur = 10;
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
+    ctx.shadowBlur = 0; // Reset glow
 }
 
 function drawFoodII() {
@@ -586,13 +595,21 @@ function drawFoodII() {
 
     ctx.clearRect(foodII.x, foodII.y, SIZE, SIZE);
 
-    ctx.fillStyle = "red"; // Colore per il simbolo dell'elemento
-    ctx.font = "20px Arial"; // Imposta la dimensione del font
+   ctx.fillStyle = "rgb(120, 179, 224)";
+    ctx.beginPath();
+    ctx.arc(food.x + SIZE / 2, food.y + SIZE / 2, SIZE / 2, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "#E51A4B"; // Rosso brillante per il testo
+    ctx.font = "bold 18px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    // Disegna il simbolo dell'elemento nel punto (x, y) del cibo
+    // Effetto glow
+    ctx.shadowColor = "#F79D27"; // Glow arancione
+    ctx.shadowBlur = 10;
     ctx.fillText(foodIIElement, foodII.x + SIZE / 2, foodII.y + SIZE / 2);
+    ctx.shadowBlur = 0; // Reset glow
 }
 
 function showDietSelection() {
@@ -790,22 +807,22 @@ function createInfoRectNo(element, x, y) {
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
     scoreBoard.style.color = "#fff";
-    scoreBoard.style.padding = "5px";
-    scoreBoard.style.border = "2px solid #78b3e0";
-    scoreBoard.style.borderRadius = "0px";
+    scoreBoard.style.padding = "8px";
+    scoreBoard.style.border = "4px solid #83B7DE";  // Stesso colore del bordo del canvas
+    scoreBoard.style.borderRadius = "8px";
     scoreBoard.style.fontFamily = "Arial, sans-serif";
-    scoreBoard.style.backgroundColor = "rgb(0, 47, 95)";
+    scoreBoard.style.backgroundColor = "rgba(0, 47, 95, 0.9)";  
     scoreBoard.style.textAlign = "center";
-    scoreBoard.style.margin = "0px auto";
-    scoreBoard.style.width = CANVAS_WIDTH;
+    scoreBoard.style.margin = "10px auto";
+    scoreBoard.style.width = `${CANVAS_WIDTH}px`;
 
     const selectedDietDiv = document.getElementById('selectedDietText');
     selectedDietDiv.style.display = 'block';
-    selectedDietDiv.style.fontSize = '1.5em';
+    selectedDietDiv.style.fontSize = '1.3em';  
     selectedDietDiv.style.fontWeight = 'bold';
-    selectedDietDiv.style.marginBottom = '5px';
-    selectedDietDiv.style.color = 'white';
-    selectedDietDiv.textContent = selectedDiet;
+    selectedDietDiv.style.marginBottom = '8px';
+    selectedDietDiv.style.color = '#78B3E0';  
+    selectedDietDiv.textContent = selectedDiet.toUpperCase();  
 
     // Calcola la percentuale degli elementi validi mangiati
     let percentage = totalFoodEaten > 0 ? ((newScore / totalFoodEaten) * 100).toFixed(1) : 0;
