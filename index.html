@@ -353,6 +353,7 @@ select:hover {
 
     // Funzione per aggiornare il numero massimo di elementi
     function updateElementCount() {
+        const rangeValue = document.getElementById('elementRange').value;
         maxElementsToUse = parseInt(document.getElementById('elementRange').value);
     
         document.getElementById('selectedElementCount').textContent = `Element Range: 1 ≤ Z ≤ ${maxElementsToUse}`;
