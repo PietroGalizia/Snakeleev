@@ -46,20 +46,18 @@ html, body {
 
 /* Titoli */
 h1 {
-    font-size: 3.5rem;
-    margin: 20px;
-    color: #F79D27;
-    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-    letter-spacing: 2px;
+    font-size: 3.8rem;
+    margin: 15px;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
 }
 
 /* Schermata iniziale */
 #startScreen {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
     width: 80%;
     max-width: 600px;
 }
@@ -73,18 +71,18 @@ h1 {
     max-width: 500px;
     text-align: center;
     margin-bottom: 20px;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(8px);
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(150, 174, 33, 0.6);
 }
 
 /* Etichette */
 .slider-label {
     font-size: 1.4rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
         
 /* Slider */
@@ -106,19 +104,18 @@ h1 {
 
 /* Slider */
 input[type="range"] {
-    width: 90%;
-    margin: 5px 0;
+    width: 85%;
+    height: 10px;
     -webkit-appearance: none;
     appearance: none;
-    height: 8px;
     background: linear-gradient(90deg, #96AE21 0%, #417F45 100%);
-    border-radius: 6px;
+    border-radius: 5px;
     outline: none;
     transition: 0.3s;
 }
 
 input[type="range"]:hover {
-    background: linear-gradient(90deg, #96AE21 0%, #417F45 100%);
+    background: linear-gradient(90deg, #A2C627 0%, #3D773D 100%);
 }
         
 /* Valore della velocità */
@@ -131,40 +128,52 @@ input[type="range"]:hover {
 
 /* Valori dinamici */
 .slider-value {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    margin-top: 8px;
-    color: #F79D27;
-    text-align: center;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); 
+    margin-bottom: 5px;
+    color: #96AE21; 
 }
 
 /* Pulsanti */
 .button {
-    margin: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 10px;
     padding: 12px 18px;
-    background-color: #E51A4B;
-    border: none;
-    border-radius: 10px;
+    background-color: #96AE21;
+    border: 2px solid rgba(150, 174, 33, 0.6);
+    border-radius: 12px;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
 .button:hover {
-    background-color: #8F7DCF;
-    transform: scale(1.07);
-    box-shadow: 0px 4px 10px rgba(65, 127, 69, 0.6);
+    background-color: #417F45;
+    transform: scale(1.05);
+    box-shadow: 0px 5px 10px rgba(65, 127, 69, 0.7);
 }
 
+/* Pulsanti con icone */
+.button::before {
+    content: '▶ ';
+    font-size: 1.1rem;
+}
+        
+.button:hover::before {
+    content: '⏵ ';
+}
+        
 /* Menu a tendina */
 select {
-    width: 80%;
+    width: 85%;
     padding: 12px;
     border-radius: 8px;
     border: none;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     text-align: center;
     background: white;
     color: #002F5F;
@@ -180,21 +189,23 @@ select:hover {
 #instructions {
     display: none;
     margin-top: 20px;
-    padding: 18px;
+    padding: 20px;
     border-radius: 12px;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    text-align: left;
 }
 
 #instructions h3 {
     text-transform: uppercase;
-    font-size: 1.6rem;
-    margin-bottom: 12px;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #96AE21;
 }
 
 #instructions ol {
-    text-align: left;
     margin-left: 20px;
+    font-size: 1.1rem;
 }
 
 /* Canvas */
