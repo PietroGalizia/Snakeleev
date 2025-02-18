@@ -286,13 +286,11 @@ select:hover {
 
     <!-- Istruzioni inizialmente nascoste -->
     <div id="instructions">
-        <ol>
-            <li>Control the snake using the arrow keys or W, A, S, and D.</li>
-            <li id="eat-instruction">Eat only the elements that match the selected diet.</li>
-            <li>Press the spacebar to swap the positions of the two elements.</li>
-            <li>Press "P" to pause or resume the game.</li>
-            <li>Refresh the page to start a new game.</li>
-        </ol>
+         <p>1. Control the snake using the arrow keys or W, A, S, and D.
+            <br>2. Eat only the elements that match the selected diet.
+            <br>3. Press the spacebar to swap the positions of the two elements.
+            <br>4. Press "P" to pause or resume the game.
+            <br>5. Refresh the page to start a new game.
         <p>
             Your score increases when you eat an element that belongs to the selected diet.
             Eating an element outside the diet does not increase the score but still adds to the total elements eaten.
@@ -352,51 +350,73 @@ select:hover {
     }
 
     // Mostra la schermata iniziale al caricamento della pagina
-    document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('speedRange').addEventListener('input', updateSpeedLabel);
-        document.getElementById('elementRange').addEventListener('input', updateElementCount);
-        // Imposta la velocità predefinita all'avvio
-        const speedSlider = document.getElementById('speedRange');
-        window.SPEED = SPEED_LEVELS[speedSlider.value];
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('speedRange').addEventListener('input', updateSpeedLabel);
+    document.getElementById('elementRange').addEventListener('input', updateElementCount);
 
-        // Aggiorna dinamicamente la velocità mentre si sposta lo slider
-        speedSlider.addEventListener('input', updateSpeedLabel);
+    // Imposta la velocità predefinita all'avvio
+    const speedSlider = document.getElementById('speedRange');
+    window.SPEED = SPEED_LEVELS[speedSlider.value];
 
-        // Popola il dropdown delle diete
-        const dietDropdown = document.getElementById("dietDropdown");
-        const diets = [
-            "Critical elements", "Elements of a smartphone", "Elements of life", "Elements of DNA",
-            "Radioactive elements (U-Th decay series)", "Elements essential for man", "Elements used in therapy",
-            "Elements used in diagnosis", "Medical radioisotopes",
-            "Elements considered safety (grades A-E) in the first wall of fusion power plan",
-            "Potentially toxic trace elements (PTEs)", "Toxic trace elements in dried mushrooms",
-            "Elements dedicated to scientists", "Elements with names of Latin derivation",
-            "Elements with names of Greek derivation",
-            "Elements named after geographical locations and celestial bodies",
-            "Elements with names not derived from Latin or Greek, nor from cities or countries",
-            "Elements known since antiquity", "Elementary substances in solid state at STP",
-            "Elementary substances in liquid state at STP", "Elementary substances in gas state at STP",
-            "Ferromagnetic elements", "Ultra-high temperature metals", "Metals", "Nonmetals",
-            "Elements of group I (Hydrogen & alkali metals)", "Elements of group II (Alkaline earth metals)",
-            "Elements of group XV (Pnictogens)", "Elements of group XVI (Chalcogens)", "Elements of group XVII (Halogens)",
-            "Elements of group XVIII (Noble gases)", "Lanthanides", "Actinides",
-            "Transition metals", "Post-transition metals", "Metalloids", "Reactive nonmetals",
-            "s-block elements", "p-block elements", "d-block elements", "f-block elements"
-        ];
+    // Popola il dropdown delle diete
+    const dietDropdown = document.getElementById("dietDropdown");
+    const diets = [
+        "Critical elements", "Elements of a smartphone", "Elements of life", "Elements of DNA",
+        "Radioactive elements (U-Th decay series)", "Elements essential for man", "Elements used in therapy",
+        "Elements used in diagnosis", "Medical radioisotopes",
+        "Elements considered safety (grades A-E) in the first wall of fusion power plan",
+        "Potentially toxic trace elements (PTEs)", "Toxic trace elements in dried mushrooms",
+        "Elements dedicated to scientists", "Elements with names of Latin derivation",
+        "Elements with names of Greek derivation",
+        "Elements named after geographical locations and celestial bodies",
+        "Elements with names not derived from Latin or Greek, nor from cities or countries",
+        "Elements known since antiquity", "Elementary substances in solid state at STP",
+        "Elementary substances in liquid state at STP", "Elementary substances in gas state at STP",
+        "Ferromagnetic elements", "Ultra-high temperature metals", "Metals", "Nonmetals",
+        "Elements of group I (Hydrogen & alkali metals)", "Elements of group II (Alkaline earth metals)",
+        "Elements of group XV (Pnictogens)", "Elements of group XVI (Chalcogens)", "Elements of group XVII (Halogens)",
+        "Elements of group XVIII (Noble gases)", "Lanthanides", "Actinides",
+        "Transition metals", "Post-transition metals", "Metalloids", "Reactive nonmetals",
+        "s-block elements", "p-block elements", "d-block elements", "f-block elements"
+    ];
 
-        // Aggiunge le opzioni al dropdown
-        diets.forEach(diet => {
-            const option = document.createElement("option");
-            option.value = diet;
-            option.textContent = diet;
-            dietDropdown.appendChild(option);
-        });
-
-        // Mostra la schermata iniziale
-        document.getElementById('title').style.display = 'block';
-        document.getElementById('gameover').style.display = 'none';
-        document.getElementById('startScreen').style.display = 'block';
+    // Aggiunge le opzioni al dropdown
+    diets.forEach(diet => {
+        const option = document.createElement("option");
+        option.value = diet;
+        option.textContent = diet;
+        dietDropdown.appendChild(option);
     });
+
+    // Gestione toggle delle istruzioni
+    const instructions = document.getElementById("instructions");
+    const toggleContainer = document.createElement("div");
+    toggleContainer.style.textAlign = "center"; // Per allineare al centro il bottone
+    toggleContainer.style.marginTop = "10px";
+
+    const toggleButton = document.createElement("button");
+    toggleButton.textContent = "Show Instructions";
+    toggleButton.classList.add("button");
+
+    // Nasconde le istruzioni inizialmente
+    instructions.style.display = "none";
+
+    // Aggiunge il pulsante sopra le istruzioni
+    toggleContainer.appendChild(toggleButton);
+    instructions.parentNode.insertBefore(toggleContainer, instructions);
+    
+    // Toggle per mostrare/nascondere le istruzioni con un solo clic
+    toggleButton.addEventListener("click", () => {
+        const isHidden = instructions.style.display === "none";
+        instructions.style.display = isHidden ? "block" : "none";
+        toggleButton.textContent = isHidden ? "Hide Instructions" : "Show Instructions";
+    });
+
+    // Mostra la schermata iniziale
+    document.getElementById('title').style.display = 'block';
+    document.getElementById('gameover').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'block';
+});
 
         function toggleInstructions() {
         var instructions = document.getElementById('instructions');
