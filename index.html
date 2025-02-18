@@ -338,6 +338,7 @@ select:hover {
 
     let maxElementsToUse = 40;
     let isElementCountChanged = false;
+    let isSpeedChanged = false;  
     let rangeValue = 40;
 
     // Funzione per aggiornare l'etichetta della velocità
@@ -347,6 +348,7 @@ select:hover {
 
         document.getElementById('selectedSpeed').textContent = `Speed: ${selectedSpeed} px/sec`;
         window.SPEED = SPEED_LEVELS[speedValue].delay; // Imposta il ritardo in ms
+        isSpeedChanged = true;
     }
 
     // Funzione per aggiornare il numero massimo di elementi
@@ -422,8 +424,15 @@ select:hover {
 
         // Se l'utente non ha modificato lo slider, imposta il valore predefinito
         if (!isElementCountChanged) {
-            maxElementsToUse = 40;
+            document.getElementById('elementRange').value = 40;
+            updateElementCount();
         }
+
+        if (!isSpeedChanged) {
+            document.getElementById('speedRange').value = 3;
+            updateSpeedLabel(); // Aggiorna l'interfaccia
+        }
+        
         selectedDiet = document.getElementById("dietDropdown").value;
         window.selectedDiet = selectedDiet;
         window.maxElementsToUse = maxElementsToUse;
