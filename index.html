@@ -396,6 +396,9 @@ select:hover {
 
     // Funzione per avviare il gioco
     function finalSelection() {
+        if (!isElementCountChanged) {
+            maxElementsToUse = 40;
+        }
         selectedDiet = document.getElementById("dietDropdown").value;
         window.selectedDiet = selectedDiet;
         document.getElementById('title').style.display = 'none';
@@ -404,6 +407,7 @@ select:hover {
         document.getElementById('selectedDietText').style.display = 'block';
         document.getElementById('scoreBoard').style.display = 'block';
         document.getElementById('touchArea').style.zIndex = 10;
+
         startNewGame();
     }
 
