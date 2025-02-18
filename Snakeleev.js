@@ -577,6 +577,7 @@ function drawFood() {
     ctx.arc(food.x + SIZE / 2, food.y + SIZE / 2, SIZE / 2, 0, Math.PI * 2);
     ctx.fill();
 
+
     ctx.fillStyle = "#E51A4B"; // Rosso brillante per il testo
     ctx.font = "bold 18px Arial";
     ctx.textAlign = "center";
@@ -1125,6 +1126,31 @@ function updateGame(ctx) {
         ctx.lineWidth = 2;
         ctx.strokeRect(part.x, part.y, SIZE, SIZE);
     });
+
+    function growSnake() {
+        let newPart = { ...snake[snake.length - 1] }; // Clona l'ultima parte
+        snake.push(newPart);
+
+        // Animazione di comparsa
+        let alpha = 0;
+        let growInterval = setInterval(() => {
+            alpha += 0.1;
+            if (alpha >= 1) {
+                clearInterval(growInterval);
+            }
+        }, 30);
+    }
+
+    function updateSnakeColors() {
+        for (let i = 1; i < snake.length; i++) {
+            let mixFactor = i / snake.length;
+            let r = Math.round(65 + (150 - 65) * mixFactor);
+            let g = Math.round(127 + (174 - 127) * mixFactor);
+            let b = Math.round(69 + (33 - 69) * mixFactor);
+            snakeColors[i] = `rgb(${r}, ${g}, ${b})`;
+        }
+    }
+
 
     // Effetto glow intorno al cibo
     //ctx.shadowColor = "rgb(247, 157, 39)"; // Colore del bagliore
