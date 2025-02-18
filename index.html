@@ -355,9 +355,13 @@ select:hover {
     function updateElementCount() {
         const rangeValue = document.getElementById('elementRange').value;
         maxElementsToUse = parseInt(rangeValue);
+    
+        // Assicura che la stringa "Element Range:" rimanga visibile
         document.getElementById('selectedElementCount').textContent = `Element Range: 1 ≤ Z ≤ ${maxElementsToUse}`;
-        isElementCountChanged = true;
+    
+        isElementCountChanged = true; // Segnala che lo slider è stato modificato
     }
+
 
     // Mostra la schermata iniziale al caricamento della pagina
     document.addEventListener('DOMContentLoaded', () => {
