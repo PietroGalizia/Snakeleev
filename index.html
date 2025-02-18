@@ -275,7 +275,7 @@ select:hover {
     </div>
 
     <div class="slider-container">
-         <p id="selectedElementCount" class="slider-value">Element Range: 1 ≤ Z ≤ 40</p>
+        <p id="selectedElementCount" class="slider-value">Element Range: 1 ≤ Z ≤ 40</p>
             <input id="elementRange" type="range" min="1" max="118" value="40" oninput="updateElementCount()">
             
     </div>
@@ -356,11 +356,12 @@ select:hover {
         const rangeValue = document.getElementById('elementRange').value;
         maxElementsToUse = parseInt(rangeValue);
     
-        // Assicura che la stringa "Element Range:" rimanga visibile
+        // Aggiorna il testo senza perdere "Element Range:"
         document.getElementById('selectedElementCount').textContent = `Element Range: 1 ≤ Z ≤ ${maxElementsToUse}`;
     
         isElementCountChanged = true; // Segnala che lo slider è stato modificato
     }
+
 
 
     // Mostra la schermata iniziale al caricamento della pagina
