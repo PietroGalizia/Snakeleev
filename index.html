@@ -352,7 +352,7 @@ select:hover {
         document.getElementById('speedRange').addEventListener('input', updateSpeedLabel);
         document.getElementById('elementRange').addEventListener('input', updateElementCount);
         // Imposta la velocità predefinita all'avvio
-        const speedSlider = document.getElementById('speedRange');
+        //const speedSlider = document.getElementById('speedRange');
         window.SPEED = SPEED_LEVELS[speedSlider.value];
 
         // Aggiorna dinamicamente la velocità mentre si sposta lo slider
@@ -389,9 +389,9 @@ select:hover {
         });
 
         // Mostra la schermata iniziale
-        document.getElementById('title').style.display = 'block';
-        document.getElementById('gameover').style.display = 'none';
-        document.getElementById('startScreen').style.display = 'block';
+        //document.getElementById('title').style.display = 'block';
+        //document.getElementById('gameover').style.display = 'none';
+        //document.getElementById('startScreen').style.display = 'block';
     });
 
     // Funzione per avviare il gioco
@@ -399,7 +399,7 @@ function finalSelection() {
     // Se il numero di elementi non è stato modificato, imposta il valore predefinito
     if (!isElementCountChanged) {
         maxElementsToUse = 40;
-        document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
+        //document.getElementById('selectedElementCount').textContent = `1 ≤ Z ≤ ${maxElementsToUse}`;
     }
 
     selectedDiet = document.getElementById("dietDropdown").value;
@@ -409,6 +409,13 @@ function finalSelection() {
     // Nasconde le schermate di selezione
     document.getElementById('title').style.display = 'none';
     document.getElementById('startScreen').style.display = 'none';
+
+if (typeof startGame === "function") {
+            startGame();
+        } else {
+            console.error("startGame() is not defined.");
+        }
+    }
     
     // Mostra gli elementi di gioco
     document.getElementById('gameCanvas').style.display = 'block';
