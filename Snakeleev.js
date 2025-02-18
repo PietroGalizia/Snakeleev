@@ -570,22 +570,26 @@ function drawFood() {
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
+    const foodSize = SIZE * 1.5; // Aumenta la dimensione del cibo del 50%
+    const x = food.x + SIZE / 2;
+    const y = food.y + SIZE / 2;
+
     ctx.clearRect(food.x, food.y, SIZE, SIZE);
 
     ctx.fillStyle = "rgb(120, 179, 224)";
     ctx.beginPath();
-    ctx.arc(food.x + SIZE / 2, food.y + SIZE / 2, SIZE / 2, 0, Math.PI * 2);
+    ctx.arc(x, y, foodSize / 2, 0, Math.PI * 2);
     ctx.fill();
 
     ctx.fillStyle = "#E51A4B"; // Rosso brillante per il testo
-    ctx.font = "bold 18px Arial";
+    ctx.font = "bold 22px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
     // Effetto glow
     ctx.shadowColor = "#F79D27"; // Glow arancione
     ctx.shadowBlur = 10;
-    ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
+    ctx.fillText(foodElement, x, y);
     ctx.shadowBlur = 0; // Reset glow
 }
 
@@ -593,22 +597,26 @@ function drawFoodII() {
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
+    const foodSize = SIZE * 1.5; // Aumenta la dimensione del cibo del 50%
+    const x = foodII.x + SIZE / 2;
+    const y = foodII.y + SIZE / 2;
+    
     ctx.clearRect(foodII.x, foodII.y, SIZE, SIZE);
 
-   ctx.fillStyle = "rgb(120, 179, 224)";
+    ctx.fillStyle = "rgb(120, 179, 224)";
     ctx.beginPath();
-    ctx.arc(food.x + SIZE / 2, food.y + SIZE / 2, SIZE / 2, 0, Math.PI * 2);
+    ctx.arc(x, y, foodSize / 2, 0, Math.PI * 2);
     ctx.fill();
 
     ctx.fillStyle = "#E51A4B"; // Rosso brillante per il testo
-    ctx.font = "bold 18px Arial";
+    ctx.font = "bold 22px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
     // Effetto glow
     ctx.shadowColor = "#F79D27"; // Glow arancione
     ctx.shadowBlur = 10;
-    ctx.fillText(foodIIElement, foodII.x + SIZE / 2, foodII.y + SIZE / 2);
+    ctx.fillText(foodIIElement, x, y);
     ctx.shadowBlur = 0; // Reset glow
 }
 
@@ -806,7 +814,7 @@ function createInfoRectNo(element, x, y) {
 
 function updateScore(newScore) {
     const scoreBoard = document.getElementById('scoreBoard');
-    scoreBoard.style.fontSize = "1em";
+    scoreBoard.style.fontSize = "1.1em";
     //scoreBoard.style.color = "#fff";
     scoreBoard.style.padding = "4px";
     scoreBoard.style.border = "2px solid #83B7DE";  // Stesso colore del bordo del canvas
@@ -819,7 +827,7 @@ function updateScore(newScore) {
 
     const selectedDietDiv = document.getElementById('selectedDietText');
     selectedDietDiv.style.display = 'block';
-    selectedDietDiv.style.fontSize = '1em';  
+    selectedDietDiv.style.fontSize = '1.1em';  
     selectedDietDiv.style.fontWeight = 'bold';
     selectedDietDiv.style.marginBottom = '8px';
     selectedDietDiv.style.color = '#78B3E0';  
@@ -1142,12 +1150,12 @@ function updateGame(ctx) {
     
     // Draw the food element symbol
     ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
-    ctx.font = "14px Arial";
+    ctx.font = "16px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(foodElement, food.x + SIZE / 2, food.y + SIZE / 2);
     ctx.fillStyle = "rgb(229, 26, 75)"; // Colore del simbolo
-    ctx.font = "14px Arial";
+    ctx.font = "16px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(foodIIElement, foodII.x + SIZE / 2, foodII.y + SIZE / 2);
