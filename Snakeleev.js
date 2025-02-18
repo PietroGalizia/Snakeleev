@@ -1194,9 +1194,42 @@ function showGameOverScreen() {
     const randomMessage = getRandomDietMessage(window.selectedDiet);
 
     gameOverElement.innerHTML = `
-        <h2>Stay Hungry! Stay Periodic!</h2>
-        <p>${randomMessage}</p>
-        <button class="button" onclick="resetGameState()">Reset</button>
+        <div style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            max-width: 500px;
+            padding: 20px;
+            background: rgba(0, 47, 95, 0.95);
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+            font-family: Arial, sans-serif;
+        ">
+            <h2 style="color: #F79D27; font-size: 28px; margin-bottom: 10px;">
+                Stay Hungry! Stay Periodic!
+            </h2>
+            <p style="font-size: 18px; color: #96AE21; margin-bottom: 15px;">
+                ${randomMessage}
+            </p>
+            <button style="
+                background-color: #E51A4B;
+                border: none;
+                padding: 12px 20px;
+                font-size: 18px;
+                color: white;
+                font-weight: bold;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.3s, transform 0.2s;
+            " 
+            onmouseover="this.style.backgroundColor='#A81E47'; this.style.transform='scale(1.1)';"
+            onmouseout="this.style.backgroundColor='#E51A4B'; this.style.transform='scale(1)';"
+            onclick="resetGameState()">Restart</button>
+        </div>
     `;
     gameOverElement.style.display = "block";
 }
