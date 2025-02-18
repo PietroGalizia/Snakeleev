@@ -132,7 +132,7 @@ input[type="range"]:hover {
     font-size: 1.3rem;
     font-weight: bold;
     margin-top: 8px;
-    color: #96AE21;
+    color: #FFF;
     text-align: center;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); 
 }
@@ -269,8 +269,8 @@ select:hover {
     <div id="startScreen">
     <!-- Contenitore per la selezione della velocità -->
     <div class="slider-container">
-            <p id="selectedSpeed" class="slider-value">Speed 3</p>
-            <input id="speedRange" type="range" min="1" max="5" value="3" oninput="updateSpeedLabel()">
+        <p id="selectedSpeed" class="slider-value">Speed: 60 px/sec</p>
+        <input id="speedRange" type="range" min="1" max="5" value="3" oninput="updateSpeedLabel()">
     </div>
 
     <div class="slider-container">
@@ -328,11 +328,11 @@ select:hover {
 <script>
     // Mappa dei livelli di velocità
     const SPEED_LEVELS = {
-        1: 250,
-        2: 200,
-        3: 150,
-        4: 125,
-        5: 100
+        1: { speed: 40, delay: 250 },
+        2: { speed: 50, delay: 200 },
+        3: { speed: 60, delay: 166.67 },
+        4: { speed: 80, delay: 125 },
+        5: { speed: 100, delay: 100 }
     };
 
     let maxElementsToUse = 40;
@@ -342,8 +342,10 @@ select:hover {
     // Funzione per aggiornare l'etichetta della velocità
     function updateSpeedLabel() {
         const speedValue = document.getElementById('speedRange').value;
-        document.getElementById('selectedSpeed').textContent = `Speed ${speedValue}`;
-        window.SPEED = SPEED_LEVELS[speedValue]; // Imposta la velocità della partita
+        const selectedSpeed = SPEED_LEVELS[speedValue].speed; // Ottiene la velocità in px/sec
+
+        document.getElementById('selectedSpeed').textContent = `Speed: ${selectedSpeed} px/sec`;
+        window.SPEED = SPEED_LEVELS[speedValue].delay; // Imposta il ritardo in ms
     }
 
     // Funzione per aggiornare il numero massimo di elementi
