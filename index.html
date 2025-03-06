@@ -5,13 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snakeleev</title>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RXF1BK97RM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<!-- Consent Overlay -->
+<div id="consent-overlay">
+    <div id="consent-box">
+        <p id="consent-text">This site uses Google Analytics to analyze traffic.</p>
+        <button onclick="acceptConsent()">Accept and Play</button>
+    </div>
+</div>
 
-  gtag('config', 'G-RXF1BK97RM');
+<!-- Styles for the overlay -->
+<style>
+    #consent-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+    #consent-box {
+        background: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        max-width: 400px;
+        font-family: Arial, sans-serif;
+    }
+    #consent-text {
+        color: black;
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    #consent-box button {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+    #consent-box button:hover {
+        background: #218838;
+    }
+</style>
+
+<!-- Script to manage consent -->
+<script>
+    function acceptConsent() {
+        localStorage.setItem("analyticsConsent", "true"); // Save consent in the browser
+        document.getElementById("consent-overlay").style.display = "none"; // Hide the overlay
+        
+        // Load Google Analytics after consent
+        var script = document.createElement("script");
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-RXF1BK97RM";
+        script.async = true;
+        document.head.appendChild(script);
+
+        script.onload = function() {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RXF1BK97RM');
+        };
+    }
+
+    // Check if consent has already been given
+    window.onload = function() {
+        if (localStorage.getItem("analyticsConsent") === "true") {
+            document.getElementById("consent-overlay").style.display = "none";
+            acceptConsent(); // Load Analytics immediately if consent was already given
+        }
+    };
 </script>
     
     <style>
