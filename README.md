@@ -2,7 +2,8 @@
 # Snakeleev: Educational Game for Learning the Periodic Table of Chemical Elements
 *****
 
-Snakeleev is an open-source educational game designed to help students learn the periodic table of chemical elements through interactive gameplay: a Snake-inspired format. The game is inspired by the classic Snake game and is aimed at both educators and students looking to explore chemistry in an engaging way. Explore Periodic Table of Chemical Elements Through Gaming. Available on GitHub, ideal for chemistry educators and students.
+Snakeleev is an open-source educational game designed to help students learn the periodic table of chemical elements through interactive gameplay-a Snake-inspired format-to engage with chemistry.. The game is inspired by the classic Snake game and is aimed at both educators and students looking to explore chemistry in an engaging way. Explore Periodic Table of Chemical Elements Through Gaming. Available on GitHub, ideal for chemistry educators and students. Learn the symbols and names of chemical elements. - Engaging gameplay that helps reinforce chemistry concepts. - Open-source and free and easy to use.
+
 
 Author
 ======
