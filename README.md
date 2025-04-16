@@ -1,8 +1,8 @@
 *****
-# Snakeleev
+# Snakeleev: Educational Game for Learning the Periodic Table of Chemical Elements
 *****
 
-Explore Periodic Table of Elements Through Gaming
+Snakeleev is an open-source educational game designed to help students learn the periodic table of chemical elements through interactive gameplay: a Snake-inspired format. The game is inspired by the classic Snake game and is aimed at both educators and students looking to explore chemistry in an engaging way. Explore Periodic Table of Chemical Elements Through Gaming. Available on GitHub, ideal for chemistry educators and students.
 
 Author
 ======
@@ -14,12 +14,16 @@ Citation
 ========
 If you reference this project, please cite:
 
-- Galizia, P. Jörmungandr's Elemental Diets: The World Snake https://github.com/PietroGalizia/JED.git, 2024.
+- Galizia, P. (2024). Snakeleev: An Educational Game for Learning the Periodic Table of Elements. https://doi.org/10.1021/acs.jchemed.5c00029.
+- Galizia, P. (2024) Jörmungandr's Elemental Diets: The World Snake https://github.com/PietroGalizia/JED.git
 - Galizia, P. (2024). Jörmungandr's Elemental Diets: The World Snake — An Immersive Educational Videogame for Exploring the Periodic Table of Elements with Real-World Contexts and Examples. https://doi.org/10.5281/zenodo.10643098
+
+Please cite the above references that first demonstrate the potential of Snake as a serious game for the study of the periodic table of chemical elements and beyond.
+
 
 Description
 ========
-Snakeleev is an educational and engaging video game that combines the classic mechanics of Snake with the science of the periodic table. Players control a "snake" that grows as it collects elements, with gameplay designed to teach and reinforce knowledge about chemical properties, element groups, and their applications. Perfect for students, educators, and science enthusiasts, Snakeleev transforms learning into an interactive experience while challenging players to think strategically.
+Snakeleev is an open-source educational and engaging video game that combines the classic mechanics of Snake with the science of the periodic table of chemical elemnts. Players control the Snake that grows as it collects elements, with gameplay designed to teach and reinforce knowledge about chemical properties, element groups, and their applications. Perfect for students, educators, and science enthusiasts, Snakeleev transforms learning into an interactive experience while challenging players to think strategically.
 
 
 License
