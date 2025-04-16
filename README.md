@@ -34,7 +34,7 @@ Description
 ========
 Snakeleev is an open-source educational game that combines the classic mechanics of Snake with the science of the periodic table of chemical elemnts. Players control the Snake that grows as it collects elements, with gameplay designed to teach and reinforce knowledge about chemical properties, element groups, and their applications. Perfect for students, educators, and science enthusiasts, Snakeleev transforms learning into an interactive experience while challenging players to think strategically.
 
-![Play Snake on Smartphone](Play Snake on Smartphone.png)
+![Play Snake on Smartphone](Play%20Snake%20on%20Smartphone.png)
 
 
 License
