@@ -1215,6 +1215,14 @@ function showGameOverScreen() {
             <p style="font-size: 18px; color: #96AE21; margin-bottom: 15px;">
                 ${randomMessage}
             </p>
+            <div style="margin-bottom: 20px; font-size: 14px;">
+                <a href="https://doi.org/10.1021/acs.jchemed.5c00029" target="_blank" 
+                   style="color: #96AE21; text-decoration: none;">
+                    P. Galizia, <i>Snakeleev: A Gamified Serious Game for Learning the Periodic Table</i><br>
+                    J. Chem. Educ. <b>2025</b>, 102, 5, 1814–1828<br>
+                    https://doi.org/10.1021/acs.jchemed.5c00029
+                </a>
+            </div>
             <button style="
                 background-color: #E51A4B;
                 border: none;
