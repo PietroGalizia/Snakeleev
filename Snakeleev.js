@@ -1192,11 +1192,15 @@ function showGameOverScreen() {
     const gameOverElement = document.getElementById("gameover");
     const diet = window.selectedDiet || "default";
     const randomMessage = getRandomDietMessage(window.selectedDiet);
+    const citationElement = document.getElementById("citation");
+    if (citationElement) citationElement.style.display = "none";
 
     gameOverElement.innerHTML = `
         <div style="
             position: absolute;
-            margin: 40px auto;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 60%;
             max-width: 500px;
             padding: 20px;
