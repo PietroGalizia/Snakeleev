@@ -26,7 +26,7 @@ Citation
 
 Please cite the following reference that demonstrates the educational potential of Snake-based games for learning the periodic table of elements and chemistry concepts:
 
-- Galizia, P. Snakeleev: A Gamified Serious Game for Learning the Periodic Table*. *J. Chem. Educ.*, 2025, 102 (5), 1814–1828. [https://doi.org/10.1021/acs.jchemed.5c00029](https://doi.org/10.1021/acs.jchemed.5c00029)
+- Galizia, P. Snakeleev: A Gamified Serious Game for Learning the Periodic Table. *J. Chem. Educ.*, 2025, 102 (5), 1814–1828. [https://doi.org/10.1021/acs.jchemed.5c00029](https://doi.org/10.1021/acs.jchemed.5c00029)
 
 Also, take a look at *Chemical Elements - Snake* by Verneri Hartus, an engaging and educational chemistry learning game that allows players to practice the names and symbols of chemical elements in 40 different languages. You can find the project here: [Chemical Elements - Snake GitHub](https://github.com/vehave/elements-snake-build/tree/main).
 
