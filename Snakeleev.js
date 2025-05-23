@@ -341,6 +341,7 @@ const dietMessages = {
     ],
     "Lanthanides": [
         "Discover more on <a href='https://ptable.com/?lang=it#Propriet%C3%A0' target='_blank' style='color: rgb(143, 125, 207);'>Ptable</a>.",
+        "'Rare earths permanent magnets are critical components of low carbon technologies such as wind turbines and electric vehicles, but also home appliances and consumer electronics.' <a href='https://cdn.ceps.eu/wp-content/uploads/2023/07/CEPS-In-depth-analysis-2022-07_Supply-chain-for-recycled-rare-earth-permanent-magnets-1.pdf' target='_blank' style='color: rgb(143, 125, 207);'>CEPS in depth analysis V. Rizos, E. Righetti, A. Kassab 2022</a>",
         "Explore the <a href='https://pubchem.ncbi.nlm.nih.gov/periodic-table/' target='_blank' style='color: rgb(143, 125, 207);'>Periodic Table</a>."
     ],
     "Actinides": [
